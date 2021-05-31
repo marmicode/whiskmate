@@ -535,7 +535,7 @@ export class RecipeRepository {
     }),
   ];
 
-  search({ keywords }: { keywords?: string }): Observable<Recipe[]> {
+  search({ keywords }: { keywords?: string } = {}): Observable<Recipe[]> {
     if (keywords == null) {
       return of(this._recipes);
     }

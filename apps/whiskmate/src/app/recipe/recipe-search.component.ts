@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { defer, BehaviorSubject } from 'rxjs';
 import { CatalogModule } from './../shared/catalog.component';
+import { Recipe } from './recipe';
 import { RecipePreviewModule } from './recipe-preview.component';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeFilter } from './recipe-filter';
@@ -16,7 +17,7 @@ import { RecipeFilter } from './recipe-filter';
     ></wm-recipe-filter>
     <wm-catalog>
       <wm-recipe-preview
-        *ngFor="let recipe of recipes$ | async"
+        *ngFor="let recipe of recipes$ | async; trackBy: trackById"
         [recipe]="recipe"
       ></wm-recipe-preview>
     </wm-catalog>`,
@@ -33,6 +34,10 @@ export class RecipeSearchComponent {
 
   onFilterChange(filter: RecipeFilter) {
     this.filter$.next(filter);
+  }
+
+  trackById(_: number, recipe: Recipe) {
+    return recipe.id;
   }
 }
 

@@ -1,3 +1,4 @@
+import { RecipeFilter } from './recipe-filter';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -17,20 +18,47 @@ describe(RecipeSearchComponent.name, () => {
   } as Recipe;
 
   it('should search recipes without keyword on load', async () => {
-    const { fixture, mockSearch } = await createComponent();
+    const {
+      fixture,
+      mockSearch,
+      getRecipePreviewRecipes,
+    } = await createComponent();
 
     mockSearch.mockReturnValue(of([papperdelle, puyLentil]));
 
     fixture.detectChanges();
 
-    const recipes = fixture.debugElement
-      .queryAll(By.css('wm-recipe-preview'))
-      .map((previewEl) => previewEl.properties.recipe);
-
-    expect(recipes).toEqual([papperdelle, puyLentil]);
+    expect(getRecipePreviewRecipes()).toEqual([papperdelle, puyLentil]);
 
     expect(mockSearch).toBeCalledTimes(1);
-    expect(mockSearch).toBeCalledWith();
+    expect(mockSearch).toBeCalledWith({});
+  });
+
+  it('should search recipes using given filter', async () => {
+    const {
+      fixture,
+      mockSearch,
+      getRecipePreviewRecipes,
+    } = await createComponent();
+
+    mockSearch.mockReturnValue(of([papperdelle]));
+
+    fixture.detectChanges();
+
+    fixture.debugElement
+      .query(By.css('wm-recipe-filter'))
+      .triggerEventHandler('filterChange', {
+        keywords: 'Papperdelle',
+        maxIngredientCount: 3,
+      } as RecipeFilter);
+
+    expect(getRecipePreviewRecipes()).toEqual([papperdelle]);
+
+    expect(mockSearch).toBeCalledTimes(2);
+    expect(mockSearch).lastCalledWith({
+      keywords: 'Papperdelle',
+      maxIngredientCount: 3,
+    } as RecipeFilter);
   });
 
   async function createComponent() {
@@ -57,6 +85,11 @@ describe(RecipeSearchComponent.name, () => {
       component: fixture.componentInstance,
       fixture,
       mockSearch,
+      getRecipePreviewRecipes() {
+        return fixture.debugElement
+          .queryAll(By.css('wm-recipe-preview'))
+          .map((previewEl) => previewEl.properties.recipe);
+      },
     };
   }
 });

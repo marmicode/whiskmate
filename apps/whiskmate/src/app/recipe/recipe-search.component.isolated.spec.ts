@@ -20,7 +20,7 @@ describe(RecipeSearchComponent.name, () => {
     ]);
 
     expect(mockSearch).toBeCalledTimes(1);
-    expect(mockSearch).toBeCalledWith();
+    expect(mockSearch).toBeCalledWith({});
   });
 
   function createComponent() {

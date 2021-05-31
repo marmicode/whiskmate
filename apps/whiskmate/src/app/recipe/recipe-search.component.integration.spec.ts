@@ -34,7 +34,7 @@ describe(RecipeSearchComponent.name, () => {
       'Puy lentil and aubergine stew',
     ]);
     expect(mockSearch).toBeCalledTimes(1);
-    expect(mockSearch).toBeCalledWith();
+    expect(mockSearch).toBeCalledWith({});
   });
 
   async function createComponent() {

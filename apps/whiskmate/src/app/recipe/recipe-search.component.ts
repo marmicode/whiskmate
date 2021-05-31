@@ -18,7 +18,7 @@ import { RecipeRepository } from './recipe-repository.service';
   selector: 'wm-recipe-search',
   template: `<wm-catalog>
     <wm-recipe-preview
-      *ngFor="let recipe of recipes"
+      *ngFor="let recipe of recipes; trackBy: trackById"
       [recipe]="recipe"
     ></wm-recipe-preview>
   </wm-catalog>`,
@@ -40,6 +40,10 @@ export class RecipeSearchComponent implements OnDestroy, OnInit {
   ngOnDestroy() {
     this._destroyed$.next();
     this._destroyed$.complete();
+  }
+
+  trackById(_: number, recipe: Recipe) {
+    return recipe.id;
   }
 }
 

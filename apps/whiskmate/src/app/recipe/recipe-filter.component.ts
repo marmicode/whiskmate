@@ -14,18 +14,32 @@ import { createRecipeFilter, RecipeFilter } from './recipe-filter';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-filter',
   template: `<form [formGroup]="filterFormGroup">
-    <input data-role="keywords-input" formControlName="keywords" type="text" />
+    <input
+      data-role="keywords-input"
+      formControlName="keywords"
+      placeholder="keywords"
+      type="text"
+    />
     <input
       data-role="max-ingredient-count-input"
       formControlName="maxIngredientCount"
+      placeholder="max ingredients"
       type="number"
     />
     <input
       data-role="max-step-count-input"
       formControlName="maxStepCount"
+      placeholder="max steps"
       type="number"
     />
   </form>`,
+  styles: [
+    `
+      :host {
+        text-align: center;
+      }
+    `,
+  ],
 })
 export class RecipeFilterComponent {
   @Output() filterChange: Observable<RecipeFilter>;

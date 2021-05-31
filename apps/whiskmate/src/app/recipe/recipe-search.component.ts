@@ -1,14 +1,14 @@
-import { MealPlanner } from './../meal-planner/meal-planner.service';
-import { switchMap, map } from 'rxjs/operators';
-import { RecipeFilterModule } from './recipe-filter.component';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { defer, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, defer } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { MealPlanner } from './../meal-planner/meal-planner.service';
 import { CatalogModule } from './../shared/catalog.component';
+import { Recipe } from './recipe';
+import { RecipeFilter } from './recipe-filter';
+import { RecipeFilterModule } from './recipe-filter.component';
 import { RecipePreviewModule } from './recipe-preview.component';
 import { RecipeRepository } from './recipe-repository.service';
-import { RecipeFilter } from './recipe-filter';
-import { Recipe } from './recipe';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +18,7 @@ import { Recipe } from './recipe';
     ></wm-recipe-filter>
     <wm-catalog>
       <wm-recipe-preview
-        *ngFor="let item of items$ | async"
+        *ngFor="let item of items$ | async; trackBy: trackById"
         [recipe]="item.recipe"
       >
         <button
@@ -65,6 +65,10 @@ export class RecipeSearchComponent {
 
   onFilterChange(filter: RecipeFilter) {
     this.filter$.next(filter);
+  }
+
+  trackById(_: number, { recipe }: { recipe: Recipe }) {
+    return recipe.id;
   }
 }
 

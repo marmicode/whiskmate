@@ -1,10 +1,12 @@
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TestBed } from '@angular/core/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RecipeFilter } from './recipe-filter';
 import {
   RecipeFilterComponent,
-  RecipeFilterModule
+  RecipeFilterModule,
 } from './recipe-filter.component';
 
 describe(RecipeFilterComponent.name, () => {
@@ -17,9 +19,9 @@ describe(RecipeFilterComponent.name, () => {
 
     component.filterChange.subscribe(observer);
 
-    setInputValue('[data-role=keywords-input]', 'Cauliflower');
-    setInputValue('[data-role=max-ingredient-count-input]', '3');
-    setInputValue('[data-role=max-step-count-input]', '10');
+    await setInputValue('[data-role=keywords-input]', 'Cauliflower');
+    await setInputValue('[data-role=max-ingredient-count-input]', '3');
+    await setInputValue('[data-role=max-step-count-input]', '10');
 
     expect(observer).lastCalledWith({
       keywords: 'Cauliflower',
@@ -35,13 +37,16 @@ describe(RecipeFilterComponent.name, () => {
 
     const fixture = TestBed.createComponent(RecipeFilterComponent);
 
+    const loader = TestbedHarnessEnvironment.loader(fixture);
+
     return {
       component: fixture.componentInstance,
       fixture,
-      setInputValue(selector: string, value: string) {
-        const el = fixture.debugElement.query(By.css(selector));
-        el.nativeElement.value = value;
-        el.nativeElement.dispatchEvent(new Event('input'));
+      async setInputValue(selector: string, value: string) {
+        const harness = await loader.getHarness(
+          MatInputHarness.with({ selector })
+        );
+        await harness.setValue(value);
       },
     };
   }

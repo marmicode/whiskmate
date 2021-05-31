@@ -30,4 +30,12 @@ cascade_changes \
   testing-00-boilerplate \
   testing-01-meal-planner \
   testing-02-meal-planner-reactive \
-  testing-03-recipe-search-boilerplate
+  testing-03-recipe-search-boilerplate \
+  testing-04-recipe-search-isolated-boilerplate \
+  testing-05-recipe-search-isolated \
+  testing-06-recipe-search-integration-boilerplate \
+  testing-07-recipe-search-integration \
+  testing-08-recipe-search-shallow-boilerplate \
+  testing-09-recipe-search-shallow \
+  testing-10-recipe-search-async-pipe
+  

@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
         flex-wrap: wrap;
         gap: 30px;
         justify-content: center;
-        padding: 0 30px;
+        padding: 30px 0;
       }
     `,
   ],

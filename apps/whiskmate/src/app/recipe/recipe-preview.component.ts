@@ -12,7 +12,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-preview',
   template: `<wm-card *ngIf="recipe" [pictureUri]="recipe.pictureUri">
-    <h2 data-role="recipe-title">{{ recipe.name }}</h2>
+    <h2 data-role="recipe-name">{{ recipe.name }}</h2>
     <ng-content></ng-content>
   </wm-card>`,
   styles: [

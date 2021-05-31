@@ -150,6 +150,27 @@
           }
         }
       }
+    },
+    "ottolenghi-scraper": {
+      "root": "libs/ottolenghi-scraper",
+      "sourceRoot": "libs/ottolenghi-scraper/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ottolenghi-scraper/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ottolenghi-scraper"],
+          "options": {
+            "jestConfig": "libs/ottolenghi-scraper/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

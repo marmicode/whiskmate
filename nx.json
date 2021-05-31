@@ -9,7 +9,7 @@
   "affected": {
     "defaultBase": "master"
   },
-  "npmScope": "commis",
+  "npmScope": "whiskmate",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
@@ -25,6 +25,9 @@
     "whiskmate-e2e": {
       "tags": [],
       "implicitDependencies": ["whiskmate"]
+    },
+    "ottolenghi-scraper": {
+      "tags": []
     }
   }
 }

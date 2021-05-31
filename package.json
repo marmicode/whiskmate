@@ -25,7 +25,8 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "scrap-ottolenghi": "ts-node -P libs/ottolenghi-scraper/tsconfig.lib.json libs/ottolenghi-scraper/src/main.ts"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +41,7 @@
     "@angular/platform-browser-dynamic": "12.0.0",
     "@angular/router": "12.0.0",
     "@nrwl/angular": "12.3.4",
+    "puppeteer": "^10.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
@@ -57,6 +59,7 @@
     "@nrwl/eslint-plugin-nx": "12.3.4",
     "@nrwl/jest": "12.3.4",
     "@nrwl/linter": "12.3.4",
+    "@nrwl/node": "^12.3.5",
     "@nrwl/tao": "12.3.4",
     "@nrwl/workspace": "12.3.4",
     "@types/jest": "26.0.8",

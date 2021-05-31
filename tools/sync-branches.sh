@@ -37,5 +37,7 @@ cascade_changes \
   testing-07-recipe-search-integration \
   testing-08-recipe-search-shallow-boilerplate \
   testing-09-recipe-search-shallow \
-  testing-10-recipe-search-async-pipe
-  
+  testing-10-recipe-search-async-pipe \
+  testing-11-recipe-filter-boilerplate \
+  testing-12-recipe-filter \
+  testing-13-recipe-search-filter-interaction \

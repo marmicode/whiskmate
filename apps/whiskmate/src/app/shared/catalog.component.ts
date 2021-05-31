@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'wm-card-list',
+  selector: 'wm-catalog',
   template: `<ng-content></ng-content>`,
   styles: [
     `
@@ -12,15 +13,16 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
         flex-wrap: wrap;
         gap: 30px;
         justify-content: center;
+        padding: 0 30px;
       }
     `,
   ],
 })
-export class CardListComponent {}
+export class CatalogComponent {}
 
 @NgModule({
-  declarations: [CardListComponent],
-  exports: [CardListComponent],
+  declarations: [CatalogComponent],
+  exports: [CatalogComponent],
   imports: [CommonModule],
 })
-export class CardListModule {}
+export class CatalogModule {}

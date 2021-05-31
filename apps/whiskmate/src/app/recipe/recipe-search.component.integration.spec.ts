@@ -27,7 +27,7 @@ describe(RecipeSearchComponent.name, () => {
           provide: RecipeRepository,
           useValue: {
             search: mockSearch,
-          },
+          } as Partial<RecipeRepository>,
         },
       ],
     }).compileComponents();

@@ -1,16 +1,8 @@
-import { RecipePreviewModule } from './recipe-preview.component';
-import { CatalogModule } from './../shared/catalog.component';
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  NgModule,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import { ReplaySubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Recipe } from './recipe';
+import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { defer } from 'rxjs';
+import { CatalogModule } from './../shared/catalog.component';
+import { RecipePreviewModule } from './recipe-preview.component';
 import { RecipeRepository } from './recipe-repository.service';
 
 @Component({
@@ -18,29 +10,15 @@ import { RecipeRepository } from './recipe-repository.service';
   selector: 'wm-recipe-search',
   template: `<wm-catalog>
     <wm-recipe-preview
-      *ngFor="let recipe of recipes"
+      *ngFor="let recipe of recipes$ | async"
       [recipe]="recipe"
     ></wm-recipe-preview>
   </wm-catalog>`,
 })
-export class RecipeSearchComponent implements OnDestroy, OnInit {
-  recipes?: Recipe[];
-
-  private _destroyed$ = new ReplaySubject(1);
+export class RecipeSearchComponent {
+  recipes$ = defer(() => this._recipeRepository.search());
 
   constructor(private _recipeRepository: RecipeRepository) {}
-
-  ngOnInit() {
-    this._recipeRepository
-      .search()
-      .pipe(takeUntil(this._destroyed$))
-      .subscribe((recipes) => (this.recipes = recipes));
-  }
-
-  ngOnDestroy() {
-    this._destroyed$.next();
-    this._destroyed$.complete();
-  }
 }
 
 @NgModule({

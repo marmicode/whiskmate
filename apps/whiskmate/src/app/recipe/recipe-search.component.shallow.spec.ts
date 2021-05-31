@@ -1,4 +1,7 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
@@ -13,7 +16,22 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  it.todo('🚧 should search recipes without keyword on load');
+  it('should search recipes without keyword on load', async () => {
+    const { fixture, mockSearch } = await createComponent();
+
+    mockSearch.mockReturnValue(of([papperdelle, puyLentil]));
+
+    fixture.detectChanges();
+
+    const recipes = fixture.debugElement
+      .queryAll(By.css('wm-recipe-preview'))
+      .map((previewEl) => previewEl.properties.recipe);
+
+    expect(recipes).toEqual([papperdelle, puyLentil]);
+
+    expect(mockSearch).toBeCalledTimes(1);
+    expect(mockSearch).toBeCalledWith();
+  });
 
   async function createComponent() {
     const mockSearch = jest.fn() as jest.MockedFunction<
@@ -21,7 +39,7 @@ describe(RecipeSearchComponent.name, () => {
     >;
 
     await TestBed.configureTestingModule({
-      // @todo
+      declarations: [RecipeSearchComponent],
       providers: [
         {
           provide: RecipeRepository,
@@ -30,6 +48,7 @@ describe(RecipeSearchComponent.name, () => {
           },
         },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     const fixture = TestBed.createComponent(RecipeSearchComponent);

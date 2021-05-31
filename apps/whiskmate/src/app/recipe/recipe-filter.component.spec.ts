@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RecipeFilter } from './recipe-filter';
 import {
   RecipeFilterComponent,
-  RecipeFilterModule,
+  RecipeFilterModule
 } from './recipe-filter.component';
 
 describe(RecipeFilterComponent.name, () => {
@@ -29,7 +30,7 @@ describe(RecipeFilterComponent.name, () => {
 
   async function createComponent() {
     await TestBed.configureTestingModule({
-      imports: [RecipeFilterModule],
+      imports: [NoopAnimationsModule, RecipeFilterModule],
     }).compileComponents();
 
     const fixture = TestBed.createComponent(RecipeFilterComponent);

@@ -6,6 +6,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { createRecipeFilter, RecipeFilter } from './recipe-filter';
@@ -14,24 +16,35 @@ import { createRecipeFilter, RecipeFilter } from './recipe-filter';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-filter',
   template: `<form [formGroup]="filterFormGroup">
-    <input
-      data-role="keywords-input"
-      formControlName="keywords"
-      placeholder="keywords"
-      type="text"
-    />
-    <input
-      data-role="max-ingredient-count-input"
-      formControlName="maxIngredientCount"
-      placeholder="max ingredients"
-      type="number"
-    />
-    <input
-      data-role="max-step-count-input"
-      formControlName="maxStepCount"
-      placeholder="max steps"
-      type="number"
-    />
+    <mat-form-field>
+      <mat-label>Keywords</mat-label>
+      <input
+        data-role="keywords-input"
+        formControlName="keywords"
+        matInput
+        type="text"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Max Ingredients</mat-label>
+      <input
+        data-role="max-ingredient-count-input"
+        formControlName="maxIngredientCount"
+        matInput
+        type="number"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Max Steps</mat-label>
+      <input
+        data-role="max-step-count-input"
+        formControlName="maxStepCount"
+        matInput
+        type="number"
+      />
+    </mat-form-field>
   </form>`,
   styles: [
     `
@@ -60,6 +73,11 @@ export class RecipeFilterComponent {
 @NgModule({
   declarations: [RecipeFilterComponent],
   exports: [RecipeFilterComponent],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+  ],
 })
 export class RecipeFilterModule {}

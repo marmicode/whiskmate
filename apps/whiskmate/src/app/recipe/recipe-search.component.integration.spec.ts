@@ -1,3 +1,4 @@
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
@@ -43,7 +44,7 @@ describe(RecipeSearchComponent.name, () => {
     >;
 
     await TestBed.configureTestingModule({
-      imports: [RecipeSearchModule],
+      imports: [NoopAnimationsModule, RecipeSearchModule],
       providers: [
         {
           provide: RecipeRepository,

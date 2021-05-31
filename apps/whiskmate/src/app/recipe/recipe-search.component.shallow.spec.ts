@@ -1,3 +1,4 @@
+import { MealPlanner } from './../meal-planner/meal-planner.service';
 import { RecipeFilter } from './recipe-filter';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -61,7 +62,50 @@ describe(RecipeSearchComponent.name, () => {
     } as RecipeFilter);
   });
 
+  it('should add recipe to meal planner', async () => {
+    const { fixture, mockAddRecipe, mockSearch } = await createComponent();
+
+    mockSearch.mockReturnValue(of([papperdelle]));
+
+    fixture.detectChanges();
+
+    fixture.debugElement
+      .query(By.css('[data-role=add-recipe]'))
+      .triggerEventHandler('click', {});
+
+    expect(mockAddRecipe).toBeCalledTimes(1);
+    expect(mockAddRecipe).toBeCalledWith(papperdelle);
+  });
+
+  it("should disable add button if can't add", async () => {
+    const {
+      fixture,
+      mockSearch,
+      mockWatchCanAddRecipe,
+    } = await createComponent();
+
+    mockSearch.mockReturnValue(of([papperdelle]));
+    mockWatchCanAddRecipe.mockReturnValue(of(false));
+
+    fixture.detectChanges();
+
+    const isButtonDisabled = fixture.debugElement.query(
+      By.css('[data-role=add-recipe]')
+    ).properties.disabled;
+
+    expect(isButtonDisabled).toBe(true);
+    expect(mockWatchCanAddRecipe).toBeCalledTimes(1);
+    expect(mockWatchCanAddRecipe).toBeCalledWith(papperdelle);
+  });
+
   async function createComponent() {
+    const mockAddRecipe = jest.fn() as jest.MockedFunction<
+      typeof MealPlanner.prototype.addRecipe
+    >;
+    const mockWatchCanAddRecipe = jest.fn() as jest.MockedFunction<
+      typeof MealPlanner.prototype.watchCanAddRecipe
+    >;
+
     const mockSearch = jest.fn() as jest.MockedFunction<
       typeof RecipeRepository.prototype.search
     >;
@@ -69,6 +113,13 @@ describe(RecipeSearchComponent.name, () => {
     await TestBed.configureTestingModule({
       declarations: [RecipeSearchComponent],
       providers: [
+        {
+          provide: MealPlanner,
+          useValue: {
+            addRecipe: mockAddRecipe,
+            watchCanAddRecipe: mockWatchCanAddRecipe,
+          } as Partial<MealPlanner>,
+        },
         {
           provide: RecipeRepository,
           useValue: {
@@ -85,6 +136,8 @@ describe(RecipeSearchComponent.name, () => {
       component: fixture.componentInstance,
       fixture,
       mockSearch,
+      mockAddRecipe,
+      mockWatchCanAddRecipe,
       getRecipePreviewRecipes() {
         return fixture.debugElement
           .queryAll(By.css('wm-recipe-preview'))

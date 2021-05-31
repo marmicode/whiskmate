@@ -1,3 +1,5 @@
+import { RecipePreviewModule } from './recipe-preview.component';
+import { CatalogModule } from './../shared/catalog.component';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -14,7 +16,12 @@ import { RecipeRepository } from './recipe-repository.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search',
-  template: `🚧 &lt;wm-recipe-search&gt;`,
+  template: `<wm-catalog>
+    <wm-recipe-preview
+      *ngFor="let recipe of recipes"
+      [recipe]="recipe"
+    ></wm-recipe-preview>
+  </wm-catalog>`,
 })
 export class RecipeSearchComponent implements OnDestroy, OnInit {
   recipes?: Recipe[];
@@ -39,6 +46,6 @@ export class RecipeSearchComponent implements OnDestroy, OnInit {
 @NgModule({
   declarations: [RecipeSearchComponent],
   exports: [RecipeSearchComponent],
-  imports: [CommonModule],
+  imports: [CatalogModule, CommonModule, RecipePreviewModule],
 })
 export class RecipeSearchModule {}

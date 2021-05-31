@@ -1,7 +1,12 @@
-import { RecipeRepository } from './recipe-repository.service';
 import { TestBed } from '@angular/core/testing';
-import { RecipeSearchComponent } from './recipe-search.component';
+import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 import { Recipe } from './recipe';
+import { RecipeRepository } from './recipe-repository.service';
+import {
+  RecipeSearchComponent,
+  RecipeSearchModule,
+} from './recipe-search.component';
 
 describe(RecipeSearchComponent.name, () => {
   const papperdelle = {
@@ -13,7 +18,24 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  it.todo('🚧 should search recipes without keyword on load');
+  it('should search recipes without keyword on load', async () => {
+    const { fixture, mockSearch } = await createComponent();
+
+    mockSearch.mockReturnValue(of([papperdelle, puyLentil]));
+
+    fixture.detectChanges();
+
+    const names = fixture.debugElement
+      .queryAll(By.css('[data-role=recipe-name]'))
+      .map((el) => el.nativeElement.textContent);
+
+    expect(names).toEqual([
+      'Pappardelle with rose harissa, black olives and capers',
+      'Puy lentil and aubergine stew',
+    ]);
+    expect(mockSearch).toBeCalledTimes(1);
+    expect(mockSearch).toBeCalledWith();
+  });
 
   async function createComponent() {
     const mockSearch = jest.fn() as jest.MockedFunction<
@@ -21,7 +43,7 @@ describe(RecipeSearchComponent.name, () => {
     >;
 
     await TestBed.configureTestingModule({
-      // @todo
+      imports: [RecipeSearchModule],
       providers: [
         {
           provide: RecipeRepository,

@@ -20,11 +20,11 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  let mockSearch: jest.MockedFunction<typeof RecipeRepository.prototype.search>;
-  beforeEach(() => (mockSearch = jest.fn()));
+  let mockRepo: jest.Mocked<Pick<RecipeRepository, 'search'>>;
+  beforeEach(() => (mockRepo = { search: jest.fn() }));
 
   it('should search recipes without keyword on load', async () => {
-    mockSearch.mockReturnValue(of([papperdelle, puyLentil]));
+    mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
     const { harness } = await createComponent();
 
@@ -32,8 +32,8 @@ describe(RecipeSearchComponent.name, () => {
       'Pappardelle with rose harissa, black olives and capers',
       'Puy lentil and aubergine stew',
     ]);
-    expect(mockSearch).toBeCalledTimes(1);
-    expect(mockSearch).toBeCalledWith({});
+    expect(mockRepo.search).toBeCalledTimes(1);
+    expect(mockRepo.search).toBeCalledWith({});
   });
 
   async function createComponent() {
@@ -42,9 +42,7 @@ describe(RecipeSearchComponent.name, () => {
       providers: [
         {
           provide: RecipeRepository,
-          useValue: {
-            search: mockSearch,
-          } as Partial<RecipeRepository>,
+          useValue: mockRepo,
         },
       ],
     }).compileComponents();

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { BehaviorSubject, defer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { MealPlanner } from './../meal-planner/meal-planner.service';
@@ -25,7 +26,9 @@ import { RecipeRepository } from './recipe-repository.service';
           [disabled]="(item.canAdd$ | async) === false"
           (click)="addRecipe(item.recipe)"
           class="add-recipe-button"
+          color="primary"
           data-role="add-recipe"
+          mat-stroked-button
         >
           ADD
         </button>
@@ -78,6 +81,7 @@ export class RecipeSearchComponent {
   imports: [
     CatalogModule,
     CommonModule,
+    MatButtonModule,
     RecipeFilterModule,
     RecipePreviewModule,
   ],

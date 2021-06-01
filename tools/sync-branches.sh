@@ -46,4 +46,8 @@ cascade_changes \
   testing-16-recipe-filter-material-harness \
   testing-17-recipe-filter-harness \
   testing-18-recipe-search-harness \
-  testing-19-recipe-search-harness-testing
+  testing-19-recipe-search-harness-testing \
+  testing-20-cypress-component-testing-boilerplate \
+  testing-21-cypress-component-testing \
+  testing-22-cypress-component-testing-with-fake-repository \
+  testing-23-visual-regression-testing \

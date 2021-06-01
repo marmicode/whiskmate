@@ -41,5 +41,9 @@ cascade_changes \
   testing-11-recipe-filter-boilerplate \
   testing-12-recipe-filter \
   testing-13-recipe-search-filter-interaction \
-  testing-14-recipe-search-add-button
-  
+  testing-14-recipe-search-add-button \
+  testing-15-recipe-filter-material \
+  testing-16-recipe-filter-material-harness \
+  testing-17-recipe-filter-harness \
+  testing-18-recipe-search-harness \
+  testing-19-recipe-search-harness-testing

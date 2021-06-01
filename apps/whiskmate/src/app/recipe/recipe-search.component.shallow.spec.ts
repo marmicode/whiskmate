@@ -20,28 +20,28 @@ describe(RecipeSearchComponent.name, () => {
   it('should search recipes without keyword on load', async () => {
     const {
       fixture,
-      mockSearch,
+      mockRepo,
       getRecipePreviewRecipes,
     } = await createComponent();
 
-    mockSearch.mockReturnValue(of([papperdelle, puyLentil]));
+    mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
     fixture.detectChanges();
 
     expect(getRecipePreviewRecipes()).toEqual([papperdelle, puyLentil]);
 
-    expect(mockSearch).toBeCalledTimes(1);
-    expect(mockSearch).toBeCalledWith({});
+    expect(mockRepo.search).toBeCalledTimes(1);
+    expect(mockRepo.search).toBeCalledWith({});
   });
 
   it('should search recipes using given filter', async () => {
     const {
       fixture,
-      mockSearch,
+      mockRepo,
       getRecipePreviewRecipes,
     } = await createComponent();
 
-    mockSearch.mockReturnValue(of([papperdelle]));
+    mockRepo.search.mockReturnValue(of([papperdelle]));
 
     fixture.detectChanges();
 
@@ -54,16 +54,16 @@ describe(RecipeSearchComponent.name, () => {
 
     expect(getRecipePreviewRecipes()).toEqual([papperdelle]);
 
-    expect(mockSearch).toBeCalledTimes(2);
-    expect(mockSearch).lastCalledWith({
+    expect(mockRepo.search).toBeCalledTimes(2);
+    expect(mockRepo.search).lastCalledWith({
       keywords: 'Papperdelle',
       maxIngredientCount: 3,
     } as RecipeFilter);
   });
 
   async function createComponent() {
-    const mockSearch = jest.fn() as jest.MockedFunction<
-      typeof RecipeRepository.prototype.search
+    const mockRepo = { search: jest.fn() } as jest.Mocked<
+      Pick<RecipeRepository, 'search'>
     >;
 
     await TestBed.configureTestingModule({
@@ -71,9 +71,7 @@ describe(RecipeSearchComponent.name, () => {
       providers: [
         {
           provide: RecipeRepository,
-          useValue: {
-            search: mockSearch,
-          } as Partial<RecipeRepository>,
+          useValue: mockRepo,
         },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -84,7 +82,7 @@ describe(RecipeSearchComponent.name, () => {
     return {
       component: fixture.componentInstance,
       fixture,
-      mockSearch,
+      mockRepo,
       getRecipePreviewRecipes() {
         return fixture.debugElement
           .queryAll(By.css('wm-recipe-preview'))

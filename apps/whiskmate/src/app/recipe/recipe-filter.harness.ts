@@ -5,7 +5,7 @@ import { ComponentHarness } from '@angular/cdk/testing';
 export class RecipeFilterHarness extends ComponentHarness {
   static hostSelector = 'wm-recipe-filter';
 
-  async setFilter(filter: RecipeFilter) {
+  async setValue(filter: RecipeFilter) {
     await this._setInputValue('[data-role=keywords-input]', filter.keywords);
     await this._setInputValue(
       '[data-role=max-ingredient-count-input]',

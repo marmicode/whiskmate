@@ -16,7 +16,7 @@ describe(RecipeFilterComponent.name, () => {
 
     component.filterChange.subscribe(observer);
 
-    await harness.setFilter({
+    await harness.setValue({
       keywords: 'Cauliflower',
       maxIngredientCount: 3,
       maxStepCount: 10,

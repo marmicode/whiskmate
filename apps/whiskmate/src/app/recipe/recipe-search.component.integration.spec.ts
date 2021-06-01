@@ -1,13 +1,14 @@
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { of } from 'rxjs';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of, Observable, EMPTY } from 'rxjs';
 import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
 import {
   RecipeSearchComponent,
   RecipeSearchModule,
 } from './recipe-search.component';
+import { RecipeSearchHarness } from './recipe-search.harness';
 
 describe(RecipeSearchComponent.name, () => {
   const papperdelle = {
@@ -19,18 +20,15 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  it('should search recipes without keyword on load', async () => {
-    const { fixture, mockSearch } = await createComponent();
+  let mockSearch: jest.MockedFunction<typeof RecipeRepository.prototype.search>;
+  beforeEach(() => (mockSearch = jest.fn()));
 
+  it('should search recipes without keyword on load', async () => {
     mockSearch.mockReturnValue(of([papperdelle, puyLentil]));
 
-    fixture.detectChanges();
+    const { harness } = await createComponent();
 
-    const names = fixture.debugElement
-      .queryAll(By.css('[data-role=recipe-name]'))
-      .map((el) => el.nativeElement.textContent);
-
-    expect(names).toEqual([
+    expect(await harness.getRecipeNames()).toEqual([
       'Pappardelle with rose harissa, black olives and capers',
       'Puy lentil and aubergine stew',
     ]);
@@ -39,10 +37,6 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   async function createComponent() {
-    const mockSearch = jest.fn() as jest.MockedFunction<
-      typeof RecipeRepository.prototype.search
-    >;
-
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, RecipeSearchModule],
       providers: [
@@ -60,7 +54,10 @@ describe(RecipeSearchComponent.name, () => {
     return {
       component: fixture.componentInstance,
       fixture,
-      mockSearch,
+      harness: await TestbedHarnessEnvironment.harnessForFixture(
+        fixture,
+        RecipeSearchHarness
+      ),
     };
   }
 });

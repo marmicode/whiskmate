@@ -1,12 +1,14 @@
-import { MealPlanner } from './../meal-planner/meal-planner.service';
-import { RecipeFilter } from './recipe-filter';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
+import { MealPlanner } from './../meal-planner/meal-planner.service';
 import { Recipe } from './recipe';
+import { RecipeFilter } from './recipe-filter';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
+import { RecipeSearchHarness } from './recipe-search.harness';
 
 describe(RecipeSearchComponent.name, () => {
   const papperdelle = {
@@ -18,33 +20,28 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  it('should search recipes without keyword on load', async () => {
-    const {
-      fixture,
-      mockSearch,
-      getRecipePreviewRecipes,
-    } = await createComponent();
+  let mockSearch: jest.MockedFunction<typeof RecipeRepository.prototype.search>;
+  beforeEach(() => (mockSearch = jest.fn()));
 
+  let mockWatchCanAddRecipe: jest.MockedFunction<
+    typeof MealPlanner.prototype.watchCanAddRecipe
+  >;
+  beforeEach(() => (mockWatchCanAddRecipe = jest.fn()));
+
+  it('should search recipes without keyword on load', async () => {
     mockSearch.mockReturnValue(of([papperdelle, puyLentil]));
 
-    fixture.detectChanges();
+    const { getRecipePreviewRecipes } = await createComponent();
 
-    expect(getRecipePreviewRecipes()).toEqual([papperdelle, puyLentil]);
+    expect(await getRecipePreviewRecipes()).toEqual([papperdelle, puyLentil]);
 
     expect(mockSearch).toBeCalledTimes(1);
     expect(mockSearch).toBeCalledWith({});
   });
 
   it('should search recipes using given filter', async () => {
-    const {
-      fixture,
-      mockSearch,
-      getRecipePreviewRecipes,
-    } = await createComponent();
-
     mockSearch.mockReturnValue(of([papperdelle]));
-
-    fixture.detectChanges();
+    const { fixture, getRecipePreviewRecipes } = await createComponent();
 
     fixture.debugElement
       .query(By.css('wm-recipe-filter'))
@@ -52,8 +49,7 @@ describe(RecipeSearchComponent.name, () => {
         keywords: 'Papperdelle',
         maxIngredientCount: 3,
       } as RecipeFilter);
-
-    expect(getRecipePreviewRecipes()).toEqual([papperdelle]);
+    expect(await getRecipePreviewRecipes()).toEqual([papperdelle]);
 
     expect(mockSearch).toBeCalledTimes(2);
     expect(mockSearch).lastCalledWith({
@@ -63,37 +59,25 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   it('should add recipe to meal planner', async () => {
-    const { fixture, mockAddRecipe, mockSearch } = await createComponent();
-
     mockSearch.mockReturnValue(of([papperdelle]));
+    const { harness, mockAddRecipe } = await createComponent();
 
-    fixture.detectChanges();
-
-    fixture.debugElement
-      .query(By.css('[data-role=add-recipe]'))
-      .triggerEventHandler('click', {});
+    const button = await harness.getFirstRecipeAddButton();
+    await button.click();
 
     expect(mockAddRecipe).toBeCalledTimes(1);
     expect(mockAddRecipe).toBeCalledWith(papperdelle);
   });
 
   it("should disable add button if can't add", async () => {
-    const {
-      fixture,
-      mockSearch,
-      mockWatchCanAddRecipe,
-    } = await createComponent();
-
     mockSearch.mockReturnValue(of([papperdelle]));
     mockWatchCanAddRecipe.mockReturnValue(of(false));
 
-    fixture.detectChanges();
+    const { harness } = await createComponent();
 
-    const isButtonDisabled = fixture.debugElement.query(
-      By.css('[data-role=add-recipe]')
-    ).properties.disabled;
+    const button = await harness.getFirstRecipeAddButton();
 
-    expect(isButtonDisabled).toBe(true);
+    expect(await button.isDisabled()).toBe(true);
     expect(mockWatchCanAddRecipe).toBeCalledTimes(1);
     expect(mockWatchCanAddRecipe).toBeCalledWith(papperdelle);
   });
@@ -101,13 +85,6 @@ describe(RecipeSearchComponent.name, () => {
   async function createComponent() {
     const mockAddRecipe = jest.fn() as jest.MockedFunction<
       typeof MealPlanner.prototype.addRecipe
-    >;
-    const mockWatchCanAddRecipe = jest.fn() as jest.MockedFunction<
-      typeof MealPlanner.prototype.watchCanAddRecipe
-    >;
-
-    const mockSearch = jest.fn() as jest.MockedFunction<
-      typeof RecipeRepository.prototype.search
     >;
 
     await TestBed.configureTestingModule({
@@ -132,17 +109,24 @@ describe(RecipeSearchComponent.name, () => {
 
     const fixture = TestBed.createComponent(RecipeSearchComponent);
 
+    const harness = await TestbedHarnessEnvironment.harnessForFixture(
+      fixture,
+      RecipeSearchHarness
+    );
+
     return {
       component: fixture.componentInstance,
       fixture,
-      mockSearch,
-      mockAddRecipe,
-      mockWatchCanAddRecipe,
-      getRecipePreviewRecipes() {
-        return fixture.debugElement
-          .queryAll(By.css('wm-recipe-preview'))
-          .map((previewEl) => previewEl.properties.recipe);
+      async getRecipePreviewRecipes(): Promise<Recipe[]> {
+        const harnesses = await harness.getRecipePreviews();
+        return Promise.all(
+          harnesses.map((harness) =>
+            harness.host().then((host) => host.getProperty('recipe'))
+          )
+        );
       },
+      harness,
+      mockAddRecipe,
     };
   }
 });

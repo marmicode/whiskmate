@@ -1,9 +1,9 @@
-import { of, Observable } from 'rxjs';
-import { RecipeRepository } from './recipe-repository.service';
 import { TestBed } from '@angular/core/testing';
-import { RecipeSearchComponent } from './recipe-search.component';
+import { Observable, of } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { Recipe } from './recipe';
-import { first, pluck } from 'rxjs/operators';
+import { RecipeRepository } from './recipe-repository.service';
+import { RecipeSearchComponent } from './recipe-search.component';
 
 describe(RecipeSearchComponent.name, () => {
   const papperdelle = { id: 'papperdelle-with-rose-harissa' } as Recipe;

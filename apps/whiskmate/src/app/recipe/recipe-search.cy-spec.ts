@@ -1,8 +1,8 @@
-import { getHarness } from '@jscutlery/cypress-harness';
-import { RecipeSearchHarness } from './recipe-search.harness';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { mount } from '@jscutlery/cypress-angular/mount';
+import { getHarness } from '@jscutlery/cypress-harness';
 import { RecipeSearchComponent } from './recipe-search.component';
+import { RecipeSearchHarness } from './recipe-search.harness';
 
 describe(RecipeSearchComponent.name, () => {
   const harness = getHarness(RecipeSearchHarness);
@@ -15,15 +15,26 @@ describe(RecipeSearchComponent.name, () => {
     })
   );
 
-  xit('should show recipes', () => {
-    throw new Error('🚧 Work in progress!');
+  it('should show recipes', () => {
+    const recipeNames = harness.getRecipeNames();
+    recipeNames.should(
+      'contain',
+      'Cauliflower, pomegranate and pistachio salad'
+    );
+    recipeNames.should('have.length', 10);
   });
 
-  xit('should filter recipes', () => {
-    throw new Error('🚧 Work in progress!');
+  it('should filter recipes', () => {
+    harness.getFilter().setValue({
+      maxIngredientCount: 10,
+      maxStepCount: 3,
+    });
+    harness.getRecipeNames().should('have.length', 1);
   });
 
-  xit('should disabled recipe once added', () => {
-    throw new Error('🚧 Work in progress!');
+  it('should disabled recipe once added', () => {
+    harness.getFirstRecipeAddButton().isDisabled().should('equal', false);
+    harness.getFirstRecipeAddButton().then((harness) => harness.click());
+    harness.getFirstRecipeAddButton().isDisabled().should('equal', true);
   });
 });

@@ -9,21 +9,21 @@ describe(RecipeSearchComponent.name, () => {
   const puyLentil = { id: 'puy-lentil-and-aubergine-stew' } as Recipe;
 
   it('should search recipes without keyword on load', () => {
-    const { component, mockSearch } = createComponent();
+    const { component, mockRepo } = createComponent();
 
-    mockSearch.mockReturnValue(of([papperdelle, puyLentil]));
+    mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
     component.ngOnInit();
 
     expect(component.recipes).toEqual([papperdelle, puyLentil]);
 
-    expect(mockSearch).toBeCalledTimes(1);
-    expect(mockSearch).toBeCalledWith();
+    expect(mockRepo.search).toBeCalledTimes(1);
+    expect(mockRepo.search).toBeCalledWith();
   });
 
   function createComponent() {
-    const mockSearch = jest.fn() as jest.MockedFunction<
-      typeof RecipeRepository.prototype.search
+    const mockRepo = { search: jest.fn() } as jest.Mocked<
+      Pick<RecipeRepository, 'search'>
     >;
 
     TestBed.configureTestingModule({
@@ -31,13 +31,11 @@ describe(RecipeSearchComponent.name, () => {
         RecipeSearchComponent,
         {
           provide: RecipeRepository,
-          useValue: {
-            search: mockSearch,
-          } as Partial<RecipeRepository>,
+          useValue: mockRepo,
         },
       ],
     });
 
-    return { component: TestBed.inject(RecipeSearchComponent), mockSearch };
+    return { component: TestBed.inject(RecipeSearchComponent), mockRepo };
   }
 });

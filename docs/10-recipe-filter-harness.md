@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout testing-16-recipe-filter-material-harness
+git checkout origin/testing-16-recipe-filter-material-harness
 
 yarn
 ```

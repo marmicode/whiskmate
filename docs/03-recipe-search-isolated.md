@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout testing-04-recipe-search-isolated-boilerplate
+git checkout origin/testing-04-recipe-search-isolated-boilerplate
 
 yarn
 ```
@@ -41,7 +41,7 @@ yarn test whiskmate --watch
 3. 🙏🛑 wait until you finish implementing the tests before running: 🛑🙏
 
 ```sh
-git checkout testing-05-recipe-search-isolated apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-05-recipe-search-isolated apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 # Appendices

@@ -35,7 +35,7 @@ export async function scrapRecipeByUrl(recipeUrl: string) {
   const recipeUrlBlocks = recipeUrl.split('/');
   const id = recipeUrlBlocks[recipeUrlBlocks.length - 1];
 
-  scraper.close();
+  await scraper.close();
 
   return {
     id,
@@ -76,8 +76,8 @@ async function _createScraper(url: string) {
   await page.goto(url);
 
   return {
-    close() {
-      browser.close();
+    async close() {
+      await browser.close();
     },
     async getPictureUri(selector: string) {
       return await page.$eval(selector, (el) => (el as HTMLImageElement).src);

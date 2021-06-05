@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout testing-00-boilerplate
+git checkout origin/testing-00-boilerplate
 
 yarn
 ```
@@ -61,7 +61,7 @@ yarn test whiskmate --watch
 3. 🙏🛑 wait until you finish implementing the tests before running: 🛑🙏
 
 ```sh
-git checkout testing-01-meal-planner apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+git checkout origin/testing-01-meal-planner apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
 
 # Appendices
@@ -102,4 +102,10 @@ describe(Shop.name, () => {
     it.todo('should close');
   });
 });
+```
+
+## Check that a function throws
+
+```ts
+expect(() => myFunction()).toThrow('my error');
 ```

@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout testing-08-recipe-search-shallow-boilerplate
+git checkout origin/testing-08-recipe-search-shallow-boilerplate
 
 yarn
 ```

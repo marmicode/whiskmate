@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout testing-15-recipe-filter-material
+git checkout origin/testing-15-recipe-filter-material
 
 yarn
 ```

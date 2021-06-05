@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout testing-01-meal-planner
+git checkout origin/testing-01-meal-planner
 
 yarn
 ```
@@ -59,7 +59,7 @@ yarn test whiskmate --watch
 3. 🙏🛑 wait until you finish implementing the tests before running: 🛑🙏
 
 ```sh
-git checkout testing-02-meal-planner-reactive apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+git checkout origin/testing-02-meal-planner-reactive apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
 
 # Appendices

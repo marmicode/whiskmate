@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout testing-20-cypress-component-testing-boilerplate
+git checkout origin/testing-20-cypress-component-testing-boilerplate
 
 yarn
 ```

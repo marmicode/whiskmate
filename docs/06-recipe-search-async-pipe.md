@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout testing-09-recipe-search-shallow
+git checkout origin/testing-09-recipe-search-shallow
 
 yarn
 ```
@@ -21,7 +21,7 @@ yarn test whiskmate --watch
 2. Checkout new `<wm-recipe-search>` implementation.
 
 ```sh
-git checkout testing-10-recipe-search-async-pipe apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-10-recipe-search-async-pipe apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 > This will replace the imperative approach:

@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout testing-12-recipe-filter
+git checkout origin/testing-12-recipe-filter
 
 yarn
 ```
@@ -37,7 +37,7 @@ yarn test whiskmate --watch
 3. 🙏🛑 wait until you finish implementing the tests before running: 🛑🙏
 
 ```sh
-git checkout testing-13-recipe-search-filter-interaction apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-13-recipe-search-filter-interaction apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 # Appendices

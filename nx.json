@@ -31,6 +31,9 @@
     },
     "whiskmate-graphql-service": {
       "tags": []
+    },
+    "whiskmate-service-core": {
+      "tags": []
     }
   }
 }

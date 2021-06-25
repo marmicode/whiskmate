@@ -221,6 +221,27 @@
           }
         }
       }
+    },
+    "whiskmate-service-core": {
+      "root": "libs/whiskmate-service-core",
+      "sourceRoot": "libs/whiskmate-service-core/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/whiskmate-service-core/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/whiskmate-service-core"],
+          "options": {
+            "jestConfig": "libs/whiskmate-service-core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

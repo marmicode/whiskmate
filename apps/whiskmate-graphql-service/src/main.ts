@@ -2,9 +2,12 @@
  * This is not a production server yet!
  * This is only a minimal backend to get started.
  */
+import {
+  getRecipes,
+  getSimilarRecipes,
+  Recipe,
+} from '@whiskmate/whiskmate-service-core';
 import { ApolloServer, gql } from 'apollo-server';
-import { Recipe } from './../../whiskmate/src/app/recipe/recipe';
-import { getRecipes, getSimilarRecipes } from './app/recipe-repository';
 import { truncate } from './app/truncate';
 
 async function main() {

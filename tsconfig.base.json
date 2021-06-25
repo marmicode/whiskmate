@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@whiskmate/ottolenghi-scraper": ["libs/ottolenghi-scraper/src/index.ts"]
+      "@whiskmate/ottolenghi-scraper": ["libs/ottolenghi-scraper/src/index.ts"],
+      "@whiskmate/whiskmate-service-core": [
+        "libs/whiskmate-service-core/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

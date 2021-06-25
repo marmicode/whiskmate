@@ -1,11 +1,5 @@
-import { join } from 'path';
-import {
-  Server,
-  ServerCredentials,
-  loadPackageDefinition,
-} from '@grpc/grpc-js';
-import { loadSync } from '@grpc/proto-loader';
-
+import { Server, ServerCredentials } from '@grpc/grpc-js';
+import { getProto } from '@whiskmate/backend/whiskmate-grpc-core';
 import { promisify } from 'util';
 
 const serviceImpl = {
@@ -17,20 +11,11 @@ const serviceImpl = {
  * sample server port
  */
 async function main() {
-  const protoPath = join(__dirname, 'assets/whiskmate.proto');
-
-  const proto = loadPackageDefinition(
-    loadSync(protoPath, {
-      keepCase: true,
-      longs: String,
-      enums: String,
-      defaults: true,
-      oneofs: true,
-    })
-  );
-
   const server = new Server();
-  server.addService(proto.Whiskmate['service'], serviceImpl);
+
+  const { Whiskmate } = getProto();
+
+  server.addService(Whiskmate['service'], serviceImpl);
   await promisify(server.bindAsync.bind(server))(
     '0.0.0.0:4002',
     ServerCredentials.createInsecure()

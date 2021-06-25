@@ -188,7 +188,7 @@
               "apps/backend/whiskmate-graphql/src/assets",
               {
                 "glob": "**/*",
-                "input": "libs/whiskmate-service-core/src/assets",
+                "input": "libs/backend/whiskmate-core/src/assets",
                 "output": "assets"
               }
             ]
@@ -241,7 +241,14 @@
             "outputPath": "dist/apps/backend/whiskmate-grpc",
             "main": "apps/backend/whiskmate-grpc/src/main.ts",
             "tsConfig": "apps/backend/whiskmate-grpc/tsconfig.app.json",
-            "assets": ["apps/backend/whiskmate-grpc/src/assets"]
+            "assets": [
+              "apps/backend/whiskmate-grpc/src/assets",
+              {
+                "glob": "**/*",
+                "input": "libs/backend/whiskmate-grpc-core/src/assets",
+                "output": "assets"
+              }
+            ]
           },
           "configurations": {
             "production": {
@@ -295,6 +302,105 @@
           "outputs": ["coverage/libs/backend/whiskmate-core"],
           "options": {
             "jestConfig": "libs/backend/whiskmate-core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "backend-whiskmate-grpc-client": {
+      "root": "libs/backend/whiskmate-grpc-client",
+      "sourceRoot": "libs/backend/whiskmate-grpc-client/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/backend/whiskmate-grpc-client/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/whiskmate-grpc-client"],
+          "options": {
+            "jestConfig": "libs/backend/whiskmate-grpc-client/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "backend-whiskmate-grpc-core": {
+      "root": "libs/backend/whiskmate-grpc-core",
+      "sourceRoot": "libs/backend/whiskmate-grpc-core/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/backend/whiskmate-grpc-core/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/whiskmate-grpc-core"],
+          "options": {
+            "jestConfig": "libs/backend/whiskmate-grpc-core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "backend-whiskmate-grpc-cli": {
+      "root": "apps/backend/whiskmate-grpc-cli",
+      "sourceRoot": "apps/backend/whiskmate-grpc-cli/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/backend/whiskmate-grpc-cli",
+            "main": "apps/backend/whiskmate-grpc-cli/src/main.ts",
+            "tsConfig": "apps/backend/whiskmate-grpc-cli/tsconfig.app.json",
+            "assets": [
+              "apps/backend/whiskmate-grpc-cli/src/assets",
+              {
+                "glob": "**/*",
+                "input": "libs/backend/whiskmate-grpc-core/src/assets",
+                "output": "assets"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/backend/whiskmate-grpc-cli/src/environments/environment.ts",
+                  "with": "apps/backend/whiskmate-grpc-cli/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "backend-whiskmate-grpc-cli:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/backend/whiskmate-grpc-cli/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/backend/whiskmate-grpc-cli"],
+          "options": {
+            "jestConfig": "apps/backend/whiskmate-grpc-cli/jest.config.js",
             "passWithNoTests": true
           }
         }

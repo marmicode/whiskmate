@@ -18,6 +18,12 @@
       "@whiskmate/ottolenghi-scraper": ["libs/ottolenghi-scraper/src/index.ts"],
       "@whiskmate/backend/whiskmate-core": [
         "libs/backend/whiskmate-core/src/index.ts"
+      ],
+      "@whiskmate/backend/whiskmate-grpc-client": [
+        "libs/backend/whiskmate-grpc-client/src/index.ts"
+      ],
+      "@whiskmate/backend/whiskmate-grpc-core": [
+        "libs/backend/whiskmate-grpc-core/src/index.ts"
       ]
     }
   },

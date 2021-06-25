@@ -37,6 +37,15 @@
     },
     "backend-whiskmate-core": {
       "tags": []
+    },
+    "backend-whiskmate-grpc-client": {
+      "tags": []
+    },
+    "backend-whiskmate-grpc-core": {
+      "tags": []
+    },
+    "backend-whiskmate-grpc-cli": {
+      "tags": []
     }
   }
 }

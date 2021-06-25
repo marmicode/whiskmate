@@ -5,5 +5,8 @@ module.exports = {
     '<rootDir>/apps/backend/whiskmate-graphql',
     '<rootDir>/libs/backend/whiskmate-core',
     '<rootDir>/apps/backend/whiskmate-grpc',
+    '<rootDir>/libs/backend/whiskmate-grpc-client',
+    '<rootDir>/libs/backend/whiskmate-grpc-core',
+    '<rootDir>/apps/backend/whiskmate-grpc-cli',
   ],
 };

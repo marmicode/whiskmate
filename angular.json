@@ -172,27 +172,6 @@
         }
       }
     },
-    "whiskmate-service-core": {
-      "root": "libs/whiskmate-service-core",
-      "sourceRoot": "libs/whiskmate-service-core/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/whiskmate-service-core/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/whiskmate-service-core"],
-          "options": {
-            "jestConfig": "libs/whiskmate-service-core/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "backend-whiskmate-graphql": {
       "root": "apps/backend/whiskmate-graphql",
       "sourceRoot": "apps/backend/whiskmate-graphql/src",
@@ -295,6 +274,27 @@
           "outputs": ["coverage/apps/backend/whiskmate-grpc"],
           "options": {
             "jestConfig": "apps/backend/whiskmate-grpc/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "backend-whiskmate-core": {
+      "root": "libs/backend/whiskmate-core",
+      "sourceRoot": "libs/backend/whiskmate-core/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/backend/whiskmate-core/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/whiskmate-core"],
+          "options": {
+            "jestConfig": "libs/backend/whiskmate-core/jest.config.js",
             "passWithNoTests": true
           }
         }

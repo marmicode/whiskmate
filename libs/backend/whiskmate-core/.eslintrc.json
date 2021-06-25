@@ -1,11 +1,11 @@
 {
-  "extends": ["../../.eslintrc.json"],
+  "extends": "../../../.eslintrc.json",
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
-        "project": ["libs/whiskmate-service-core/tsconfig.*?.json"]
+        "project": ["libs/backend/whiskmate-core/tsconfig.*?.json"]
       },
       "rules": {}
     },

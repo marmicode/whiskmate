@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'whiskmate-service-core',
-  preset: '../../jest.preset.js',
+  displayName: 'backend-whiskmate-core',
+  preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -10,5 +10,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/whiskmate-service-core',
+  coverageDirectory: '../../../coverage/libs/backend/whiskmate-core',
 };

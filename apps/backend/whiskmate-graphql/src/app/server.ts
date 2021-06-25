@@ -2,7 +2,7 @@ import {
   getRecipes,
   getSimilarRecipes,
   Recipe,
-} from '@whiskmate/whiskmate-service-core';
+} from '@whiskmate/backend/whiskmate-core';
 import { ApolloServer, gql } from 'apollo-server';
 import { truncate } from './truncate';
 

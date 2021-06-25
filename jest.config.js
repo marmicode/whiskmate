@@ -2,7 +2,7 @@ module.exports = {
   projects: [
     '<rootDir>/apps/whiskmate',
     '<rootDir>/libs/ottolenghi-scraper',
-    '<rootDir>/apps/whiskmate-graphql-service',
+    '<rootDir>/apps/backend/whiskmate-graphql',
     '<rootDir>/libs/whiskmate-service-core',
     '<rootDir>/apps/whiskmate-grpc-service',
   ],

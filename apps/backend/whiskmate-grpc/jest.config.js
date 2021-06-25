@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'whiskmate-grpc-service',
-  preset: '../../jest.preset.js',
+  displayName: 'backend-whiskmate-grpc',
+  preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,5 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/whiskmate-grpc-service',
+  coverageDirectory: '../../../coverage/apps/backend/whiskmate-grpc',
 };

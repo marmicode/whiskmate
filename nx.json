@@ -29,13 +29,13 @@
       "tags": [],
       "implicitDependencies": ["whiskmate"]
     },
-    "whiskmate-grpc-service": {
-      "tags": []
-    },
     "whiskmate-service-core": {
       "tags": []
     },
     "backend-whiskmate-graphql": {
+      "tags": []
+    },
+    "backend-whiskmate-grpc": {
       "tags": []
     }
   }

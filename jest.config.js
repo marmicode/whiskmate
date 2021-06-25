@@ -4,6 +4,6 @@ module.exports = {
     '<rootDir>/libs/ottolenghi-scraper',
     '<rootDir>/apps/backend/whiskmate-graphql',
     '<rootDir>/libs/whiskmate-service-core',
-    '<rootDir>/apps/whiskmate-grpc-service',
+    '<rootDir>/apps/backend/whiskmate-grpc',
   ],
 };

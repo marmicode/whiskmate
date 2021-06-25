@@ -10,9 +10,12 @@ async function main() {
   ]);
 
   const client = getClient();
-  const response = await promisify(client.GetIngredients.bind(client))({
-    recipeId,
-  });
+
+  const response = await promisify(
+    client.GetIngredients.bind(client) as typeof client.GetIngredients
+  )({ recipeId: 'test' });
+
+  console.log(response);
 }
 
 main();

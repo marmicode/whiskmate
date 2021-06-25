@@ -2,7 +2,7 @@ import { credentials } from '@grpc/grpc-js';
 import { getProto } from '@whiskmate/backend/whiskmate-grpc-core';
 
 export function getClient() {
-  const { Whiskmate } = getProto() as any;
+  const { WhiskmateClient } = getProto();
 
-  return new Whiskmate('localhost:4002', credentials.createInsecure());
+  return new WhiskmateClient('localhost:4002', credentials.createInsecure());
 }

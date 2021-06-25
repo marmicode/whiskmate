@@ -1,20 +1,12 @@
-import type * as grpc from '@grpc/grpc-js';
-import type { MessageTypeDefinition } from '@grpc/proto-loader';
+// Original file: libs/backend/whiskmate-grpc-core/src/assets/whiskmate.proto
 
-import type { WhiskmateClient as _WhiskmateClient, WhiskmateDefinition as _WhiskmateDefinition } from './Whiskmate';
+import type * as grpc from '@grpc/grpc-js'
+import type { MethodDefinition } from '@grpc/proto-loader'
+import type { GetIngredientsRequest as _GetIngredientsRequest, GetIngredientsRequest__Output as _GetIngredientsRequest__Output } from './GetIngredientsRequest';
+import type { GetIngredientsResponse as _GetIngredientsResponse, GetIngredientsResponse__Output as _GetIngredientsResponse__Output } from './GetIngredientsResponse';
 
-type SubtypeConstructor<Constructor extends new (...args: any) => any, Subtype> = {
-  new(...args: ConstructorParameters<Constructor>): Subtype;
-};
-
-export interface ProtoGrpcType {
-  GetIngredientsRequest: MessageTypeDefinition
-  GetIngredientsResponse: MessageTypeDefinition
-  Ingredient: MessageTypeDefinition
-  Whiskmate: SubtypeConstructor<typeof grpc.Client, _WhiskmateClient> & { service: _WhiskmateDefinition }
-}
-
-rpc.CallOptions, callback: (error?: grpc.ServiceError, result?: _GetIngredientsResponse__Output) => void): grpc.ClientUnaryCall;
+export interface WhiskmateClient extends grpc.Client {
+  GetIngredients(argument: _GetIngredientsRequest, metadata: grpc.Metadata, options: grpc.CallOptions, callback: (error?: grpc.ServiceError, result?: _GetIngredientsResponse__Output) => void): grpc.ClientUnaryCall;
   GetIngredients(argument: _GetIngredientsRequest, metadata: grpc.Metadata, callback: (error?: grpc.ServiceError, result?: _GetIngredientsResponse__Output) => void): grpc.ClientUnaryCall;
   GetIngredients(argument: _GetIngredientsRequest, options: grpc.CallOptions, callback: (error?: grpc.ServiceError, result?: _GetIngredientsResponse__Output) => void): grpc.ClientUnaryCall;
   GetIngredients(argument: _GetIngredientsRequest, callback: (error?: grpc.ServiceError, result?: _GetIngredientsResponse__Output) => void): grpc.ClientUnaryCall;

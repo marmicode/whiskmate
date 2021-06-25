@@ -1,5 +1,8 @@
 import { join } from 'path';
 
+/**
+ * Return all recipes.
+ */
 export async function getRecipes({
   ingredientsCount,
 }: { ingredientsCount?: number } = {}) {
@@ -14,6 +17,9 @@ export async function getRecipes({
   return recipes;
 }
 
+/**
+ * Return similar recipes based on ingredient count.
+ */
 export async function getSimilarRecipes(recipe: Recipe) {
   const recipes = await getRecipes();
 
@@ -26,6 +32,15 @@ export async function getSimilarRecipes(recipe: Recipe) {
     /* Let's consider recipes with same number of ingredients as similar.*/
     return recipe.ingredients.length === _recipe.ingredients.length;
   });
+}
+
+/**
+ * Return a recipe's ingredients.
+ */
+export async function getIngredients({ recipeId }: { recipeId: string }) {
+  const recipes = (await loadData()).recipes;
+
+  return recipes.find((recipe) => recipe.id === recipeId)?.ingredients;
 }
 
 export interface Recipe {

@@ -187,7 +187,7 @@
             "assets": [
               "apps/backend/whiskmate-graphql/src/assets",
               {
-                "glob": "**/*",
+                "glob": "**/db.json",
                 "input": "libs/backend/whiskmate-core/src/assets",
                 "output": "assets"
               }
@@ -244,7 +244,12 @@
             "assets": [
               "apps/backend/whiskmate-grpc/src/assets",
               {
-                "glob": "**/*",
+                "glob": "**/db.json",
+                "input": "libs/backend/whiskmate-core/src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*.proto",
                 "input": "libs/backend/whiskmate-grpc-core/src/assets",
                 "output": "assets"
               }
@@ -374,7 +379,7 @@
             "assets": [
               "apps/backend/whiskmate-grpc-cli/src/assets",
               {
-                "glob": "**/*",
+                "glob": "**/*.proto",
                 "input": "libs/backend/whiskmate-grpc-core/src/assets",
                 "output": "assets"
               }

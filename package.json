@@ -26,6 +26,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
+    "codegen": "nx run-many --target codegen --all",
     "scrap-ottolenghi": "ts-node -P libs/ottolenghi-scraper/tsconfig.lib.json libs/ottolenghi-scraper/src/main.ts"
   },
   "private": true,

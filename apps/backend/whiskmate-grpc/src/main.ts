@@ -1,4 +1,5 @@
 import { Server, ServerCredentials } from '@grpc/grpc-js';
+import { getIngredients, getRecipes } from '@whiskmate/backend/whiskmate-core';
 import {
   getProto,
   WhiskmateHandlers,
@@ -6,7 +7,14 @@ import {
 import { promisify } from 'util';
 
 const serviceImpl: WhiskmateHandlers = {
-  GetIngredients: (call, callback) => callback(null, {}),
+  GetIngredients: async (call, callback) =>
+    callback(null, {
+      ingredients: await getIngredients({ recipeId: call.request.recipeId }),
+    }),
+  GetRecipes: async (call, callback) =>
+    callback(null, {
+      recipes: await getRecipes(),
+    }),
 };
 
 /**

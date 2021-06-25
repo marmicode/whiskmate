@@ -333,6 +333,16 @@
       "sourceRoot": "libs/backend/whiskmate-grpc-core/src",
       "projectType": "library",
       "architect": {
+        "codegen": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "yarn proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=libs/backend/whiskmate-grpc-core/src/assets libs/backend/whiskmate-grpc-core/src/assets/*.proto"
+              }
+            ]
+          }
+        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {

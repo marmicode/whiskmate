@@ -184,7 +184,14 @@
             "outputPath": "dist/apps/whiskmate-graphql-service",
             "main": "apps/whiskmate-graphql-service/src/main.ts",
             "tsConfig": "apps/whiskmate-graphql-service/tsconfig.app.json",
-            "assets": ["apps/whiskmate-graphql-service/src/assets"]
+            "assets": [
+              "apps/whiskmate-graphql-service/src/assets",
+              {
+                "glob": "**/*",
+                "input": "libs/whiskmate-service-core/src/assets",
+                "output": "assets"
+              }
+            ]
           },
           "configurations": {
             "production": {

@@ -1,5 +1,4 @@
 import { getClient } from '@whiskmate/backend/whiskmate-grpc-client';
-import { promisify } from 'util';
 import { prompt } from 'inquirer';
 
 async function main() {
@@ -9,11 +8,9 @@ async function main() {
     },
   ]);
 
-  const client = getClient();
+  const { getIngredients } = getClient();
 
-  const response = await promisify(
-    client.GetIngredients.bind(client) as typeof client.GetIngredients
-  )({ recipeId: 'test' });
+  const response = await getIngredients({ recipeId });
 
   console.log(response);
 }

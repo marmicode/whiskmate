@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+service Whiskmate {
+  rpc GetIngredients (GetIngredientsRequest) returns (GetIngredientsResponse);
+}
+
+message GetIngredientsRequest {
+  string recipeId = 1;
+}
+
+message GetIngredientsResponse {
+  repeated Ingredient ingredients = 1;
+}
+
+message Ingredient {
+  string name = 1;
+}

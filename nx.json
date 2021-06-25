@@ -19,6 +19,9 @@
     }
   },
   "projects": {
+    "ottolenghi-scraper": {
+      "tags": []
+    },
     "whiskmate": {
       "tags": []
     },
@@ -26,7 +29,7 @@
       "tags": [],
       "implicitDependencies": ["whiskmate"]
     },
-    "ottolenghi-scraper": {
+    "whiskmate-graphql-service": {
       "tags": []
     }
   }

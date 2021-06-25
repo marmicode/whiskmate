@@ -34,6 +34,27 @@
     }
   },
   "projects": {
+    "ottolenghi-scraper": {
+      "root": "libs/ottolenghi-scraper",
+      "sourceRoot": "libs/ottolenghi-scraper/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ottolenghi-scraper/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ottolenghi-scraper"],
+          "options": {
+            "jestConfig": "libs/ottolenghi-scraper/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "whiskmate": {
       "projectType": "application",
       "root": "apps/whiskmate",
@@ -151,22 +172,51 @@
         }
       }
     },
-    "ottolenghi-scraper": {
-      "root": "libs/ottolenghi-scraper",
-      "sourceRoot": "libs/ottolenghi-scraper/src",
-      "projectType": "library",
+    "whiskmate-graphql-service": {
+      "root": "apps/whiskmate-graphql-service",
+      "sourceRoot": "apps/whiskmate-graphql-service/src",
+      "projectType": "application",
       "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/whiskmate-graphql-service",
+            "main": "apps/whiskmate-graphql-service/src/main.ts",
+            "tsConfig": "apps/whiskmate-graphql-service/tsconfig.app.json",
+            "assets": ["apps/whiskmate-graphql-service/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/whiskmate-graphql-service/src/environments/environment.ts",
+                  "with": "apps/whiskmate-graphql-service/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "whiskmate-graphql-service:build"
+          }
+        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/ottolenghi-scraper/**/*.ts"]
+            "lintFilePatterns": ["apps/whiskmate-graphql-service/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ottolenghi-scraper"],
+          "outputs": ["coverage/apps/whiskmate-graphql-service"],
           "options": {
-            "jestConfig": "libs/ottolenghi-scraper/jest.config.js",
+            "jestConfig": "apps/whiskmate-graphql-service/jest.config.js",
             "passWithNoTests": true
           }
         }

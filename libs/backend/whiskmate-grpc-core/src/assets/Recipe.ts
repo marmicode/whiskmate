@@ -2,11 +2,11 @@
 
 
 export interface Recipe {
-  'name'?: (string);
   'id'?: (string);
+  'name'?: (string);
 }
 
 export interface Recipe__Output {
-  'name': (string);
   'id': (string);
+  'name': (string);
 }

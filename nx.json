@@ -46,6 +46,9 @@
     },
     "backend-whiskmate-grpc-cli": {
       "tags": []
+    },
+    "backend-whiskmate-restful-core": {
+      "tags": []
     }
   }
 }

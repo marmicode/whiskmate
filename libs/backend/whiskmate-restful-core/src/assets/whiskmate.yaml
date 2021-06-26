@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Whiskmate
+  version: 0.1.0
+tags:
+  - name: Recipes
+    description: Basic recipes CRUD operations
+paths:
+  /recipes:
+    get:
+      summary: Get all recipes
+      tags:
+        - Recipes
+      operationId: recipes.get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeListResponse'
+        '4XX':
+          $ref: '#/components/responses/Problem'
+components:
+  schemas:
+    Recipe:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    RecipeListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Recipe'
+      example:
+        - id: babaganoush
+          name: Babaganoush
+  responses:
+    Problem:
+      description: Problem
+      content:
+        application/problem+json:
+          schema:
+            required:
+              - title
+              - type
+            properties:
+              type:
+                type: string
+              title:
+                type: string

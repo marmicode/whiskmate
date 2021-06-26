@@ -24,6 +24,9 @@
       ],
       "@whiskmate/backend/whiskmate-grpc-core": [
         "libs/backend/whiskmate-grpc-core/src/index.ts"
+      ],
+      "@whiskmate/backend/whiskmate-restful-core": [
+        "libs/backend/whiskmate-restful-core/src/index.ts"
       ]
     }
   },

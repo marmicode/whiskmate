@@ -420,6 +420,37 @@
           }
         }
       }
+    },
+    "backend-whiskmate-restful-core": {
+      "root": "libs/backend/whiskmate-restful-core",
+      "sourceRoot": "libs/backend/whiskmate-restful-core/src",
+      "projectType": "library",
+      "architect": {
+        "codegen": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "openapi-generator-cli generate -i libs/backend/whiskmate-restful-core/src/assets/whiskmate.yaml -g typescript-angular -o libs/backend/whiskmate-restful-core/src/lib --additional-properties stringEnums=true"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/backend/whiskmate-restful-core/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/whiskmate-restful-core"],
+          "options": {
+            "jestConfig": "libs/backend/whiskmate-restful-core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

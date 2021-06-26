@@ -301,6 +301,11 @@
                 "glob": "**/db.json",
                 "input": "libs/backend/whiskmate-core/src/assets",
                 "output": "assets"
+              },
+              {
+                "glob": "**/whiskmate.yaml",
+                "input": "libs/backend/whiskmate-restful-core/src/assets",
+                "output": "assets"
               }
             ]
           },

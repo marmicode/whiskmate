@@ -21,10 +21,30 @@ paths:
                 $ref: '#/components/schemas/RecipeListResponse'
         '4XX':
           $ref: '#/components/responses/Problem'
+    post:
+      summary: Add a recipe
+      tags:
+        - Recipes
+      operationId: recipes.post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipeRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
 components:
   schemas:
     Recipe:
       type: object
+      required:
+        - id
+        - name
       properties:
         id:
           type: string
@@ -37,6 +57,13 @@ components:
       example:
         - id: babaganoush
           name: Babaganoush
+    RecipeRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
   responses:
     Problem:
       description: Problem

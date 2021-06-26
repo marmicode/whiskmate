@@ -66,8 +66,8 @@ export async function getIngredients({ recipeId }: { recipeId: string }) {
 }
 
 export interface RecipeInfo {
-  description: string;
   name: string;
+  description?: string;
 }
 
 export interface Recipe extends RecipeInfo {

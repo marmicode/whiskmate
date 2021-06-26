@@ -11,8 +11,7 @@
  */
 
 
-export interface Recipe { 
-    id: string;
+export interface RecipeRequest { 
     name: string;
 }
 

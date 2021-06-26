@@ -431,7 +431,7 @@
           "options": {
             "commands": [
               {
-                "command": "openapi-generator-cli generate -i libs/backend/whiskmate-restful-core/src/assets/whiskmate.yaml -g typescript-angular -o libs/backend/whiskmate-restful-core/src/lib --additional-properties stringEnums=true"
+                "command": "openapi-generator-cli generate -i libs/backend/whiskmate-restful-core/src/assets/whiskmate.yaml -g typescript-angular -o libs/backend/whiskmate-restful-core/src/lib --additional-properties stringEnums=true --global-property models"
               }
             ]
           }

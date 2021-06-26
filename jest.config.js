@@ -9,5 +9,6 @@ module.exports = {
     '<rootDir>/libs/backend/whiskmate-grpc-core',
     '<rootDir>/apps/backend/whiskmate-grpc-cli',
     '<rootDir>/libs/backend/whiskmate-restful-core',
+    '<rootDir>/apps/backend/whiskmate-restful',
   ],
 };

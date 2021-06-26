@@ -48,6 +48,7 @@
     "express": "4.17.1",
     "graphql": "^15.5.1",
     "lowdb": "^2.1.0",
+    "openapi-request-validator": "^9.0.3",
     "puppeteer": "^10.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

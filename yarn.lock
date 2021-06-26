@@ -4331,6 +4331,16 @@ ajv@^8.0.0, ajv@^8.0.1:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
+ajv@^8.3.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.6.0.tgz#60cc45d9c46a477d80d92c48076d972c342e5720"
+  integrity sha512-cnUG4NSBiM4YFBxgZIj/In3/6KX+rQ2l2YPRVcvAMQGWEPKuXoPIhxzwqh31jA3IPbI4qEOp/5ILI4ynioXsGQ==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    json-schema-traverse "^1.0.0"
+    require-from-string "^2.0.2"
+    uri-js "^4.2.2"
+
 alphanum-sort@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
@@ -6043,7 +6053,7 @@ content-disposition@0.5.3:
   dependencies:
     safe-buffer "5.1.2"
 
-content-type@~1.0.4:
+content-type@^1.0.4, content-type@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
@@ -11515,6 +11525,29 @@ open@^7.0.2, open@^7.0.3, open@^7.4.2:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
 
+openapi-jsonschema-parameters@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/openapi-jsonschema-parameters/-/openapi-jsonschema-parameters-9.0.3.tgz#bcff9faae22a6e967e9b15c94fa76b9500f102c8"
+  integrity sha512-47mnQTscui93dKhNbvbrDwjbIgiiqeXvNWbv6RfQSJKD5ugcDV1jcPkfORZRWm6CF0TDb+rhW8bPkOVrF+J2lw==
+  dependencies:
+    openapi-types "^9.0.3"
+
+openapi-request-validator@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/openapi-request-validator/-/openapi-request-validator-9.0.3.tgz#679b576fbc540a00747ae8a0aae13fa8d463d800"
+  integrity sha512-YLkhCyUvVycEKwnzM/1tTA+1V6u7D+J/honS4a+sm1NUyu2ImGQ2hoVl6U7DpyIAzxNP2ds3Sma7BgIF3pwrJQ==
+  dependencies:
+    ajv "^8.3.0"
+    content-type "^1.0.4"
+    openapi-jsonschema-parameters "^9.0.3"
+    openapi-types "^9.0.3"
+    ts-log "^2.1.4"
+
+openapi-types@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/openapi-types/-/openapi-types-9.0.3.tgz#4f1fcf956165692f710ac7823b89a6b7d36b0fbb"
+  integrity sha512-c4C1xAKZOvOxeSWvRY0d2XsoaZoF8M7rifxfZZCIH2mqPEQxOz8qfFx4oEpLFaE+DfDGe08HcIA/p1Bu93keLQ==
+
 opn@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/opn/-/opn-5.5.0.tgz#fc7164fab56d235904c51c3b27da6758ca3b9bfc"
@@ -14990,6 +15023,11 @@ ts-loader@^8.0.14:
     loader-utils "^2.0.0"
     micromatch "^4.0.0"
     semver "^7.3.4"
+
+ts-log@^2.1.4:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/ts-log/-/ts-log-2.2.3.tgz#4da5640fe25a9fb52642cd32391c886721318efb"
+  integrity sha512-XvB+OdKSJ708Dmf9ore4Uf/q62AYDTzFcAdxc8KNML1mmAWywRFVt/dn1KYJH8Agt5UJNujfM3znU5PxgAzA2w==
 
 ts-node@~9.1.1:
   version "9.1.1"

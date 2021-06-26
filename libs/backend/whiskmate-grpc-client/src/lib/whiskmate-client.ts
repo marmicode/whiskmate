@@ -14,5 +14,8 @@ export function getClient() {
     getIngredients: promisify(
       client.GetIngredients.bind(client) as typeof client.GetIngredients
     ),
+    getRecipes: promisify(
+      client.GetRecipes.bind(client) as typeof client.GetRecipes
+    ),
   };
 }

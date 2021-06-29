@@ -11,4 +11,8 @@ module.exports = {
     '<rootDir>/libs/backend/whiskmate-restful-core',
     '<rootDir>/apps/backend/whiskmate-restful',
   ],
+  moduleNameMapper: {
+    '^@whiskmate/backend/whiskmate-core/(.*)':
+      '<rootDir>/libs/backend/whiskmate-core/$1',
+  },
 };

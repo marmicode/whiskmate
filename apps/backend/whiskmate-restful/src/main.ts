@@ -14,7 +14,7 @@ app.use(
   })
 );
 
-app.use('/recipes', recipesRouter);
+app.use(recipesRouter);
 
 app.use((err, req, res, next) => {
   const errorType = `https://errors.whiskmate.io/${

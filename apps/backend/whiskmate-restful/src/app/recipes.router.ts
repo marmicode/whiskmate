@@ -1,16 +1,23 @@
-import { Recipe } from '@whiskmate/backend/whiskmate-core';
-import { getRecipes, addRecipe } from '@whiskmate/backend/whiskmate-core';
+import {
+  addRecipe,
+  getRecipes,
+  Recipe,
+} from '@whiskmate/backend/whiskmate-core';
 import * as openapi from '@whiskmate/backend/whiskmate-restful-core';
 import { Router } from 'express';
+import { defer } from 'rxjs';
+import { retry } from 'rxjs/operators';
 
 export const recipesRouter = Router();
 
-recipesRouter.get('/', async (req, res) => {
-  const recipes = await getRecipes();
+recipesRouter.get('/recipes', async (req, res) => {
+  const recipes = await defer(() => getRecipes())
+    .pipe(retry(3))
+    .toPromise();
   res.send(recipes.map((recipe) => toRecipeDto(recipe)));
 });
 
-recipesRouter.post('/', async (req, res) => {
+recipesRouter.post('/recipes', async (req, res) => {
   const recipe = await addRecipe(req.body as openapi.RecipeRequest);
   res.send(toRecipeDto(recipe));
 });

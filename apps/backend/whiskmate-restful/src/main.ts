@@ -7,12 +7,12 @@ import { middleware as openapiValidator } from 'express-openapi-validator';
 const app = express();
 
 app.use(json({ type: 'application/json' }));
-app.use(
-  openapiValidator({
-    apiSpec: join(__dirname, 'assets/whiskmate.yaml'),
-    validateRequests: true,
-  })
-);
+// app.use(
+//   openapiValidator({
+//     apiSpec: join(__dirname, 'assets/whiskmate.yaml'),
+//     validateRequests: true,
+//   })
+// );
 
 app.use(recipesRouter);
 

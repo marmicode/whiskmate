@@ -7,7 +7,7 @@ jest.mock('@whiskmate/backend/whiskmate-core');
 
 const mockGetRecipes = getRecipes as jest.MockedFunction<typeof getRecipes>;
 
-describe('sheep router', () => {
+describe('recipes router', () => {
   it(`should return recipes`, async () => {
     givenDatabaseWorks();
 

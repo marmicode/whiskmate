@@ -1,6 +1,7 @@
 export {
   addRecipe,
   getIngredients,
+  getRecipe,
   getRecipes,
   getSimilarRecipes,
 } from './lib/recipe-repository';

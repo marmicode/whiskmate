@@ -1,5 +1,6 @@
 import {
   addRecipe,
+  getRecipe,
   getRecipes,
   Recipe,
 } from '@whiskmate/backend/whiskmate-core';
@@ -20,6 +21,12 @@ recipesRouter.get('/recipes', async (req, res) => {
 recipesRouter.post('/recipes', async (req, res) => {
   const recipe = await addRecipe(req.body as openapi.RecipeRequest);
   res.send(toRecipeDto(recipe));
+});
+
+recipesRouter.get('/recipes/:recipeId', async (req, res) => {
+  const recipe = await getRecipe({ recipeId: req.params.recipeId });
+
+  recipe ? res.send(toRecipeDto(recipe)) : res.sendStatus(404);
 });
 
 export function toRecipeDto(recipe: Recipe): openapi.Recipe {

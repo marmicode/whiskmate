@@ -20,6 +20,11 @@ export async function addRecipe(recipeInfo: RecipeInfo) {
   return recipe;
 }
 
+export async function getRecipe({ recipeId }: { recipeId: string }) {
+  const db = await getDb();
+  return db.data.recipes.find((recipe) => recipe.id === recipeId);
+}
+
 /**
  * Return all recipes.
  */

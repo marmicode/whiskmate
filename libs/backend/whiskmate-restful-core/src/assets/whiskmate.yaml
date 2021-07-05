@@ -1,14 +1,30 @@
 openapi: 3.0.0
 info:
-  title: Whiskmate
+  title: Whiskmate's Recipes
+  description: |
+    # Introduction
+
+    Whiskmate's Recipes is a service providing access
+    to a bunch of lovely recipes that will please you
+    on any season.
   version: 0.1.0
+  contact:
+    name: Marmicode
+    url: 'https://marmicode.io'
+    email: kitchen@marmicode.io
 tags:
   - name: Recipes
     description: Basic recipes CRUD operations
+servers:
+  - description: Local
+    url: 'http://localhost:4000'
 paths:
   /recipes:
     get:
       summary: Get all recipes
+      description: |
+        This will return all recipes.
+        Pagination is not implemented yet.
       tags:
         - Recipes
       operationId: recipes.get
@@ -19,10 +35,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RecipeListResponse'
-        '4XX':
+        4XX:
           $ref: '#/components/responses/Problem'
     post:
       summary: Add a recipe
+      description: |
+        This route allows you add new recipes to the catalog.
       tags:
         - Recipes
       operationId: recipes.post
@@ -38,6 +56,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Recipe'
+        4XX:
+          $ref: '#/components/responses/Problem'
+  /recipes/{recipeId}:
+    parameters:
+      - schema:
+          type: string
+        name: recipeId
+        in: path
+        required: true
+        description: Any recipe id as returned by /recipes
+    get:
+      summary: Your GET endpoint
+      description: This route will return the recipe or a 404 if not found.
+      operationId: recipe.get
+      tags:
+        - Recipes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        4XX:
+          $ref: '#/components/responses/Problem'
 components:
   schemas:
     Recipe:

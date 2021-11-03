@@ -27,6 +27,7 @@ function cascade_changes() {
 }
 
 cascade_changes \
+  boilerplate \
   testing-00-boilerplate \
   testing-01-meal-planner \
   testing-02-meal-planner-reactive \
@@ -51,3 +52,7 @@ cascade_changes \
   testing-21-cypress-component-testing \
   testing-22-cypress-component-testing-with-fake-repository \
   testing-23-visual-regression-testing \
+
+cascade_changes \
+  boilerplate \
+  api

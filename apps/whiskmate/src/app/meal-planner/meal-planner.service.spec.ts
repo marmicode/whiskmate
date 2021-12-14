@@ -19,6 +19,8 @@ describe(MealPlanner.name, () => {
   });
 
   it('should watch recipes', () => {
+    const { mealPlanner, papperdelle, puyLentil } = harness;
+
     const observer = jest.fn();
     mealPlanner.recipes$.subscribe(observer);
 
@@ -37,6 +39,8 @@ describe(MealPlanner.name, () => {
   });
 
   it('should watch if recipe can be added', () => {
+    const { mealPlanner, papperdelle } = harness;
+
     const observer = jest.fn();
     mealPlanner.watchCanAddRecipe(papperdelle).subscribe(observer);
 
@@ -48,6 +52,8 @@ describe(MealPlanner.name, () => {
   });
 
   it("should not trigger observable if result didn't change", () => {
+    const { mealPlanner, papperdelle, puyLentil } = harness;
+
     const observer = jest.fn();
     mealPlanner.watchCanAddRecipe(papperdelle).subscribe(observer);
 

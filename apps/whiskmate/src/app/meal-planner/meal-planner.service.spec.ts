@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { Observable, PartialObserver } from 'rxjs';
 import { Recipe } from './../recipe/recipe';
 import { MealPlanner } from './meal-planner.service';
 
@@ -21,18 +22,17 @@ describe(MealPlanner.name, () => {
   it('should watch recipes', () => {
     const { mealPlanner, papperdelle, puyLentil } = harness;
 
-    const observer = jest.fn();
-    mealPlanner.recipes$.subscribe(observer);
+    const observer = observe(mealPlanner.recipes$);
 
     mealPlanner.addRecipe(papperdelle);
     mealPlanner.addRecipe(puyLentil);
 
-    expect(observer).toBeCalledTimes(3);
-    expect(observer).toHaveBeenNthCalledWith(1, []);
-    expect(observer).toHaveBeenNthCalledWith(2, [
+    expect(observer.next).toBeCalledTimes(3);
+    expect(observer.next).toHaveBeenNthCalledWith(1, []);
+    expect(observer.next).toHaveBeenNthCalledWith(2, [
       expect.objectContaining({ id: 'papperdelle-with-rose-harissa' }),
     ]);
-    expect(observer).toHaveBeenNthCalledWith(3, [
+    expect(observer.next).toHaveBeenNthCalledWith(3, [
       expect.objectContaining({ id: 'papperdelle-with-rose-harissa' }),
       expect.objectContaining({ id: 'puy-lentil-and-aubergine-stew' }),
     ]);
@@ -41,14 +41,13 @@ describe(MealPlanner.name, () => {
   it('should watch if recipe can be added', () => {
     const { mealPlanner, papperdelle } = harness;
 
-    const observer = jest.fn();
-    mealPlanner.watchCanAddRecipe(papperdelle).subscribe(observer);
+    const observer = observe(mealPlanner.watchCanAddRecipe(papperdelle));
 
     mealPlanner.addRecipe(papperdelle);
 
-    expect(observer).toBeCalledTimes(2);
-    expect(observer).toBeCalledWith(true);
-    expect(observer).toBeCalledWith(false);
+    expect(observer.next).toBeCalledTimes(2);
+    expect(observer.next).toBeCalledWith(true);
+    expect(observer.next).toBeCalledWith(false);
   });
 
   it("should not trigger observable if result didn't change", () => {
@@ -95,3 +94,14 @@ describe(MealPlanner.name, () => {
     };
   }
 });
+
+function observe<T>(observable: Observable<T>) {
+  const observer: PartialObserver<T> = {
+    next: jest.fn<void, [T]>(),
+    error: jest.fn<void, [unknown]>(),
+    complete: jest.fn<void, []>(),
+  };
+  const subscription = observable.subscribe(observer);
+  afterEach(() => subscription.unsubscribe());
+  return observer;
+}

@@ -58,7 +58,7 @@ describe(MealPlanner.name, () => {
     mealPlanner.addRecipe(papperdelle);
     mealPlanner.addRecipe(puyLentil);
 
-    expect(observer).toBeCalledTimes(2);
+    expect(observer.next).toBeCalledTimes(2);
   });
 
   describe('with recipe', () => {

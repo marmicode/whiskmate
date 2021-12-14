@@ -2,6 +2,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TestBed } from '@angular/core/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { observe } from '../../testing/observe';
 import { RecipeFilter } from './recipe-filter';
 import {
   RecipeFilterComponent,
@@ -10,19 +11,17 @@ import {
 
 describe(RecipeFilterComponent.name, () => {
   it('should trigger filterChange output', async () => {
-    const observer = jest.fn();
-
     const { component, fixture, setInputValue } = await createComponent();
 
     fixture.detectChanges();
 
-    component.filterChange.subscribe(observer);
+    const observer = observe(component.filterChange);
 
     await setInputValue('[data-role=keywords-input]', 'Cauliflower');
     await setInputValue('[data-role=max-ingredient-count-input]', '3');
     await setInputValue('[data-role=max-step-count-input]', '10');
 
-    expect(observer).lastCalledWith({
+    expect(observer.next).lastCalledWith({
       keywords: 'Cauliflower',
       maxIngredientCount: 3,
       maxStepCount: 10,

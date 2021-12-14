@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Observable, PartialObserver } from 'rxjs';
+import { observe } from '../../testing/observe';
 import { Recipe } from './../recipe/recipe';
 import { MealPlanner } from './meal-planner.service';
 
@@ -93,14 +93,3 @@ describe(MealPlanner.name, () => {
     };
   }
 });
-
-function observe<T>(observable: Observable<T>) {
-  const observer: PartialObserver<T> = {
-    next: jest.fn<void, [T]>(),
-    error: jest.fn<void, [unknown]>(),
-    complete: jest.fn<void, []>(),
-  };
-  const subscription = observable.subscribe(observer);
-  afterEach(() => subscription.unsubscribe());
-  return observer;
-}

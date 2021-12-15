@@ -1,14 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { observe } from '../../testing/observe';
+import { createObserver } from '../../testing/observer';
 import { RecipeFilter } from './recipe-filter';
 import {
   RecipeFilterComponent,
-  RecipeFilterModule
+  RecipeFilterModule,
 } from './recipe-filter.component';
 
 describe(RecipeFilterComponent.name, () => {
+  const { observe } = createObserver();
+
   it('should trigger filterChange output', async () => {
     const { component, fixture, setInputValue } = await createComponent();
 

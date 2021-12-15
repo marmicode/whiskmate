@@ -1,9 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { observe } from '../../testing/observe';
 import { Recipe } from './../recipe/recipe';
 import { MealPlanner } from './meal-planner.service';
+import { createObserver } from '../../testing/observer';
 
 describe(MealPlanner.name, () => {
+  const { observe } = createObserver();
+
   let harness: ReturnType<typeof createHarness>;
   beforeEach(() => (harness = createHarness()));
 

@@ -1,9 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { Observable, PartialObserver } from 'rxjs';
+import { Observable, PartialObserver, Subscription } from 'rxjs';
 import { Recipe } from './../recipe/recipe';
 import { MealPlanner } from './meal-planner.service';
 
 describe(MealPlanner.name, () => {
+  const { observe } = createObserver();
+
   let harness: ReturnType<typeof createHarness>;
   beforeEach(() => (harness = createHarness()));
 
@@ -94,13 +96,21 @@ describe(MealPlanner.name, () => {
   }
 });
 
-function observe<T>(observable: Observable<T>) {
-  const observer: PartialObserver<T> = {
-    next: jest.fn<void, [T]>(),
-    error: jest.fn<void, [unknown]>(),
-    complete: jest.fn<void, []>(),
-  };
-  const subscription = observable.subscribe(observer);
+function createObserver() {
+  let subscription: Subscription;
+
+  beforeEach(() => (subscription = new Subscription()));
   afterEach(() => subscription.unsubscribe());
-  return observer;
+
+  return {
+    observe<T>(observable: Observable<T>) {
+      const observer: PartialObserver<T> = {
+        next: jest.fn<void, [T]>(),
+        error: jest.fn<void, [unknown]>(),
+        complete: jest.fn<void, []>(),
+      };
+      subscription.add(observable.subscribe(observer));
+      return observer;
+    },
+  };
 }

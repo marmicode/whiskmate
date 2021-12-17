@@ -1,6 +1,6 @@
-# Cost-Effective Angular Testing
+# Pragmatic Angular Testing
 
-👨🏻‍🍳 Welcome to [Marmicode](https://marmicode.io)'s Cost-Effective Angular Testing
+👨🏻‍🍳 Welcome to [Marmicode](https://marmicode.io)'s Pragmatic Angular Testing
 
 ## Exercises instructions
 

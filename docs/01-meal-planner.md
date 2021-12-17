@@ -21,7 +21,7 @@ yarn
 
 # 📝 Steps
 
-1. Create `apps/whiskmate/src/app/meal/meal-planner.spec.ts` _(Cf. use [example below](#test-example))_
+1. Create `apps/whiskmate/src/app/meal-planner/meal-planner.spec.ts` _(Cf. use [example below](#test-example))_
 2. You can import `Recipe` from `apps/whiskmate/src/app/recipe/recipe.ts`
 
 ```ts

@@ -27,7 +27,7 @@ function cascade_changes() {
 }
 
 cascade_changes \
-  boilerplate \
+  base \
   testing-00-boilerplate \
   testing-01-meal-planner \
   testing-02-meal-planner-reactive \
@@ -54,5 +54,9 @@ cascade_changes \
   testing-23-visual-regression-testing \
 
 cascade_changes \
-  boilerplate \
+  base \
   api
+
+cascade_changes \
+  base \
+  main

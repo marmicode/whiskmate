@@ -1,9 +1,23 @@
-/**
- * @todo implement RecipeRepository
- */
-class RecipeRepository {}
+class RecipeRepository {
+  #recipes = [];
 
-xdescribe(RecipeRepository.name, () => {
+  addRecipe(recipe) {
+    this.#recipes.push(recipe);
+  }
+
+  getRecipes() {
+    return this.#recipes;
+  }
+
+  removeRecipe(recipeId) {
+    const recipeIndex = this.#recipes.findIndex(
+      (recipe) => recipe.id === recipeId
+    );
+    this.#recipes.splice(recipeIndex, 1);
+  }
+}
+
+describe(RecipeRepository.name, () => {
   const burger = { id: 'burger', name: '🍔 Burger' };
   const salad = { id: 'salad', name: '🥗 Salad' };
 

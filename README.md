@@ -1,23 +1,18 @@
-# Pragmatic Angular Testing
+# 👋 Welcome to Whiskmate 👨🏻‍🍳
 
-👨🏻‍🍳 Welcome to [Marmicode](https://marmicode.io)'s Pragmatic Angular Testing
+This is a multi-purpose repository around a Meal Planning app called Whiskmate.
 
-## Exercises instructions
+# Branches index
 
-1. [Setup](docs/00-setup.md)
-2. [Meal Planner](docs/01-meal-planner.md)
-3. [Meal Planner Reactive](docs/02-meal-planner-reactive.md)
-4. [Recipe Search Isolated](docs/03-recipe-search-isolated.md)
-5. [Recipe Search Integration](docs/04-recipe-search-integration.md)
-6. [Recipe Search Shallow](docs/05-recipe-search-shallow.md)
-7. [Recipe Search Async Pipe](docs/06-recipe-search-async-pipe.md)
-8. [Recipe Filter](docs/07-recipe-filter.md)
-9. [Recipe Filter Interaction](docs/08-recipe-filter-interaction.md)
-10. [Recipe Filter With Harness](docs/09-recipe-filter-with-harness.md)
-11. [Recipe Filter Harness](docs/10-recipe-filter-harness.md)
-12. [Cypress Component Testing](docs/11-cypress-component-testing.md)
+Here is an index of this repo's branches:
 
-## [FAQ](docs/faq.md)
+| Branch                                                                                                           | Description                                                              |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [dom-distancing-0-main](https://github.com/marmicode/whiskmate/tree/dom-distancing-0-main)                       | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #0/4 |
+| [dom-distancing-1-testing](https://github.com/marmicode/whiskmate/tree/dom-distancing-1-testing)                 | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #1/4 |
+| [dom-distancing-2-date-input](https://github.com/marmicode/whiskmate/tree/dom-distancing-2-date-input)           | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #2/4 |
+| [dom-distancing-3-mat-date-picker](https://github.com/marmicode/whiskmate/tree/dom-distancing-3-mat-date-picker) | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #3/4 |
+| [dom-distancing-4-easy-harness](https://github.com/marmicode/whiskmate/tree/dom-distancing-4-easy-harness)       | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #4/4 |
 
 ---
 

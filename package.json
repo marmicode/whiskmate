@@ -1,0 +1,15 @@
+{
+  "name": "whiskmate",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "git@github.com:marmicode/whiskmate.git",
+  "author": "Younes Jaaidi <yjaaidi@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}

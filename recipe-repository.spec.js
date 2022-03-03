@@ -3,28 +3,23 @@ const { resolve } = require('path/posix');
 class RecipeRepository {
   #recipes = [];
 
-  addRecipe(recipe) {
+  async addRecipe(recipe) {
     this.#recipes = [...this.#recipes, recipe];
   }
 
-  getRecipes() {
-    return Promise.resolve(this.#recipes);
+  async getRecipes() {
+    return this.#recipes;
   }
 
-  removeRecipe(recipeId) {
-    return new Promise((resolve, reject) => {
-      const previousCount = this.#recipes.length;
+  async removeRecipe(recipeId) {
+    const previousCount = this.#recipes.length;
 
-      this.#recipes = this.#recipes.filter((recipe) => recipe.id !== recipeId);
+    this.#recipes = this.#recipes.filter((recipe) => recipe.id !== recipeId);
 
-      /* Check new recipes length to know if recipe has been removed. */
-      if (previousCount === this.#recipes.length) {
-        reject(new Error('Recipe not found.'));
-        return;
-      }
-
-      resolve();
-    });
+    /* Check new recipes length to know if recipe has been removed. */
+    if (previousCount === this.#recipes.length) {
+      throw new Error('Recipe not found.');
+    }
   }
 }
 

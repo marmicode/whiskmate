@@ -1,3 +1,5 @@
+const { resolve } = require('path/posix');
+
 class RecipeRepository {
   #recipes = [];
 
@@ -23,37 +25,37 @@ describe(RecipeRepository.name, () => {
   beforeEach(() => (recipeRepository = new RecipeRepository()));
 
   describe('without recipes', () => {
-    it('should get empty recipes list', () => {
-      expect(recipeRepository.getRecipes()).toEqual([]);
+    it('should get empty recipes list', async () => {
+      expect(await recipeRepository.getRecipes()).toEqual([]);
     });
 
-    it('should add recipe', () => {
-      recipeRepository.addRecipe(burger);
+    it('should add recipe', async () => {
+      await recipeRepository.addRecipe(burger);
 
-      expect(recipeRepository.getRecipes()).toEqual([
+      expect(await recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
           name: '🍔 Burger',
         }),
       ]);
     });
 
-    it('should add recipe and respect immutability', () => {
-      const recipes = recipeRepository.getRecipes();
+    it('should add recipe and respect immutability', async () => {
+      const recipes = await recipeRepository.getRecipes();
 
-      recipeRepository.addRecipe(burger);
+      await recipeRepository.addRecipe(burger);
 
       expect(recipes).toEqual([]);
     });
   });
 
   describe('with recipes', () => {
-    beforeEach(() => {
-      recipeRepository.addRecipe(burger);
-      recipeRepository.addRecipe(salad);
+    beforeEach(async () => {
+      await recipeRepository.addRecipe(burger);
+      await recipeRepository.addRecipe(salad);
     });
 
-    it('should get recipes', () => {
-      expect(recipeRepository.getRecipes()).toEqual([
+    it('should get recipes', async () => {
+      expect(await recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
           name: '🍔 Burger',
         }),
@@ -63,21 +65,27 @@ describe(RecipeRepository.name, () => {
       ]);
     });
 
-    it('should remove recipe', () => {
-      expect(recipeRepository.removeRecipe('burger'));
-      expect(recipeRepository.getRecipes()).toEqual([
+    it('should remove recipe', async () => {
+      expect(await recipeRepository.removeRecipe('burger'));
+      expect(await recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
           name: '🥗 Salad',
         }),
       ]);
     });
 
-    it('should remove recipe and respect immutability', () => {
-      const recipes = recipeRepository.getRecipes();
+    it('should remove recipe and respect immutability', async () => {
+      const recipes = await recipeRepository.getRecipes();
 
-      expect(recipeRepository.removeRecipe('burger'));
+      expect(await recipeRepository.removeRecipe('burger'));
 
       expect(recipes.length).toEqual(2);
+    });
+
+    xit('should reject promise when removing unexisting recipe', async () => {
+      expect(
+        recipeRepository.removeRecipe('unexisting-recipe')
+      ).rejects.toMatch(/Recipe not found./);
     });
   });
 });

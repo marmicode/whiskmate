@@ -39,6 +39,14 @@ describe(RecipeRepository.name, () => {
         }),
       ]);
     });
+
+    xit('should add recipe and respect immutability', () => {
+      const recipes = recipeRepository.getRecipes();
+
+      recipeRepository.addRecipe(burger);
+
+      expect(recipes).toEqual([]);
+    });
   });
 
   describe('with recipes', () => {
@@ -65,6 +73,14 @@ describe(RecipeRepository.name, () => {
           name: '🥗 Salad',
         }),
       ]);
+    });
+
+    xit('should remove recipe and respect immutability', () => {
+      const recipes = recipeRepository.getRecipes();
+
+      expect(recipeRepository.removeRecipe('burger'));
+
+      expect(recipes.length).toEqual(2);
     });
   });
 });

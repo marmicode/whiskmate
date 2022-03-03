@@ -8,11 +8,23 @@ class RecipeRepository {
   }
 
   getRecipes() {
-    return this.#recipes;
+    return Promise.resolve(this.#recipes);
   }
 
   removeRecipe(recipeId) {
-    this.#recipes = this.#recipes.filter((recipe) => recipe.id !== recipeId);
+    return new Promise((resolve, reject) => {
+      const previousCount = this.#recipes.length;
+
+      this.#recipes = this.#recipes.filter((recipe) => recipe.id !== recipeId);
+
+      /* Check new recipes length to know if recipe has been removed. */
+      if (previousCount === this.#recipes.length) {
+        reject(new Error('Recipe not found.'));
+        return;
+      }
+
+      resolve();
+    });
   }
 }
 
@@ -82,7 +94,7 @@ describe(RecipeRepository.name, () => {
       expect(recipes.length).toEqual(2);
     });
 
-    xit('should reject promise when removing unexisting recipe', () => {
+    it('should reject promise when removing unexisting recipe', () => {
       expect(
         recipeRepository.removeRecipe('unexisting-recipe')
       ).rejects.toMatchObject({

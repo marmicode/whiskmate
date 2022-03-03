@@ -3,7 +3,6 @@
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
-  "defaultProject": "whiskmate",
   "schematics": {
     "@nrwl/angular": {
       "application": {
@@ -393,123 +392,6 @@
           "options": {
             "jestConfig": "libs/ottolenghi-scraper/jest.config.js",
             "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "whiskmate": {
-      "projectType": "application",
-      "root": "apps/whiskmate",
-      "sourceRoot": "apps/whiskmate/src",
-      "prefix": "wm",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/whiskmate",
-            "index": "apps/whiskmate/src/index.html",
-            "main": "apps/whiskmate/src/main.ts",
-            "polyfills": "apps/whiskmate/src/polyfills.ts",
-            "tsConfig": "apps/whiskmate/tsconfig.app.json",
-            "assets": [
-              "apps/whiskmate/src/favicon.ico",
-              "apps/whiskmate/src/assets"
-            ],
-            "styles": ["apps/whiskmate/src/styles.css"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "apps/whiskmate/src/environments/environment.ts",
-                  "with": "apps/whiskmate/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "whiskmate:build:production"
-            },
-            "development": {
-              "browserTarget": "whiskmate:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "whiskmate:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/whiskmate/src/**/*.ts",
-              "apps/whiskmate/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/whiskmate"],
-          "options": {
-            "jestConfig": "apps/whiskmate/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "whiskmate-e2e": {
-      "root": "apps/whiskmate-e2e",
-      "sourceRoot": "apps/whiskmate-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/whiskmate-e2e/cypress.json",
-            "tsConfig": "apps/whiskmate-e2e/tsconfig.e2e.json",
-            "devServerTarget": "whiskmate:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "whiskmate:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/whiskmate-e2e/**/*.{js,ts}"]
           }
         }
       }

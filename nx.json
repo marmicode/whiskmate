@@ -45,13 +45,6 @@
     },
     "ottolenghi-scraper": {
       "tags": []
-    },
-    "whiskmate": {
-      "tags": []
-    },
-    "whiskmate-e2e": {
-      "tags": [],
-      "implicitDependencies": ["whiskmate"]
     }
   }
 }

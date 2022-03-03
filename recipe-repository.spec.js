@@ -95,11 +95,9 @@ describe(RecipeRepository.name, () => {
     });
 
     it('should reject promise when removing unexisting recipe', () => {
-      expect(
+      expect(() =>
         recipeRepository.removeRecipe('unexisting-recipe')
-      ).rejects.toMatchObject({
-        message: /Recipe not found./,
-      });
+      ).rejects.toThrowError(/Recipe not found./);
     });
   });
 });

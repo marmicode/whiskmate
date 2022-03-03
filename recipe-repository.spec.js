@@ -2,7 +2,7 @@ class RecipeRepository {
   #recipes = [];
 
   addRecipe(recipe) {
-    this.#recipes.push(recipe);
+    this.#recipes = [...this.#recipes, recipe];
   }
 
   getRecipes() {
@@ -10,10 +10,7 @@ class RecipeRepository {
   }
 
   removeRecipe(recipeId) {
-    const recipeIndex = this.#recipes.findIndex(
-      (recipe) => recipe.id === recipeId
-    );
-    this.#recipes.splice(recipeIndex, 1);
+    this.#recipes = this.#recipes.filter((recipe) => recipe.id !== recipeId);
   }
 }
 
@@ -40,7 +37,7 @@ describe(RecipeRepository.name, () => {
       ]);
     });
 
-    xit('should add recipe and respect immutability', () => {
+    it('should add recipe and respect immutability', () => {
       const recipes = recipeRepository.getRecipes();
 
       recipeRepository.addRecipe(burger);
@@ -75,7 +72,7 @@ describe(RecipeRepository.name, () => {
       ]);
     });
 
-    xit('should remove recipe and respect immutability', () => {
+    it('should remove recipe and respect immutability', () => {
       const recipes = recipeRepository.getRecipes();
 
       expect(recipeRepository.removeRecipe('burger'));

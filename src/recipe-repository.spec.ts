@@ -1,34 +1,4 @@
-interface Recipe {
-  id: string;
-  name: string;
-}
-
-function createRecipe(recipe: Recipe): Recipe {
-  return recipe;
-}
-
-class RecipeRepository {
-  private _recipes: Recipe[] = [];
-
-  async addRecipe(recipe: Recipe) {
-    this._recipes = [...this._recipes, recipe];
-  }
-
-  async getRecipes() {
-    return this._recipes;
-  }
-
-  async removeRecipe(recipeId: string) {
-    const previousCount = this._recipes.length;
-
-    this._recipes = this._recipes.filter((recipe) => recipe.id !== recipeId);
-
-    /* Check new recipes length to know if recipe has been removed. */
-    if (previousCount === this._recipes.length) {
-      throw new Error('Recipe not found.');
-    }
-  }
-}
+import { createRecipe, RecipeRepository } from './recipe-repository';
 
 describe(RecipeRepository.name, () => {
   const burger = createRecipe({ id: 'burger', name: '🍔 Burger' });

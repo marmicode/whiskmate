@@ -1,8 +1,12 @@
+const { nanoid } = require('nanoid');
+
 class RecipeRepository {
   #recipes = [];
 
-  addRecipe(recipe) {
+  addRecipe(recipeData) {
+    const recipe = { ...recipeData, id: nanoid() };
     this.#recipes = [...this.#recipes, recipe];
+    return recipe;
   }
 
   getRecipes() {
@@ -15,8 +19,8 @@ class RecipeRepository {
 }
 
 describe(RecipeRepository.name, () => {
-  const burger = { id: 'burger', name: '🍔 Burger' };
-  const salad = { id: 'salad', name: '🥗 Salad' };
+  const burgerData = { name: '🍔 Burger' };
+  const saladData = { name: '🥗 Salad' };
 
   let recipeRepository;
 
@@ -28,7 +32,7 @@ describe(RecipeRepository.name, () => {
     });
 
     it('should add recipe', () => {
-      recipeRepository.addRecipe(burger);
+      recipeRepository.addRecipe(burgerData);
 
       expect(recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
@@ -40,16 +44,21 @@ describe(RecipeRepository.name, () => {
     it('should add recipe and respect immutability', () => {
       const recipes = recipeRepository.getRecipes();
 
-      recipeRepository.addRecipe(burger);
+      recipeRepository.addRecipe(burgerData);
 
       expect(recipes).toEqual([]);
     });
   });
 
   describe('with recipes', () => {
+    let burgerId;
+
     beforeEach(() => {
-      recipeRepository.addRecipe(burger);
-      recipeRepository.addRecipe(salad);
+      const burger = recipeRepository.addRecipe(burgerData);
+      recipeRepository.addRecipe(saladData);
+
+      /* Remember burger id to remove it later. */
+      burgerId = burger.id;
     });
 
     it('should get recipes', () => {
@@ -64,7 +73,7 @@ describe(RecipeRepository.name, () => {
     });
 
     it('should remove recipe', () => {
-      expect(recipeRepository.removeRecipe('burger'));
+      expect(recipeRepository.removeRecipe(burgerId));
       expect(recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
           name: '🥗 Salad',
@@ -75,7 +84,7 @@ describe(RecipeRepository.name, () => {
     it('should remove recipe and respect immutability', () => {
       const recipes = recipeRepository.getRecipes();
 
-      expect(recipeRepository.removeRecipe('burger'));
+      expect(recipeRepository.removeRecipe(burgerId));
 
       expect(recipes.length).toEqual(2);
     });

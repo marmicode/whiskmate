@@ -1,8 +1,9 @@
-export interface Recipe {
-  id: string;
+import { nanoid } from 'nanoid';
+
+export interface RecipeData {
   name: string;
 }
 
-export function createRecipe(recipe: Recipe): Recipe {
-  return recipe;
+export interface Recipe extends RecipeData {
+  id: string;
 }

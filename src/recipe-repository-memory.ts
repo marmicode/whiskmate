@@ -1,10 +1,13 @@
-import { Recipe } from './recipe-repository';
+import { nanoid } from 'nanoid';
+import { Recipe, RecipeData } from './recipe-repository';
 
 export class RecipeRepositoryMemory {
   private _recipes: Recipe[] = [];
 
-  async addRecipe(recipe: Recipe) {
+  async addRecipe(recipeData: RecipeData) {
+    const recipe = { ...recipeData, id: nanoid() };
     this._recipes = [...this._recipes, recipe];
+    return recipe;
   }
 
   async getRecipes() {

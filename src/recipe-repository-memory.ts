@@ -1,5 +1,10 @@
 import { nanoid } from 'nanoid';
-import { Recipe, RecipeData, RecipeRepository } from './recipe-repository';
+import {
+  Recipe,
+  RecipeData,
+  RecipeRepository,
+  RecipeNotFoundError,
+} from './recipe-repository';
 
 export class RecipeRepositoryMemory implements RecipeRepository {
   private _recipes: Recipe[] = [];
@@ -21,7 +26,7 @@ export class RecipeRepositoryMemory implements RecipeRepository {
 
     /* Check new recipes length to know if recipe has been removed. */
     if (previousCount === this._recipes.length) {
-      throw new Error('Recipe not found.');
+      throw new RecipeNotFoundError(recipeId);
     }
   }
 }

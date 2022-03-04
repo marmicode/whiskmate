@@ -11,3 +11,10 @@ export interface RecipeRepository {
   getRecipes(): Promise<Recipe[]>;
   removeRecipe(recipeId: string): Promise<void>;
 }
+
+export class RecipeNotFoundError extends Error {
+  constructor(recipeId: string) {
+    super(`Recipe ${recipeId} not found.`);
+    this.name = RecipeNotFoundError.name;
+  }
+}

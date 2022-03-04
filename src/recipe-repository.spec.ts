@@ -1,4 +1,4 @@
-import { RecipeRepository } from './recipe-repository';
+import { RecipeRepository, RecipeNotFoundError } from './recipe-repository';
 import { RecipeRepositoryFilesystem } from './recipe-repository-filesystem';
 import { RecipeRepositoryMemory } from './recipe-repository-memory';
 import { createTmpDir } from './helpers/create-tmp-dir';
@@ -84,6 +84,17 @@ describe.each([
       ]);
     });
 
+    it('should get recipes and expose recipe id', async () => {
+      expect(await recipeRepository.getRecipes()).toEqual([
+        expect.objectContaining({
+          id: burgerId,
+        }),
+        expect.objectContaining({
+          id: expect.any(String),
+        }),
+      ]);
+    });
+
     it('should remove recipe', async () => {
       expect(await recipeRepository.removeRecipe(burgerId));
       expect(await recipeRepository.getRecipes()).toEqual([
@@ -104,7 +115,7 @@ describe.each([
     it('should reject promise when removing unexisting recipe', () => {
       expect(() =>
         recipeRepository.removeRecipe('unexisting-recipe')
-      ).rejects.toThrowError(/Recipe not found./);
+      ).rejects.toThrowError(new RecipeNotFoundError('unexisting-recipe'));
     });
   });
 });

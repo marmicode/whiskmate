@@ -38,6 +38,8 @@ describe.each([
     destroyRecipeRepository = destroy;
   });
 
+  afterEach(() => destroyRecipeRepository());
+
   describe('without recipes', () => {
     it('should get empty recipes list', async () => {
       expect(await recipeRepository.getRecipes()).toEqual([]);

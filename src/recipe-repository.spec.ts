@@ -1,12 +1,42 @@
+import { RecipeRepository } from './recipe-repository';
+import { RecipeRepositoryFilesystem } from './recipe-repository-filesystem';
 import { RecipeRepositoryMemory } from './recipe-repository-memory';
+import { createTmpDir } from './helpers/create-tmp-dir';
 
-describe(RecipeRepositoryMemory.name, () => {
+describe.each([
+  [
+    RecipeRepositoryMemory.name,
+    {
+      async createRecipeRepository() {
+        return { repo: new RecipeRepositoryMemory(), async destroy() {} };
+      },
+    },
+  ],
+  // [
+  //   RecipeRepositoryFilesystem.name,
+  //   {
+  //     async createRecipeRepository() {
+  //       const { path, destroy } = await createTmpDir();
+
+  //       return {
+  //         repo: new RecipeRepositoryFilesystem(path),
+  //         destroy,
+  //       };
+  //     },
+  //   },
+  // ],
+])('%s', (_, { createRecipeRepository }) => {
   const burgerData = { name: '🍔 Burger' };
   const saladData = { name: '🥗 Salad' };
 
-  let recipeRepository: RecipeRepositoryMemory;
+  let recipeRepository: RecipeRepository;
+  let destroyRecipeRepository: () => Promise<void>;
 
-  beforeEach(() => (recipeRepository = new RecipeRepositoryMemory()));
+  beforeEach(async () => {
+    const { repo, destroy } = await createRecipeRepository();
+    recipeRepository = repo;
+    destroyRecipeRepository = destroy;
+  });
 
   describe('without recipes', () => {
     it('should get empty recipes list', async () => {

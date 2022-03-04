@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
-import { Recipe, RecipeData } from './recipe-repository';
+import { Recipe, RecipeData, RecipeRepository } from './recipe-repository';
 
-export class RecipeRepositoryMemory {
+export class RecipeRepositoryMemory implements RecipeRepository {
   private _recipes: Recipe[] = [];
 
   async addRecipe(recipeData: RecipeData) {

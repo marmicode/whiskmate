@@ -1,8 +1,12 @@
+const { nanoid } = require('nanoid');
+
 class RecipeRepository {
   #recipes = [];
 
-  addRecipe(recipe) {
+  addRecipe(recipeData) {
+    const recipe = { ...recipeData, id: nanoid() };
     this.#recipes.push(recipe);
+    return recipe;
   }
 
   getRecipes() {
@@ -17,7 +21,7 @@ class RecipeRepository {
   }
 }
 
-xdescribe(RecipeRepository.name, () => {
+describe(RecipeRepository.name, () => {
   const burgerData = { name: '🍔 Burger' };
   const saladData = { name: '🥗 Salad' };
 

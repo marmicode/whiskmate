@@ -1,6 +1,6 @@
 async function main() {
-  const { RecipeRepository } = await import('./recipe-repository');
-  console.log(await new RecipeRepository().getRecipes());
+  const { RecipeRepositoryMemory } = await import('./recipe-repository-memory');
+  console.log(await new RecipeRepositoryMemory().getRecipes());
 }
 
 main();

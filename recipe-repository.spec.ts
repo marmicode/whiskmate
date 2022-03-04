@@ -1,31 +1,40 @@
-class RecipeRepository {
-  #recipes = [];
+interface Recipe {
+  id: string;
+  name: string;
+}
 
-  async addRecipe(recipe) {
-    this.#recipes = [...this.#recipes, recipe];
+function createRecipe(recipe: Recipe): Recipe {
+  return recipe;
+}
+
+class RecipeRepository {
+  private _recipes: Recipe[] = [];
+
+  async addRecipe(recipe: Recipe) {
+    this._recipes = [...this._recipes, recipe];
   }
 
   async getRecipes() {
-    return this.#recipes;
+    return this._recipes;
   }
 
-  async removeRecipe(recipeId) {
-    const previousCount = this.#recipes.length;
+  async removeRecipe(recipeId: string) {
+    const previousCount = this._recipes.length;
 
-    this.#recipes = this.#recipes.filter((recipe) => recipe.id !== recipeId);
+    this._recipes = this._recipes.filter((recipe) => recipe.id !== recipeId);
 
     /* Check new recipes length to know if recipe has been removed. */
-    if (previousCount === this.#recipes.length) {
+    if (previousCount === this._recipes.length) {
       throw new Error('Recipe not found.');
     }
   }
 }
 
 describe(RecipeRepository.name, () => {
-  const burger = { id: 'burger', name: '🍔 Burger' };
-  const salad = { id: 'salad', name: '🥗 Salad' };
+  const burger = createRecipe({ id: 'burger', name: '🍔 Burger' });
+  const salad = createRecipe({ id: 'salad', name: '🥗 Salad' });
 
-  let recipeRepository;
+  let recipeRepository: RecipeRepository;
 
   beforeEach(() => (recipeRepository = new RecipeRepository()));
 

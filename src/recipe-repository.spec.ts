@@ -1,7 +1,7 @@
-import { RecipeRepository, RecipeNotFoundError } from './recipe-repository';
+import { createTmpDir } from './helpers/create-tmp-dir';
+import { RecipeNotFoundError, RecipeRepository } from './recipe-repository';
 import { RecipeRepositoryFilesystem } from './recipe-repository-filesystem';
 import { RecipeRepositoryMemory } from './recipe-repository-memory';
-import { createTmpDir } from './helpers/create-tmp-dir';
 
 describe.each([
   [
@@ -12,19 +12,19 @@ describe.each([
       },
     },
   ],
-  // [
-  //   RecipeRepositoryFilesystem.name,
-  //   {
-  //     async createRecipeRepository() {
-  //       const { path, destroy } = await createTmpDir();
+  [
+    RecipeRepositoryFilesystem.name,
+    {
+      async createRecipeRepository() {
+        const { path, destroy } = await createTmpDir();
 
-  //       return {
-  //         repo: new RecipeRepositoryFilesystem(path),
-  //         destroy,
-  //       };
-  //     },
-  //   },
-  // ],
+        return {
+          repo: new RecipeRepositoryFilesystem(path),
+          destroy,
+        };
+      },
+    },
+  ],
 ])('%s', (_, { createRecipeRepository }) => {
   const burgerData = { name: '🍔 Burger' };
   const saladData = { name: '🥗 Salad' };

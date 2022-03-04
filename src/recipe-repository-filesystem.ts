@@ -1,18 +1,54 @@
+import { readdir, readFile, rm, writeFile } from 'fs/promises';
 import { nanoid } from 'nanoid';
-import { Recipe, RecipeData, RecipeRepository } from './recipe-repository';
+import { join } from 'path';
+import {
+  Recipe,
+  RecipeData,
+  RecipeNotFoundError,
+  RecipeRepository,
+} from './recipe-repository';
 
 export class RecipeRepositoryFilesystem implements RecipeRepository {
-  constructor(path: string) {}
+  constructor(private _path: string) {}
 
-  addRecipe(recipeData: RecipeData): Promise<Recipe> {
-    throw new Error('🚧 Work in progress!');
+  async addRecipe(recipeData: RecipeData) {
+    const recipeId = nanoid();
+    const path = this._getRecipePath(recipeId);
+    await writeFile(path, JSON.stringify(recipeData));
+
+    return {
+      ...recipeData,
+      id: recipeId,
+    };
   }
 
-  getRecipes(): Promise<Recipe[]> {
-    throw new Error('🚧 Work in progress!');
+  async getRecipes(): Promise<Recipe[]> {
+    const paths = await readdir(this._path);
+    const recipes = await Promise.all(
+      paths.map(async (recipeId) => {
+        const path = this._getRecipePath(recipeId);
+        const content = await readFile(path, 'utf-8');
+        const data = JSON.parse(content);
+        return {
+          ...data,
+          id: recipeId,
+        };
+      })
+    );
+    return recipes;
   }
 
-  removeRecipe(recipeId: string): Promise<void> {
-    throw new Error('🚧 Work in progress!');
+  async removeRecipe(recipeId: string) {
+    try {
+      await rm(this._getRecipePath(recipeId));
+    } catch (e: any) {
+      if (e?.code === 'ENOENT') {
+        throw new RecipeNotFoundError(recipeId);
+      }
+    }
+  }
+
+  private _getRecipePath(recipeId: string) {
+    return join(this._path, recipeId);
   }
 }

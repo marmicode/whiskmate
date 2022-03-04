@@ -1,12 +1,13 @@
-import { createRecipe, RecipeRepository } from './recipe-repository';
+import { createRecipe } from './recipe-repository';
+import { RecipeRepositoryMemory } from './recipe-repository-memory';
 
-describe(RecipeRepository.name, () => {
+describe(RecipeRepositoryMemory.name, () => {
   const burger = createRecipe({ id: 'burger', name: '🍔 Burger' });
   const salad = createRecipe({ id: 'salad', name: '🥗 Salad' });
 
-  let recipeRepository: RecipeRepository;
+  let recipeRepository: RecipeRepositoryMemory;
 
-  beforeEach(() => (recipeRepository = new RecipeRepository()));
+  beforeEach(() => (recipeRepository = new RecipeRepositoryMemory()));
 
   describe('without recipes', () => {
     it('should get empty recipes list', async () => {

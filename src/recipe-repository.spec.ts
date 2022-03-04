@@ -76,25 +76,29 @@ describe.each([
     });
 
     it('should get recipes', async () => {
-      expect(await recipeRepository.getRecipes()).toEqual([
-        expect.objectContaining({
-          name: '🍔 Burger',
-        }),
-        expect.objectContaining({
-          name: '🥗 Salad',
-        }),
-      ]);
+      expect(await recipeRepository.getRecipes()).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            name: '🍔 Burger',
+          }),
+          expect.objectContaining({
+            name: '🥗 Salad',
+          }),
+        ])
+      );
     });
 
     it('should get recipes and expose recipe id', async () => {
-      expect(await recipeRepository.getRecipes()).toEqual([
-        expect.objectContaining({
-          id: burgerId,
-        }),
-        expect.objectContaining({
-          id: expect.any(String),
-        }),
-      ]);
+      expect(await recipeRepository.getRecipes()).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            id: burgerId,
+          }),
+          expect.objectContaining({
+            id: expect.any(String),
+          }),
+        ])
+      );
     });
 
     it('should remove recipe', async () => {

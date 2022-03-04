@@ -17,9 +17,9 @@ class RecipeRepository {
   }
 }
 
-describe(RecipeRepository.name, () => {
-  const burger = { id: 'burger', name: '🍔 Burger' };
-  const salad = { id: 'salad', name: '🥗 Salad' };
+xdescribe(RecipeRepository.name, () => {
+  const burgerData = { name: '🍔 Burger' };
+  const saladData = { name: '🥗 Salad' };
 
   let recipeRepository;
 
@@ -31,7 +31,7 @@ describe(RecipeRepository.name, () => {
     });
 
     it('should add recipe', () => {
-      recipeRepository.addRecipe(burger);
+      recipeRepository.addRecipe(burgerData);
 
       expect(recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
@@ -42,9 +42,14 @@ describe(RecipeRepository.name, () => {
   });
 
   describe('with recipes', () => {
+    let burgerId;
+
     beforeEach(() => {
-      recipeRepository.addRecipe(burger);
-      recipeRepository.addRecipe(salad);
+      const burger = recipeRepository.addRecipe(burgerData);
+      recipeRepository.addRecipe(saladData);
+
+      /* Remember burger id to remove it later. */
+      burgerId = burger.id;
     });
 
     it('should get recipes', () => {
@@ -59,7 +64,7 @@ describe(RecipeRepository.name, () => {
     });
 
     it('should remove recipe', () => {
-      expect(recipeRepository.removeRecipe('burger'));
+      expect(recipeRepository.removeRecipe(burgerId));
       expect(recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
           name: '🥗 Salad',

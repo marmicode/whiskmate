@@ -6,6 +6,8 @@
   "author": "Younes Jaaidi <yjaaidi@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
     "test": "jest",
     "test:watch": "jest --watch"
   },

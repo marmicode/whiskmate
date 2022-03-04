@@ -9,7 +9,8 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "outDir": "dist"
+    "outDir": "dist",
+    "strict": true
   },
   "include": ["**/*.ts"],
   "exclude": ["dist", "node_modules", "**/*.spec.ts"]

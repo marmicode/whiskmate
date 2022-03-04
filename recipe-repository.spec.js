@@ -47,7 +47,7 @@ describe(RecipeRepository.name, () => {
     xit('should add recipe and respect immutability', () => {
       const recipes = recipeRepository.getRecipes();
 
-      recipeRepository.addRecipe(burger);
+      recipeRepository.addRecipe(burgerData);
 
       expect(recipes).toEqual([]);
     });
@@ -87,7 +87,7 @@ describe(RecipeRepository.name, () => {
     xit('should remove recipe and respect immutability', () => {
       const recipes = recipeRepository.getRecipes();
 
-      expect(recipeRepository.removeRecipe('burger'));
+      expect(recipeRepository.removeRecipe(burgerId));
 
       expect(recipes.length).toEqual(2);
     });

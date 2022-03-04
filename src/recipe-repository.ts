@@ -1,17 +1,20 @@
-export interface Recipe {
-  id: string;
+import { nanoid } from 'nanoid';
+
+export interface RecipeData {
   name: string;
 }
 
-export function createRecipe(recipe: Recipe): Recipe {
-  return recipe;
+export interface Recipe extends RecipeData {
+  id: string;
 }
 
 export class RecipeRepository {
   private _recipes: Recipe[] = [];
 
-  async addRecipe(recipe: Recipe) {
+  async addRecipe(recipeData: RecipeData) {
+    const recipe = { ...recipeData, id: nanoid() };
     this._recipes = [...this._recipes, recipe];
+    return recipe;
   }
 
   async getRecipes() {

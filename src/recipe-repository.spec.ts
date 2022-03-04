@@ -1,8 +1,9 @@
-import { createRecipe, RecipeRepository } from './recipe-repository';
+import { RecipeRepository } from './recipe-repository';
+import { nanoid } from 'nanoid';
 
 describe(RecipeRepository.name, () => {
-  const burger = createRecipe({ id: 'burger', name: '🍔 Burger' });
-  const salad = createRecipe({ id: 'salad', name: '🥗 Salad' });
+  const burgerData = { name: '🍔 Burger' };
+  const saladData = { name: '🥗 Salad' };
 
   let recipeRepository: RecipeRepository;
 
@@ -14,7 +15,7 @@ describe(RecipeRepository.name, () => {
     });
 
     it('should add recipe', async () => {
-      await recipeRepository.addRecipe(burger);
+      await recipeRepository.addRecipe(burgerData);
 
       expect(await recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
@@ -26,16 +27,21 @@ describe(RecipeRepository.name, () => {
     it('should add recipe and respect immutability', async () => {
       const recipes = await recipeRepository.getRecipes();
 
-      await recipeRepository.addRecipe(burger);
+      await recipeRepository.addRecipe(burgerData);
 
       expect(recipes).toEqual([]);
     });
   });
 
   describe('with recipes', () => {
+    let burgerId: string;
+
     beforeEach(async () => {
-      await recipeRepository.addRecipe(burger);
-      await recipeRepository.addRecipe(salad);
+      const burger = await recipeRepository.addRecipe(burgerData);
+      await recipeRepository.addRecipe(saladData);
+
+      /* Remember burger id to remove it later. */
+      burgerId = burger.id;
     });
 
     it('should get recipes', async () => {
@@ -50,7 +56,7 @@ describe(RecipeRepository.name, () => {
     });
 
     it('should remove recipe', async () => {
-      expect(await recipeRepository.removeRecipe('burger'));
+      expect(await recipeRepository.removeRecipe(burgerId));
       expect(await recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
           name: '🥗 Salad',
@@ -61,7 +67,7 @@ describe(RecipeRepository.name, () => {
     it('should remove recipe and respect immutability', async () => {
       const recipes = await recipeRepository.getRecipes();
 
-      expect(await recipeRepository.removeRecipe('burger'));
+      expect(await recipeRepository.removeRecipe(burgerId));
 
       expect(recipes.length).toEqual(2);
     });

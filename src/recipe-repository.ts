@@ -13,8 +13,9 @@ export interface RecipeRepository {
 }
 
 export class RecipeNotFoundError extends Error {
-  constructor(recipeId: string) {
+  name = RecipeNotFoundError.name;
+
+  constructor(public recipeId: string) {
     super(`Recipe ${recipeId} not found.`);
-    this.name = RecipeNotFoundError.name;
   }
 }

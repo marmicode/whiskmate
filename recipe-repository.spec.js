@@ -1,5 +1,3 @@
-const { resolve } = require('path/posix');
-
 class RecipeRepository {
   #recipes = [];
 

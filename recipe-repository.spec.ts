@@ -1,17 +1,20 @@
-interface Recipe {
-  id: string;
+import { nanoid } from 'nanoid';
+
+interface RecipeData {
   name: string;
 }
 
-function createRecipe(recipe: Recipe): Recipe {
-  return recipe;
+interface Recipe extends RecipeData {
+  id: string;
 }
 
 class RecipeRepository {
   private _recipes: Recipe[] = [];
 
-  async addRecipe(recipe: Recipe) {
+  async addRecipe(recipeData: RecipeData) {
+    const recipe = { ...recipeData, id: nanoid() };
     this._recipes = [...this._recipes, recipe];
+    return recipe;
   }
 
   async getRecipes() {
@@ -31,8 +34,8 @@ class RecipeRepository {
 }
 
 describe(RecipeRepository.name, () => {
-  const burger = createRecipe({ id: 'burger', name: '🍔 Burger' });
-  const salad = createRecipe({ id: 'salad', name: '🥗 Salad' });
+  const burgerData = { name: '🍔 Burger' };
+  const saladData = { name: '🥗 Salad' };
 
   let recipeRepository: RecipeRepository;
 
@@ -44,7 +47,7 @@ describe(RecipeRepository.name, () => {
     });
 
     it('should add recipe', async () => {
-      await recipeRepository.addRecipe(burger);
+      await recipeRepository.addRecipe(burgerData);
 
       expect(await recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
@@ -56,16 +59,21 @@ describe(RecipeRepository.name, () => {
     it('should add recipe and respect immutability', async () => {
       const recipes = await recipeRepository.getRecipes();
 
-      await recipeRepository.addRecipe(burger);
+      await recipeRepository.addRecipe(burgerData);
 
       expect(recipes).toEqual([]);
     });
   });
 
   describe('with recipes', () => {
+    let burgerId: string;
+
     beforeEach(async () => {
-      await recipeRepository.addRecipe(burger);
-      await recipeRepository.addRecipe(salad);
+      const burger = await recipeRepository.addRecipe(burgerData);
+      await recipeRepository.addRecipe(saladData);
+
+      /* Remember burger id to remove it later. */
+      burgerId = burger.id;
     });
 
     it('should get recipes', async () => {
@@ -80,7 +88,7 @@ describe(RecipeRepository.name, () => {
     });
 
     it('should remove recipe', async () => {
-      expect(await recipeRepository.removeRecipe('burger'));
+      expect(await recipeRepository.removeRecipe(burgerId));
       expect(await recipeRepository.getRecipes()).toEqual([
         expect.objectContaining({
           name: '🥗 Salad',
@@ -91,7 +99,7 @@ describe(RecipeRepository.name, () => {
     it('should remove recipe and respect immutability', async () => {
       const recipes = await recipeRepository.getRecipes();
 
-      expect(await recipeRepository.removeRecipe('burger'));
+      expect(await recipeRepository.removeRecipe(burgerId));
 
       expect(recipes.length).toEqual(2);
     });

@@ -1,21 +1,9 @@
-export interface RecipeData {
-  name: string;
-}
+import { RecipeRepository } from './recipe-repository-common';
+import { RecipeRepositoryMemory } from './recipe-repository-memory';
 
-export interface Recipe extends RecipeData {
-  id: string;
-}
+let _recipeRepository: RecipeRepository;
 
-export interface RecipeRepository {
-  addRecipe(recipeData: RecipeData): Promise<Recipe>;
-  getRecipes(): Promise<Recipe[]>;
-  removeRecipe(recipeId: string): Promise<void>;
-}
-
-export class RecipeNotFoundError extends Error {
-  name = RecipeNotFoundError.name;
-
-  constructor(public recipeId: string) {
-    super(`Recipe ${recipeId} not found.`);
-  }
+export function getRecipeRepository(): RecipeRepository {
+  return (_recipeRepository =
+    _recipeRepository ?? new RecipeRepositoryMemory());
 }

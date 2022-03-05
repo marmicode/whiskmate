@@ -6,7 +6,7 @@ import {
   RecipeData,
   RecipeNotFoundError,
   RecipeRepository,
-} from './recipe-repository';
+} from './recipe-repository-common';
 
 export class RecipeRepositoryFilesystem implements RecipeRepository {
   constructor(private _path: string) {}

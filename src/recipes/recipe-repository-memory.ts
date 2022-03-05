@@ -4,7 +4,7 @@ import {
   RecipeData,
   RecipeRepository,
   RecipeNotFoundError,
-} from './recipe-repository';
+} from './recipe-repository-common';
 
 export class RecipeRepositoryMemory implements RecipeRepository {
   private _recipes: Recipe[] = [];

@@ -22,10 +22,10 @@ export const get =
   };
 
 export const del =
-  (router: Router) =>
+  <RES_BODY>(router: Router) =>
   <PATH extends string>(
     path: PATH,
-    ...handlers: RequestHandler<PATH, unknown, unknown>[]
+    ...handlers: RequestHandler<PATH, unknown, RES_BODY>[]
   ) => {
     return router.delete(path, ...handlers);
   };

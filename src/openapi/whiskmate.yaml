@@ -120,6 +120,7 @@ components:
     RecipeRequest:
       title: RecipeRequest
       type: object
+      additionalProperties: false
       properties:
         name:
           type: string

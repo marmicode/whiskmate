@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Recipe
+  version: '0.1.0'
+  description: ''
+  contact:
+    name: Marmicode
+    email: kitchen@marmicode.io
+servers:
+  - url: 'https://recipes.whiskmate.io'
+    description: Prod
+  - url: 'http://localhost:3000'
+    description: Local
+tags:
+  - name: Recipe
+  - name: Ingredient
+paths:
+  /recipes:
+    get:
+      summary: Get all recipes
+      tags:
+        - Recipe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recipe'
+                  total:
+                    type: number
+              examples:
+                OK:
+                  value:
+                    items:
+                      - id: burger
+                        created_at: '2019-08-24T14:15:22Z'
+                        name: "\U0001F354 Burger"
+                        ingredients:
+                          - id: salt
+                            name: Salt
+                    total: 1
+                Empty:
+                  value:
+                    items: []
+                    total: 0
+        4XX:
+          $ref: '#/components/responses/4XX'
+      operationId: get-recipes
+      description: ...
+    post:
+      summary: Create a recipe
+      operationId: post-recipes
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+              examples:
+                OK:
+                  value:
+                    id: burger
+                    created_at: '2019-08-24T14:15:22Z'
+                    name: "\U0001F354 Burger"
+                    ingredients:
+                      - id: salt
+                        name: Salt
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipeRequest'
+            examples:
+              Burger:
+                value:
+                  name: "\U0001F354 Burger"
+                  ingredients:
+                    - id: salt
+                      name: Salt
+      tags:
+        - Recipe
+      description: ...
+  '/recipes/{recipe_id}':
+    parameters:
+      - schema:
+          type: string
+        name: recipe_id
+        in: path
+        required: true
+    delete:
+      summary: Delete recipe
+      operationId: delete-recipe
+      responses:
+        '204':
+          description: No Content
+      tags:
+        - Recipe
+      description: ...
+components:
+  schemas:
+    Recipe:
+      title: Recipe
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+              example: burger
+            created_at:
+              type: string
+              format: date-time
+          required:
+            - id
+            - created_at
+        - $ref: '#/components/schemas/RecipeRequest'
+      required:
+        - name
+        - ingredients
+      x-examples: {}
+    RecipeRequest:
+      title: RecipeRequest
+      type: object
+      properties:
+        name:
+          type: string
+          description: Recipe's name
+          example: "\U0001F354 Burger"
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+      required:
+        - name
+    Ingredient:
+      title: Ingredient
+      type: object
+      properties:
+        id:
+          type: string
+          example: salt
+        name:
+          type: string
+          example: Salt
+      required:
+        - id
+        - name
+  responses:
+    4XX:
+      description: Problem
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string

@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: Recipe
   version: '0.1.0'
@@ -26,6 +26,7 @@ paths:
           content:
             application/json:
               schema:
+                title: RecipeList
                 type: object
                 properties:
                   items:
@@ -158,6 +159,7 @@ components:
       content:
         application/problem+json:
           schema:
+            title: Problem
             type: object
             properties:
               type:

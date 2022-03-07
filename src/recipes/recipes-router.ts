@@ -9,13 +9,11 @@ import { RecipeNotFoundError } from './recipe-repository-common';
 
 export const recipesRouter = Router();
 
-const repository = getRecipeRepository();
-
 /**
  * Create recipe.
  */
 post<RecipeRequest, Recipe>(recipesRouter)('/recipes', async (req, res) => {
-  const recipe = await repository.addRecipe(req.body);
+  const recipe = await getRecipeRepository().addRecipe(req.body);
   res.status(201).send(recipe);
 });
 
@@ -23,7 +21,7 @@ post<RecipeRequest, Recipe>(recipesRouter)('/recipes', async (req, res) => {
  * Retrieve recipes.
  */
 get<RecipeList>(recipesRouter)('/recipes', async (_, res) => {
-  const recipes = await repository.getRecipes();
+  const recipes = await getRecipeRepository().getRecipes();
   res.send({
     total: recipes.length,
     items: recipes,
@@ -35,7 +33,7 @@ get<RecipeList>(recipesRouter)('/recipes', async (_, res) => {
  */
 del<Problem>(recipesRouter)('/recipes/:recipeId', async (req, res) => {
   try {
-    await repository.removeRecipe(req.params.recipeId);
+    await getRecipeRepository().removeRecipe(req.params.recipeId);
     res.sendStatus(204);
   } catch (e) {
     if (e instanceof RecipeNotFoundError) {

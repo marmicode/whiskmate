@@ -1,7 +1,6 @@
 import { Passport } from 'passport';
-import { Strategy as BearerStrategy } from 'passport-http-bearer';
-import { createJwtVerifier } from './utils/jwt-verifier';
-
+import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
+import { passportJwtSecret } from 'jwks-rsa';
 import { Handler } from 'express';
 
 export function createAuthMiddleware({
@@ -10,35 +9,36 @@ export function createAuthMiddleware({
   const passport = new Passport();
 
   passport.use(
-    new BearerStrategy(async (token, done) => {
-      const { verify } = await createJwtVerifier(
-        'https://whiskmate.eu.auth0.com/.well-known/jwks.json',
-        {
-          audience: 'https://recipe-api.marmicode.io',
-          issuer: 'https://whiskmate.eu.auth0.com/',
-          verifyExpiration,
-        }
-      );
-
-      try {
-        const claims = await verify(token);
+    new JwtStrategy(
+      {
+        // Dynamically provide a signing key based on the kid in the header and the signing keys provided by the JWKS endpoint.
+        secretOrKeyProvider: passportJwtSecret({
+          cache: true,
+          rateLimit: true,
+          jwksRequestsPerMinute: 5,
+          jwksUri: 'https://whiskmate.eu.auth0.com/.well-known/jwks.json',
+        }),
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        audience: 'https://recipe-api.marmicode.io',
+        issuer: 'https://whiskmate.eu.auth0.com/',
+        algorithms: ['RS256'],
+        ignoreExpiration: !verifyExpiration,
+      },
+      (payload, done) => {
         done(
           null,
           {
-            id: claims.sub,
+            id: payload.sub,
           },
           {
-            scope: claims.scope.split(','),
+            scope: payload.scope.split(','),
           }
         );
-      } catch (err) {
-        console.error(err);
-        done(null, false);
       }
-    })
+    )
   );
 
-  return passport.authenticate('bearer', {
+  return passport.authenticate('jwt', {
     session: false,
   });
 }

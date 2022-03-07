@@ -15,7 +15,7 @@ describe('Recipes Router', () => {
     beforeEach(() => withRecipes([]));
 
     describe('GET /recipes', () => {
-      xit('🚧 should return 403 if scope recipe.read is missing', async () => {
+      it('should return 403 if scope recipe.read is missing', async () => {
         const client = createTestClient({
           scope: [],
         });
@@ -25,7 +25,7 @@ describe('Recipes Router', () => {
     });
 
     describe('POST /recipes', () => {
-      xit('🚧 should return 403 if scope recipe.read is missing', async () => {
+      it('should return 403 if scope recipe.read is missing', async () => {
         const client = createTestClient({
           scope: [],
         });
@@ -46,7 +46,7 @@ describe('Recipes Router', () => {
         });
       });
 
-      xit('🚧 should return 403 if scope recipe.write is missing', async () => {
+      it('should return 403 if scope recipe.write is missing', async () => {
         const client = createTestClient({
           scope: ['recipe.read'],
         });

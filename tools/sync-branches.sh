@@ -58,5 +58,6 @@ cascade_changes \
   api
 
 cascade_changes \
+  --skip-tests \
   base \
   main

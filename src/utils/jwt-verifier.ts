@@ -1,6 +1,5 @@
 import { decode, JwtPayload, verify } from 'jsonwebtoken';
 import * as jwksClient from 'jwks-rsa';
-import * as memoize from 'memoizee';
 
 export interface Claims extends JwtPayload {}
 
@@ -8,9 +7,7 @@ export interface JwtVerifier {
   verify(token: string): Claims;
 }
 
-export const createJwtVerifier = memoize(_createJwtVerifier);
-
-function _createJwtVerifier(
+export function createJwtVerifier(
   jwksUri: string,
   {
     audience,

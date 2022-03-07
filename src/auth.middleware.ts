@@ -1,38 +1,44 @@
 import { Passport } from 'passport';
-import { Strategy as BearerStrategy } from 'passport-http-bearer';
-import { createJwtVerifier } from './utils/jwt-verifier';
+import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
+import { passportJwtSecret } from 'jwks-rsa';
+import { Handler } from 'express';
 
-const passport = new Passport();
+export function createAuthMiddleware({
+  verifyExpiration = true,
+}: { verifyExpiration?: boolean } = {}): Handler {
+  const passport = new Passport();
 
-passport.use(
-  new BearerStrategy(async (token, done) => {
-    const { verify } = await createJwtVerifier(
-      'https://whiskmate.eu.auth0.com/.well-known/jwks.json',
+  passport.use(
+    new JwtStrategy(
       {
+        // Dynamically provide a signing key based on the kid in the header and the signing keys provided by the JWKS endpoint.
+        secretOrKeyProvider: passportJwtSecret({
+          cache: true,
+          rateLimit: true,
+          jwksRequestsPerMinute: 5,
+          jwksUri: 'https://whiskmate.eu.auth0.com/.well-known/jwks.json',
+        }),
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         audience: 'https://recipe-api.marmicode.io',
         issuer: 'https://whiskmate.eu.auth0.com/',
-        verifyExpiration: false,
+        algorithms: ['RS256'],
+        ignoreExpiration: !verifyExpiration,
+      },
+      (payload, done) => {
+        done(
+          null,
+          {
+            id: payload.sub,
+          },
+          {
+            scope: payload.scope.split(','),
+          }
+        );
       }
-    );
+    )
+  );
 
-    try {
-      const claims = await verify(token);
-      done(
-        null,
-        {
-          id: claims.sub,
-        },
-        {
-          scope: claims.scope.split(','),
-        }
-      );
-    } catch (err) {
-      console.error(err);
-      done(null, false);
-    }
-  })
-);
-
-export const authMiddleware = passport.authenticate('bearer', {
-  session: false,
-});
+  return passport.authenticate('jwt', {
+    session: false,
+  });
+}

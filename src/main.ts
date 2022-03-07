@@ -7,10 +7,11 @@ import {
 } from 'express-openapi-validator';
 import { join } from 'path';
 import { env } from 'process';
-import { recipesRouter } from './recipes/recipes-router';
 
 /* Overrides Router class to catch async errors. */
 require('express-async-errors');
+
+import { recipesRouter } from './recipes/recipes-router';
 
 function main() {
   const app = express();

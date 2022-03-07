@@ -1,4 +1,4 @@
-import { authMiddleware } from './auth.middleware';
+import { createAuthMiddleware } from './auth.middleware';
 import * as express from 'express';
 import * as request from 'supertest';
 import { createJwtVerifier } from './utils/jwt-verifier';
@@ -9,7 +9,7 @@ const mockCreateJwtVerifier = createJwtVerifier as jest.MockedFunction<
   typeof createJwtVerifier
 >;
 
-xdescribe(authMiddleware.name, () => {
+xdescribe('authMiddleware', () => {
   afterEach(() => {
     /* Reset console.error. */
     jest.resetAllMocks();
@@ -63,7 +63,12 @@ xdescribe(authMiddleware.name, () => {
     });
 
     const app = express();
-    app.use(authMiddleware);
+    app.use(
+      createAuthMiddleware({
+        /* Testing token is expired. */
+        verifyExpiration: false,
+      })
+    );
     app.get('/', (req, res) => {
       mockGet(req);
       res.sendStatus(200);

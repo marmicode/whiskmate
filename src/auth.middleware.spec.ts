@@ -9,7 +9,7 @@ const mockCreateJwtVerifier = createJwtVerifier as jest.MockedFunction<
   typeof createJwtVerifier
 >;
 
-xdescribe(authMiddleware.name, () => {
+describe(authMiddleware.name, () => {
   afterEach(() => {
     /* Reset console.error. */
     jest.resetAllMocks();

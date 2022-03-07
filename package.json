@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "codegen": "tools/openapi-codegen.sh",
+    "codegen": "run-p codegen:*",
+    "codegen:prisma": "prisma generate --schema src/schema.prisma",
+    "codegen:openapi": "tools/openapi-codegen.sh",
     "watch": "tsc --watch",
     "start": "nodemon src/main.ts",
     "test": "jest",
@@ -26,13 +28,16 @@
     "jest": "^27.5.1",
     "nock": "^13.2.4",
     "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
+    "prisma": "^3.10.0",
     "supertest": "^6.2.2",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.6.0",
     "typescript": "^4.6.2"
   },
   "dependencies": {
+    "@prisma/client": "^3.10.0",
     "axios": "^0.26.0",
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",

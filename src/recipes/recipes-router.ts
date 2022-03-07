@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { del, get, post } from '../helpers/typed-express';
+import { del, get, post } from '../utils/typed-express';
 import { Recipe } from '../openapi/model/recipe';
 import { RecipeList } from '../openapi/model/recipe-list';
 import { Problem } from '../openapi/model/problem';

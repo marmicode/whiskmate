@@ -14,6 +14,26 @@ describe('Recipes Router', () => {
   describe('without recipes', () => {
     beforeEach(() => withRecipes([]));
 
+    describe('GET /recipes', () => {
+      xit('🚧 should return 403 if scope recipe.read is missing', async () => {
+        const client = createTestClient({
+          scope: [],
+        });
+        const { status } = await client.get('/recipes');
+        expect(status).toEqual(403);
+      });
+    });
+
+    describe('POST /recipes', () => {
+      xit('🚧 should return 403 if scope recipe.read is missing', async () => {
+        const client = createTestClient({
+          scope: [],
+        });
+        const { status } = await client.post('/recipes').send({});
+        expect(status).toEqual(403);
+      });
+    });
+
     describe('DELETE /recipes/:recipeId', () => {
       it('should return 404 if recipe is not found', async () => {
         const client = createTestClient();
@@ -24,6 +44,14 @@ describe('Recipes Router', () => {
           title: 'Recipe not found',
           detail: `Recipe unknown-recipe not found.`,
         });
+      });
+
+      xit('🚧 should return 403 if scope recipe.write is missing', async () => {
+        const client = createTestClient({
+          scope: ['recipe.read'],
+        });
+        const { status } = await client.delete('/recipes/some-recipe');
+        expect(status).toEqual(403);
       });
     });
   });
@@ -76,8 +104,21 @@ describe('Recipes Router', () => {
     return recipes;
   }
 
-  function createTestClient() {
+  function createTestClient({
+    scope = ['recipe.read', 'recipe.write'],
+  }: {
+    scope?: string[];
+  } = {}) {
     const app = express();
+    app.use((req, res, next) => {
+      req.user = {
+        id: 'foobar',
+      };
+      req.authInfo = {
+        scope,
+      };
+      next();
+    });
     app.use(recipesRouter);
     return request(app);
   }

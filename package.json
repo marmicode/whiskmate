@@ -19,6 +19,8 @@
     "@types/jest": "^27.4.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/memoizee": "^0.4.7",
+    "@types/passport": "^1.0.7",
+    "@types/passport-http-bearer": "^1.0.37",
     "@types/supertest": "^2.0.11",
     "jest": "^27.5.1",
     "nock": "^13.2.4",
@@ -38,6 +40,7 @@
     "jwks-rsa": "^2.0.5",
     "memoizee": "^0.4.15",
     "nanoid": "^3.3.1",
-    "passport": "^0.5.2"
+    "passport": "^0.5.2",
+    "passport-http-bearer": "^1.0.1"
   }
 }

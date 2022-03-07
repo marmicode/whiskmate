@@ -43,6 +43,8 @@ describe('jwtVerifier', () => {
     const { verify } = await createJwtVerifier(
       'https://whiskmate.eu.auth0.com/.well-known/jwks.json',
       {
+        audience: 'https://recipe-api.marmicode.io',
+        issuer: 'https://whiskmate.eu.auth0.com/',
         verifyExpiration: false,
       }
     );

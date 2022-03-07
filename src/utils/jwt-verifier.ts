@@ -12,7 +12,11 @@ export const createJwtVerifier = memoize(_createJwtVerifier);
 
 function _createJwtVerifier(
   jwksUri: string,
-  { verifyExpiration = true }: { verifyExpiration?: boolean } = {}
+  {
+    audience,
+    issuer,
+    verifyExpiration = true,
+  }: { audience?: string; issuer?: string; verifyExpiration?: boolean } = {}
 ): JwtVerifier {
   const jwkClient = jwksClient({ jwksUri });
 
@@ -23,7 +27,10 @@ function _createJwtVerifier(
       const key = await jwkClient.getSigningKey(kid);
 
       return verify(token, key.getPublicKey(), {
+        algorithms: ['RS256'],
+        audience,
         ignoreExpiration: !verifyExpiration,
+        issuer,
       }) as JwtPayload;
     },
   };

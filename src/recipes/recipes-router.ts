@@ -11,8 +11,8 @@ import { withScope } from '../utils/guards';
 export const recipesRouter = Router();
 
 export enum RecipeScopes {
-  read = 'recipe.read',
-  write = 'recipe.write',
+  Read = 'recipe.read',
+  Write = 'recipe.write',
 }
 
 /**
@@ -20,7 +20,7 @@ export enum RecipeScopes {
  */
 post<RecipeRequest, Recipe>(recipesRouter)(
   '/recipes',
-  withScope(RecipeScopes.write),
+  withScope(RecipeScopes.Write),
   async (req, res) => {
     const recipe = await getRecipeRepository().addRecipe(req.body);
     res.status(201).send(recipe);
@@ -32,7 +32,7 @@ post<RecipeRequest, Recipe>(recipesRouter)(
  */
 get<RecipeList>(recipesRouter)(
   '/recipes',
-  withScope(RecipeScopes.read),
+  withScope(RecipeScopes.Read),
   async (_, res) => {
     const recipes = await getRecipeRepository().getRecipes();
     res.send({
@@ -47,7 +47,7 @@ get<RecipeList>(recipesRouter)(
  */
 del<Problem>(recipesRouter)(
   '/recipes/:recipeId',
-  withScope(RecipeScopes.write),
+  withScope(RecipeScopes.Write),
   async (req, res) => {
     try {
       await getRecipeRepository().removeRecipe(req.params.recipeId);

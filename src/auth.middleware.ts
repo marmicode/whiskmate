@@ -9,17 +9,17 @@ export function createAuthMiddleware({
 }: { verifyExpiration?: boolean } = {}): Handler {
   const passport = new Passport();
 
+  const { verify } = createJwtVerifier(
+    'https://whiskmate.eu.auth0.com/.well-known/jwks.json',
+    {
+      audience: 'https://recipe-api.marmicode.io',
+      issuer: 'https://whiskmate.eu.auth0.com/',
+      verifyExpiration,
+    }
+  );
+
   passport.use(
     new BearerStrategy(async (token, done) => {
-      const { verify } = await createJwtVerifier(
-        'https://whiskmate.eu.auth0.com/.well-known/jwks.json',
-        {
-          audience: 'https://recipe-api.marmicode.io',
-          issuer: 'https://whiskmate.eu.auth0.com/',
-          verifyExpiration,
-        }
-      );
-
       try {
         const claims = await verify(token);
         done(

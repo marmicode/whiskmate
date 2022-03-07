@@ -8,7 +8,7 @@ import {
 import { join } from 'path';
 import { env } from 'process';
 import { recipesRouter } from './recipes/recipes-router';
-import { authMiddleware } from './auth.middleware';
+import { createAuthMiddleware } from './auth.middleware';
 
 /* Overrides Router class to catch async errors. */
 require('express-async-errors');
@@ -17,7 +17,7 @@ function main() {
   const app = express();
   const port = env.PORT ?? 3000;
 
-  app.use(authMiddleware);
+  app.use(createAuthMiddleware());
 
   app.use(json());
 

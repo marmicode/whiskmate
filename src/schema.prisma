@@ -1,0 +1,15 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+}
+
+model Recipe {
+  id        String   @id @default(cuid()) @map("_id")
+  createdAt DateTime @default(now())
+  name      String
+}

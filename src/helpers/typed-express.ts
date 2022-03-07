@@ -1,10 +1,11 @@
-import type { Router, Request, Response } from 'express';
+import type { NextFunction, Request, Response, Router } from 'express';
 import type { RouteParameters } from 'express-serve-static-core';
 
 type RequestHandler<PATH extends string, REQ_BODY, RES_BODY> = (
   req: Request<RouteParameters<PATH>, RES_BODY, REQ_BODY>,
-  res: Response<RES_BODY>
-) => Promise<void>;
+  res: Response<RES_BODY>,
+  next: NextFunction
+) => Promise<void> | void;
 
 /* @hack we need currying due to the following issue
  * https://github.com/microsoft/TypeScript/issues/16597

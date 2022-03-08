@@ -43,7 +43,7 @@ export default {
 
     // @todo update field on event
 
-    function _addIngredient(ingredient) {
+    function _addIngredient({ ingredient }) {
       ingredients.value = [...ingredients.value, ingredient];
     }
 
@@ -63,7 +63,7 @@ export default {
           quantity: null,
           unit: null,
         };
-        _addIngredient(ingredient);
+        _addIngredient({ ingredient });
 
         // @todo emit new ingredient
       },

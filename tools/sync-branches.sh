@@ -27,6 +27,11 @@ function cascade_changes() {
 }
 
 cascade_changes \
+  --skip-tests \
+  base \
+  main
+
+cascade_changes \
   base \
   testing-00-boilerplate \
   testing-01-meal-planner \
@@ -53,8 +58,13 @@ cascade_changes \
   testing-22-cypress-component-testing-with-fake-repository \
   testing-23-visual-regression-testing \
 
+
 cascade_changes \
+  --skip-tests \
   base \
+  nodejs-00-boilerplate
+
+cascade_changes \
   nodejs-00-boilerplate \
   nodejs-01-recipe-repository-boilerplate \
   nodejs-02-recipe-repository \
@@ -87,8 +97,3 @@ cascade_changes \
 cascade_changes \
   base \
   api
-
-cascade_changes \
-  --skip-tests \
-  base \
-  main

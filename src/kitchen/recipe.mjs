@@ -35,20 +35,9 @@ export default {
     const recipeId = route.params.recipeId;
     const socket = io('http://localhost:3000/recipes');
 
-    ingredients.value = [
-      {
-        id: 'salt',
-        name: 'Salt',
-        quantity: '2',
-        unit: 'g',
-      },
-      {
-        id: 'pepper',
-        name: 'Pepper',
-        quantity: '1',
-        unit: 'pinch',
-      },
-    ];
+    ingredients.value = [];
+
+    // @todo set ingredients on load
 
     // @todo add ingredient on event
 

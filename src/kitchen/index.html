@@ -1,0 +1,40 @@
+<script type="importmap">
+  {
+    "imports": {
+      "@vue/devtools-api": "https://unpkg.com/@vue/devtools-api@6/lib/esm/index.js",
+      "socket.io-client": "https://www.unpkg.com/socket.io-client@4/dist/socket.io.esm.min.js",
+      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js",
+      "vue-router": "https://unpkg.com/vue-router@4/dist/vue-router.esm-browser.js"
+    }
+  }
+</script>
+
+<div id="app">
+  <router-view />
+</div>
+
+<script type="module">
+  import { createApp } from 'vue';
+  import { createRouter, createWebHashHistory } from 'vue-router';
+  import Recipe from './recipe.mjs';
+  import Recipes from './recipes.mjs';
+
+  const routes = [
+    { path: '/recipes', component: Recipes },
+    { path: '/recipes/:recipeId', component: Recipe, name: 'recipe' },
+    { path: '/', redirect: '/recipes' },
+  ];
+
+  const router = createRouter({
+    history: createWebHashHistory(),
+    routes,
+  });
+
+  createApp({
+    components: {
+      Recipes,
+    },
+  })
+    .use(router)
+    .mount('#app');
+</script>

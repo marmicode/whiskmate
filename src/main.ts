@@ -1,4 +1,5 @@
 import { json } from 'body-parser';
+import * as cors from 'cors';
 import * as express from 'express';
 import { NextFunction, Response } from 'express';
 import {
@@ -13,12 +14,17 @@ require('express-async-errors');
 
 import { createAuthMiddleware } from './auth.middleware';
 import { recipesRouter } from './recipes/recipes-router';
+import { isAuthEnabled } from './config';
 
 function main() {
   const app = express();
   const port = env.PORT ?? 3000;
 
-  app.use(createAuthMiddleware());
+  app.use(cors());
+
+  if (isAuthEnabled) {
+    app.use(createAuthMiddleware());
+  }
 
   app.use(json());
 

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { isAuthEnabled } from '../config';
 
 export interface RequestAuthInfo {
   authInfo: {
@@ -13,7 +14,7 @@ export type Guard<REQ extends Request> = (
 export const withGuard =
   <REQ extends Request, RES extends Response>(guard: Guard<REQ>) =>
   (req: REQ, res: RES, next: NextFunction) => {
-    if (!guard(req as REQ & RequestAuthInfo)) {
+    if (isAuthEnabled && !guard(req as REQ & RequestAuthInfo)) {
       res.status(403);
       res.send({
         type: 'https://whiskmate.io/problems/forbidden',

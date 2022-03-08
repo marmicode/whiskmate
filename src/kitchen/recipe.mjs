@@ -1,5 +1,6 @@
 import { shallowRef } from 'vue';
 import { useRoute } from 'vue-router';
+import { io } from 'socket.io-client';
 import { nanoid } from './nanoid.mjs';
 
 export default {
@@ -32,6 +33,7 @@ export default {
     const route = useRoute();
     const ingredients = shallowRef();
     const recipeId = route.params.recipeId;
+    const socket = io('http://localhost:3000/recipes');
 
     ingredients.value = [
       {
@@ -48,6 +50,22 @@ export default {
       },
     ];
 
+    // @todo add ingredient on event
+
+    // @todo update field on event
+
+    function _addIngredient(ingredient) {
+      ingredients.value = [...ingredients.value, ingredient];
+    }
+
+    function _updateField({ ingredientId, field, value }) {
+      ingredients.value = ingredients.value.map((ingredient) =>
+        ingredient.id === ingredientId
+          ? { ...ingredient, [field]: value }
+          : ingredient
+      );
+    }
+
     return {
       addIngredient() {
         const ingredient = {
@@ -56,7 +74,7 @@ export default {
           quantity: null,
           unit: null,
         };
-        ingredients.value = [...ingredients.value, ingredient];
+        _addIngredient(ingredient);
 
         // @todo emit new ingredient
       },

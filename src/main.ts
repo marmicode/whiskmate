@@ -13,8 +13,9 @@ import { env } from 'process';
 require('express-async-errors');
 
 import { createAuthMiddleware } from './auth.middleware';
-import { recipesRouter } from './recipes/recipes-router';
 import { isAuthEnabled } from './config';
+import { setupIoServer } from './io';
+import { recipesRouter } from './recipes/recipes-router';
 
 function main() {
   const app = express();
@@ -63,9 +64,11 @@ function main() {
     });
   });
 
-  app.listen(port, () => {
+  const httpServer = app.listen(port, () => {
     console.log(`Listenining at http://localhost:${port}`);
   });
+
+  setupIoServer(httpServer);
 }
 
 main();

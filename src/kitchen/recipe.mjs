@@ -7,9 +7,16 @@ export default {
   template: `
   <ul>
     <li v-for="ingredient in ingredients" :key="ingredient.id">
-      <input :value="ingredient.quantity" style="width: 40px" @input="e => updateField(ingredient.id, 'quantitiy', e.target.value)">
+      <input
+        :value="ingredient.quantity"
+        @input="e => updateIngredient(ingredient.id, {quantity: e.target.value})"
+        style="width: 40px"
+        type="number">
 
-      <select :value="ingredient.unit" style="width: 100px" @input="e => updateField(ingredient.id, 'unit', e.target.value)">
+      <select
+        :value="ingredient.unit"
+        @input="e => updateIngredient(ingredient.id, {unit: e.target.value})"
+        style="width: 100px">
 
         <option value="">--Please choose a unit--</option>
         <option value="g">Grams</option>
@@ -24,9 +31,13 @@ export default {
 
       </select>
 
-      <input v-model="ingredient.name" @input="e => updateField(ingredient.id, 'name', e.target.value)">
+      <input 
+        :value="ingredient.name"
+        @input="e => updateIngredient(ingredient.id, {name: e.target.value})">
     </li>
+
     <li><button @click="addIngredient" type="button">ADD INGREDIENT</button></li>
+
   </ul>
   `,
   setup() {
@@ -63,12 +74,14 @@ export default {
           quantity: null,
           unit: null,
         };
+
         _addIngredient({ ingredient });
 
         // @todo emit new ingredient
       },
-      updateField(ingredientId, field, value) {
-        const changes = { [field]: value };
+      updateIngredient(ingredientId, changes) {
+        _updateIngredient({ ingredientId, changes });
+
         // @todo emit ingredient change
       },
       ingredients,

@@ -33,7 +33,7 @@ export default {
     const route = useRoute();
     const ingredients = shallowRef();
     const recipeId = route.params.recipeId;
-    const socket = io('http://localhost:3000/recipes');
+    const socket = io('http://localhost:3000/ingredients');
 
     ingredients.value = [];
 

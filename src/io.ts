@@ -8,7 +8,7 @@ export function setupIoServer(httpServer: HttpServer) {
     },
   });
 
-  io.of('/recipes').on('connection', (socket) => {
+  io.of('/ingredients').on('connection', (socket) => {
     // @todo handle connection
   });
 }

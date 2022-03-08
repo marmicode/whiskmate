@@ -44,15 +44,22 @@ export default {
     const route = useRoute();
     const ingredients = shallowRef();
     const recipeId = route.params.recipeId;
-    const socket = io('http://localhost:3000/ingredients');
+    const socket = io('http://localhost:3000/ingredients', {
+      query: {
+        recipeId,
+      },
+    });
 
     ingredients.value = [];
 
-    // @todo set ingredients on load
+    socket.on(
+      'ingredients-loaded',
+      ({ ingredients: _ingredients }) => (ingredients.value = _ingredients)
+    );
 
-    // @todo add ingredient on event
+    socket.on('ingredient-added', _addIngredient);
 
-    // @todo update field on event
+    socket.on('ingredient-changed', _updateIngredient);
 
     function _addIngredient({ ingredient }) {
       ingredients.value = [...ingredients.value, ingredient];
@@ -77,12 +84,15 @@ export default {
 
         _addIngredient({ ingredient });
 
-        // @todo emit new ingredient
+        socket.emit('ingredient-added', { ingredient });
       },
       updateIngredient(ingredientId, changes) {
         _updateIngredient({ ingredientId, changes });
 
-        // @todo emit ingredient change
+        socket.emit('ingredient-changed', {
+          ingredientId,
+          changes,
+        });
       },
       ingredients,
     };

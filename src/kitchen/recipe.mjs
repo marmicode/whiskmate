@@ -47,10 +47,10 @@ export default {
       ingredients.value = [...ingredients.value, ingredient];
     }
 
-    function _updateField({ ingredientId, field, value }) {
+    function _updateIngredient({ ingredientId, changes }) {
       ingredients.value = ingredients.value.map((ingredient) =>
         ingredient.id === ingredientId
-          ? { ...ingredient, [field]: value }
+          ? { ...ingredient, ...changes }
           : ingredient
       );
     }
@@ -68,6 +68,7 @@ export default {
         // @todo emit new ingredient
       },
       updateField(ingredientId, field, value) {
+        const changes = { [field]: value };
         // @todo emit ingredient change
       },
       ingredients,

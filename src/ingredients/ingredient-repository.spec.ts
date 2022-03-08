@@ -65,7 +65,7 @@ describe(IngredientRepository.name, () => {
 
     repository.updateIngredient({
       ingredientId: 'cheese',
-      data: {
+      changes: {
         quantity: 60,
       },
     });

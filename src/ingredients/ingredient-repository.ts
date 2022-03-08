@@ -32,16 +32,16 @@ export class IngredientRepository {
 
   updateIngredient({
     ingredientId,
-    data,
+    changes,
   }: {
     ingredientId: string;
-    data: Partial<Ingredient>;
+    changes: Partial<Ingredient>;
   }) {
     this._ingredients = this._ingredients.map(({ recipeId, ingredient }) => {
       if (ingredient.id === ingredientId) {
         ingredient = {
           ...ingredient,
-          ...data,
+          ...changes,
         };
       }
 

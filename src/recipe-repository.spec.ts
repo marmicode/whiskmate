@@ -118,10 +118,10 @@ describe.each([
       expect(recipes.length).toEqual(2);
     });
 
-    it('should reject promise when removing unexisting recipe', () => {
-      expect(() =>
+    it('should reject promise when removing unexisting recipe', async () => {
+      await expect(
         recipeRepository.removeRecipe('unexisting-recipe')
-      ).rejects.toThrowError(new RecipeNotFoundError('unexisting-recipe'));
+      ).rejects.toThrow(new RecipeNotFoundError('unexisting-recipe'));
     });
   });
 });

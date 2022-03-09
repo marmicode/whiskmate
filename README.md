@@ -1,18 +1,23 @@
-# 👋 Welcome to Whiskmate 👨🏻‍🍳
+# Pragmatic NodeJS
 
-This is a multi-purpose repository around a Meal Planning app called Whiskmate.
+👨🏻‍🍳 Welcome to [Marmicode](https://marmicode.io)'s Pragmatic Node.js workshop.
 
-# Branches index
+## Exercises instructions
 
-Here is an index of this repo's branches:
-
-| Branch                                                                                                           | Description                                                              |
-| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [dom-distancing-0-main](https://github.com/marmicode/whiskmate/tree/dom-distancing-0-main)                       | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #0/4 |
-| [dom-distancing-1-testing](https://github.com/marmicode/whiskmate/tree/dom-distancing-1-testing)                 | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #1/4 |
-| [dom-distancing-2-date-input](https://github.com/marmicode/whiskmate/tree/dom-distancing-2-date-input)           | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #2/4 |
-| [dom-distancing-3-mat-date-picker](https://github.com/marmicode/whiskmate/tree/dom-distancing-3-mat-date-picker) | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #3/4 |
-| [dom-distancing-4-easy-harness](https://github.com/marmicode/whiskmate/tree/dom-distancing-4-easy-harness)       | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #4/4 |
+1. [Recipe Repository](docs/01-recipe-repository.md)
+2. [Recipe Repository Immutability](docs/02-recipe-repository-immutability.md)
+3. [Recipe Repository with Promises](docs/03-recipe-repository-promise.md)
+4. [Recipe Repository with async/await](docs/04-recipe-repository-async-await.md)
+5. [Typed Recipe Repository](docs/05-recipe-repository-typescript.md)
+6. [Recipe Repository Filesystem-based](docs/06-recipe-repository-fs.md)
+7. [Recipe API](docs/07-recipe-api.md)
+8. [Typed Recipe API](docs/08-recipe-api-typed.md)
+9. [OpenAPI](docs/09-openapi.md)
+10. [Recipe API Testing](docs/10-recipe-api-testing.md)
+11. [Recipe API Authentication](docs/11-recipe-api-authn.md)
+12. [Recipe API Authorization](docs/12-recipe-api-authz.md)
+13. [Recipe API DB](docs/13-recipe-api-db.md)
+14. [Recipe Edition using Websockets](docs/14-recipe-edition-websocket.md)
 
 ---
 

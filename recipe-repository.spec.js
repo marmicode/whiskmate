@@ -87,10 +87,10 @@ describe(RecipeRepository.name, () => {
       expect(recipes.length).toEqual(2);
     });
 
-    xit('should reject promise when removing unexisting recipe', () => {
-      expect(() =>
+    xit('should reject promise when removing unexisting recipe', async () => {
+      await expect(
         recipeRepository.removeRecipe('unexisting-recipe')
-      ).rejects.toThrowError(/Recipe not found./);
+      ).rejects.toThrow(/Recipe not found./);
     });
   });
 });

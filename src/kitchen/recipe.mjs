@@ -1,7 +1,6 @@
+import { io } from 'socket.io-client';
 import { shallowRef } from 'vue';
 import { useRoute } from 'vue-router';
-import { io } from 'socket.io-client';
-import { nanoid } from './nanoid.mjs';
 
 export default {
   template: `
@@ -69,7 +68,6 @@ export default {
     return {
       addIngredient() {
         const ingredient = {
-          id: nanoid(),
           name: null,
           quantity: null,
           unit: null,

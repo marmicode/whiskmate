@@ -1,8 +1,13 @@
-export interface Ingredient {
-  id: string;
+import { nanoid } from 'nanoid';
+
+export interface IngredientData {
   name: string;
   quantity: number;
   unit: string;
+}
+
+export interface Ingredient extends IngredientData {
+  id: string;
 }
 
 export class IngredientRepository {
@@ -10,11 +15,16 @@ export class IngredientRepository {
 
   addIngredient({
     recipeId,
-    ingredient,
+    ingredientData,
   }: {
     recipeId: string;
-    ingredient: Ingredient;
+    ingredientData: IngredientData;
   }) {
+    const ingredient = {
+      ...ingredientData,
+      id: nanoid(),
+    };
+
     this._ingredients = [
       ...this._ingredients,
       {
@@ -22,12 +32,20 @@ export class IngredientRepository {
         ingredient,
       },
     ];
+
+    return ingredient;
   }
 
   getRecipeIngredients(recipeId: string) {
     return this._ingredients
       .filter(({ recipeId: _recipeId }) => _recipeId === recipeId)
       .map(({ ingredient }) => ingredient);
+  }
+
+  getIngredientRecipeId(ingredientId: string) {
+    return this._ingredients.find(
+      ({ ingredient }) => ingredient.id === ingredientId
+    )?.recipeId;
   }
 
   updateIngredient({

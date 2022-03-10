@@ -8,7 +8,7 @@ import { getRecipeRepository } from './recipe-repository';
 import { RecipeNotFoundError } from './recipe-repository-common';
 import { withScope } from '../utils/guards';
 
-export const recipesRouter = Router();
+export const recipeRouter = Router();
 
 export enum RecipeScopes {
   Read = 'recipe.read',
@@ -18,7 +18,7 @@ export enum RecipeScopes {
 /**
  * Create recipe.
  */
-post<RecipeRequest, Recipe>(recipesRouter)(
+post<RecipeRequest, Recipe>(recipeRouter)(
   '/recipes',
   withScope(RecipeScopes.Write),
   async (req, res) => {
@@ -30,7 +30,7 @@ post<RecipeRequest, Recipe>(recipesRouter)(
 /**
  * Retrieve recipes.
  */
-get<RecipeList>(recipesRouter)(
+get<RecipeList>(recipeRouter)(
   '/recipes',
   withScope(RecipeScopes.Read),
   async (_, res) => {
@@ -45,7 +45,7 @@ get<RecipeList>(recipesRouter)(
 /**
  * Remove recipe.
  */
-del<Problem>(recipesRouter)(
+del<Problem>(recipeRouter)(
   '/recipes/:recipeId',
   withScope(RecipeScopes.Write),
   async (req, res) => {

@@ -12,14 +12,14 @@ interface List<T> {
   items: T[];
 }
 
-export const recipesRouter = Router();
+export const recipeRouter = Router();
 
 const repository = getRecipeRepository();
 
 /**
  * Create recipe.
  */
-post<RecipeData, Recipe>(recipesRouter)('/recipes', async (req, res) => {
+post<RecipeData, Recipe>(recipeRouter)('/recipes', async (req, res) => {
   const recipe = await repository.addRecipe(req.body);
   res.status(201).send(recipe);
 });
@@ -27,7 +27,7 @@ post<RecipeData, Recipe>(recipesRouter)('/recipes', async (req, res) => {
 /**
  * Retrieve recipes.
  */
-get<List<Recipe>>(recipesRouter)('/recipes', async (_, res) => {
+get<List<Recipe>>(recipeRouter)('/recipes', async (_, res) => {
   const recipes = await repository.getRecipes();
   res.send({
     total: recipes.length,
@@ -38,7 +38,7 @@ get<List<Recipe>>(recipesRouter)('/recipes', async (_, res) => {
 /**
  * Remove recipe.
  */
-del(recipesRouter)('/recipes/:recipeId', async (req, res) => {
+del(recipeRouter)('/recipes/:recipeId', async (req, res) => {
   try {
     await repository.removeRecipe(req.params.recipeId);
     res.sendStatus(204);

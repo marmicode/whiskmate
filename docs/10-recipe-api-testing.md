@@ -16,10 +16,10 @@ yarn
 
 1. Run tests: `yarn test:watch` (or `npm run test:watch`).
 
-2. Create test suite in `src/recipes/recipes-router.spec.ts`:
+2. Create test suite in `src/recipes/recipe.router.spec.ts`:
 
 ```ts
-describe('Recipes Router', () => {
+describe('Recipe Router', () => {
 
   it('should retrieve recipes', () => {
     ...
@@ -33,7 +33,7 @@ describe('Recipes Router', () => {
 ```ts
 beforeEach(() => {
   const app = express();
-  app.use(recipesRouter);
+  app.use(recipeRouter);
   ...
 });
 ```
@@ -47,7 +47,7 @@ let client;
 
 beforeEach(() => {
   const app = express();
-  app.use(recipesRouter);
+  app.use(recipeRouter);
   client = supertest(app);
 });
 ```

@@ -1,7 +1,7 @@
 import { readdir, readFile, rm, writeFile } from 'fs/promises';
 import { nanoid } from 'nanoid';
 import { join } from 'path';
-import { isErrorWithCode } from './helpers/is-error-with-code';
+import { isErrorWithCode } from '../helpers/is-error-with-code';
 import {
   Recipe,
   RecipeData,

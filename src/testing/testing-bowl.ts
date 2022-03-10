@@ -7,7 +7,7 @@
  */
 export function createTestingBowl<
   T extends
-    | Object
+    | Record<string, unknown>
     | {
         destroy?: () => void | Promise<void> | Partial<T> | Promise<Partial<T>>;
       }

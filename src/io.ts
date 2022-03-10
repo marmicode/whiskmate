@@ -11,10 +11,10 @@ export function setupIoServer(httpServer: HttpServer) {
     },
   });
 
-  io.of('/ingredients').on('connection', (socket) => {
+  io.of('/ingredients').on('connection', async (socket) => {
     const recipeId = socket.handshake.query.recipeId as string;
     const recipeIngredientsRoom = `/recipes/${recipeId}/ingredients`;
-    socket.join(recipeIngredientsRoom);
+    await socket.join(recipeIngredientsRoom);
 
     const ingredients = ingredientRepository.getRecipeIngredients(recipeId);
 

@@ -3,7 +3,7 @@ import * as request from 'supertest';
 import { getRecipeRepository } from './recipe-repository';
 import { RecipeData } from './recipe-repository-common';
 import { RecipeRepositoryMemory } from './recipe-repository-memory';
-import { recipesRouter } from './recipes-router';
+import { recipeRouter } from './recipe.router';
 
 jest.mock('./recipe-repository');
 const mockGetRecipeRepository = getRecipeRepository as jest.MockedFunction<
@@ -119,7 +119,7 @@ describe('Recipes Router', () => {
       };
       next();
     });
-    app.use(recipesRouter);
+    app.use(recipeRouter);
     return request(app);
   }
 });

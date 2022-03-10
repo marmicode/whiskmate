@@ -1,6 +1,6 @@
 import { json } from 'body-parser';
 import * as express from 'express';
-import { recipesRouter } from './recipes/recipes-router';
+import { recipeRouter } from './recipes/recipe.router';
 import { NextFunction, Response } from 'express';
 import {
   error,
@@ -55,4 +55,4 @@ app.use((err: unknown, req: unknown, res: Response, next: NextFunction) => {
   });
 });
 
-app.use(recipesRouter);
+app.use(recipeRouter);

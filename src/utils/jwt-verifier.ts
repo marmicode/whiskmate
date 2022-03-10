@@ -1,7 +1,7 @@
 import { decode, JwtPayload, verify } from 'jsonwebtoken';
 import * as jwksClient from 'jwks-rsa';
 
-export interface Claims extends JwtPayload {}
+export type Claims = JwtPayload;
 
 export interface JwtVerifier {
   verify(token: string): Claims;

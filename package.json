@@ -13,7 +13,7 @@
     "watch": "tsc --watch",
     "start": "run-p start:*",
     "start:kitchen": "serve src/kitchen -l 8000",
-    "start:api": "nodemon src/main.ts",
+    "start:api": "nodemon --exec node_modules/.bin/ts-node src/main.ts",
     "test": "jest",
     "test:watch": "jest --watch"
   },

@@ -1,6 +1,7 @@
 import { readdir, readFile, rm, writeFile } from 'fs/promises';
 import { nanoid } from 'nanoid';
 import { join } from 'path';
+import { isErrorWithCode } from '../utils/is-error-with-code';
 import {
   Recipe,
   RecipeData,
@@ -41,8 +42,8 @@ export class RecipeRepositoryFilesystem implements RecipeRepository {
   async removeRecipe(recipeId: string) {
     try {
       await rm(this._getRecipePath(recipeId));
-    } catch (e: any) {
-      if (e?.code === 'ENOENT') {
+    } catch (e: unknown) {
+      if (isErrorWithCode(e) && e.code === 'ENOENT') {
         throw new RecipeNotFoundError(recipeId);
       }
     }

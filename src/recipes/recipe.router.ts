@@ -7,14 +7,14 @@ import { RecipeRequest } from '../openapi/model/recipe-request';
 import { getRecipeRepository } from './recipe-repository';
 import { RecipeNotFoundError } from './recipe-repository-common';
 
-export const recipesRouter = Router();
+export const recipeRouter = Router();
 
 const repository = getRecipeRepository();
 
 /**
  * Create recipe.
  */
-post<RecipeRequest, Recipe>(recipesRouter)('/recipes', async (req, res) => {
+post<RecipeRequest, Recipe>(recipeRouter)('/recipes', async (req, res) => {
   const recipe = await repository.addRecipe(req.body);
   res.status(201).send(recipe);
 });
@@ -22,7 +22,7 @@ post<RecipeRequest, Recipe>(recipesRouter)('/recipes', async (req, res) => {
 /**
  * Retrieve recipes.
  */
-get<RecipeList>(recipesRouter)('/recipes', async (_, res) => {
+get<RecipeList>(recipeRouter)('/recipes', async (_, res) => {
   const recipes = await repository.getRecipes();
   res.send({
     total: recipes.length,
@@ -33,7 +33,7 @@ get<RecipeList>(recipesRouter)('/recipes', async (_, res) => {
 /**
  * Remove recipe.
  */
-del<Problem>(recipesRouter)('/recipes/:recipeId', async (req, res) => {
+del<Problem>(recipeRouter)('/recipes/:recipeId', async (req, res) => {
   try {
     await repository.removeRecipe(req.params.recipeId);
     res.sendStatus(204);

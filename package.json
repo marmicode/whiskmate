@@ -11,7 +11,7 @@
     "codegen:prisma": "prisma generate --schema src/schema.prisma",
     "codegen:openapi": "tools/openapi-codegen.sh",
     "watch": "tsc --watch",
-    "start": "nodemon src/main.ts",
+    "start": "nodemon --exec node_modules/.bin/ts-node src/main.ts",
     "test": "jest",
     "test:watch": "jest --watch"
   },

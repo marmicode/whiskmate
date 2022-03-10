@@ -14,20 +14,20 @@ yarn
 
 # 📝 Steps
 
-1. Create new router in `src/recipes/recipe-router.ts`.
+1. Create new router in `src/recipes/recipe.router.ts`.
 
 ```ts
-export const recipesRouter = Router();
+export const recipeRouter = Router();
 
-recipesRouter.post('/recipes', ...);
-recipesRouter.get('/recipes', ...);
-recipesRouter.delete('/recipes/:recipeId', ...);
+recipeRouter.post('/recipes', ...);
+recipeRouter.get('/recipes', ...);
+recipeRouter.delete('/recipes/:recipeId', ...);
 ```
 
 2. Use router in `src/main.ts`.
 
 ```ts
-app.use(recipesRouter);
+app.use(recipeRouter);
 ```
 
 3. Grab a repository instance using `getRecipeRepository()` from `src/recipes/recipe-repository.ts`.

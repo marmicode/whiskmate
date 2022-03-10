@@ -16,7 +16,4 @@ app.use((err: unknown, req: unknown, res: Response, next: NextFunction) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.send('👋 Welcome!');
-});
 app.use(recipesRouter);

@@ -11,28 +11,40 @@ export function setupIoServer(httpServer: HttpServer) {
     },
   });
 
-  io.of('/ingredients').on('connection', async (socket) => {
+  const namespace = io.of('/ingredients');
+
+  namespace.on('connection', async (socket) => {
     const recipeId = socket.handshake.query.recipeId as string;
     const recipeIngredientsRoom = `/recipes/${recipeId}/ingredients`;
     await socket.join(recipeIngredientsRoom);
 
-    const ingredients = ingredientRepository.getRecipeIngredients(recipeId);
+    socket.emit('ingredients-loaded', {
+      ingredients: ingredientRepository.getRecipeIngredients(recipeId),
+    });
 
-    socket.emit('ingredients-loaded', { ingredients });
+    socket.on('add-ingredient', ({ ingredientData }) => {
+      const ingredient = ingredientRepository.addIngredient({
+        recipeId,
+        ingredientData,
+      });
 
-    socket.on('ingredient-added', ({ ingredient }) =>
-      ingredientRepository.addIngredient({ recipeId, ingredient })
-    );
+      /* Send to everyone in the room including sender as they
+       * need the id. */
+      namespace
+        .to(recipeIngredientsRoom)
+        .emit('ingredient-added', { ingredient });
+    });
 
-    socket.on('ingredient-changed', ({ ingredientId, changes }) => {
+    socket.on('ingredient-changed', (event) => {
+      const { ingredientId, changes } = event;
+
       ingredientRepository.updateIngredient({
         ingredientId,
         changes,
       });
-    });
 
-    socket.onAny((eventName, event) => {
-      socket.to(recipeIngredientsRoom).emit(eventName, event);
+      /* Send to friends in the same room. */
+      socket.to(recipeIngredientsRoom).emit('ingredient-changed', event);
     });
   });
 }

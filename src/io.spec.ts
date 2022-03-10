@@ -36,9 +36,16 @@ describe('io', () => {
       bowl.otherSocket.on('ingredient-added', bowl.otherSpy);
       bowl.friendSocket.on('ingredient-added', bowl.friendSpy);
 
-      bowl.socket.emit('ingredient-added', {
-        ingredient: {
-          id: 'avocado',
+      /* Mock succesful ingredient creation. */
+      bowl.mockRepository.addIngredient.mockReturnValue({
+        id: 'avocado',
+        name: '🥑 Avocado',
+        quantity: 50,
+        unit: 'g',
+      });
+
+      bowl.socket.emit('add-ingredient', {
+        ingredientData: {
           name: '🥑 Avocado',
           quantity: 50,
           unit: 'g',
@@ -51,8 +58,7 @@ describe('io', () => {
         expect(bowl.mockRepository.addIngredient).toBeCalledTimes(1);
         expect(bowl.mockRepository.addIngredient).toBeCalledWith({
           recipeId: 'burger',
-          ingredient: {
-            id: 'avocado',
+          ingredientData: {
             name: '🥑 Avocado',
             quantity: 50,
             unit: 'g',
@@ -61,9 +67,17 @@ describe('io', () => {
       });
     });
 
-    it('should not notify self', async () => {
+    it('should notify self', async () => {
       await waitForExpect(() => {
-        expect(bowl.spy).toBeCalledTimes(0);
+        expect(bowl.spy).toBeCalledTimes(1);
+        expect(bowl.spy).toBeCalledWith({
+          ingredient: {
+            id: expect.any(String),
+            name: '🥑 Avocado',
+            quantity: 50,
+            unit: 'g',
+          },
+        });
       });
     });
 
@@ -72,7 +86,7 @@ describe('io', () => {
         expect(bowl.friendSpy).toBeCalledTimes(1);
         expect(bowl.friendSpy).toBeCalledWith({
           ingredient: {
-            id: 'avocado',
+            id: expect.any(String),
             name: '🥑 Avocado',
             quantity: 50,
             unit: 'g',

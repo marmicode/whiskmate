@@ -6,7 +6,7 @@
   "author": "Younes Jaaidi <yjaaidi@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cp src/openapi/whiskmate.yaml dist/src/openapi; tsc",
+    "build": "mkdir -p dist/src/openapi && cp src/openapi/whiskmate.yaml dist/src/openapi && tsc",
     "codegen": "tools/openapi-codegen.sh",
     "watch": "tsc --watch",
     "start": "nodemon --exec node_modules/.bin/ts-node src/main.ts",

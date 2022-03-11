@@ -31,7 +31,7 @@ export function createAuthMiddleware({
             id: payload.sub,
           },
           {
-            scope: payload.scope.split(','),
+            scope: payload.scope.split(' '),
           }
         );
       }

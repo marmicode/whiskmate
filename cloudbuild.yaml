@@ -1,0 +1,47 @@
+steps:
+  # Fetch cached image and don't crash if image is not found (for the first time).
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker pull gcr.io/$PROJECT_ID/whiskmate-api || exit 0
+
+  # Build the container image.
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '.',
+        '-f',
+        'Dockerfile',
+        '-t',
+        'gcr.io/$PROJECT_ID/whiskmate-api',
+        '--cache-from',
+        'gcr.io/$PROJECT_ID/whiskmate-api',
+      ]
+  # Push the container image to Container Registry.
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/whiskmate-api']
+
+  # Deploy container image to Cloud Run.
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'run',
+        'deploy',
+        'whiskmate-api',
+        '--image',
+        'gcr.io/$PROJECT_ID/whiskmate-api',
+        '--region',
+        'europe-west1',
+        '--platform',
+        'managed',
+        '--allow-unauthenticated',
+      ]
+images:
+  - gcr.io/$PROJECT_ID/whiskmate-api
+
+# We have to specify a storage on our GCP project so CI can read the results.
+# Cf. https://github.com/GoogleCloudPlatform/cloud-builders/issues/120
+# logsBucket: 'gs://$PROJECT_ID/cloudbuild-logs'

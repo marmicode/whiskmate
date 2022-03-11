@@ -6,10 +6,11 @@
   "author": "Younes Jaaidi <yjaaidi@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cp src/openapi/whiskmate.yaml dist/src/openapi; tsc",
+    "build": "mkdir -p dist/src/openapi && cp src/openapi/whiskmate.yaml dist/src/openapi && tsc",
     "codegen": "run-p codegen:*",
     "codegen:prisma": "prisma generate --schema src/schema.prisma",
     "codegen:openapi": "tools/openapi-codegen.sh",
+    "deploy": "gcloud builds submit",
     "watch": "tsc --watch",
     "start": "run-p start:*",
     "start:kitchen": "serve src/kitchen -l 8000",

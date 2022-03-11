@@ -28,7 +28,7 @@ export function createAuthMiddleware({
             id: claims.sub,
           },
           {
-            scope: claims.scope.split(','),
+            scope: claims.scope.split(' '),
           }
         );
       } catch (err) {

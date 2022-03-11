@@ -1,4 +1,3 @@
-import { io } from 'socket.io-client';
 import { shallowRef } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -40,25 +39,19 @@ export default {
   </ul>
   `,
   setup() {
+    const apiBaseUrl = 'http://localhost:3000';
     const route = useRoute();
     const ingredients = shallowRef();
     const recipeId = route.params.recipeId;
-    const socket = io('http://localhost:3000/ingredients', {
-      query: {
-        recipeId,
-      },
-    });
+    const ingredientChangesSource = new EventSource(
+      `${apiBaseUrl}/recipes/${recipeId}/ingredient-changes`
+    );
 
     ingredients.value = [];
 
-    socket.on(
-      'ingredients-loaded',
-      ({ ingredients: _ingredients }) => (ingredients.value = _ingredients)
-    );
-
-    socket.on('ingredient-added', _addIngredient);
-
-    socket.on('ingredient-changed', _updateIngredient);
+    ingredientChangesSource.onmessage = (message) => {
+      // @todo update ingredients list.
+    };
 
     function _addIngredient({ ingredient }) {
       ingredients.value = [...ingredients.value, ingredient];
@@ -72,25 +65,37 @@ export default {
       );
     }
 
-    return {
-      addIngredient() {
-        socket.emit('add-ingredient', {
-          ingredientData: {
-            name: null,
-            quantity: null,
-            unit: null,
-          },
-        });
-      },
-      updateIngredient(ingredientId, changes) {
-        _updateIngredient({ ingredientId, changes });
+    function _upsertIngredient({ ingredient }) {
+      if (
+        ingredients.value.find(
+          (_ingredient) => _ingredient.id === ingredient.id
+        )
+      ) {
+        _updateIngredient({ ingredientId: ingredient.id, changes: ingredient });
+      } else {
+        _addIngredient({ ingredient });
+      }
+    }
 
-        socket.emit('ingredient-changed', {
-          ingredientId,
-          changes,
-        });
+    return {
+      async addIngredient() {
+        // @todo send ingredient to POST `${apiBaseUrl}/recipes/${recipeId}/ingredients`.
+        // @todo add returned ingredient to `ingredients.value` list.
+      },
+      async updateIngredient(ingredientId, changes) {
+        // @todo update ingredient in `ingredients.value` list.
+        // @todo send ingredient changes to PATCH `${apiBaseUrl}/ingredients/${ingredientId}`.
       },
       ingredients,
     };
   },
 };
+
+async function sendJsonRequest(url, { method, data }) {
+  const response = await fetch(url, {
+    method,
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  return await response.json();
+}

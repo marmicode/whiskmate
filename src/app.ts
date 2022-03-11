@@ -1,6 +1,6 @@
 import { json } from 'body-parser';
+import * as cors from 'cors';
 import * as express from 'express';
-import { recipeRouter } from './recipes/recipe.router';
 import { NextFunction, Response } from 'express';
 import {
   error,
@@ -8,8 +8,9 @@ import {
 } from 'express-openapi-validator';
 import { join } from 'path';
 import { createAuthMiddleware } from './auth.middleware';
-import * as cors from 'cors';
 import { isAuthEnabled } from './config';
+import { ingredientRouter } from './ingredients/ingredient.router';
+import { recipeRouter } from './recipes/recipe.router';
 
 export const app = express();
 
@@ -20,6 +21,8 @@ if (isAuthEnabled) {
 }
 
 app.use(json());
+
+app.use(ingredientRouter);
 
 app.use(
   openapiMiddleware({

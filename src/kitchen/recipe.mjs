@@ -50,7 +50,7 @@ export default {
     ingredients.value = [];
 
     ingredientChangesSource.onmessage = (message) => {
-      // @todo update ingredients list.
+      _upsertIngredient({ ingredient: JSON.parse(message.data) });
     };
 
     function _addIngredient({ ingredient }) {
@@ -79,12 +79,27 @@ export default {
 
     return {
       async addIngredient() {
-        // @todo send ingredient to POST `${apiBaseUrl}/recipes/${recipeId}/ingredients`.
-        // @todo add returned ingredient to `ingredients.value` list.
+        const ingredient = await sendJsonRequest(
+          `${apiBaseUrl}/recipes/${recipeId}/ingredients`,
+          {
+            method: 'POST',
+            data: {
+              name: null,
+              quantity: null,
+              unit: null,
+            },
+          }
+        );
+
+        _upsertIngredient({ ingredient });
       },
       async updateIngredient(ingredientId, changes) {
-        // @todo update ingredient in `ingredients.value` list.
-        // @todo send ingredient changes to PATCH `${apiBaseUrl}/ingredients/${ingredientId}`.
+        _upsertIngredient({ ingredient: { ...changes, id: ingredientId } });
+
+        await sendJsonRequest(`${apiBaseUrl}/ingredients/${ingredientId}`, {
+          method: 'PATCH',
+          data: changes,
+        });
       },
       ingredients,
     };

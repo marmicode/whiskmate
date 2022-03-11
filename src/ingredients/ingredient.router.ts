@@ -28,10 +28,15 @@ ingredientRouter.get('/recipes/:recipeId/ingredient-changes', (req, res) => {
     res.write(data);
   };
 
-  // @todo send ingredients to client.
+  for (const ingredient of ingredients) {
+    sendIngredient(ingredient);
+  }
 
-  // @todo listen to recipeChangeBus (e.g. recipeChangesBus.on(recipeId))
-  // and send to client.
+  recipeChangesBus.on(recipeId, sendIngredient);
+
+  req.socket.on('close', () =>
+    recipeChangesBus.removeListener(recipeId, sendIngredient)
+  );
 });
 
 post<IngredientData, Ingredient>(ingredientRouter)(

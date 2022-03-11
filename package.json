@@ -6,7 +6,7 @@
   "author": "Younes Jaaidi <yjaaidi@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cp src/openapi/whiskmate.yaml dist/src/openapi; tsc",
+    "build": "mkdir -p dist/src/openapi && cp src/openapi/whiskmate.yaml dist/src/openapi && tsc",
     "codegen": "run-p codegen:*",
     "codegen:prisma": "prisma generate --schema src/schema.prisma",
     "codegen:openapi": "tools/openapi-codegen.sh",

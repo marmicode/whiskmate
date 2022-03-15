@@ -58,7 +58,6 @@ cascade_changes \
   testing-22-cypress-component-testing-with-fake-repository \
   testing-23-visual-regression-testing \
 
-
 cascade_changes \
   --skip-tests \
   base \
@@ -92,7 +91,10 @@ cascade_changes \
   nodejs-24-recipe-api-db-boilerplate \
   nodejs-25-recipe-api-db \
   nodejs-26-recipe-edition-websocket-boilerplate \
-  nodejs-27-recipe-edition-websocket
+  nodejs-27-recipe-edition-websocket \
+  nodejs-28-recipe-edition-sse-boilerplate \
+  nodejs-29-recipe-edition-sse \
+  nodejs-30-gcp-cloud-run
 
 cascade_changes \
   base \

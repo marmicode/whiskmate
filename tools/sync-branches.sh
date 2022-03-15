@@ -27,6 +27,11 @@ function cascade_changes() {
 }
 
 cascade_changes \
+  --skip-tests \
+  base \
+  main
+
+cascade_changes \
   base \
   testing-00-boilerplate \
   testing-01-meal-planner \
@@ -54,7 +59,11 @@ cascade_changes \
   testing-23-visual-regression-testing \
 
 cascade_changes \
+  --skip-tests \
   base \
+  nodejs-00-boilerplate
+
+cascade_changes \
   nodejs-00-boilerplate \
   nodejs-01-recipe-repository-boilerplate \
   nodejs-02-recipe-repository \
@@ -82,13 +91,11 @@ cascade_changes \
   nodejs-24-recipe-api-db-boilerplate \
   nodejs-25-recipe-api-db \
   nodejs-26-recipe-edition-websocket-boilerplate \
-  nodejs-27-recipe-edition-websocket
+  nodejs-27-recipe-edition-websocket \
+  nodejs-28-recipe-edition-sse-boilerplate \
+  nodejs-29-recipe-edition-sse \
+  nodejs-30-gcp-cloud-run
 
 cascade_changes \
   base \
   api
-
-cascade_changes \
-  --skip-tests \
-  base \
-  main

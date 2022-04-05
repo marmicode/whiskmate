@@ -5,12 +5,15 @@ import { MealPlanner } from './meal-planner.service';
 
 describe(MealPlanner.name, () => {
   const { observe } = createObserver();
-
-  let harness: ReturnType<typeof createHarness>;
-  beforeEach(() => (harness = createHarness()));
+  const papperdelle = {
+    id: 'papperdelle-with-rose-harissa',
+  } as Recipe;
+  const puyLentil = {
+    id: 'puy-lentil-and-aubergine-stew',
+  } as Recipe;
 
   it('should add recipe', () => {
-    const { mealPlanner, papperdelle, puyLentil } = harness;
+    const { mealPlanner } = createMealPlanner();
 
     mealPlanner.addRecipe(papperdelle);
     mealPlanner.addRecipe(puyLentil);
@@ -22,7 +25,7 @@ describe(MealPlanner.name, () => {
   });
 
   it('should watch recipes', () => {
-    const { mealPlanner, papperdelle, puyLentil } = harness;
+    const { mealPlanner } = createMealPlanner();
 
     const observer = observe(mealPlanner.recipes$);
 
@@ -41,7 +44,7 @@ describe(MealPlanner.name, () => {
   });
 
   it('should watch if recipe can be added', () => {
-    const { mealPlanner, papperdelle } = harness;
+    const { mealPlanner } = createMealPlanner();
 
     const observer = observe(mealPlanner.watchCanAddRecipe(papperdelle));
 
@@ -52,8 +55,8 @@ describe(MealPlanner.name, () => {
     expect(observer.next).toBeCalledWith(false);
   });
 
-  it("should not trigger observable if result didn't change", () => {
-    const { mealPlanner, papperdelle, puyLentil } = harness;
+  it(`should not trigger observable if result didn't change`, () => {
+    const { mealPlanner } = createMealPlanner();
 
     const observer = observe(mealPlanner.watchCanAddRecipe(papperdelle));
 
@@ -63,35 +66,47 @@ describe(MealPlanner.name, () => {
     expect(observer.next).toBeCalledTimes(2);
   });
 
-  describe('with recipe', () => {
-    beforeEach(() => {
-      const { mealPlanner, papperdelle } = harness;
-      mealPlanner.addRecipe(papperdelle);
-    });
-
-    it('should not allow recipe duplicates', () => {
-      const { mealPlanner, papperdelle } = harness;
-      expect(mealPlanner.canAddRecipe(papperdelle)).toBe(false);
-    });
-
-    it('should allow new recipes', () => {
-      const { mealPlanner, puyLentil } = harness;
-      expect(mealPlanner.canAddRecipe(puyLentil)).toBe(true);
-    });
-
-    it('should throw error if recipe is already present', () => {
-      const { mealPlanner, papperdelle } = harness;
-      expect(() => mealPlanner.addRecipe(papperdelle)).toThrowError(
-        `Can't add recipe.`
-      );
-    });
+  it('should not allow recipe duplicates', () => {
+    const { mealPlanner } = createMealPlannerWithPapperdelle();
+    expect(mealPlanner.canAddRecipe(papperdelle)).toBe(false);
   });
 
-  function createHarness() {
+  it('should allow new recipes', () => {
+    const { mealPlanner } = createMealPlannerWithPapperdelle();
+    expect(mealPlanner.canAddRecipe(puyLentil)).toBe(true);
+  });
+
+  it('should throw error if recipe is already present', () => {
+    const { mealPlanner } = createMealPlannerWithPapperdelle();
+    expect(() => mealPlanner.addRecipe(papperdelle)).toThrowError(
+      `Can't add recipe.`
+    );
+  });
+
+  it('should allow new recipes', () => {
+    const { mealPlanner } = createMealPlannerWithPapperdelle();
+    expect(mealPlanner.canAddRecipe(puyLentil)).toBe(true);
+  });
+
+  it('should throw error if recipe is already present', () => {
+    const { mealPlanner } = createMealPlannerWithPapperdelle();
+    expect(() => mealPlanner.addRecipe(papperdelle)).toThrowError(
+      `Can't add recipe.`
+    );
+  });
+
+  function createMealPlannerWithPapperdelle() {
+    const { mealPlanner, ...rest } = createMealPlanner();
+    mealPlanner.addRecipe(papperdelle);
+    return {
+      mealPlanner,
+      ...rest,
+    };
+  }
+
+  function createMealPlanner() {
     return {
       mealPlanner: TestBed.inject(MealPlanner),
-      papperdelle: { id: 'papperdelle-with-rose-harissa' } as Recipe,
-      puyLentil: { id: 'puy-lentil-and-aubergine-stew' } as Recipe,
     };
   }
 });

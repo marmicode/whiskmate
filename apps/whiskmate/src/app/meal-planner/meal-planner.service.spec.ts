@@ -83,18 +83,6 @@ describe(MealPlanner.name, () => {
     );
   });
 
-  it('should allow new recipes', () => {
-    const { mealPlanner } = createMealPlannerWithPapperdelle();
-    expect(mealPlanner.canAddRecipe(puyLentil)).toBe(true);
-  });
-
-  it('should throw error if recipe is already present', () => {
-    const { mealPlanner } = createMealPlannerWithPapperdelle();
-    expect(() => mealPlanner.addRecipe(papperdelle)).toThrowError(
-      `Can't add recipe.`
-    );
-  });
-
   function createMealPlannerWithPapperdelle() {
     const { mealPlanner, ...rest } = createMealPlanner();
     mealPlanner.addRecipe(papperdelle);

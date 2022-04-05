@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { createRecipe, Recipe } from './recipe';
 import { RecipeFilter } from './recipe-filter';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let require: any;
 
 @Injectable({
   providedIn: 'root',
@@ -41,8 +45,9 @@ export class RecipeRepository {
         { quantity: { amount: 1, unit: 'unit' }, name: '½ tbsp lemon juice' },
         { name: 'salt' },
       ],
-      pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Cauliflower,-pomegranate-and-pistachio-salad.jpg',
+      pictureUri: this._getPictureUri(
+        'Cauliflower,-pomegranate-and-pistachio-salad.jpg'
+      ),
       steps: [
         'Preheat the oven to 200°C fan.',
         'Coarsely grate a third of the cauliflower and set aside in a bowl. Break the remaining cauliflower into florets, roughly 3cm wide, and add these to a separate bowl with the cauliflower leaves, if you have any, and onion. Toss everything together with 2 tablespoons of oil and ¼ teaspoon of salt, then spread out on a large parchment-lined baking tray. Roast for about 20 minutes, until cooked through and golden-brown. Remove from the oven and set aside to cool.',
@@ -83,8 +88,7 @@ export class RecipeRepository {
         { quantity: { amount: 1, unit: 'tbsp' }, name: "za'atar" },
         { name: 'salt and black pepper' },
       ],
-      pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Braised-eggs-with-leek-and-za%E2%80%99atar.jpg',
+      pictureUri: this._getPictureUri('Braised-eggs-with-leek-and-zaatar.jpg'),
       steps: [
         'Put the butter and 1 tablespoon of oil into a large sauté pan, for which you have a lid, and place on a medium high heat. Once the butter starts to foam, add the leeks, ½ teaspoon of salt and plenty of pepper. Fry for 3 minutes, stirring frequently, until the leeks are soft. Add the cumin, lemon and vegetable stock and boil rapidly for 4–5 minutes, until most of the stock has evaporated. Fold in the spinach and cook for a minute, until wilted, then reduce the heat to medium.',
         'Use a large spoon to make 6 indentations in the mixture and break one egg into each space. Sprinkle the eggs with a pinch of salt, dot the feta around the eggs, then cover the pan. Simmer for 4–5 minutes, until the egg whites are cooked but the yolks are still runny.',
@@ -149,8 +153,9 @@ export class RecipeRepository {
           name: 'coriander leaves, chopped',
         },
       ],
-      pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Buckwheat-and-ricotta-hotcakes-with-preserved-lemon-salsa.jpg',
+      pictureUri: this._getPictureUri(
+        'Buckwheat-and-ricotta-hotcakes-with-preserved-lemon-salsa.jpg'
+      ),
       steps: [
         'Start with the salsa. Combine the vinegar, sumac, sugar, lime peel, garlic and onion in a medium bowl with half a teaspoon of salt, then leave to pickle for at least three hours (and preferably overnight).',
         'To make the hotcake batter, put the buckwheat groats, milk, parmesan, basil, dill and egg yolks in a food processor with half a teaspoon of salt. Whizz on high speed until you have a uniform batter, then tip into a large bowl, stir in 60g ricotta and set to one side. Don&rsquo;t worry if the batter discolours after a few minutes: it will brighten up again once fried.',
@@ -197,8 +202,9 @@ export class RecipeRepository {
         },
         { name: 'Salt and black pepper' },
       ],
-      pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Stuffed-Romano-peppers-with-ricotta-and-mascarpone.jpg',
+      pictureUri: this._getPictureUri(
+        'Stuffed-Romano-peppers-with-ricotta-and-mascarpone.jpg'
+      ),
       steps: [
         'Preheat the oven to 180C.',
         'Use a little knife to make a small vertical incision – about 6 centimeters long – from the top towards the end of each pepper. You will use this incision to scoop out the seeds later. Arrange the pepper on a roasting tray and place in the oven for 30 minutes, until soft. Remove and set aside to cool before using a small spoon to carefully extract and discard the seeds. The aim is to leave the stem on the peppers when they are stuffed so take your time here: it’s a fiddly job. Peel the skin off the peppers – again, don’t rush here – and set aside on a kitchen paper-lined plate to dry.',
@@ -263,8 +269,9 @@ export class RecipeRepository {
           name: 'eggs, yolks and whites separated',
         },
       ],
-      pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Slow-cooked-chicken-with-a-crisp-corn-crust.jpg',
+      pictureUri: this._getPictureUri(
+        'Slow-cooked-chicken-with-a-crisp-corn-crust.jpg'
+      ),
       steps: [
         'Heat the oil in a large sauté pan, for which you have a lid, on a medium high heat. Add the onions and fry for 8–9 minutes, stirring a few times, until caramelised and soft. Reduce the heat to medium and add the garlic, harissa, paprika, chicken, 1 teaspoon of salt and a good grind of black pepper. Cook for 5 minutes, stirring frequently, then add the passata and tomatoes. Pour over 350ml of water, bring to the boil, then simmer on a medium heat, covered, for 30 minutes, stirring every once in a while.',
         'Add the peppers and chocolate and continue to simmer for another 35–40 minutes, with the pan now uncovered, stirring frequently, until the sauce is getting thick and the chicken is falling apart. Remove from the heat and stir in the coriander. If you are serving the chicken as it is (as a stew without the batter), it’s ready to serve (or freeze, once it’s come to room temperature) at this stage. If you are making the corn topping, spoon the chicken into a ceramic baking dish – one with high sides that measures about 20 x 30cm – and set aside.',
@@ -308,8 +315,9 @@ export class RecipeRepository {
         { quantity: { amount: 120, unit: 'g' }, name: 'Greek-style yoghurt' },
         { name: 'salt' },
       ],
-      pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Pappardelle-with-rose-harissa,-black-olives-and-capers.jpg',
+      pictureUri: this._getPictureUri(
+        'Pappardelle-with-rose-harissa,-black-olives-and-capers.jpg'
+      ),
       steps: [
         'Put the oil into a large sauté pan, for which you have a lid, and place on a medium high heat. Once hot, add the onion and fry for 8 minutes, stirring every once in a while, until soft and caramelised. Add the harissa, tomatoes, olives, capers and ½ teaspoon of salt and continue to fry for 3–4 minutes, stirring frequently, until the tomatoes start to break down. Add 200ml of water and stir through. Once boiling, reduce the heat to medium low, cover the pan and simmer for 10 minutes. Remove the lid of the sauce and continue to cook for 4–5 minutes, until the sauce is thick and rich. Stir in 10g of the parsley and set aside.',
         'Meanwhile, fill a large pot with plenty of salted water and place on a high heat. Once boiling, add the pappardelle and cook according to the packet instructions, until al dente. Drain well.',
@@ -356,8 +364,9 @@ export class RecipeRepository {
         { name: 'red wine vinegar' },
         { name: 'Pinch salt' },
       ],
-      pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Baked-ricotta-with-figs-and-lavender-honey.jpg',
+      pictureUri: this._getPictureUri(
+        'Baked-ricotta-with-figs-and-lavender-honey.jpg'
+      ),
       steps: [
         'Preheat the oven to 180C/350F/ gas mark 4. Put the ricotta in the centre of a clean tea towel, squeeze to get rid of some of the liquid, then transfer the cheese to a bowl, season and mix well.',
         'Lightly oil four individual ramekins or one round ovenproof dish about 15cm in diameter (this dish looks great in a brown terracotta one). Spread the ricotta inside and level with a palette knife or a spoon - the cheese should come about 2.5cm up the sides.',
@@ -421,8 +430,7 @@ export class RecipeRepository {
         },
         { quantity: { amount: 60, unit: 'ml' }, name: 'olive oil' },
       ],
-      pictureUri:
-        "https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Irish'-stew.jpg",
+      pictureUri: this._getPictureUri('Irish-stew.jpg'),
       steps: [
         'Heat the oven to 180C/350F/gas mark 4. Drain and rinse the soaked wheat, put it in a medium pan with lots of water, bring to a boil and simmer for an hour, until cooked. Drain and set aside.',
         "Season the lamb with a teaspoon of salt and some black pepper. Put one tablespoon of oil in a large, deep sauté pan for which you have a lid; place on a medium-high heat. Add some of the lamb – don't overcrowd the pan – and sear for four minutes on all sides. Transfer to a bowl, and repeat with the remaining lamb, adding oil as needed.",
@@ -479,8 +487,9 @@ export class RecipeRepository {
         },
         { quantity: { amount: 2, unit: 'unit' }, name: '½ tbsp olive oil' },
       ],
-      pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Chermoula-basted-halibut-with-farro.jpg',
+      pictureUri: this._getPictureUri(
+        'Chermoula-basted-halibut-with-farro.jpg'
+      ),
       steps: [
         'Simmer the farro in plenty of water for 20 minutes to an hour – the cooking time will depend on the brand; you want it tender with just a little bite. Drain and set aside.',
         'Cook the broad beans in salted boiling water for two minutes, drain, refresh under cold water, then remove and discard the skins.',
@@ -525,8 +534,9 @@ export class RecipeRepository {
         },
         { name: 'Salt and black pepper' },
       ],
-      pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Roast-chicken-with-dates,-olives-and-capers.jpg',
+      pictureUri: this._getPictureUri(
+        'Roast-chicken-with-dates,-olives-and-capers.jpg'
+      ),
       steps: [
         'Place the chicken in a large, non-reactive bowl and add all of the ingredients, apart from the wine and date molasses, along with ¾ teaspoon of salt and a good grind of black pepper. Gently mix everything together, cover the bowl and leave in the fridge to marinate for 1 to 2 days, stirring the ingredients a few times during the process.',
         'Preheat the oven to 180C.',
@@ -560,5 +570,9 @@ export class RecipeRepository {
     });
 
     return of(recipes);
+  }
+
+  private _getPictureUri(pictureName: string): string {
+    return require(`!!file-loader!./pics/${pictureName}`).default;
   }
 }

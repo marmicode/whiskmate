@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { Recipe } from './recipe';
@@ -17,15 +17,13 @@ describe(RecipeSearchComponent.name, () => {
   } as Recipe;
 
   it('should search recipes without keyword on load', async () => {
-    const { fixture, mockRepo } = await createComponent();
+    const { mockRepo, render, getDisplayedRecipes } = await createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
-    fixture.detectChanges();
+    await render();
 
-    const recipes = fixture.debugElement
-      .queryAll(By.css('wm-recipe-preview'))
-      .map((previewEl) => previewEl.properties.recipe);
+    const recipes = getDisplayedRecipes();
 
     expect(recipes).toEqual([papperdelle, puyLentil]);
 
@@ -38,23 +36,31 @@ describe(RecipeSearchComponent.name, () => {
       Pick<RecipeRepository, 'search'>
     >;
 
-    await TestBed.configureTestingModule({
-      declarations: [RecipeSearchComponent],
-      providers: [
-        {
-          provide: RecipeRepository,
-          useValue: mockRepo,
-        },
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-
-    const fixture = TestBed.createComponent(RecipeSearchComponent);
+    let fixture: ComponentFixture<RecipeSearchComponent>;
 
     return {
-      component: fixture.componentInstance,
-      fixture,
       mockRepo,
+      async render() {
+        await TestBed.configureTestingModule({
+          declarations: [RecipeSearchComponent],
+          providers: [
+            {
+              provide: RecipeRepository,
+              useValue: mockRepo,
+            },
+          ],
+          schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(RecipeSearchComponent);
+
+        fixture.detectChanges();
+      },
+      getDisplayedRecipes() {
+        return fixture.debugElement
+          .queryAll(By.css('wm-recipe-preview'))
+          .map((previewEl) => previewEl.properties.recipe);
+      },
     };
   }
 });

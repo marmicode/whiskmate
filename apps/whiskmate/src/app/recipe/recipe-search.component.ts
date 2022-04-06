@@ -45,15 +45,13 @@ import { RecipeRepository } from './recipe-repository.service';
 })
 export class RecipeSearchComponent {
   filter$ = new BehaviorSubject<RecipeFilter>({});
-  items$ = defer(() =>
-    this.filter$.pipe(
-      switchMap((filter) => this._recipeRepository.search(filter)),
-      map((recipes) =>
-        recipes.map((recipe) => ({
-          canAdd$: this._mealPlanner.watchCanAddRecipe(recipe),
-          recipe,
-        }))
-      )
+  items$ = this.filter$.pipe(
+    switchMap((filter) => this._recipeRepository.search(filter)),
+    map((recipes) =>
+      recipes.map((recipe) => ({
+        canAdd$: this._mealPlanner.watchCanAddRecipe(recipe),
+        recipe,
+      }))
     )
   );
 

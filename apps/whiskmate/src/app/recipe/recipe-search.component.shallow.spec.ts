@@ -1,6 +1,6 @@
 import { RecipeFilter } from './recipe-filter';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { Recipe } from './recipe';
@@ -18,17 +18,13 @@ describe(RecipeSearchComponent.name, () => {
   } as Recipe;
 
   it('should search recipes without keyword on load', async () => {
-    const {
-      fixture,
-      mockRepo,
-      getRecipePreviewRecipes,
-    } = await createComponent();
+    const { mockRepo, render, getDisplayedRecipes } = await createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
-    fixture.detectChanges();
+    await render();
 
-    expect(getRecipePreviewRecipes()).toEqual([papperdelle, puyLentil]);
+    expect(getDisplayedRecipes()).toEqual([papperdelle, puyLentil]);
 
     expect(mockRepo.search).toBeCalledTimes(1);
     expect(mockRepo.search).toBeCalledWith({});
@@ -36,29 +32,30 @@ describe(RecipeSearchComponent.name, () => {
 
   it('should search recipes using given filter', async () => {
     const {
-      fixture,
       mockRepo,
-      getRecipePreviewRecipes,
+      render,
+      getDisplayedRecipes,
+      updateFilter,
     } = await createComponent();
+
+    mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
+
+    await render();
 
     mockRepo.search.mockReturnValue(of([papperdelle]));
 
-    fixture.detectChanges();
-
-    fixture.debugElement
-      .query(By.css('wm-recipe-filter'))
-      .triggerEventHandler('filterChange', {
-        keywords: 'Papperdelle',
-        maxIngredientCount: 3,
-      } as RecipeFilter);
-
-    expect(getRecipePreviewRecipes()).toEqual([papperdelle]);
-
-    expect(mockRepo.search).toBeCalledTimes(2);
-    expect(mockRepo.search).lastCalledWith({
+    updateFilter({
       keywords: 'Papperdelle',
       maxIngredientCount: 3,
-    } as RecipeFilter);
+    });
+
+    expect(getDisplayedRecipes()).toEqual([papperdelle]);
+
+    expect(mockRepo.search).toBeCalledTimes(2);
+    expect(mockRepo.search).lastCalledWith<[RecipeFilter]>({
+      keywords: 'Papperdelle',
+      maxIngredientCount: 3,
+    });
   });
 
   async function createComponent() {
@@ -66,27 +63,36 @@ describe(RecipeSearchComponent.name, () => {
       Pick<RecipeRepository, 'search'>
     >;
 
-    await TestBed.configureTestingModule({
-      declarations: [RecipeSearchComponent],
-      providers: [
-        {
-          provide: RecipeRepository,
-          useValue: mockRepo,
-        },
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-
-    const fixture = TestBed.createComponent(RecipeSearchComponent);
+    let fixture: ComponentFixture<RecipeSearchComponent>;
 
     return {
-      component: fixture.componentInstance,
-      fixture,
       mockRepo,
-      getRecipePreviewRecipes() {
+      async render() {
+        await TestBed.configureTestingModule({
+          declarations: [RecipeSearchComponent],
+          providers: [
+            {
+              provide: RecipeRepository,
+              useValue: mockRepo,
+            },
+          ],
+          schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(RecipeSearchComponent);
+
+        fixture.detectChanges();
+      },
+      getDisplayedRecipes() {
         return fixture.debugElement
           .queryAll(By.css('wm-recipe-preview'))
           .map((previewEl) => previewEl.properties.recipe);
+      },
+      updateFilter(filter: RecipeFilter) {
+        fixture.debugElement
+          .query(By.css('wm-recipe-filter'))
+          .triggerEventHandler('filterChange', filter);
+        fixture.detectChanges();
       },
     };
   }

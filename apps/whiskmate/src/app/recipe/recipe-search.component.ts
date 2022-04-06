@@ -1,13 +1,13 @@
-import { switchMap } from 'rxjs/operators';
-import { RecipeFilterModule } from './recipe-filter.component';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { defer, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { CatalogModule } from './../shared/catalog.component';
 import { Recipe } from './recipe';
+import { RecipeFilter } from './recipe-filter';
+import { RecipeFilterModule } from './recipe-filter.component';
 import { RecipePreviewModule } from './recipe-preview.component';
 import { RecipeRepository } from './recipe-repository.service';
-import { RecipeFilter } from './recipe-filter';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,10 +24,8 @@ import { RecipeFilter } from './recipe-filter';
 })
 export class RecipeSearchComponent {
   filter$ = new BehaviorSubject<RecipeFilter>({});
-  recipes$ = defer(() =>
-    this.filter$.pipe(
-      switchMap((filter) => this._recipeRepository.search(filter))
-    )
+  recipes$ = this.filter$.pipe(
+    switchMap((filter) => this._recipeRepository.search(filter))
   );
 
   constructor(private _recipeRepository: RecipeRepository) {}

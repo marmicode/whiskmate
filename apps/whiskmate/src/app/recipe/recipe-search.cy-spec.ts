@@ -13,13 +13,13 @@ class FakeRecipeRepository {
       id: 'cauliflower-pomegranate-and-pistachio-salad',
       name: 'Cauliflower, pomegranate and pistachio salad',
       pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Cauliflower,-pomegranate-and-pistachio-salad.jpg',
+        'https://media.istockphoto.com/photos/fresh-cauliflower-with-pieces-isolated-on-white-picture-id511868689?k=20&m=511868689&s=612x612&w=0&h=UZxuS1zMfMaYm1ag2tBFUG-JO4TJRS_jzSOB7hseX5k=',
     },
     {
       id: 'braised-eggs-with-leek-and-za-atar',
       name: 'Braised eggs with leek and za’atar',
       pictureUri:
-        'https://ottolenghi.co.uk/media/contentmanager/content/cache/646x458//Braised-eggs-with-leek-and-za%E2%80%99atar.jpg',
+        'https://healthynibblesandbits.com/wp-content/uploads/2015/10/Fried-Egg-Breakfast-FF.jpg',
     },
   ];
 

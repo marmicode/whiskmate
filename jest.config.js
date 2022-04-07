@@ -1,3 +1,3 @@
-module.exports = {
-  projects: ['<rootDir>/apps/whiskmate', '<rootDir>/libs/ottolenghi-scraper'],
-};
+const { getJestProjects } = require('@nrwl/jest');
+
+module.exports = { projects: getJestProjects() };

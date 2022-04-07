@@ -1,39 +1,29 @@
 {
   "version": 1,
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "defaultProject": "whiskmate",
-  "schematics": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "style": "css",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "style": "css",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "css",
-      "inlineStyle": true,
-      "inlineTemplate": true
-    }
-  },
   "projects": {
+    "ottolenghi-scraper": {
+      "root": "libs/ottolenghi-scraper",
+      "sourceRoot": "libs/ottolenghi-scraper/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ottolenghi-scraper/**/*.ts"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ottolenghi-scraper"],
+          "options": {
+            "jestConfig": "libs/ottolenghi-scraper/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "whiskmate": {
       "projectType": "application",
       "root": "apps/whiskmate",
@@ -113,7 +103,8 @@
               "apps/whiskmate/src/**/*.ts",
               "apps/whiskmate/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -123,7 +114,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "whiskmate-e2e": {
       "root": "apps/whiskmate-e2e",
@@ -147,30 +139,12 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/whiskmate-e2e/**/*.{js,ts}"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
-      }
-    },
-    "ottolenghi-scraper": {
-      "root": "libs/ottolenghi-scraper",
-      "sourceRoot": "libs/ottolenghi-scraper/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/ottolenghi-scraper/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ottolenghi-scraper"],
-          "options": {
-            "jestConfig": "libs/ottolenghi-scraper/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["whiskmate"]
     }
   }
 }

@@ -32,7 +32,7 @@ Let's test `<wm-recipe-search>` in Cypress.
 1. Run Cypress in component testing mode:
 
 ```sh
-yarn ct
+yarn nx ct whiskmate --watch
 ```
 
 2. Open `recipe-search.cy-spec.ts`.

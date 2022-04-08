@@ -26,8 +26,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "scrap-ottolenghi": "ts-node -P libs/ottolenghi-scraper/tsconfig.lib.json libs/ottolenghi-scraper/src/main.ts",
-    "ct": "cypress open-ct --project apps/whiskmate"
+    "scrap-ottolenghi": "ts-node -P libs/ottolenghi-scraper/tsconfig.lib.json libs/ottolenghi-scraper/src/main.ts"
   },
   "private": true,
   "dependencies": {

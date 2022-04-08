@@ -1,0 +1,29 @@
+{
+  "root": "apps/whiskmate-e2e",
+  "sourceRoot": "apps/whiskmate-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/whiskmate-e2e/cypress.json",
+        "tsConfig": "apps/whiskmate-e2e/tsconfig.e2e.json",
+        "devServerTarget": "whiskmate:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "whiskmate:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/whiskmate-e2e/**/*.{js,ts}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["whiskmate"]
+}

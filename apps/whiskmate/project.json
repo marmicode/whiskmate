@@ -87,6 +87,14 @@
         "jestConfig": "apps/whiskmate/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "ct": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/whiskmate/cypress.json",
+        "tsConfig": "apps/whiskmate/tsconfig.cypress.json",
+        "testingType": "component"
+      }
     }
   },
   "tags": []

@@ -1,5 +1,6 @@
 import { getHarness } from '@jscutlery/cypress-harness';
 import { RecipeSearchHarness } from './recipe-search.harness';
+import { styles, stylesheets } from './../../styles';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { mount } from '@jscutlery/cypress-angular/mount';
 import { RecipeSearchComponent } from './recipe-search.component';
@@ -10,8 +11,8 @@ describe(RecipeSearchComponent.name, () => {
   beforeEach(() =>
     mount(RecipeSearchComponent, {
       imports: [BrowserAnimationsModule],
-      /* eslint-disable-next-line @typescript-eslint/no-var-requires */
-      style: require('!!css-loader!../../styles.css').toString(),
+      stylesheets,
+      styles,
     })
   );
 

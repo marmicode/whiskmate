@@ -1,18 +1,19 @@
-import { of, Observable } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
 import { RecipeRepository } from './recipe-repository.service';
 import { TestBed } from '@angular/core/testing';
 import { RecipeSearchComponent } from './recipe-search.component';
 import { Recipe } from './recipe';
-import { first, pluck } from 'rxjs/operators';
 
 describe(RecipeSearchComponent.name, () => {
   const papperdelle = { id: 'papperdelle-with-rose-harissa' } as Recipe;
   const puyLentil = { id: 'puy-lentil-and-aubergine-stew' } as Recipe;
 
   it('should search recipes without keyword on load', async () => {
-    const { component, mockRepo } = createComponent();
+    const { mockRepo, render } = createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
+
+    const { component } = render();
 
     expect(await firstValueFrom(component.items$)).toEqual([
       expect.objectContaining({ recipe: papperdelle }),
@@ -38,10 +39,12 @@ describe(RecipeSearchComponent.name, () => {
       ],
     });
 
-    return { component: TestBed.inject(RecipeSearchComponent), mockRepo };
+    return {
+      mockRepo,
+      render() {
+        const component = TestBed.inject(RecipeSearchComponent);
+        return { component };
+      },
+    };
   }
 });
-
-async function firstValueFrom<T>(source: Observable<T>): Promise<T> {
-  return source.pipe(first()).toPromise();
-}

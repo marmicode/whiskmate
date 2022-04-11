@@ -31,7 +31,7 @@ export class RecipeSearchComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy() {
-    this._destroyed$.next();
+    this._destroyed$.next(undefined);
     this._destroyed$.complete();
   }
 }

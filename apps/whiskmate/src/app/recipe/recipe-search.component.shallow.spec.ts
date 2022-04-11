@@ -1,6 +1,6 @@
 import { RecipeFilter } from './recipe-filter';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { Recipe } from './recipe';
@@ -22,7 +22,7 @@ describe(RecipeSearchComponent.name, () => {
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
-    await render();
+    render();
 
     expect(getDisplayedRecipes()).toEqual([papperdelle, puyLentil]);
 
@@ -63,24 +63,23 @@ describe(RecipeSearchComponent.name, () => {
       Pick<RecipeRepository, 'search'>
     >;
 
+    await TestBed.configureTestingModule({
+      declarations: [RecipeSearchComponent],
+      providers: [
+        {
+          provide: RecipeRepository,
+          useValue: mockRepo,
+        },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
     let fixture: ComponentFixture<RecipeSearchComponent>;
 
     return {
       mockRepo,
-      async render() {
-        await TestBed.configureTestingModule({
-          declarations: [RecipeSearchComponent],
-          providers: [
-            {
-              provide: RecipeRepository,
-              useValue: mockRepo,
-            },
-          ],
-          schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        }).compileComponents();
-
+      render() {
         fixture = TestBed.createComponent(RecipeSearchComponent);
-
         fixture.detectChanges();
       },
       getDisplayedRecipes() {

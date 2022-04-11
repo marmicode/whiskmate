@@ -12,7 +12,6 @@ describe(RecipeSearchComponent.name, () => {
     return {
       render() {
         const component = TestBed.inject(RecipeSearchComponent);
-        component.ngOnInit();
         return { component };
       },
     };

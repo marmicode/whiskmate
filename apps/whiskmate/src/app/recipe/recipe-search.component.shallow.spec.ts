@@ -34,12 +34,8 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   it('should search recipes using given filter', async () => {
-    const {
-      mockRepo,
-      render,
-      getDisplayedRecipes,
-      updateFilter,
-    } = await createComponent();
+    const { mockRepo, render, getDisplayedRecipes, updateFilter } =
+      await createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
@@ -62,12 +58,8 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   it('should add recipe to meal planner', async () => {
-    const {
-      mockMealPlanner,
-      mockRepo,
-      getFirstAddButton,
-      render,
-    } = await createComponent();
+    const { mockMealPlanner, mockRepo, getFirstAddButton, render } =
+      await createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle]));
 
@@ -81,12 +73,8 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   it("should disable add button if can't add", async () => {
-    const {
-      mockMealPlanner,
-      mockRepo,
-      getFirstAddButton,
-      render,
-    } = await createComponent();
+    const { mockMealPlanner, mockRepo, getFirstAddButton, render } =
+      await createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle]));
     mockMealPlanner.watchCanAddRecipe.mockReturnValue(of(false));
@@ -110,6 +98,21 @@ describe(RecipeSearchComponent.name, () => {
       Pick<RecipeRepository, 'search'>
     >;
 
+    await TestBed.configureTestingModule({
+      declarations: [RecipeSearchComponent],
+      providers: [
+        {
+          provide: MealPlanner,
+          useValue: mockMealPlanner,
+        },
+        {
+          provide: RecipeRepository,
+          useValue: mockRepo,
+        },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
     let fixture: ComponentFixture<RecipeSearchComponent>;
     let harness: RecipeSearchHarness;
 
@@ -117,27 +120,12 @@ describe(RecipeSearchComponent.name, () => {
       mockMealPlanner,
       mockRepo,
       async render() {
-        await TestBed.configureTestingModule({
-          declarations: [RecipeSearchComponent],
-          providers: [
-            {
-              provide: MealPlanner,
-              useValue: mockMealPlanner,
-            },
-            {
-              provide: RecipeRepository,
-              useValue: mockRepo,
-            },
-          ],
-          schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        }).compileComponents();
-
         fixture = TestBed.createComponent(RecipeSearchComponent);
-
         harness = await TestbedHarnessEnvironment.harnessForFixture(
           fixture,
           RecipeSearchHarness
         );
+        fixture.detectChanges();
       },
       getFirstAddButton: () => harness.getFirstRecipeAddButton(),
       async getDisplayedRecipes() {

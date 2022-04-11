@@ -21,7 +21,7 @@ describe(RecipeSearchComponent.name, () => {
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
-    await render();
+    render();
 
     const recipes = getDisplayedRecipes();
 

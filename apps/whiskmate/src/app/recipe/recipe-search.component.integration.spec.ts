@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { Recipe } from './recipe';
@@ -19,17 +19,13 @@ describe(RecipeSearchComponent.name, () => {
   } as Recipe;
 
   it('should search recipes without keyword on load', async () => {
-    const { fixture, mockRepo } = await createComponent();
+    const { mockRepo, getRecipeNames, render } = await createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
-    fixture.detectChanges();
+    render();
 
-    const names = fixture.debugElement
-      .queryAll(By.css('[data-role=recipe-name]'))
-      .map((el) => el.nativeElement.textContent);
-
-    expect(names).toEqual([
+    expect(getRecipeNames()).toEqual([
       'Pappardelle with rose harissa, black olives and capers',
       'Puy lentil and aubergine stew',
     ]);
@@ -52,12 +48,19 @@ describe(RecipeSearchComponent.name, () => {
       ],
     }).compileComponents();
 
-    const fixture = TestBed.createComponent(RecipeSearchComponent);
+    let fixture: ComponentFixture<RecipeSearchComponent>;
 
     return {
-      component: fixture.componentInstance,
-      fixture,
       mockRepo,
+      render() {
+        fixture = TestBed.createComponent(RecipeSearchComponent);
+        fixture.detectChanges();
+      },
+      getRecipeNames() {
+        return fixture.debugElement
+          .queryAll(By.css('[data-role=recipe-name]'))
+          .map((el) => el.nativeElement.textContent);
+      },
     };
   }
 });

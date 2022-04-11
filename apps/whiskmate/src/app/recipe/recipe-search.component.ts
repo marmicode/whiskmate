@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { defer } from 'rxjs';
 import { CatalogModule } from './../shared/catalog.component';
 import { Recipe } from './recipe';
 import { RecipePreviewModule } from './recipe-preview.component';
@@ -17,10 +16,10 @@ import { RecipeRepository } from './recipe-repository.service';
   </wm-catalog>`,
 })
 export class RecipeSearchComponent {
-  recipes$ = defer(() => this._recipeRepository.search());
+  recipes$ = this._recipeRepository.search();
 
   constructor(private _recipeRepository: RecipeRepository) {}
-
+  
   trackById(_: number, recipe: Recipe) {
     return recipe.id;
   }

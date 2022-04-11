@@ -1,5 +1,5 @@
 import { RecipeRepository } from './recipe-repository.service';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { RecipeSearchComponent } from './recipe-search.component';
 import { Recipe } from './recipe';
 
@@ -30,12 +30,14 @@ describe(RecipeSearchComponent.name, () => {
       ],
     }).compileComponents();
 
-    const fixture = TestBed.createComponent(RecipeSearchComponent);
+    let fixture: ComponentFixture<RecipeSearchComponent>;
 
     return {
-      component: fixture.componentInstance,
-      fixture,
       mockRepo,
+      render() {
+        fixture = TestBed.createComponent(RecipeSearchComponent);
+        fixture.detectChanges();
+      },
     };
   }
 });

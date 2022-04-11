@@ -1,6 +1,6 @@
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
@@ -20,13 +20,12 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  let mockRepo: jest.Mocked<Pick<RecipeRepository, 'search'>>;
-  beforeEach(() => (mockRepo = { search: jest.fn() }));
-
   it('should search recipes without keyword on load', async () => {
+    const { mockRepo, render } = await createComponent();
+
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
-    const { harness } = await createComponent();
+    const { harness } = await render();
 
     expect(await harness.getRecipeNames()).toEqual([
       'Pappardelle with rose harissa, black olives and capers',
@@ -37,6 +36,10 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   async function createComponent() {
+    const mockRepo = { search: jest.fn() } as jest.Mocked<
+      Pick<RecipeRepository, 'search'>
+    >;
+
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, RecipeSearchModule],
       providers: [
@@ -47,15 +50,19 @@ describe(RecipeSearchComponent.name, () => {
       ],
     }).compileComponents();
 
-    const fixture = TestBed.createComponent(RecipeSearchComponent);
+    let fixture: ComponentFixture<RecipeSearchComponent>;
 
     return {
-      component: fixture.componentInstance,
-      fixture,
-      harness: await TestbedHarnessEnvironment.harnessForFixture(
-        fixture,
-        RecipeSearchHarness
-      ),
+      mockRepo,
+      async render() {
+        fixture = TestBed.createComponent(RecipeSearchComponent);
+        fixture.detectChanges();
+        const harness = await TestbedHarnessEnvironment.harnessForFixture(
+          fixture,
+          RecipeSearchHarness
+        );
+        return { harness };
+      },
     };
   }
 });

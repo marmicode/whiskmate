@@ -40,7 +40,6 @@ describe(RecipeSearchComponent.name, () => {
       mockRepo,
       render() {
         const component = TestBed.inject(RecipeSearchComponent);
-        component.ngOnInit();
         return { component };
       },
     };

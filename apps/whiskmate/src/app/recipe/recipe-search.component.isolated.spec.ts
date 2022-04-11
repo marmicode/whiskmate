@@ -9,11 +9,11 @@ describe(RecipeSearchComponent.name, () => {
   const puyLentil = { id: 'puy-lentil-and-aubergine-stew' } as Recipe;
 
   it('should search recipes without keyword on load', () => {
-    const { component, mockRepo } = createComponent();
+    const { mockRepo, render } = createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
-    component.ngOnInit();
+    const { component } = render();
 
     expect(component.recipes).toEqual([papperdelle, puyLentil]);
 
@@ -36,6 +36,13 @@ describe(RecipeSearchComponent.name, () => {
       ],
     });
 
-    return { component: TestBed.inject(RecipeSearchComponent), mockRepo };
+    return {
+      mockRepo,
+      render() {
+        const component = TestBed.inject(RecipeSearchComponent);
+        component.ngOnInit();
+        return { component };
+      },
+    };
   }
 });

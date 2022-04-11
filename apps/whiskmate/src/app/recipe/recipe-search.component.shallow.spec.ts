@@ -1,11 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-<<<<<<< HEAD
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
-=======
-import { ComponentFixture, TestBed } from '@angular/core/testing';
->>>>>>> testing-08-recipe-search-shallow-boilerplate
 import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
@@ -63,7 +59,7 @@ describe(RecipeSearchComponent.name, () => {
         return fixture.debugElement
           .queryAll(By.css('wm-recipe-preview'))
           .map((previewEl) => previewEl.properties.recipe);
-      }
+      },
     };
   }
 });

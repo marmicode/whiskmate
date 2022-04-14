@@ -10184,6 +10184,13 @@ jest-environment-node@^27.2.2, jest-environment-node@^27.5.1:
     jest-mock "^27.5.1"
     jest-util "^27.5.1"
 
+jest-file-loader@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/jest-file-loader/-/jest-file-loader-1.0.2.tgz#e2be618b89b5e7e46342c73d310a205afc8cbabb"
+  integrity sha512-RjFHxMavsVJw58cBPzm/OiJMk5Fgomxy6C7Neul937hFif1oIjE8jpGq2Q2WTEUK6mEe9DZo9UQ12ty8tMR98w==
+  dependencies:
+    slash "^3.0.0"
+
 jest-get-type@^27.0.6, jest-get-type@^27.5.1:
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-27.5.1.tgz#3cd613c507b0f7ace013df407a1c1cd578bcb4f1"

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { createRecipe, Recipe } from './recipe';
@@ -64,8 +63,7 @@ export class RecipeRepository {
         { quantity: { amount: 2, unit: 'tbsp' }, name: 'olive oil' },
         {
           quantity: { amount: 2, unit: 'unit' },
-          name:
-            'large leeks (or 4 smaller), trimmed and cut into ½ cm slices (530g)',
+          name: 'large leeks (or 4 smaller), trimmed and cut into ½ cm slices (530g)',
         },
         {
           quantity: { amount: 1, unit: 'tsp' },
@@ -73,8 +71,7 @@ export class RecipeRepository {
         },
         {
           quantity: { amount: 2, unit: 'unit' },
-          name:
-            'small preserved lemons, pips discarded, skin and flesh finely chopped (30g)',
+          name: 'small preserved lemons, pips discarded, skin and flesh finely chopped (30g)',
         },
         {
           quantity: { amount: 300, unit: 'ml' },
@@ -104,8 +101,7 @@ export class RecipeRepository {
         { name: 'For the hotcakes' },
         {
           quantity: { amount: 150, unit: 'g' },
-          name:
-            'raw buckwheat groats, soaked in plenty of cold water for 3-4 hours (any less, and they won&rsquo;t soften enough, longer and they will disintegrate)',
+          name: 'raw buckwheat groats, soaked in plenty of cold water for 3-4 hours (any less, and they won&rsquo;t soften enough, longer and they will disintegrate)',
         },
         { quantity: { amount: 150, unit: 'ml' }, name: 'whole milk' },
         {
@@ -121,8 +117,7 @@ export class RecipeRepository {
         { name: 'Salt and black pepper' },
         {
           quantity: { amount: 140, unit: 'g' },
-          name:
-            'ricotta (or just 60g if serving with fried eggs: see introduction)',
+          name: 'ricotta (or just 60g if serving with fried eggs: see introduction)',
         },
         {
           quantity: { amount: 40, unit: 'g' },
@@ -135,8 +130,7 @@ export class RecipeRepository {
         { name: 'Finely shaved peel of 1 lime' },
         {
           quantity: { amount: 1, unit: 'unit' },
-          name:
-            'garlic clove, roughly bashed with the flat of a knife but left unpeeled',
+          name: 'garlic clove, roughly bashed with the flat of a knife but left unpeeled',
         },
         { name: '½ red onion, peeled and cut into 2- to 3mm-thick slices' },
         {
@@ -145,8 +139,7 @@ export class RecipeRepository {
         },
         {
           quantity: { amount: 1, unit: 'unit' },
-          name:
-            '-2 small preserved lemons, flesh cut off and discarded, skin chopped into 0.5cm dice',
+          name: '-2 small preserved lemons, flesh cut off and discarded, skin chopped into 0.5cm dice',
         },
         {
           quantity: { amount: 10, unit: 'g' },
@@ -231,8 +224,7 @@ export class RecipeRepository {
         { quantity: { amount: 2, unit: 'tsp' }, name: 'sweet smoked paprika' },
         {
           quantity: { amount: 850, unit: 'g' },
-          name:
-            'chicken thighs, skinless and boneless (about 9&ndash;10 thighs)',
+          name: 'chicken thighs, skinless and boneless (about 9&ndash;10 thighs)',
         },
         { quantity: { amount: 200, unit: 'ml' }, name: 'passata' },
         {
@@ -241,8 +233,7 @@ export class RecipeRepository {
         },
         {
           quantity: { amount: 200, unit: 'g' },
-          name:
-            'jarred roasted red peppers, drained and cut into 2cm thick rounds',
+          name: 'jarred roasted red peppers, drained and cut into 2cm thick rounds',
         },
         {
           quantity: { amount: 15, unit: 'g' },
@@ -260,8 +251,7 @@ export class RecipeRepository {
         },
         {
           quantity: { amount: 500, unit: 'g' },
-          name:
-            'corn kernels, fresh or frozen and defrosted (shaved corn kernels from 4 large corn cobs, if starting from fresh)',
+          name: 'corn kernels, fresh or frozen and defrosted (shaved corn kernels from 4 large corn cobs, if starting from fresh)',
         },
         { quantity: { amount: 3, unit: 'tbsp' }, name: 'whole milk' },
         {
@@ -414,8 +404,7 @@ export class RecipeRepository {
         { quantity: { amount: 1, unit: 'tsp' }, name: 'caster sugar' },
         {
           quantity: { amount: 4, unit: 'unit' },
-          name:
-            'sprigs of fresh thyme, 4 of oregano and 2 of parsley, tied with string, plus extra parsley to serve',
+          name: 'sprigs of fresh thyme, 4 of oregano and 2 of parsley, tied with string, plus extra parsley to serve',
         },
         { quantity: { amount: 450, unit: 'ml' }, name: 'chicken stock' },
         { name: 'For the paste:' },
@@ -573,6 +562,7 @@ export class RecipeRepository {
   }
 
   private _getPictureUri(pictureName: string): string {
-    return require(`!!file-loader!./pics/${pictureName}`).default;
+    const module = require(`!!file-loader!./pics/${pictureName}`);
+    return module.default ?? module;
   }
 }

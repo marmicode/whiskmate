@@ -89,5 +89,5 @@ describe(scrapRecipeByUrl.name, () => {
       ],
     });
   }, /* Test is too slow probably due to puppeteer bootstrap. */
-  10000);
+  15000);
 });

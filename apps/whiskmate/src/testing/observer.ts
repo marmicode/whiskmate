@@ -16,6 +16,11 @@ export function createObserver() {
       subscription.add(observable.subscribe(observer));
       return {
         ...observer,
+        mockClear() {
+          observer.next.mockClear();
+          observer.error.mockClear();
+          observer.complete.mockClear();
+        },
         mockReset() {
           observer.next.mockReset();
           observer.error.mockReset();

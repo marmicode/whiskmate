@@ -40,3 +40,11 @@ testem.log
 Thumbs.db
 
 /.env
+
+/.yarn-cache
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

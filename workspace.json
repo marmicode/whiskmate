@@ -4,5 +4,6 @@
     "ottolenghi-scraper": "libs/ottolenghi-scraper",
     "whiskmate": "apps/whiskmate",
     "whiskmate-e2e": "apps/whiskmate-e2e"
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

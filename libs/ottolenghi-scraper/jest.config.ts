@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'ottolenghi-scraper',
   preset: '../../jest.preset.js',
   globals: {

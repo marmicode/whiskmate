@@ -1,6 +1,6 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "root": "apps/whiskmate",
   "sourceRoot": "apps/whiskmate/src",
   "prefix": "wm",
   "targets": {
@@ -84,7 +84,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/whiskmate"],
       "options": {
-        "jestConfig": "apps/whiskmate/jest.config.js",
+        "jestConfig": "apps/whiskmate/jest.config.ts",
         "passWithNoTests": true
       }
     }

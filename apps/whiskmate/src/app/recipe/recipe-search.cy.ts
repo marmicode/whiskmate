@@ -1,18 +1,18 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { mount } from '@jscutlery/cypress-angular/mount';
 import { getHarness } from '@jscutlery/cypress-harness';
-import { styles, stylesheets } from './../../styles';
-import { RecipeSearchComponent } from './recipe-search.component';
+import { mount } from 'cypress/angular';
+import {
+  RecipeSearchComponent,
+  RecipeSearchModule,
+} from './recipe-search.component';
 import { RecipeSearchHarness } from './recipe-search.harness';
 
 describe(RecipeSearchComponent.name, () => {
   const harness = getHarness(RecipeSearchHarness);
 
   beforeEach(() =>
-    mount(RecipeSearchComponent, {
-      imports: [BrowserAnimationsModule],
-      stylesheets,
-      styles,
+    mount('<wm-recipe-search></wm-recipe-search>', {
+      imports: [BrowserAnimationsModule, RecipeSearchModule],
     })
   );
 

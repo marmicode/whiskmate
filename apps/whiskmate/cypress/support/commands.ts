@@ -3,6 +3,8 @@
 import 'cypress-pipe';
 import 'zone.js/testing';
 
+import '@percy/cypress';
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {

@@ -29,7 +29,7 @@ for CURRENT in $*; do
   if [ "$SKIP_TESTS" != "true" ]
   then
     yarn
-    yarn jest
+    yarn nx run-many --target test
 
     # Run component tests if `cy.ts` files exist.
     if [ $(find apps libs -name '*.cy.ts' | wc -l) -gt 0 ]

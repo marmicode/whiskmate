@@ -87,6 +87,15 @@
         "jestConfig": "apps/whiskmate/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "component-test": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/whiskmate/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "whiskmate:build"
+      }
     }
   },
   "tags": []

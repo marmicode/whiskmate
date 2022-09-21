@@ -88,12 +88,13 @@
         "passWithNoTests": true
       }
     },
-    "ct": {
+    "component-test": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/whiskmate/cypress.json",
-        "tsConfig": "apps/whiskmate/tsconfig.cypress.json",
-        "testingType": "component"
+        "cypressConfig": "apps/whiskmate/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "whiskmate:build"
       }
     }
   },

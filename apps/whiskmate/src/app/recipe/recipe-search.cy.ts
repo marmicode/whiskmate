@@ -2,10 +2,12 @@ import { of } from 'rxjs';
 import { RecipeFilter } from './recipe-filter';
 import { RecipeRepository } from './recipe-repository.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { mount } from '@jscutlery/cypress-angular/mount';
 import { getHarness } from '@jscutlery/cypress-harness';
-import { styles, stylesheets } from './../../styles';
-import { RecipeSearchComponent } from './recipe-search.component';
+import { mount } from 'cypress/angular';
+import {
+  RecipeSearchComponent,
+  RecipeSearchModule,
+} from './recipe-search.component';
 import { RecipeSearchHarness } from './recipe-search.harness';
 
 class FakeRecipeRepository {
@@ -35,16 +37,14 @@ describe(RecipeSearchComponent.name, () => {
   const harness = getHarness(RecipeSearchHarness);
 
   beforeEach(() =>
-    mount(RecipeSearchComponent, {
-      imports: [BrowserAnimationsModule],
+    mount('<wm-recipe-search></wm-recipe-search>', {
+      imports: [BrowserAnimationsModule, RecipeSearchModule],
       providers: [
         {
           provide: RecipeRepository,
           useClass: FakeRecipeRepository,
         },
       ],
-      stylesheets,
-      styles,
     })
   );
 

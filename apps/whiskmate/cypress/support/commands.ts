@@ -1,4 +1,4 @@
-/* @todo replace with @jscutlery/cypress-harness/support 
+/* @todo replace with @jscutlery/cypress-harness/support
  * when issue https://github.com/jscutlery/devkit/issues/216 is fixed. */
 import 'cypress-pipe';
 import 'zone.js/testing';

@@ -2,6 +2,7 @@
  * when issue https://github.com/jscutlery/devkit/issues/216 is fixed. */
 import 'cypress-pipe';
 import 'zone.js/testing';
+import { mount } from 'cypress/angular';
 
 import '@percy/cypress';
 
@@ -11,6 +12,7 @@ declare global {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       getByDataRole(role: string): Chainable<JQuery<HTMLElement>>;
+      mount: typeof mount;
     }
   }
 }
@@ -18,3 +20,5 @@ declare global {
 Cypress.Commands.add('getByDataRole', (role) => {
   return cy.get(`[data-role="${role}"]`);
 });
+
+Cypress.Commands.add('mount', mount);

@@ -25,7 +25,18 @@ for CURRENT in $*; do
 
   git checkout $CURRENT
   git merge --no-edit $PARENT_BRANCH
-  [ "$SKIP_TESTS" = "true" ] || (yarn && yarn jest)
+
+  if [ "$SKIP_TESTS" != "true" ]
+  then
+    yarn
+    yarn jest
+
+    # Run component tests if `cy.ts` files exist.
+    if [ $(find apps libs -name '*.cy.ts' | wc -l) -gt 0 ]
+    then
+      yarn nx run-many --target component-test 
+    fi
+  fi
 
   PARENT_BRANCH="$CURRENT"
 

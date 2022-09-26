@@ -14,6 +14,9 @@
     },
     {
       "path": "./cypress/tsconfig.cy.json"
+    },
+    {
+      "path": "./.storybook/tsconfig.json"
     }
   ],
   "compilerOptions": {

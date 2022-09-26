@@ -20,7 +20,7 @@ export default {
   ],
   transform: {
     '^.+\\.(ts|js|mjs|html)$': 'jest-preset-angular',
-    '^.+\\.jpg$': 'jest-file-loader',
+    '^.+\\.(css)$': 'jest-preview/transforms/file',
   },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
 };

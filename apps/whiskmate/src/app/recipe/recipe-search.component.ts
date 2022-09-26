@@ -22,16 +22,19 @@ import { RecipeRepository } from './recipe-repository.service';
         *ngFor="let item of items$ | async; trackBy: trackById"
         [recipe]="item.recipe"
       >
-        <button
-          [disabled]="(item.canAdd$ | async) === false"
-          (click)="addRecipe(item.recipe)"
-          class="add-recipe-button"
-          color="primary"
-          data-role="add-recipe"
-          mat-stroked-button
-        >
-          ADD
-        </button>
+        <div class="container">
+          <button
+            [class.dn]="true"
+            [disabled]="(item.canAdd$ | async) === false"
+            (click)="addRecipe(item.recipe)"
+            class="add-recipe-button"
+            color="primary"
+            data-role="add-recipe"
+          >
+            ADD
+          </button>
+          <!-- <div class="large">SOMETHING</div> -->
+        </div>
       </wm-recipe-preview>
     </wm-catalog>`,
   styles: [
@@ -39,6 +42,25 @@ import { RecipeRepository } from './recipe-repository.service';
       .add-recipe-button {
         display: block;
         margin: auto;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .container > button {
+        flex: 1;
+        flex-basis: 0;
+        overflow: hidden;
+        border: 0;
+        padding: 0;
+      }
+
+      .large {
+        flex-basis: 500px;
       }
     `,
   ],

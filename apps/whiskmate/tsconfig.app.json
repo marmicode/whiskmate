@@ -4,13 +4,8 @@
     "outDir": "../../dist/out-tsc",
     "types": []
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ],
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.d.ts"],
   "exclude": [
     "jest.config.ts",
     "cypress/**/*",
@@ -18,6 +13,8 @@
     "**/*.cy.ts",
     "**/*.cy.js",
     "**/*.cy.tsx",
-    "**/*.cy.jsx"
+    "**/*.cy.jsx",
+    "**/*.stories.ts",
+    "**/*.stories.js"
   ]
 }

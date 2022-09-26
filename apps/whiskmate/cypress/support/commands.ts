@@ -22,3 +22,16 @@ Cypress.Commands.add('getByDataRole', (role) => {
 });
 
 Cypress.Commands.add('mount', mount);
+
+// Cypress.Commands.overwrite<'click', 'element'>(
+//   'click',
+//   (click, el, x, y, options) => {
+//     expect(el.height(), 'Element is not tall enough to be clicked').to.be.gt(
+//       50
+//     );
+//     expect(el.width(), 'Element is not large enough to be clicked').to.be.gt(
+//       100
+//     );
+//     click(el, x, y, options);
+//   }
+// );

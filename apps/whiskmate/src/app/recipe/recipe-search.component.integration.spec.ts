@@ -1,6 +1,10 @@
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { screen } from '@testing-library/angular';
+import '@testing-library/jest-dom';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { of } from 'rxjs';
 import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
@@ -20,12 +24,23 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
+  beforeEach(() => {
+    const styleEl = document.createElement('style');
+    styleEl.textContent = readFileSync(
+      join(__dirname, '../../styles.css'),
+      'utf-8'
+    );
+    document.head.appendChild(styleEl);
+  });
+
   it('should search recipes without keyword on load', async () => {
     const { mockRepo, render } = await createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
     const { harness } = await render();
+
+    expect(screen.getAllByText('ADD')[0]).toBeVisible();
 
     expect(await harness.getRecipeNames()).toEqual([
       'Pappardelle with rose harissa, black olives and capers',
@@ -57,6 +72,8 @@ describe(RecipeSearchComponent.name, () => {
       async render() {
         fixture = TestBed.createComponent(RecipeSearchComponent);
         fixture.detectChanges();
+        console.log(document.head.innerHTML);
+
         const harness = await TestbedHarnessEnvironment.harnessForFixture(
           fixture,
           RecipeSearchHarness

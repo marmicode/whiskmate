@@ -8,6 +8,7 @@ import {
   RecipeSearchModule,
 } from './recipe-search.component';
 import { RecipeSearchHarness } from './recipe-search.harness';
+import { Recipe } from './recipe';
 
 class FakeRecipeRepository {
   _recipes = [
@@ -67,9 +68,9 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   it('should disabled recipe once added', () => {
-    harness.getFirstRecipeAddButton().isDisabled().should('equal', false);
-    harness.getFirstRecipeAddButton().then((harness) => harness.click());
-    harness.getFirstRecipeAddButton().isDisabled().should('equal', true);
+    cy.contains('ADD').should('not.be.disabled');
+    cy.contains('ADD').click();
+    cy.contains('ADD').should('be.disabled');
     cy.percySnapshot();
   });
 });

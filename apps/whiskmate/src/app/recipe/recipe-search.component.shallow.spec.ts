@@ -9,6 +9,10 @@ import { RecipeFilter } from './recipe-filter';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
 import { RecipeSearchHarness } from './recipe-search.harness';
+import { render, screen, fireEvent, prettyDOM } from '@testing-library/angular';
+import '@testing-library/jest-dom';
+
+import preview from 'jest-preview';
 
 describe(RecipeSearchComponent.name, () => {
   const papperdelle = {
@@ -64,6 +68,7 @@ describe(RecipeSearchComponent.name, () => {
     mockRepo.search.mockReturnValue(of([papperdelle]));
 
     await render();
+    expect(await screen.findByText('ADD')).toBeVisible();
 
     const button = await getFirstAddButton();
     await button.click();

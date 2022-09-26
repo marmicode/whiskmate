@@ -8,7 +8,7 @@ yarn
 
 # 🎯 Goal: Test `<wm-recipe-search>` using Cypress Component Testing & Harnesses
 
-Thanks to [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) _(Cypress >= 7)_ and [@jscutlery/cypress-angular](https://github.com/jscutlery/test-utils/tree/main/packages/cypress-angular), we can isolate a component or a block and test it in Cypress.
+Thanks to [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction), we can isolate a component or a block and test it in Cypress.
 
 The fun part is that we can reuse our harnesses using [@jscutlery/cypress-harness](https://github.com/jscutlery/test-utils/tree/main/packages/cypress-harness).
 
@@ -19,25 +19,22 @@ Let's test `<wm-recipe-search>` in Cypress.
 0. [✅ Already done]
 
 > ```sh
-> ng add @jscutlery/cypress-angular # Also installs cypress.
->
-> # Setup component testing for the apps or libs of your choice.
-> ng g @jscutlery/cypress-angular:setup-ct whiskmate
+> nx g @nrwl/angular:cypress-component-configuration whiskmate
 >
 > # Setup @jscutlery/cypress-harness
 > yarn add -D  @jscutlery/cypress-harness cypress-pipe
-> echo "import '@jscutlery/cypress-harness/support';" >> apps/whiskmate/cypress/support/index.ts
+> echo "import 'cypress-pipe';" >> apps/whiskmate/cypress/support/index.ts
 > ```
 
 1. Run Cypress in component testing mode:
 
 ```sh
-yarn nx ct whiskmate --watch
+yarn nx component-test whiskmate --watch
 ```
 
-2. Open `recipe-search.cy-spec.ts`.
+1. Open `recipe-search.cy.ts`.
 
-3. Have fun with the `RecipeSearchHarness` and implement the 3 tests.
+2. Have fun with the `RecipeSearchHarness` and implement the 3 tests.
 
 # Appendices
 

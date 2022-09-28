@@ -1,0 +1,49 @@
+{
+  "Arrow Function": {
+    "prefix": "arf",
+    "body": ["() => {}"]
+  },
+  "Deprecate work in progress": {
+    "prefix": "depwip",
+    "body": ["/**", "* @deprecated 🚧 Work in progress.", "*/"]
+  },
+  "Throw not implemented": {
+    "prefix": "thrownie",
+    "body": ["throw new Error('🚧 Not implemented error!');"]
+  },
+  "Throw work in progress": {
+    "prefix": "throwwip",
+    "body": ["throw new Error('🚧 Work in progress!');"]
+  },
+  "Tap console.log": {
+    "prefix": "tcl",
+    "body": "tap(console.log)"
+  },
+  "Angular Service": {
+    "prefix": "ngs",
+    "body": [
+      "import { Injectable } from '@angular/core';",
+      "",
+      "@Injectable({",
+      "  providedIn: 'root',",
+      "})",
+      "export class $1 {}"
+    ]
+  },
+  "SFC": {
+    "prefix": "sfc",
+    "body": [
+      "import { CommonModule } from '@angular/common';",
+      "import { ChangeDetectionStrategy, Component } from '@angular/core';",
+      "",
+      "@Component({",
+      "  standalone: true,",
+      "  changeDetection: ChangeDetectionStrategy.OnPush,",
+      "  selector: '$2',",
+      "  imports: [CommonModule],",
+      "  template: `🚧 &lt;$2&gt;`",
+      "})",
+      "export class $1Component {}"
+    ]
+  }
+}

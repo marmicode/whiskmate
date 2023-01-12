@@ -1,10 +1,4 @@
-import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  NgModule,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,27 +6,31 @@ import { createRecipeFilter, RecipeFilter } from './recipe-filter';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   selector: 'wm-recipe-filter',
-  template: `<form [formGroup]="filterFormGroup">
-    <input
-      data-role="keywords-input"
-      formControlName="keywords"
-      placeholder="keywords"
-      type="text"
-    />
-    <input
-      data-role="max-ingredient-count-input"
-      formControlName="maxIngredientCount"
-      placeholder="max ingredients"
-      type="number"
-    />
-    <input
-      data-role="max-step-count-input"
-      formControlName="maxStepCount"
-      placeholder="max steps"
-      type="number"
-    />
-  </form>`,
+  imports: [ReactiveFormsModule],
+  template: `
+    <form [formGroup]="filterFormGroup">
+      <input
+        data-role="keywords-input"
+        formControlName="keywords"
+        placeholder="keywords"
+        type="text"
+      />
+      <input
+        data-role="max-ingredient-count-input"
+        formControlName="maxIngredientCount"
+        placeholder="max ingredients"
+        type="number"
+      />
+      <input
+        data-role="max-step-count-input"
+        formControlName="maxStepCount"
+        placeholder="max steps"
+        type="number"
+      />
+    </form>
+  `,
   styles: [
     `
       :host {
@@ -56,10 +54,3 @@ export class RecipeFilterComponent {
     );
   }
 }
-
-@NgModule({
-  declarations: [RecipeFilterComponent],
-  exports: [RecipeFilterComponent],
-  imports: [CommonModule, ReactiveFormsModule],
-})
-export class RecipeFilterModule {}

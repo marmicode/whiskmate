@@ -8,7 +8,7 @@ import { RecipeSearchModule } from './recipe/recipe-search.component';
   selector: 'wm-app',
   imports: [TitleComponent, RecipeSearchModule],
   template: `
-    <wm-title>Welcome to Whiskmate</wm-title>
+    <wm-title>👨🏻‍🍳 Welcome to Whiskmate 🥘</wm-title>
     <wm-recipe-search></wm-recipe-search>
   `,
 })

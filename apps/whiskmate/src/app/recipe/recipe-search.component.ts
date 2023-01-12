@@ -4,6 +4,7 @@ import { NgForOf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -28,9 +29,8 @@ import { RecipeRepository } from './recipe-repository.service';
 export class RecipeSearchComponent implements OnDestroy, OnInit {
   recipes?: Recipe[];
 
+  private _recipeRepository = inject(RecipeRepository);
   private _subscription?: Subscription;
-
-  constructor(private _recipeRepository: RecipeRepository) {}
 
   ngOnInit() {
     this._subscription = this._recipeRepository

@@ -14,22 +14,23 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  it.todo('🚧 should search recipes without keyword on load');
+  it.todo('🚧 should search recipes without filtering');
 
-  async function createComponent() {
+  function createComponent() {
     const mockRepo = { search: jest.fn() } as jest.Mocked<
       Pick<RecipeRepository, 'search'>
     >;
 
-    await TestBed.configureTestingModule({
-      // @todo
+    TestBed.configureTestingModule({
       providers: [
         {
           provide: RecipeRepository,
           useValue: mockRepo,
         },
       ],
-    }).compileComponents();
+    });
+
+    // @todo
 
     let fixture: ComponentFixture<RecipeSearchComponent>;
 

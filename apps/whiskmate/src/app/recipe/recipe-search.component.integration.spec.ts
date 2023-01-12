@@ -1,5 +1,5 @@
 import { RecipeRepository } from './recipe-repository.service';
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RecipeSearchComponent } from './recipe-search.component';
 import { Recipe } from './recipe';
 
@@ -13,22 +13,21 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  it.todo('🚧 should search recipes without keyword on load');
+  it.todo('🚧 should search recipes without filtering');
 
-  async function createComponent() {
+  function createComponent() {
     const mockRepo = { search: jest.fn() } as jest.Mocked<
       Pick<RecipeRepository, 'search'>
     >;
 
-    await TestBed.configureTestingModule({
-      // @todo
+    TestBed.configureTestingModule({
       providers: [
         {
           provide: RecipeRepository,
           useValue: mockRepo,
         },
       ],
-    }).compileComponents();
+    });
 
     let fixture: ComponentFixture<RecipeSearchComponent>;
 

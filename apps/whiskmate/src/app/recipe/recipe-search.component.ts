@@ -1,18 +1,27 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { AsyncPipe, NgForOf } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { CatalogModule } from './../shared/catalog.component';
+import { CatalogComponent } from './../shared/catalog.component';
 import { Recipe } from './recipe';
 import { RecipeFilter } from './recipe-filter';
-import { RecipeFilterModule } from './recipe-filter.component';
-import { RecipePreviewModule } from './recipe-preview.component';
+import { RecipeFilterComponent } from './recipe-filter.component';
+import { RecipePreviewComponent } from './recipe-preview.component';
 import { RecipeRepository } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   selector: 'wm-recipe-search',
-  template: ` <wm-recipe-filter
+  imports: [
+    AsyncPipe,
+    CatalogComponent,
+    NgForOf,
+    RecipeFilterComponent,
+    RecipePreviewComponent,
+  ],
+  template: `
+    <wm-recipe-filter
       (filterChange)="onFilterChange($event)"
     ></wm-recipe-filter>
     <wm-catalog>
@@ -20,7 +29,8 @@ import { RecipeRepository } from './recipe-repository.service';
         *ngFor="let recipe of recipes$ | async; trackBy: trackById"
         [recipe]="recipe"
       ></wm-recipe-preview>
-    </wm-catalog>`,
+    </wm-catalog>
+  `,
 })
 export class RecipeSearchComponent {
   filter$ = new BehaviorSubject<RecipeFilter>({});
@@ -38,15 +48,3 @@ export class RecipeSearchComponent {
     return recipe.id;
   }
 }
-
-@NgModule({
-  declarations: [RecipeSearchComponent],
-  exports: [RecipeSearchComponent],
-  imports: [
-    CatalogModule,
-    CommonModule,
-    RecipeFilterModule,
-    RecipePreviewModule,
-  ],
-})
-export class RecipeSearchModule {}

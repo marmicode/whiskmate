@@ -1,4 +1,5 @@
 {
+  "name": "ottolenghi-scraper",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ottolenghi-scraper/src",
   "projectType": "library",
@@ -12,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/ottolenghi-scraper"],
+      "outputs": ["{workspaceRoot}/coverage/libs/ottolenghi-scraper"],
       "options": {
         "jestConfig": "libs/ottolenghi-scraper/jest.config.ts",
         "passWithNoTests": true

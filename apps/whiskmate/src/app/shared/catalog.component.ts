@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   selector: 'wm-catalog',
   template: `<ng-content></ng-content>`,
   styles: [
@@ -19,10 +19,3 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
   ],
 })
 export class CatalogComponent {}
-
-@NgModule({
-  declarations: [CatalogComponent],
-  exports: [CatalogComponent],
-  imports: [CommonModule],
-})
-export class CatalogModule {}

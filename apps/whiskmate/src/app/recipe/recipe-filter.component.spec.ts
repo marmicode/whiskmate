@@ -2,16 +2,13 @@ import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { createObserver } from '../../testing/observer';
 import { RecipeFilter } from './recipe-filter';
-import {
-  RecipeFilterComponent,
-  RecipeFilterModule,
-} from './recipe-filter.component';
+import { RecipeFilterComponent } from './recipe-filter.component';
 
 describe(RecipeFilterComponent.name, () => {
   const { observe } = createObserver();
 
-  it('should trigger filterChange output', async () => {
-    const { component, fixture, setInputValue } = await createComponent();
+  it('should trigger filterChange output', () => {
+    const { component, fixture, setInputValue } = createComponent();
 
     fixture.detectChanges();
 
@@ -28,11 +25,7 @@ describe(RecipeFilterComponent.name, () => {
     } as RecipeFilter);
   });
 
-  async function createComponent() {
-    await TestBed.configureTestingModule({
-      imports: [RecipeFilterModule],
-    }).compileComponents();
-
+  function createComponent() {
     const fixture = TestBed.createComponent(RecipeFilterComponent);
 
     return {

@@ -1,55 +1,48 @@
-import { RecipePreviewModule } from './recipe-preview.component';
-import { CatalogModule } from './../shared/catalog.component';
-import { CommonModule } from '@angular/common';
+import { RecipePreviewComponent } from './recipe-preview.component';
+import { CatalogComponent } from './../shared/catalog.component';
+import { NgForOf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  NgModule,
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   selector: 'wm-recipe-search',
-  template: `<wm-catalog>
-    <wm-recipe-preview
-      *ngFor="let recipe of recipes; trackBy: trackById"
-      [recipe]="recipe"
-    ></wm-recipe-preview>
-  </wm-catalog>`,
+  imports: [CatalogComponent, NgForOf, RecipePreviewComponent],
+  template: `
+    <wm-catalog>
+      <wm-recipe-preview
+        *ngFor="let recipe of recipes; trackBy: trackById"
+        [recipe]="recipe"
+      ></wm-recipe-preview>
+    </wm-catalog>
+  `,
 })
 export class RecipeSearchComponent implements OnDestroy, OnInit {
   recipes?: Recipe[];
 
-  private _destroyed$ = new ReplaySubject(1);
+  private _subscription?: Subscription;
 
   constructor(private _recipeRepository: RecipeRepository) {}
 
   ngOnInit() {
-    this._recipeRepository
+    this._subscription = this._recipeRepository
       .search()
-      .pipe(takeUntil(this._destroyed$))
       .subscribe((recipes) => (this.recipes = recipes));
   }
 
   ngOnDestroy() {
-    this._destroyed$.next(undefined);
-    this._destroyed$.complete();
+    this._subscription?.unsubscribe();
   }
 
   trackById(_: number, recipe: Recipe) {
     return recipe.id;
   }
 }
-
-@NgModule({
-  declarations: [RecipeSearchComponent],
-  exports: [RecipeSearchComponent],
-  imports: [CatalogModule, CommonModule, RecipePreviewModule],
-})
-export class RecipeSearchModule {}

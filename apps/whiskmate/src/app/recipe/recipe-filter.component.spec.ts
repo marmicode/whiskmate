@@ -1,18 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import {
-  RecipeFilterComponent,
-  RecipeFilterModule,
-} from './recipe-filter.component';
+import { RecipeFilterComponent } from './recipe-filter.component';
 
 describe(RecipeFilterComponent.name, () => {
   it.todo('🚧 should trigger filterChange output');
 
-  async function createComponent() {
-    await TestBed.configureTestingModule({
-      imports: [RecipeFilterModule],
-    }).compileComponents();
-
+  function createComponent() {
     const fixture = TestBed.createComponent(RecipeFilterComponent);
 
     return {

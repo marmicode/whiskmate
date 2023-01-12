@@ -13,6 +13,7 @@ import { RecipeRepository } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   selector: 'wm-recipe-search',
   template: `🚧 &lt;wm-recipe-search&gt;`,
 })
@@ -35,10 +36,3 @@ export class RecipeSearchComponent implements OnDestroy, OnInit {
     this._destroyed$.complete();
   }
 }
-
-@NgModule({
-  declarations: [RecipeSearchComponent],
-  exports: [RecipeSearchComponent],
-  imports: [CommonModule],
-})
-export class RecipeSearchModule {}

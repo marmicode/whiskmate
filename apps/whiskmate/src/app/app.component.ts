@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TitleComponent } from './title.component';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   selector: 'wm-app',
-  template: `<h1>Welcome to Whismate</h1>`,
+  imports: [TitleComponent],
+  template: ` <wm-title>👨🏻‍🍳 Welcome to Whiskmate 🥘</wm-title> `,
 })
 export class AppComponent {}

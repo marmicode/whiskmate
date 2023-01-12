@@ -5,6 +5,8 @@ import { of } from 'rxjs';
 import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
+import { CommonModule } from '@angular/common';
+import { RecipePreviewComponent } from './recipe-preview.component';
 
 describe(RecipeSearchComponent.name, () => {
   const papperdelle = {
@@ -16,8 +18,8 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  it('should search recipes without keyword on load', async () => {
-    const { mockRepo, render, getDisplayedRecipes } = await createComponent();
+  it('should search recipes without filtering', () => {
+    const { mockRepo, render, getDisplayedRecipes } = createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
@@ -31,21 +33,26 @@ describe(RecipeSearchComponent.name, () => {
     expect(mockRepo.search).toBeCalledWith();
   });
 
-  async function createComponent() {
+  function createComponent() {
     const mockRepo = { search: jest.fn() } as jest.Mocked<
       Pick<RecipeRepository, 'search'>
     >;
 
-    await TestBed.configureTestingModule({
-      declarations: [RecipeSearchComponent],
+    TestBed.configureTestingModule({
       providers: [
         {
           provide: RecipeRepository,
           useValue: mockRepo,
         },
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+    });
+
+    TestBed.overrideComponent(RecipeSearchComponent, {
+      set: {
+        imports: [CommonModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      },
+    });
 
     let fixture: ComponentFixture<RecipeSearchComponent>;
 

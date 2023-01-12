@@ -1,7 +1,8 @@
 import { AsyncPipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CatalogComponent } from './../shared/catalog.component';
 import { RecipePreviewComponent } from './recipe-preview.component';
+import { Observable } from 'rxjs';
 import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
 
@@ -20,9 +21,13 @@ import { RecipeRepository } from './recipe-repository.service';
   `,
 })
 export class RecipeSearchComponent {
-  recipes$ = this._recipeRepository.search();
+  recipes$: Observable<Recipe[]>;
 
-  constructor(private _recipeRepository: RecipeRepository) {}
+  private _recipeRepository = inject(RecipeRepository);
+
+  constructor() {
+    this.recipes$ = this._recipeRepository.search();
+  }
 
   trackById(_: number, recipe: Recipe) {
     return recipe.id;

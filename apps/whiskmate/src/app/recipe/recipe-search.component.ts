@@ -23,4 +23,3 @@ export class RecipeSearchComponent implements OnInit {
   imports: [CommonModule],
 })
 export class RecipeSearchModule {}
-``

@@ -24,6 +24,7 @@ shift
 for CURRENT in $*; do
 
   git checkout $CURRENT
+  git pull origin $CURRENT
   git merge --no-edit $PARENT_BRANCH
 
   if [ "$SKIP_TESTS" != "true" ]

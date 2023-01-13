@@ -1,4 +1,5 @@
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -20,8 +21,8 @@ describe(RecipeSearchComponent.name, () => {
     name: 'Puy lentil and aubergine stew',
   } as Recipe;
 
-  it('should search recipes without keyword on load', async () => {
-    const { mockRepo, render, getDisplayedRecipes } = await createComponent();
+  it('should search recipes without filtering', async () => {
+    const { mockRepo, render, getDisplayedRecipes } = createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
@@ -35,7 +36,7 @@ describe(RecipeSearchComponent.name, () => {
 
   it('should search recipes using given filter', async () => {
     const { mockRepo, render, getDisplayedRecipes, updateFilter } =
-      await createComponent();
+      createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
 
@@ -59,7 +60,7 @@ describe(RecipeSearchComponent.name, () => {
 
   it('should add recipe to meal planner', async () => {
     const { mockMealPlanner, mockRepo, getFirstAddButton, render } =
-      await createComponent();
+      createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle]));
 
@@ -74,7 +75,7 @@ describe(RecipeSearchComponent.name, () => {
 
   it("should disable add button if can't add", async () => {
     const { mockMealPlanner, mockRepo, getFirstAddButton, render } =
-      await createComponent();
+      createComponent();
 
     mockRepo.search.mockReturnValue(of([papperdelle]));
     mockMealPlanner.watchCanAddRecipe.mockReturnValue(of(false));
@@ -88,7 +89,7 @@ describe(RecipeSearchComponent.name, () => {
     expect(mockMealPlanner.watchCanAddRecipe).toBeCalledWith(papperdelle);
   });
 
-  async function createComponent() {
+  function createComponent() {
     const mockMealPlanner = {
       addRecipe: jest.fn(),
       watchCanAddRecipe: jest.fn(),
@@ -98,8 +99,7 @@ describe(RecipeSearchComponent.name, () => {
       Pick<RecipeRepository, 'search'>
     >;
 
-    await TestBed.configureTestingModule({
-      declarations: [RecipeSearchComponent],
+    TestBed.configureTestingModule({
       providers: [
         {
           provide: MealPlanner,
@@ -110,8 +110,14 @@ describe(RecipeSearchComponent.name, () => {
           useValue: mockRepo,
         },
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+    });
+
+    TestBed.overrideComponent(RecipeSearchComponent, {
+      set: {
+        imports: [CommonModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      },
+    });
 
     let fixture: ComponentFixture<RecipeSearchComponent>;
     let harness: RecipeSearchHarness;

@@ -3,10 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { createObserver } from '../../testing/observer';
 import { RecipeFilter } from './recipe-filter';
-import {
-  RecipeFilterComponent,
-  RecipeFilterModule,
-} from './recipe-filter.component';
+import { RecipeFilterComponent } from './recipe-filter.component';
 import { RecipeFilterHarness } from './recipe-filter.harness';
 
 describe(RecipeFilterComponent.name, () => {
@@ -31,9 +28,7 @@ describe(RecipeFilterComponent.name, () => {
   });
 
   async function createComponent() {
-    await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, RecipeFilterModule],
-    }).compileComponents();
+    TestBed.configureTestingModule({ imports: [NoopAnimationsModule] });
 
     const fixture = TestBed.createComponent(RecipeFilterComponent);
 

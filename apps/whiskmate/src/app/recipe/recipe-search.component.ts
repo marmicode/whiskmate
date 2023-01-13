@@ -1,20 +1,30 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { AsyncPipe, NgForOf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { BehaviorSubject, defer } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { MealPlanner } from './../meal-planner/meal-planner.service';
-import { CatalogModule } from './../shared/catalog.component';
+import { CatalogComponent } from './../shared/catalog.component';
 import { Recipe } from './recipe';
 import { RecipeFilter } from './recipe-filter';
-import { RecipeFilterModule } from './recipe-filter.component';
-import { RecipePreviewModule } from './recipe-preview.component';
+import { RecipeFilterComponent } from './recipe-filter.component';
+import { RecipePreviewComponent } from './recipe-preview.component';
 import { RecipeRepository } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   selector: 'wm-recipe-search',
-  template: ` <wm-recipe-filter
+  imports: [
+    AsyncPipe,
+    CatalogComponent,
+    MatButtonModule,
+    NgForOf,
+    RecipeFilterComponent,
+    RecipePreviewComponent,
+  ],
+  template: `
+    <wm-recipe-filter
       (filterChange)="onFilterChange($event)"
     ></wm-recipe-filter>
     <wm-catalog>
@@ -33,7 +43,8 @@ import { RecipeRepository } from './recipe-repository.service';
           ADD
         </button>
       </wm-recipe-preview>
-    </wm-catalog>`,
+    </wm-catalog>
+  `,
   styles: [
     `
       .add-recipe-button {
@@ -55,10 +66,8 @@ export class RecipeSearchComponent {
     )
   );
 
-  constructor(
-    private _mealPlanner: MealPlanner,
-    private _recipeRepository: RecipeRepository
-  ) {}
+  private _mealPlanner = inject(MealPlanner);
+  private _recipeRepository = inject(RecipeRepository);
 
   addRecipe(recipe: Recipe) {
     this._mealPlanner.addRecipe(recipe);
@@ -72,16 +81,3 @@ export class RecipeSearchComponent {
     return recipe.id;
   }
 }
-
-@NgModule({
-  declarations: [RecipeSearchComponent],
-  exports: [RecipeSearchComponent],
-  imports: [
-    CatalogModule,
-    CommonModule,
-    MatButtonModule,
-    RecipeFilterModule,
-    RecipePreviewModule,
-  ],
-})
-export class RecipeSearchModule {}

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TitleComponent } from './title.component';
 import { RecipeSearchModule } from './recipe/recipe-search.component';
+import { TitleComponent } from './shared/title.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

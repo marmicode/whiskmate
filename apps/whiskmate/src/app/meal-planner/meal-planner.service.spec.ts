@@ -20,48 +20,6 @@ describe(MealPlanner.name, () => {
     ]);
   });
 
-  it('should watch recipes', () => {
-    const { mealPlanner } = createMealPlanner();
-
-    const observer = observe(mealPlanner.recipes$);
-
-    mealPlanner.addRecipe(burger);
-    mealPlanner.addRecipe(salad);
-
-    expect(observer.next).toBeCalledTimes(3);
-    expect(observer.next).nthCalledWith(1, []);
-    expect(observer.next).nthCalledWith(2, [
-      expect.objectContaining({ name: 'Burger' }),
-    ]);
-    expect(observer.next).nthCalledWith(3, [
-      expect.objectContaining({ name: 'Burger' }),
-      expect.objectContaining({ name: 'Salad' }),
-    ]);
-  });
-
-  it('should watch if recipe can be added', () => {
-    const { mealPlanner } = createMealPlanner();
-
-    const observer = observe(mealPlanner.watchCanAddRecipe(burger));
-
-    mealPlanner.addRecipe(burger);
-
-    expect(observer.next).toBeCalledTimes(2);
-    expect(observer.next).toBeCalledWith(true);
-    expect(observer.next).toBeCalledWith(false);
-  });
-
-  it(`should not trigger observable if result didn't change`, () => {
-    const { mealPlanner } = createMealPlanner();
-
-    const observer = observe(mealPlanner.watchCanAddRecipe(burger));
-
-    mealPlanner.addRecipe(burger);
-    mealPlanner.addRecipe(salad);
-
-    expect(observer.next).toBeCalledTimes(2);
-  });
-
   it('should not allow recipe duplicates', () => {
     const { mealPlanner } = createMealPlannerWithBurger();
 
@@ -80,6 +38,75 @@ describe(MealPlanner.name, () => {
     expect(() => mealPlanner.addRecipe(burger)).toThrowError(
       `Can't add recipe.`
     );
+  });
+
+  describe('recipes$', () => {
+    it('should emit empty array when no recipes', async () => {
+      const { mealPlanner } = createMealPlanner();
+
+      const observer = observe(mealPlanner.recipes$);
+
+      expect(observer.next).toBeCalledTimes(1);
+      expect(observer.next).toBeCalledWith([]);
+    });
+
+    it('should emit recipes when added', () => {
+      const { mealPlanner } = createMealPlanner();
+
+      const observer = observe(mealPlanner.recipes$);
+
+      observer.mockClear();
+
+      mealPlanner.addRecipe(burger);
+      mealPlanner.addRecipe(salad);
+
+      expect(observer.next).toBeCalledTimes(2);
+      expect(observer.next).nthCalledWith(1, [
+        expect.objectContaining({ name: 'Burger' }),
+      ]);
+      expect(observer.next).nthCalledWith(2, [
+        expect.objectContaining({ name: 'Burger' }),
+        expect.objectContaining({ name: 'Salad' }),
+      ]);
+    });
+  });
+
+  describe('watchCanAddRecipe()', () => {
+    it('should instantly emit if recipe can be added', () => {
+      const { mealPlanner } = createMealPlanner();
+
+      const observer = observe(mealPlanner.watchCanAddRecipe(burger));
+
+      expect(observer.next).toBeCalledTimes(1);
+      expect(observer.next).toBeCalledWith(true);
+    });
+
+    it(`should emit false when recipe is added and can't be added anymore`, () => {
+      const { mealPlanner } = createMealPlanner();
+
+      const observer = observe(mealPlanner.watchCanAddRecipe(burger));
+
+      observer.mockClear();
+
+      mealPlanner.addRecipe(burger);
+
+      expect(observer.next).toBeCalledTimes(1);
+      expect(observer.next).toBeCalledWith(false);
+    });
+
+    it(`should not emit if result didn't change`, () => {
+      const { mealPlanner } = createMealPlanner();
+
+      const observer = observe(mealPlanner.watchCanAddRecipe(burger));
+
+      mealPlanner.addRecipe(burger);
+
+      observer.mockClear();
+
+      mealPlanner.addRecipe(salad);
+
+      expect(observer.next).not.toBeCalled();
+    });
   });
 
   function createMealPlannerWithBurger() {

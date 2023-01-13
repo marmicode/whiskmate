@@ -9,12 +9,10 @@ describe(RecipeSearchComponent.name, () => {
       providers: [RecipeSearchComponent],
     });
 
-    return {
-      render() {
-        const component = TestBed.inject(RecipeSearchComponent);
-        component.ngOnInit();
-        return { component };
-      },
-    };
+    const component = TestBed.inject(RecipeSearchComponent);
+
+    component.ngOnInit();
+
+    return { component };
   }
 });

@@ -1,48 +1,41 @@
-import { of } from 'rxjs';
 import { RecipeRepository } from './recipe-repository.service';
 import { TestBed } from '@angular/core/testing';
 import { RecipeSearchComponent } from './recipe-search.component';
-import { Recipe } from './recipe';
+import { RecipeRepositoryFake } from './recipe-repository.service.fake';
+import { recipeMother } from '../testing/recipe.mother';
 
 describe(RecipeSearchComponent.name, () => {
-  const papperdelle = { id: 'papperdelle-with-rose-harissa' } as Recipe;
-  const puyLentil = { id: 'puy-lentil-and-aubergine-stew' } as Recipe;
+  it('should search recipes without filtering', () => {
+    const { component } = createComponent();
 
-  it('should search recipes without keyword on load', () => {
-    const { mockRepo, render } = createComponent();
-
-    mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
-
-    const { component } = render();
-
-    expect(component.recipes).toEqual([papperdelle, puyLentil]);
-
-    expect(mockRepo.search).toBeCalledTimes(1);
-    expect(mockRepo.search).toBeCalledWith();
+    expect(component.recipes).toEqual([
+      expect.objectContaining({ name: 'Burger' }),
+      expect.objectContaining({ name: 'Salad' }),
+    ]);
   });
 
   function createComponent() {
-    const mockRepo = { search: jest.fn() } as jest.Mocked<
-      Pick<RecipeRepository, 'search'>
-    >;
+    const fakeRepo = new RecipeRepositoryFake();
+
+    fakeRepo.setRecipes([
+      recipeMother.withBasicInfo('Burger').build(),
+      recipeMother.withBasicInfo('Salad').build(),
+    ]);
 
     TestBed.configureTestingModule({
       providers: [
         RecipeSearchComponent,
         {
           provide: RecipeRepository,
-          useValue: mockRepo,
+          useValue: fakeRepo,
         },
       ],
     });
 
-    return {
-      mockRepo,
-      render() {
-        const component = TestBed.inject(RecipeSearchComponent);
-        component.ngOnInit();
-        return { component };
-      },
-    };
+    const component = TestBed.inject(RecipeSearchComponent);
+
+    component.ngOnInit();
+
+    return { component };
   }
 });

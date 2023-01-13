@@ -1,6 +1,6 @@
 export interface Recipe {
   id: string;
-  description: string;
+  description: string | null;
   ingredients: Ingredient[];
   name: string;
   pictureUri: string;

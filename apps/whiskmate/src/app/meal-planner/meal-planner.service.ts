@@ -16,7 +16,7 @@ export class MealPlanner {
   }
 
   addRecipe(recipe: Recipe) {
-    if (!this.canAddRecipe(recipe)) {
+    if (!this._canAddRecipe({ recipe, recipes: this._recipes$.value })) {
       throw new Error(`Can't add recipe.`);
     }
     this._recipes$.next([...this._recipes$.value, recipe]);
@@ -27,20 +27,6 @@ export class MealPlanner {
       map((recipes) => this._canAddRecipe({ recipe, recipes })),
       distinctUntilChanged()
     );
-  }
-
-  /**
-   * @deprecated use `watchCanAddRecipe` instead.
-   */
-  canAddRecipe(recipe: Recipe): boolean {
-    return this._canAddRecipe({ recipe, recipes: this.getRecipes() });
-  }
-
-  /**
-   * @deprecated use `recipes$` instead.
-   */
-  getRecipes(): Recipe[] {
-    return this._recipes$.value;
   }
 
   private _canAddRecipe({

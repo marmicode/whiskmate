@@ -2,34 +2,23 @@ import { TestBed } from '@angular/core/testing';
 import { createObserver } from '../../testing/observer';
 import { MealPlanner } from './meal-planner.service';
 import { recipeMother } from '../testing/recipe.mother';
+import { firstValueFrom } from 'rxjs';
 
 describe(MealPlanner.name, () => {
   const { observe } = createObserver();
   const burger = recipeMother.withBasicInfo('Burger').build();
   const salad = recipeMother.withBasicInfo('Salad').build();
 
-  it('should add recipe', () => {
+  it('should add recipe', async () => {
     const { mealPlanner } = createMealPlanner();
 
     mealPlanner.addRecipe(burger);
     mealPlanner.addRecipe(salad);
 
-    expect(mealPlanner.getRecipes()).toEqual([
+    expect(await firstValueFrom(mealPlanner.recipes$)).toEqual([
       expect.objectContaining({ name: 'Burger' }),
       expect.objectContaining({ name: 'Salad' }),
     ]);
-  });
-
-  it('should not allow recipe duplicates', () => {
-    const { mealPlanner } = createMealPlannerWithBurger();
-
-    expect(mealPlanner.canAddRecipe(burger)).toBe(false);
-  });
-
-  it('should allow new recipes', () => {
-    const { mealPlanner } = createMealPlannerWithBurger();
-
-    expect(mealPlanner.canAddRecipe(salad)).toBe(true);
   });
 
   it('should throw error if recipe is already present', () => {

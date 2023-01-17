@@ -1,108 +1,76 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { of } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { MealPlanner } from './../meal-planner/meal-planner.service';
 import { RecipeFilter } from './recipe-filter';
-import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
 import { CommonModule } from '@angular/common';
+import { RecipeRepositoryFake } from './recipe-repository.service.fake';
+import { recipeMother } from '../testing/recipe.mother';
 
 describe(RecipeSearchComponent.name, () => {
-  const papperdelle = {
-    id: 'papperdelle-with-rose-harissa',
-    name: 'Pappardelle with rose harissa, black olives and capers',
-  } as Recipe;
-  const puyLentil = {
-    id: 'puy-lentil-and-aubergine-stew',
-    name: 'Puy lentil and aubergine stew',
-  } as Recipe;
-
   it('should search recipes without filtering', () => {
-    const { mockRepo, render, getDisplayedRecipes } = createComponent();
+    const { getRecipeNames } = renderComponent();
 
-    mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
-
-    render();
-
-    expect(getDisplayedRecipes()).toEqual([papperdelle, puyLentil]);
-
-    expect(mockRepo.search).toBeCalledTimes(1);
-    expect(mockRepo.search).toBeCalledWith({});
+    expect(getRecipeNames()).toEqual(['Burger', 'Salad']);
   });
 
-  it('should search recipes using given filter', async () => {
-    const { mockRepo, render, getDisplayedRecipes, updateFilter } =
-      await createComponent();
-
-    mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
-
-    render();
-
-    mockRepo.search.mockReturnValue(of([papperdelle]));
+  it('should search recipes using given filter', () => {
+    const { getRecipeNames, updateFilter } = renderComponent();
 
     updateFilter({
-      keywords: 'Papperdelle',
+      keywords: 'Burg',
       maxIngredientCount: 3,
     });
 
-    expect(getDisplayedRecipes()).toEqual([papperdelle]);
+    expect(getRecipeNames()).toEqual(['Burger']);
+  });
 
-    expect(mockRepo.search).toBeCalledTimes(2);
-    expect(mockRepo.search).lastCalledWith<[RecipeFilter]>({
-      keywords: 'Papperdelle',
-      maxIngredientCount: 3,
-    });
+  it('should enable add button if recipe can be added', async () => {
+    const { getFirstAddButton } = renderComponent();
+
+    expect(getFirstAddButton().isDisabled()).toBe(false);
   });
 
   it('should add recipe to meal planner', async () => {
-    const { mockMealPlanner, mockRepo, getFirstAddButton, render } =
-      await createComponent();
-
-    mockRepo.search.mockReturnValue(of([papperdelle]));
-
-    render();
+    const { getFirstAddButton, getMealPlannerRecipeNames } = renderComponent();
 
     getFirstAddButton().click();
 
-    expect(mockMealPlanner.addRecipe).toBeCalledTimes(1);
-    expect(mockMealPlanner.addRecipe).toBeCalledWith(papperdelle);
+    expect(await getMealPlannerRecipeNames()).toEqual(['Burger']);
   });
 
   it("should disable add button if can't add", async () => {
-    const { mockMealPlanner, mockRepo, getFirstAddButton, render } =
-      await createComponent();
+    const { getFirstAddButton } = renderComponentWithBurgerInMealPlanner();
 
-    mockRepo.search.mockReturnValue(of([papperdelle]));
-    mockMealPlanner.watchCanAddRecipe.mockReturnValue(of(false));
-
-    render();
-
+    /* Can't add burger because there is already a burger with the same id. */
     expect(getFirstAddButton().isDisabled()).toBe(true);
-    expect(mockMealPlanner.watchCanAddRecipe).toBeCalledTimes(1);
-    expect(mockMealPlanner.watchCanAddRecipe).toBeCalledWith(papperdelle);
   });
 
-  function createComponent() {
-    const mockMealPlanner = {
-      addRecipe: jest.fn(),
-      watchCanAddRecipe: jest.fn(),
-    } as jest.Mocked<Pick<MealPlanner, 'addRecipe' | 'watchCanAddRecipe'>>;
+  function renderComponentWithBurgerInMealPlanner() {
+    const { mealPlanner, detectChanges, ...utils } = renderComponent();
 
-    const mockRepo = { search: jest.fn() } as jest.Mocked<
-      Pick<RecipeRepository, 'search'>
-    >;
+    mealPlanner.addRecipe(recipeMother.withBasicInfo('Burger').build());
+    detectChanges();
+
+    return { ...utils };
+  }
+
+  function renderComponent() {
+    const fakeRepo = new RecipeRepositoryFake();
+
+    fakeRepo.setRecipes([
+      recipeMother.withBasicInfo('Burger').build(),
+      recipeMother.withBasicInfo('Salad').build(),
+    ]);
 
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: MealPlanner,
-          useValue: mockMealPlanner,
-        },
-        {
           provide: RecipeRepository,
-          useValue: mockRepo,
+          useValue: fakeRepo,
         },
       ],
     });
@@ -114,13 +82,14 @@ describe(RecipeSearchComponent.name, () => {
       },
     });
 
-    let fixture: ComponentFixture<RecipeSearchComponent>;
+    const fixture = TestBed.createComponent(RecipeSearchComponent);
+    fixture.detectChanges();
+
+    const mealPlanner = TestBed.inject(MealPlanner);
 
     return {
-      mockMealPlanner,
-      mockRepo,
-      render() {
-        fixture = TestBed.createComponent(RecipeSearchComponent);
+      mealPlanner,
+      detectChanges() {
         fixture.detectChanges();
       },
       getFirstAddButton() {
@@ -130,10 +99,14 @@ describe(RecipeSearchComponent.name, () => {
           isDisabled: () => el.properties.disabled,
         };
       },
-      getDisplayedRecipes() {
+      async getMealPlannerRecipeNames() {
+        const recipes = await firstValueFrom(mealPlanner.recipes$);
+        return recipes.map((recipe) => recipe.name);
+      },
+      getRecipeNames() {
         return fixture.debugElement
           .queryAll(By.css('wm-recipe-preview'))
-          .map((previewEl) => previewEl.properties.recipe);
+          .map((previewEl) => previewEl.properties.recipe.name);
       },
       updateFilter(filter: RecipeFilter) {
         fixture.debugElement

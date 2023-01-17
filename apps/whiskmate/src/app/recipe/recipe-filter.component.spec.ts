@@ -10,7 +10,7 @@ describe(RecipeFilterComponent.name, () => {
   const { observe } = createObserver();
 
   it('should trigger filterChange output', async () => {
-    const { component, harness } = await createComponent();
+    const { component, harness } = await renderComponent();
 
     const observer = observe(component.filterChange);
 
@@ -27,14 +27,12 @@ describe(RecipeFilterComponent.name, () => {
     } as RecipeFilter);
   });
 
-  async function createComponent() {
+  async function renderComponent() {
     TestBed.configureTestingModule({ imports: [NoopAnimationsModule] });
-
     const fixture = TestBed.createComponent(RecipeFilterComponent);
 
     return {
       component: fixture.componentInstance,
-      fixture,
       harness: await TestbedHarnessEnvironment.harnessForFixture(
         fixture,
         RecipeFilterHarness

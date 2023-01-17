@@ -4722,19 +4722,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/angular@npm:^11.0.4":
-  version: 11.0.4
-  resolution: "@testing-library/angular@npm:11.0.4"
+"@testing-library/angular@npm:13.1.0":
+  version: 13.1.0
+  resolution: "@testing-library/angular@npm:13.1.0"
   dependencies:
     "@testing-library/dom": ^8.0.0
     tslib: ^2.3.1
   peerDependencies:
-    "@angular/common": ">= 13.0.0"
-    "@angular/core": ">= 13.0.0"
-    "@angular/platform-browser": ">= 13.0.0"
-    "@angular/router": ">= 13.0.0"
-    rxjs: ">= 7.4.0"
-  checksum: ede15a95facc77055ed73c1aa435226671cb270d808a05eb2fc4384961373f06d4095fc11dc4d7a86f85c09278301a783f574537f65aa4ffe56841b2ae6786bb
+    "@angular/common": ">= 15.1.0"
+    "@angular/core": ">= 15.1.0"
+    "@angular/platform-browser": ">= 15.1.0"
+    "@angular/router": ">= 15.1.0"
+  checksum: da5bdc068cb86b6d71b89929dcce661eb9d667f5f3df8b41af613dd1e1549f1713db72c3bb0858b241680511e70b3807ca3ca4b58d20c967567b35d98d295e50
+  languageName: node
+  linkType: hard
+
+"@testing-library/dom@npm:8.20.0":
+  version: 8.20.0
+  resolution: "@testing-library/dom@npm:8.20.0"
+  dependencies:
+    "@babel/code-frame": ^7.10.4
+    "@babel/runtime": ^7.12.5
+    "@types/aria-query": ^5.0.1
+    aria-query: ^5.0.0
+    chalk: ^4.1.0
+    dom-accessibility-api: ^0.5.9
+    lz-string: ^1.4.4
+    pretty-format: ^27.0.2
+  checksum: 1e599129a2fe91959ce80900a0a4897232b89e2a8e22c1f5950c36d39c97629ea86b4986b60b173b5525a05de33fde1e35836ea597b03de78cc51b122835c6f0
   languageName: node
   linkType: hard
 
@@ -4751,6 +4766,15 @@ __metadata:
     lz-string: ^1.4.4
     pretty-format: ^27.0.2
   checksum: e4df091fcf84c9eac4a6ee4c76674c1d562bf98732f0ac8820972d7718ab10397b672b9f082aace3cacd1f610fc77de6e1b6094e67afe1df0443bf22eb9deab2
+  languageName: node
+  linkType: hard
+
+"@testing-library/user-event@npm:14.4.3":
+  version: 14.4.3
+  resolution: "@testing-library/user-event@npm:14.4.3"
+  peerDependencies:
+    "@testing-library/dom": ">=7.21.4"
+  checksum: 852c48ea6db1c9471b18276617c84fec4320771e466cd58339a732ca3fd73ad35e5a43ae14f51af51a8d0a150dcf60fcaab049ef367871207bea8f92c4b8195e
   languageName: node
   linkType: hard
 
@@ -4807,6 +4831,13 @@ __metadata:
   version: 4.2.2
   resolution: "@types/aria-query@npm:4.2.2"
   checksum: 6f2ce11d91e2d665f3873258db19da752d91d85d3679eb5efcdf9c711d14492287e1e4eb52613b28e60375841a9e428594e745b68436c963d8bad4bf72188df3
+  languageName: node
+  linkType: hard
+
+"@types/aria-query@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@types/aria-query@npm:5.0.1"
+  checksum: 69fd7cceb6113ed370591aef04b3fd0742e9a1b06dd045c43531448847b85de181495e4566f98e776b37c422a12fd71866e0a1dfd904c5ec3f84d271682901de
   languageName: node
   linkType: hard
 
@@ -7407,7 +7438,9 @@ __metadata:
     "@nrwl/workspace": 15.4.5
     "@percy/cli": ^1.10.4
     "@percy/cypress": ^3.1.2
-    "@testing-library/angular": ^11.0.4
+    "@testing-library/angular": 13.1.0
+    "@testing-library/dom": 8.20.0
+    "@testing-library/user-event": 14.4.3
     "@types/jest": 28.1.8
     "@types/node": 18.7.1
     "@typescript-eslint/eslint-plugin": 5.48.1

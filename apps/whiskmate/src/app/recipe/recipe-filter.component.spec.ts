@@ -10,15 +10,13 @@ describe(RecipeFilterComponent.name, () => {
   const { observe } = createObserver();
 
   it('should trigger filterChange output', async () => {
-    const { component, fixture, setInputValue } = createComponent();
-
-    fixture.detectChanges();
+    const { component, setInputValue } = renderComponent();
 
     const observer = observe(component.filterChange);
 
-    await setInputValue('[data-role=keywords-input]', 'Cauliflower');
-    await setInputValue('[data-role=max-ingredient-count-input]', '3');
-    await setInputValue('[data-role=max-step-count-input]', '10');
+    await setInputValue('keywords-input', 'Cauliflower');
+    await setInputValue('max-ingredient-count-input', '3');
+    await setInputValue('max-step-count-input', '10');
 
     expect(observer.next).lastCalledWith({
       keywords: 'Cauliflower',
@@ -27,19 +25,25 @@ describe(RecipeFilterComponent.name, () => {
     } as RecipeFilter);
   });
 
-  function createComponent() {
+  function renderComponent() {
     TestBed.configureTestingModule({ imports: [NoopAnimationsModule] });
-
     const fixture = TestBed.createComponent(RecipeFilterComponent);
 
     const loader = TestbedHarnessEnvironment.loader(fixture);
 
+    fixture.detectChanges();
+
     return {
       component: fixture.componentInstance,
-      fixture,
-      async setInputValue(selector: string, value: string) {
+      async setInputValue(
+        dataRole:
+          | 'keywords-input'
+          | 'max-ingredient-count-input'
+          | 'max-step-count-input',
+        value: string
+      ) {
         const harness = await loader.getHarness(
-          MatInputHarness.with({ selector })
+          MatInputHarness.with({ selector: `[data-role="${dataRole}"]` })
         );
         await harness.setValue(value);
       },

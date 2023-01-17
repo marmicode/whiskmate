@@ -12,9 +12,9 @@ describe(RecipeFilterComponent.name, () => {
 
     const observer = observe(component.filterChange);
 
-    setInputValue('[data-role=keywords-input]', 'Cauliflower');
-    setInputValue('[data-role=max-ingredient-count-input]', '3');
-    setInputValue('[data-role=max-step-count-input]', '10');
+    setInputValue('keywords-input', 'Cauliflower');
+    setInputValue('max-ingredient-count-input', '3');
+    setInputValue('max-step-count-input', '10');
 
     expect(observer.next).lastCalledWith({
       keywords: 'Cauliflower',
@@ -30,9 +30,16 @@ describe(RecipeFilterComponent.name, () => {
 
     return {
       component: fixture.componentInstance,
-      fixture,
-      setInputValue(selector: string, value: string) {
-        const el = fixture.debugElement.query(By.css(selector));
+      setInputValue(
+        dataRole:
+          | 'keywords-input'
+          | 'max-ingredient-count-input'
+          | 'max-step-count-input',
+        value: string
+      ) {
+        const el = fixture.debugElement.query(
+          By.css(`[data-role="${dataRole}"]`)
+        );
         el.nativeElement.value = value;
         el.nativeElement.dispatchEvent(new Event('input'));
       },

@@ -29,5 +29,4 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-19-recipe-search-harness-testing \
   testing-20-cypress-component-testing-boilerplate \
   testing-21-cypress-component-testing \
-  testing-22-cypress-component-testing-with-fake-repository \
-  testing-23-visual-regression-testing \
+  testing-22-visual-regression-testing \

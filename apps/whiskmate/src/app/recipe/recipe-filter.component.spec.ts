@@ -12,9 +12,9 @@ describe(RecipeFilterComponent.name, () => {
 
     const observer = observe(component.filterChange);
 
-    setInputValue('[data-role=keywords-input]', 'Cauliflower');
-    setInputValue('[data-role=max-ingredient-count-input]', '3');
-    setInputValue('[data-role=max-step-count-input]', '10');
+    setInputValue('keywords-input', 'Cauliflower');
+    setInputValue('max-ingredient-count-input', '3');
+    setInputValue('max-step-count-input', '10');
 
     expect(observer.next).lastCalledWith({
       keywords: 'Cauliflower',

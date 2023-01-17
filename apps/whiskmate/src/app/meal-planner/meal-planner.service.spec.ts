@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { Recipe } from './../recipe/recipe';
 import { MealPlanner } from './meal-planner.service';
 import { recipeMother } from '../testing/recipe.mother';
 

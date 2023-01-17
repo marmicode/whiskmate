@@ -1,49 +1,42 @@
-import { firstValueFrom, of } from 'rxjs';
 import { RecipeRepository } from './recipe-repository.service';
 import { TestBed } from '@angular/core/testing';
 import { RecipeSearchComponent } from './recipe-search.component';
-import { Recipe } from './recipe';
+import { RecipeRepositoryFake } from './recipe-repository.service.fake';
+import { recipeMother } from '../testing/recipe.mother';
+import { firstValueFrom } from 'rxjs';
 
 describe(RecipeSearchComponent.name, () => {
-  const papperdelle = { id: 'papperdelle-with-rose-harissa' } as Recipe;
-  const puyLentil = { id: 'puy-lentil-and-aubergine-stew' } as Recipe;
+  it('should search recipes without filtering', async () => {
+    const { getRecipeNames } = createComponent();
 
-  it('should search recipes without keyword on load', async () => {
-    const { mockRepo, render } = createComponent();
-
-    mockRepo.search.mockReturnValue(of([papperdelle, puyLentil]));
-
-    const { component } = render();
-
-    expect(await firstValueFrom(component.items$)).toEqual([
-      expect.objectContaining({ recipe: papperdelle }),
-      expect.objectContaining({ recipe: puyLentil }),
-    ]);
-
-    expect(mockRepo.search).toBeCalledTimes(1);
-    expect(mockRepo.search).toBeCalledWith({});
+    expect(await getRecipeNames()).toEqual(['Burger', 'Salad']);
   });
 
   function createComponent() {
-    const mockRepo = { search: jest.fn() } as jest.Mocked<
-      Pick<RecipeRepository, 'search'>
-    >;
+    const fakeRepo = new RecipeRepositoryFake();
+
+    fakeRepo.setRecipes([
+      recipeMother.withBasicInfo('Burger').build(),
+      recipeMother.withBasicInfo('Salad').build(),
+    ]);
 
     TestBed.configureTestingModule({
       providers: [
         RecipeSearchComponent,
         {
           provide: RecipeRepository,
-          useValue: mockRepo,
+          useValue: fakeRepo,
         },
       ],
     });
 
+    const component = TestBed.inject(RecipeSearchComponent);
+
     return {
-      mockRepo,
-      render() {
-        const component = TestBed.inject(RecipeSearchComponent);
-        return { component };
+      component,
+      async getRecipeNames() {
+        const items = await firstValueFrom(component.items$);
+        return items.map((item) => item.recipe.name);
       },
     };
   }

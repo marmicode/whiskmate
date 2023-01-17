@@ -8,9 +8,7 @@ describe(RecipeFilterComponent.name, () => {
   const { observe } = createObserver();
 
   it('should trigger filterChange output', () => {
-    const { component, fixture, setInputValue } = createComponent();
-
-    fixture.detectChanges();
+    const { component, setInputValue } = renderComponent();
 
     const observer = observe(component.filterChange);
 
@@ -25,8 +23,10 @@ describe(RecipeFilterComponent.name, () => {
     } as RecipeFilter);
   });
 
-  function createComponent() {
+  function renderComponent() {
     const fixture = TestBed.createComponent(RecipeFilterComponent);
+
+    fixture.detectChanges();
 
     return {
       component: fixture.componentInstance,

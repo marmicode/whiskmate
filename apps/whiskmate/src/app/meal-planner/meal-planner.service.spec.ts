@@ -1,8 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { createObserver } from '../../testing/observer';
-import { MealPlanner } from './meal-planner.service';
-import { recipeMother } from '../testing/recipe.mother';
 import { firstValueFrom } from 'rxjs';
+import { createObserver } from '../../testing/observer';
+import { recipeMother } from '../testing/recipe.mother';
+import { MealPlanner } from './meal-planner.service';
+import { MealRepositoryFake } from './meal-repository.fake';
+import { MealRepository } from './meal-repository.service';
 
 describe(MealPlanner.name, () => {
   const { observe } = createObserver();
@@ -27,6 +29,16 @@ describe(MealPlanner.name, () => {
     expect(() => mealPlanner.addRecipe(burger)).toThrowError(
       `Can't add recipe.`
     );
+  });
+
+  it('should add recipe to meal repository', () => {
+    const { mealPlanner, mealRepoFake } = createMealPlanner();
+
+    mealPlanner.addRecipe(burger);
+
+    expect(mealRepoFake.getMealsSync()).toEqual([
+      expect.objectContaining({ name: 'Burger' }),
+    ]);
   });
 
   describe('recipes$', () => {
@@ -110,8 +122,20 @@ describe(MealPlanner.name, () => {
   }
 
   function createMealPlanner() {
+    const mealRepoFake = new MealRepositoryFake();
+
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: MealRepository,
+          useValue: mealRepoFake,
+        },
+      ],
+    });
+
     return {
       mealPlanner: TestBed.inject(MealPlanner),
+      mealRepoFake,
     };
   }
 });

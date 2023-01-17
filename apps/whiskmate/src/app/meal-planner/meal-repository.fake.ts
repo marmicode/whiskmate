@@ -7,15 +7,18 @@ import { MealRepositoryDef } from './meal-repository.service';
   providedIn: 'root',
 })
 export class MealRepositoryFake implements MealRepositoryDef {
+  private _meals: Recipe[] = [];
+
   addMeal(recipe: Recipe): Observable<void> {
-    throw new Error('🚧 work in progress!');
+    this._meals = [...this._meals, recipe];
+    return of(undefined);
   }
 
   getMeals(): Observable<Recipe[]> {
-    throw new Error('🚧 work in progress!');
+    return of(this._meals);
   }
 
   getMealsSync(): Recipe[] {
-    throw new Error('🚧 work in progress!');
+    return this._meals;
   }
 }

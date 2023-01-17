@@ -24,7 +24,7 @@ export class MealPlanner {
 
   watchCanAddRecipe(recipe: Recipe): Observable<boolean> {
     return this._recipes$.pipe(
-      map((recipes) => this._canAddRecipes({ recipe, recipes })),
+      map((recipes) => this._canAddRecipe({ recipe, recipes })),
       distinctUntilChanged()
     );
   }
@@ -33,7 +33,7 @@ export class MealPlanner {
    * @deprecated use `watchCanAddRecipe` instead.
    */
   canAddRecipe(recipe: Recipe): boolean {
-    return this._canAddRecipes({ recipe, recipes: this.getRecipes() });
+    return this._canAddRecipe({ recipe, recipes: this.getRecipes() });
   }
 
   /**
@@ -43,7 +43,7 @@ export class MealPlanner {
     return this._recipes$.value;
   }
 
-  private _canAddRecipes({
+  private _canAddRecipe({
     recipes,
     recipe,
   }: {

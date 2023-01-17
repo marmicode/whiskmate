@@ -25,8 +25,10 @@ describe(RecipeFilterComponent.name, () => {
     } as RecipeFilter);
   });
 
-  function createComponent() {
+  function renderComponent() {
     const fixture = TestBed.createComponent(RecipeFilterComponent);
+
+    fixture.detectChanges();
 
     return {
       component: fixture.componentInstance,

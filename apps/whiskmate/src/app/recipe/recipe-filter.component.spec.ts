@@ -5,8 +5,10 @@ import { RecipeFilterComponent } from './recipe-filter.component';
 describe(RecipeFilterComponent.name, () => {
   it.todo('🚧 should trigger filterChange output');
 
-  function createComponent() {
+  function renderComponent() {
     const fixture = TestBed.createComponent(RecipeFilterComponent);
+
+    fixture.detectChanges();
 
     return {
       component: fixture.componentInstance,

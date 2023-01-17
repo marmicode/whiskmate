@@ -12,9 +12,16 @@ describe(RecipeFilterComponent.name, () => {
 
     return {
       component: fixture.componentInstance,
-      fixture,
-      setInputValue(selector: string, value: string) {
-        const el = fixture.debugElement.query(By.css(selector));
+      setInputValue(
+        dataRole:
+          | 'keywords-input'
+          | 'max-ingredient-count-input'
+          | 'max-step-count-input',
+        value: string
+      ) {
+        const el = fixture.debugElement.query(
+          By.css(`[data-role="${dataRole}"]`)
+        );
         el.nativeElement.value = value;
         el.nativeElement.dispatchEvent(new Event('input'));
       },

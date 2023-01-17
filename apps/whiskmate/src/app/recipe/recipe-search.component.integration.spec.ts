@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
 import { RecipeSearchHarness } from './recipe-search.harness';
-import { RecipeRepositoryFake } from './recipe-repository.service.fake';
+import { RecipeRepositoryFake } from './recipe-repository.fake';
 import { recipeMother } from '../testing/recipe.mother';
 
 describe(RecipeSearchComponent.name, () => {

@@ -7,12 +7,9 @@ import { firstValueFrom } from 'rxjs';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
-    const { component } = createComponent();
+    const { getRecipeNames } = createComponent();
 
-    expect(await firstValueFrom(component.recipes$)).toEqual([
-      expect.objectContaining({ name: 'Burger' }),
-      expect.objectContaining({ name: 'Salad' }),
-    ]);
+    expect(await getRecipeNames()).toEqual(['Burger', 'Salad']);
   });
 
   function createComponent() {
@@ -35,6 +32,12 @@ describe(RecipeSearchComponent.name, () => {
 
     const component = TestBed.inject(RecipeSearchComponent);
 
-    return { component };
+    return {
+      component,
+      async getRecipeNames() {
+        const recipes = await firstValueFrom(component.recipes$);
+        return recipes.map((recipe) => recipe.name);
+      },
+    };
   }
 });

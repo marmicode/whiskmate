@@ -1,11 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { recipeMother } from '../testing/recipe.mother';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
-import { CommonModule } from '@angular/common';
-import { RecipeRepositoryFake } from './recipe-repository.service.fake';
-import { recipeMother } from '../testing/recipe.mother';
+import { RecipeRepositoryFake } from './recipe-repository.fake';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', () => {

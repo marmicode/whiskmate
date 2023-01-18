@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-09-recipe-search-shallow
+git checkout origin/testing-306-recipe-search-shallow
 
 yarn
 ```
@@ -15,13 +15,13 @@ Let's go reactive and see what happens.
 1. Run tests:
 
 ```sh
-yarn test whiskmate --watch
+yarn test --watch
 ```
 
-2. Checkout new `<wm-recipe-search>` implementation.
+2. Checkout new `RecipeSearchComponent` implementation.
 
 ```sh
-git checkout origin/testing-10-recipe-search-async-pipe apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-307-recipe-search-async-pipe apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 > This will replace the imperative approach:

@@ -42,7 +42,7 @@ yarn test --watch
 
 4. Implement tests.
 
-5. Check out the implementation as mentioned at step 0 if you didn't do it already.
+5. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
 # 🎯 Goal #2: Test `MealPlanner.canAddRecipe`
 

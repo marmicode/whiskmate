@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { lastValueFrom } from 'rxjs';
 import { recipeMother } from '../testing/recipe.mother';
 import { LocalStorage } from '../shared/local-storage';
-import { LocalStorageFake } from '../shared/local-storage.fake';
+import { provideLocalStorageFake } from '../shared/local-storage.fake';
 
 describe(MealRepository.name, () => {
   const burger = recipeMother.withBasicInfo('Burger').build();
@@ -37,12 +37,7 @@ describe(MealRepository.name, () => {
 
   function createMealRepository() {
     TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: LocalStorage,
-          useClass: LocalStorageFake,
-        },
-      ],
+      providers: [provideLocalStorageFake()],
     });
 
     const mealRepo = TestBed.inject(MealRepository);

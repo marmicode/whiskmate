@@ -2356,6 +2356,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.14.6":
+  version: 7.20.7
+  resolution: "@babel/runtime@npm:7.20.7"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 4629ce5c46f06cca9cfb9b7fc00d48003335a809888e2b91ec2069a2dcfbfef738480cff32ba81e0b7c290f8918e5c22ddcf2b710001464ee84ba62c7e32a3a3
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:7.16.7":
   version: 7.16.7
   resolution: "@babel/template@npm:7.16.7"
@@ -4737,7 +4746,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:8.20.0":
+"@testing-library/cypress@npm:8.0.7":
+  version: 8.0.7
+  resolution: "@testing-library/cypress@npm:8.0.7"
+  dependencies:
+    "@babel/runtime": ^7.14.6
+    "@testing-library/dom": ^8.1.0
+  peerDependencies:
+    cypress: ^2.1.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0
+  checksum: e005bc1a7ec808706c57e95ed312069fb5be39ea7362900dc2a32c09f124d478ade69ebcd7df88c076e3867ab328ae6e6ce13791bdf042621ff66b56552bf74b
+  languageName: node
+  linkType: hard
+
+"@testing-library/dom@npm:8.20.0, @testing-library/dom@npm:^8.1.0":
   version: 8.20.0
   resolution: "@testing-library/dom@npm:8.20.0"
   dependencies:
@@ -7439,13 +7460,14 @@ __metadata:
     "@percy/cli": 1.17.0
     "@percy/cypress": 3.1.2
     "@testing-library/angular": 13.1.0
+    "@testing-library/cypress": 8.0.7
     "@testing-library/dom": 8.20.0
     "@testing-library/user-event": 14.4.3
     "@types/jest": 28.1.8
     "@types/node": 18.7.1
     "@typescript-eslint/eslint-plugin": 5.48.1
     "@typescript-eslint/parser": 5.48.1
-    cypress: ^11.0.0
+    cypress: 11.2.0
     cypress-pipe: ^2.0.0
     dotenv: 10.0.0
     eslint: 8.15.0
@@ -7997,7 +8019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^11.0.0":
+"cypress@npm:11.2.0":
   version: 11.2.0
   resolution: "cypress@npm:11.2.0"
   dependencies:
@@ -15762,7 +15784,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.10":
+"regenerator-runtime@npm:^0.13.10, regenerator-runtime@npm:^0.13.11":
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4

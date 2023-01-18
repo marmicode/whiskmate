@@ -12,7 +12,7 @@ export interface MealRepositoryDef {
   providedIn: 'root',
 })
 export class MealRepository implements MealRepositoryDef {
-  addMeal(recipe: Recipe): Observable<void> {
+  addMeal(meal: Recipe): Observable<void> {
     throw new Error('🚧 work in progress!');
   }
 

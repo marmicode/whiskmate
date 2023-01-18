@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-11-recipe-filter-boilerplate
+git checkout origin/testing-400-recipe-filter-boilerplate
 
 yarn
 ```
@@ -14,10 +14,15 @@ This will be later used by `<wm-recipe-search>` to filter results based on user 
 
 # 📝 Steps
 
+0. [optional] you can either checkout the updated `RecipeFilterComponent` implementation first or go full-on TDD and implement the tests first.
+```sh
+git checkout origin/testing-401-recipe-filter apps/whiskmate/src/app/recipe/recipe-filter.component.ts
+```
+
 1. Run tests:
 
 ```sh
-yarn test whiskmate --watch
+yarn test --watch
 ```
 
 2. Implement tests:
@@ -28,10 +33,4 @@ yarn test whiskmate --watch
 
    3. Check that `filterChange` have been triggered.
 
-   4. Did you think about triggering change detection?
-
-3. 🙏🛑 wait until you finish implementing the tests before running: 🛑🙏
-
-```sh
-git checkout origin/testing-12-recipe-filter apps/whiskmate/src/app/recipe/recipe-filter.component.ts
-```
+3. checkout the implementation as mentioned at step 0 if you didn't do it already.

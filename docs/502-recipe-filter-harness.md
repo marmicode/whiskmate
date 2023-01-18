@@ -1,28 +1,28 @@
 # Setup
 
 ```sh
-git checkout origin/testing-16-recipe-filter-material-harness
+git checkout origin/testing-501-recipe-filter-material-harness
 
 yarn
 ```
 
 # 🎯 Goal: Create and use `RecipeFilterHarness`
 
-Create a harness that abstracts interactions with `<wm-recipe-filter>`.
+Create a harness that abstracts interactions with `RecipeFilterComponent`.
 
-Update `recipe-filter.component.spec.ts` in order to use the `RecipeFilterHarness`.
+Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts) in order to use the `RecipeFilterHarness`.
 
 # 📝 Steps
 
 1. Run tests:
 
 ```sh
-yarn test whiskmate --watch
+yarn test --watch
 ```
 
 2. Create harness:
 
-   1. Create `RecipeFilterHarness` in `recipe-filter.harness.ts`.
+   1. Create `RecipeFilterHarness` in [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts).
 
    2. Extend `ComponentHarness`.
 
@@ -59,6 +59,6 @@ yarn test whiskmate --watch
 const getItem = this.locatorFor('.item');
 (await getItem()).click();
 
-const getCalendar = this.locatorFor(MatCalendarHarness);
+const getCalendar = this.locatorFor(MatCalendarHarness.with({selector: '[data-role="start-date-cal"]'}));
 (await getCalendar()).openCalendar();
 ```

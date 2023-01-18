@@ -15,3 +15,10 @@ export class LocalStorageFake implements LocalStorage {
     return this._map.get(key) ?? null;
   }
 }
+
+export function provideLocalStorageFake() {
+  return {
+    provide: LocalStorage,
+    useClass: LocalStorageFake,
+  };
+}

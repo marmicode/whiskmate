@@ -44,7 +44,7 @@ yarn test --watch
 
    2. Query DOM and check child components properties. (Cf. [query DOM with `fixture.debugElement`](04-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](#-tip-access-element-properties))
 
-3. Check out the implementation as mentioned at step 0 if you didn't do it already.
+3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
 # Appendices
 

@@ -7,7 +7,7 @@ import { MealRepositoryDef } from './meal-repository.service';
   providedIn: 'root',
 })
 export class MealRepositoryFake implements MealRepositoryDef {
-  addMeal(recipe: Recipe): Observable<void> {
+  addMeal(meal: Recipe): Observable<void> {
     throw new Error('🚧 work in progress!');
   }
 

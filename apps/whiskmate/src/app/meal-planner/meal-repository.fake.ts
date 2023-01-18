@@ -9,8 +9,8 @@ import { MealRepositoryDef } from './meal-repository.service';
 export class MealRepositoryFake implements MealRepositoryDef {
   private _meals: Recipe[] = [];
 
-  addMeal(recipe: Recipe): Observable<void> {
-    this._meals = [...this._meals, recipe];
+  addMeal(meal: Recipe): Observable<void> {
+    this._meals = [...this._meals, meal];
     return of(undefined);
   }
 

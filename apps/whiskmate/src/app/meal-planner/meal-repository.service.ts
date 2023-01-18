@@ -20,8 +20,8 @@ export class MealRepository implements MealRepositoryDef {
     this._meals = this._loadMeals();
   }
 
-  addMeal(recipe: Recipe): Observable<void> {
-    this._updateMeals([...this._meals, recipe]);
+  addMeal(meal: Recipe): Observable<void> {
+    this._updateMeals([...this._meals, meal]);
     return of(undefined);
   }
 

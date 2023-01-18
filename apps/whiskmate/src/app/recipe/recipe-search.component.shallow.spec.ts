@@ -9,6 +9,7 @@ import { RecipeFilter } from './recipe-filter';
 import { RecipeRepositoryFake } from './recipe-repository.fake';
 import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
+import { provideLocalStorageFake } from '../shared/local-storage.fake';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', () => {
@@ -72,6 +73,7 @@ describe(RecipeSearchComponent.name, () => {
           provide: RecipeRepository,
           useValue: fakeRepo,
         },
+        provideLocalStorageFake(),
       ],
     });
 

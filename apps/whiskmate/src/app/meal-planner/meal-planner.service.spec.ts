@@ -1,35 +1,26 @@
 import { TestBed } from '@angular/core/testing';
+import { firstValueFrom } from 'rxjs';
 import { createObserver } from '../../testing/observer';
-import { MealPlanner } from './meal-planner.service';
 import { recipeMother } from '../testing/recipe.mother';
+import { MealPlanner } from './meal-planner.service';
+import { MealRepositoryFake } from './meal-repository.fake';
+import { MealRepository } from './meal-repository.service';
 
 describe(MealPlanner.name, () => {
   const { observe } = createObserver();
   const burger = recipeMother.withBasicInfo('Burger').build();
   const salad = recipeMother.withBasicInfo('Salad').build();
 
-  it('should add recipe', () => {
+  it('should add recipe', async () => {
     const { mealPlanner } = createMealPlanner();
 
     mealPlanner.addRecipe(burger);
     mealPlanner.addRecipe(salad);
 
-    expect(mealPlanner.getRecipes()).toEqual([
+    expect(await firstValueFrom(mealPlanner.recipes$)).toEqual([
       expect.objectContaining({ name: 'Burger' }),
       expect.objectContaining({ name: 'Salad' }),
     ]);
-  });
-
-  it('should not allow recipe duplicates', () => {
-    const { mealPlanner } = createMealPlannerWithBurger();
-
-    expect(mealPlanner.canAddRecipe(burger)).toBe(false);
-  });
-
-  it('should allow new recipes', () => {
-    const { mealPlanner } = createMealPlannerWithBurger();
-
-    expect(mealPlanner.canAddRecipe(salad)).toBe(true);
   });
 
   it('should throw error if recipe is already present', () => {
@@ -38,6 +29,27 @@ describe(MealPlanner.name, () => {
     expect(() => mealPlanner.addRecipe(burger)).toThrowError(
       `Can't add recipe.`
     );
+  });
+
+  it('should add recipe to meal repository', () => {
+    const { mealPlanner, mealRepoFake } = createMealPlanner();
+
+    mealPlanner.addRecipe(burger);
+
+    expect(mealRepoFake.getMealsSync()).toEqual([
+      expect.objectContaining({ name: 'Burger' }),
+    ]);
+  });
+
+  it('should fetch recipes from meal repository', async () => {
+    const { getMealPlanner, mealRepoFake } = setUpMealPlanner();
+
+    mealRepoFake.addMeal(burger);
+
+    const mealPlanner = getMealPlanner();
+    expect(await firstValueFrom(mealPlanner.recipes$)).toEqual([
+      expect.objectContaining({ name: 'Burger' }),
+    ]);
   });
 
   describe('recipes$', () => {
@@ -121,8 +133,31 @@ describe(MealPlanner.name, () => {
   }
 
   function createMealPlanner() {
+    const { getMealPlanner, ...utils } = setUpMealPlanner();
+
     return {
-      mealPlanner: TestBed.inject(MealPlanner),
+      mealPlanner: getMealPlanner(),
+      ...utils,
+    };
+  }
+
+  function setUpMealPlanner() {
+    const mealRepoFake = new MealRepositoryFake();
+
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: MealRepository,
+          useValue: mealRepoFake,
+        },
+      ],
+    });
+
+    return {
+      getMealPlanner() {
+        return TestBed.inject(MealPlanner);
+      },
+      mealRepoFake,
     };
   }
 });

@@ -1,8 +1,10 @@
-/* @todo replace with @jscutlery/cypress-harness/support 
+/* @todo replace with @jscutlery/cypress-harness/support
  * when issue https://github.com/jscutlery/devkit/issues/216 is fixed. */
 import 'cypress-pipe';
 import 'zone.js/testing';
-import { mount } from 'cypress/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Type } from '@angular/core';
+import { mount, MountConfig } from 'cypress/angular';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -19,4 +21,12 @@ Cypress.Commands.add('getByDataRole', (role) => {
   return cy.get(`[data-role="${role}"]`);
 });
 
-Cypress.Commands.add('mount', mount);
+Cypress.Commands.add(
+  'mount',
+  <T>(component: Type<T> | string, config?: MountConfig<T>) => {
+    return mount(component, {
+      ...config,
+      imports: [BrowserAnimationsModule, ...(config?.imports || [])],
+    });
+  }
+);

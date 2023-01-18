@@ -28,15 +28,13 @@ git checkout origin/testing-201-meal-repository-fake apps/whiskmate/src/app/meal
 yarn test --watch
 ```
 
-2. Add test: `it('should add recipe to meal repository', ...)`
+2. Create & provide the spy. _(Cf. [Tip: Create & provide a type-safe spy](#-tip--create--provide-a-type-safe-spy))_
 
-3. Create & provide the spy. _(Cf. [Tip: Create & provide a type-safe spy](#-tip--create--provide-a-type-safe-spy))_
+3. Add a recipe using `mealPlanner.addRecipe(...)`.
 
-4. Add a recipe using `mealPlanner.addRecipe(...)`.
+4. Check that the spies were called properly.
 
-5. Check that the spies were called properly.
-
-6. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+5. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
 # 📝 Steps with a Fake
 
@@ -51,17 +49,34 @@ git checkout origin/testing-201-meal-repository-fake apps/whiskmate/src/app/meal
 yarn test --watch
 ```
 
-2. Add test: `it('should add recipe to meal repository', ...)`
+2. Implement the fake in [`meal-repository.fake.ts`](../apps/whiskmate/src/app/meal-planner/meal-repository.fake.ts) & provide it _(Cf. [Tip: Provide a fake](#-tip--provide-a-fake))_.
 
-3. Implement the fake in [`meal-repository.fake.ts`](../apps/whiskmate/src/app/meal-planner/meal-repository.fake.ts) & provide it _(Cf. [Tip: Provide a fake](#-tip--provide-a-fake))_.
+3. Add a recipe using `mealPlanner.addRecipe(...)`.
 
-4. Add a recipe using `mealPlanner.addRecipe(...)`.
+4. Check that the fake repo contains the added recipe.
 
-5. Check that the fake repo contains the added recipe.
-
-6. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+5. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
 # Appendices
+
+## 🎁 Tip: Create & provide a type-safe spy
+
+```ts
+const myRepoSpy: jest.Mocked<MyRepoDef> = {
+  /* Do not stub the returned value or implementation here
+   * as it won't be type-safe... */
+  getItems: jest.fn()
+};
+
+/* ... do it here instead so it's type-safe. */
+myRepoSpy.getItems.mockReturnValue(of([]));
+
+TestBed.configureTestingModule({
+  providers: [
+    { provide: MyRepo, useValue: myRepoSpy }
+  ]
+});
+```
 
 ## 🎁 Tip: Provide a fake
 

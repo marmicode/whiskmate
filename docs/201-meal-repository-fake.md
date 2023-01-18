@@ -36,7 +36,7 @@ yarn test --watch
 
 5. Check that the spies were called properly.
 
-6. Check out the implementation as mentioned at step 0 if you didn't do it already.
+6. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
 # 📝 Steps with a Fake
 

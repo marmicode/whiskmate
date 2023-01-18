@@ -41,6 +41,8 @@ describe(MealPlanner.name, () => {
     ]);
   });
 
+  it.todo('🚧 should fetch recipes from meal repository');
+
   describe('recipes$', () => {
     it('should emit empty array when no recipes', async () => {
       const { mealPlanner } = createMealPlanner();
@@ -122,6 +124,15 @@ describe(MealPlanner.name, () => {
   }
 
   function createMealPlanner() {
+    const { getMealPlanner, ...utils } = setUpMealPlanner();
+
+    return {
+      mealPlanner: getMealPlanner(),
+      ...utils,
+    };
+  }
+
+  function setUpMealPlanner() {
     const mealRepoFake = new MealRepositoryFake();
 
     TestBed.configureTestingModule({
@@ -134,7 +145,9 @@ describe(MealPlanner.name, () => {
     });
 
     return {
-      mealPlanner: TestBed.inject(MealPlanner),
+      getMealPlanner() {
+        return TestBed.inject(MealPlanner);
+      },
       mealRepoFake,
     };
   }

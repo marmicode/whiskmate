@@ -26,6 +26,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
+    "ct": "nx run-many --target component-test",
     "percy:ct": "percy exec -- nx run-many --target component-test",
     "scrap-ottolenghi": "ts-node -P libs/ottolenghi-scraper/tsconfig.lib.json libs/ottolenghi-scraper/src/main.ts"
   },

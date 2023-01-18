@@ -41,7 +41,16 @@ describe(MealPlanner.name, () => {
     ]);
   });
 
-  it.todo('🚧 should fetch recipes from meal repository');
+  it('should fetch recipes from meal repository', async () => {
+    const { getMealPlanner, mealRepoFake } = setUpMealPlanner();
+
+    mealRepoFake.addMeal(burger);
+
+    const mealPlanner = getMealPlanner();
+    expect(await firstValueFrom(mealPlanner.recipes$)).toEqual([
+      expect.objectContaining({ name: 'Burger' }),
+    ]);
+  });
 
   describe('recipes$', () => {
     it('should emit empty array when no recipes', async () => {

@@ -16,6 +16,11 @@ export class MealPlanner implements OnDestroy {
 
   constructor() {
     this.recipes$ = this._recipes$.asObservable();
+    this._subscription.add(
+      this._mealRepository
+        .getMeals()
+        .subscribe((recipes) => this._recipes$.next(recipes))
+    );
   }
 
   ngOnDestroy() {

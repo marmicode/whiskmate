@@ -5,6 +5,7 @@ import 'cypress-pipe';
 import 'zone.js/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Type } from '@angular/core';
+import { configure } from '@testing-library/cypress';
 import { mount, MountConfig } from 'cypress/angular';
 
 declare global {
@@ -12,15 +13,12 @@ declare global {
   namespace Cypress {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
-      getByDataRole(role: string): Chainable<JQuery<HTMLElement>>;
       mount: typeof mount;
     }
   }
 }
 
-Cypress.Commands.add('getByDataRole', (role) => {
-  return cy.get(`[data-role="${role}"]`);
-});
+configure({ testIdAttribute: 'data-role' });
 
 Cypress.Commands.add(
   'mount',

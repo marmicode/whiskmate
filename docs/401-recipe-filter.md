@@ -33,4 +33,4 @@ yarn test --watch
 
    3. Check that `filterChange` have been triggered.
 
-3. checkout the implementation as mentioned at step 0 if you didn't do it already.
+3. Checkout the implementation as mentioned at step 0 if you didn't do it already.

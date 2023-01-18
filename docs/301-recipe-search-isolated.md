@@ -50,4 +50,4 @@ yarn test --watch
    });
    ```
 
-3. Check out the implementation as mentioned at step 0 if you didn't do it already.
+3. Checkout the implementation as mentioned at step 0 if you didn't do it already.

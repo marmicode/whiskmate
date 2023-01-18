@@ -61,13 +61,7 @@ yarn test whiskmate --watch
 
 2. Implement tests.
 
-3. 🙏🛑 wait until you finish implementing the tests before running: 🛑🙏
-
-```sh
-git checkout origin/testing-02-meal-planner-reactive apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
-```
-
-4. Check out the implementation as mentioned at step 0 if you didn't do it already.
+3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
 
 # Appendices

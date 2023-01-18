@@ -1,10 +1,8 @@
+import '@jscutlery/cypress-harness/support-ct';
+import '@percy/cypress';
 import '@testing-library/cypress/add-commands';
-/* @todo replace with @jscutlery/cypress-harness/support
- * when issue https://github.com/jscutlery/devkit/issues/216 is fixed. */
-import 'cypress-pipe';
-import 'zone.js/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Type } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { configure } from '@testing-library/cypress';
 import { mount, MountConfig } from 'cypress/angular';
 

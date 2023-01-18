@@ -5,6 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { firstValueFrom } from 'rxjs';
 import { MealPlanner } from '../meal-planner/meal-planner.service';
+import { provideLocalStorageFake } from '../shared/local-storage.fake';
 import { recipeMother } from '../testing/recipe.mother';
 import { RecipeFilter } from './recipe-filter';
 import { RecipeRepository } from './recipe-repository.service';
@@ -80,6 +81,7 @@ describe(RecipeSearchComponent.name, () => {
           provide: RecipeRepository,
           useValue: fakeRepo,
         },
+        provideLocalStorageFake(),
       ],
     });
 

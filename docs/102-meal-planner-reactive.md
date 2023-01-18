@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-01-meal-planner
+git checkout origin/testing-101-meal-planner
 
 yarn
 ```
@@ -24,10 +24,15 @@ class MealPlanner {
 
 # 📝 Steps
 
+0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
+```sh
+git checkout origin/testing-102-meal-planner-reactive apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+```
+
 1. Run tests:
 
 ```sh
-yarn test whiskmate --watch
+yarn test --watch
 ```
 
 2. Implement tests.
@@ -61,6 +66,9 @@ yarn test whiskmate --watch
 ```sh
 git checkout origin/testing-02-meal-planner-reactive apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
+
+4. Check out the implementation as mentioned at step 0 if you didn't do it already.
+
 
 # Appendices
 

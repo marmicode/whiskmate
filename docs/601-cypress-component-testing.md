@@ -1,18 +1,18 @@
 # Setup
 
 ```sh
-git checkout origin/testing-20-cypress-component-testing-boilerplate
+git checkout origin/testing-600-cypress-component-testing-boilerplate
 
 yarn
 ```
 
-# 🎯 Goal: Test `<wm-recipe-search>` using Cypress Component Testing & Harnesses
+# 🎯 Goal: Test `RecipeSearchComponent` using Cypress Component Testing & Harnesses
 
 Thanks to [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction), we can isolate a component or a block and test it in Cypress.
 
-The fun part is that we can reuse our harnesses using [@jscutlery/cypress-harness](https://github.com/jscutlery/test-utils/tree/main/packages/cypress-harness).
+The fun part is that we can reuse our harnesses using [@jscutlery/cypress-harness](https://github.com/jscutlery/devkit/tree/main/packages/cypress-harness).
 
-Let's test `<wm-recipe-search>` in Cypress.
+Let's test `RecipeSearchComponent` in Cypress.
 
 # 📝 Steps
 
@@ -29,10 +29,10 @@ Let's test `<wm-recipe-search>` in Cypress.
 1. Run Cypress in component testing mode:
 
 ```sh
-yarn nx component-test whiskmate --watch
+yarn ct --watch
 ```
 
-1. Open `recipe-search.cy.ts`.
+1. Open [`recipe-search.cy.ts`](apps/whiskmate/src/app/recipe/recipe-search.cy.ts).
 
 2. Have fun with the `RecipeSearchHarness` and implement the 3 tests.
 

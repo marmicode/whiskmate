@@ -29,6 +29,8 @@ describe(MealPlanner.name, () => {
     );
   });
 
+  it.todo('🚧 should add recipe to meal repository');
+
   describe('recipes$', () => {
     it('should emit empty array when no recipes', async () => {
       const { mealPlanner } = createMealPlanner();

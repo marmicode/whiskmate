@@ -1,26 +1,26 @@
 # Setup
 
 ```sh
-git checkout origin/testing-15-recipe-filter-material
+git checkout origin/testing-500-recipe-filter-material-harness-boilerplate
 
 yarn
 ```
 
 # 🎯 Goal: Test `<wm-recipe-filter>` using `MatInputHarness`
 
-Update `recipe-filter.component.spec.ts` using `MatInputHarness`.
+Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts) using `MatInputHarness`.
 
 # 📝 Steps
 
 1. Run tests:
 
 ```sh
-yarn test whiskmate --watch
+yarn test --watch
 ```
 
 2. Implement tests:
 
-   1. Open `recipe-filter.component.spec.ts`.
+   1. Open [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts).
 
    2. Instantiate a `HarnessLoader`:
 

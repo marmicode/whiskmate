@@ -11,10 +11,6 @@
     "prefix": "thrownie",
     "body": ["throw new Error('🚧 Not implemented error!');"]
   },
-  "Throw work in progress": {
-    "prefix": "throwwip",
-    "body": ["throw new Error('🚧 Work in progress!');"]
-  },
   "Tap console.log": {
     "prefix": "tcl",
     "body": "tap(console.log)"
@@ -30,18 +26,17 @@
       "export class $1 {}"
     ]
   },
-  "SFC": {
-    "prefix": "sfc",
+  "Angular Component": {
+    "prefix": "ngc",
     "body": [
-      "import { CommonModule } from '@angular/common';",
       "import { ChangeDetectionStrategy, Component } from '@angular/core';",
       "",
       "@Component({",
-      "  standalone: true,",
       "  changeDetection: ChangeDetectionStrategy.OnPush,",
+      "  standalone: true,",
       "  selector: '$2',",
-      "  imports: [CommonModule],",
-      "  template: `🚧 &lt;$2&gt;`",
+      "  imports: [],",
+      "  template: `🚧 &lt;$2&gt; 🚧`",
       "})",
       "export class $1Component {}"
     ]

@@ -1,14 +1,14 @@
 # Setup
 
 ```sh
-git checkout origin/testing-00-boilerplate
+git checkout origin/testing-100-meal-planner-boilerplate
 
 yarn
 ```
 
 # 🎯 Goal #1: Test `MealPlanner` service
 
-`MealPlanner` is a stateful service that stores recipes that the user selects from a recipe catalog.
+`MealPlanner` is a stateful service storing recipes that the user selects from a recipe catalog.
 
 **Implement tests** for a class called `MealPlanner` with the following methods:
 
@@ -21,8 +21,14 @@ yarn
 
 # 📝 Steps
 
-1. Create `apps/whiskmate/src/app/meal-planner/meal-planner.spec.ts` _(Cf. use [example below](#test-example))_
-2. You can import `Recipe` from `apps/whiskmate/src/app/recipe/recipe.ts`
+0. [optional] you can either checkout the `MealPlanner` implementation first or go full-on TDD and implement the tests first.
+```sh
+git checkout origin/testing-101-meal-planner apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+```
+
+1. Go to [`apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts`](../apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts) _(Cf. use [example below](#test-example))_
+2. 
+3. You can import `Recipe` from `apps/whiskmate/src/app/recipe/recipe.ts`
 
 ```ts
 import { Recipe } from '../recipe/recipe';
@@ -31,10 +37,12 @@ import { Recipe } from '../recipe/recipe';
 3. Run tests:
 
 ```sh
-yarn test whiskmate --watch
+yarn test --watch
 ```
 
 4. Implement tests.
+
+5. Check out the implementation as mentioned at step 0 if you didn't do it already.
 
 # 🎯 Goal #2: Test `MealPlanner.canAddRecipe`
 
@@ -46,23 +54,17 @@ yarn test whiskmate --watch
 
 ## Business rules
 
-1. Recipe can only be added if not already present. (i.e. recipes can't be added twice)
+1. Recipe can only be added if not already present. _(i.e. recipes can't be added twice)_
 
 # 📝 Steps
 
 1. Run tests:
 
 ```sh
-yarn test whiskmate --watch
+yarn test --watch
 ```
 
 2. Implement tests.
-
-3. 🙏🛑 wait until you finish implementing the tests before running: 🛑🙏
-
-```sh
-git checkout origin/testing-01-meal-planner apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
-```
 
 # Appendices
 
@@ -83,7 +85,9 @@ describe(Calculator.name, () => {
   });
 
   function createCalculator() {
-    return new Calculator();
+    return {
+      calculator: new Calculator(),
+    };
   }
 });
 ```

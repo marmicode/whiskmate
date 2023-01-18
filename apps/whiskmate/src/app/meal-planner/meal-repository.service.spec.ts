@@ -9,19 +9,48 @@ describe(MealRepository.name, () => {
   const burger = recipeMother.withBasicInfo('Burger').build();
   const salad = recipeMother.withBasicInfo('Salad').build();
 
-  it.todo('🚧 should add recipe');
+  it('should add recipe', async () => {
+    const { mealRepo } = createMealRepository();
 
-  it.todo('🚧 should return empty array when storage is empty');
+    await lastValueFrom(mealRepo.addMeal(burger));
+    await lastValueFrom(mealRepo.addMeal(salad));
 
-  it.todo('🚧 should return empty array when storage value is invalid');
+    expect(await lastValueFrom(mealRepo.getMeals())).toEqual([
+      expect.objectContaining({ name: 'Burger' }),
+      expect.objectContaining({ name: 'Salad' }),
+    ]);
+  });
+
+  it('should return empty array when storage is empty', async () => {
+    const { mealRepo } = createMealRepository();
+
+    expect(await lastValueFrom(mealRepo.getMeals())).toEqual([]);
+  });
+
+  it('should return empty array when storage value is invalid', async () => {
+    const { mealRepo, setStorageValue } = createMealRepository();
+
+    setStorageValue('invalid-value');
+
+    expect(await lastValueFrom(mealRepo.getMeals())).toEqual([]);
+  });
 
   function createMealRepository() {
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: LocalStorage,
+          useClass: LocalStorageFake,
+        },
+      ],
+    });
+
     const mealRepo = TestBed.inject(MealRepository);
 
     return {
       mealRepo,
       setStorageValue(value: string) {
-        // @todo
+        TestBed.inject(LocalStorage).setItem('meals', value);
       },
     };
   }

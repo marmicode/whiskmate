@@ -25,7 +25,7 @@ yarn ct --watch
 cy.findByLabelText('Keywords').type('...');
 ```
 
-4. Spy on the `filterChange` output _(Cf. )_ and check that it was called with the right filter object.
+4. Spy on the `filterChange` output _(Cf. [🎁 Tip: Spying on component outputs](#-tip--spying-on-component-outputs))_ and check that it was called with the right filter object.
 
 # Appendices
 

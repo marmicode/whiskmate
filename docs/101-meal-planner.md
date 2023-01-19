@@ -12,12 +12,12 @@ yarn
 
 **Implement tests** for a class called `MealPlanner` with the following methods:
 
-1. `addRecipe(recipe: Recipe)`: adds new recipes.
-2. `getRecipes(): Recipe[]`: returns the list of recipes added.
+- `addRecipe(recipe: Recipe)`: adds new recipes.
+- `getRecipes(): Recipe[]`: returns the list of recipes added.
 
 ## Business rules
 
-1. `addRecipe` should throw an error if a recipe has already being added.
+- `addRecipe` should throw an error if a recipe has already being added.
 
 # 📝 Steps
 
@@ -27,8 +27,8 @@ git checkout origin/testing-101-meal-planner apps/whiskmate/src/app/meal-planner
 ```
 
 1. Go to [`apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts`](../apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts) _(Cf. use [example below](#test-example))_
-2. 
-3. You can import `Recipe` from `apps/whiskmate/src/app/recipe/recipe.ts`
+
+2. You can import `Recipe` from `apps/whiskmate/src/app/recipe/recipe.ts`
 
 ```ts
 import { Recipe } from '../recipe/recipe';
@@ -50,11 +50,11 @@ yarn test --watch
 
 **Implement tests** for the new method:
 
-1. `canAddRecipe(recipe: Recipe): boolean`: returns true if recipe can be added and false otherwise.
+- `canAddRecipe(recipe: Recipe): boolean`: returns true if recipe can be added and false otherwise.
 
 ## Business rules
 
-1. Recipe can only be added if not already present. _(i.e. recipes can't be added twice)_
+- Recipe can only be added if not already present. _(i.e. recipes can't be added twice)_
 
 # 📝 Steps
 

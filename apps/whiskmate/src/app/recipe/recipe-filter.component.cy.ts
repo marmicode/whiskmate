@@ -1,5 +1,5 @@
 import { RecipeFilterComponent } from './recipe-filter.component';
-import { spyOutput } from '../../testing/cypress-observer';
+import { spyOutput } from '../../../cypress/support/spy-output';
 
 describe(RecipeFilterComponent.name, () => {
   xit('🚧 should trigger filterChange output', () => {

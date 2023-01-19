@@ -4,10 +4,10 @@ import { getHarness } from '@jscutlery/cypress-harness';
 import { RecipePreviewHarness } from './recipe-preview.harness';
 
 describe(RecipePreviewComponent.name, () => {
-  xit('should show recipe name', () => {
+  it('should show recipe name', () => {
     const { harness } = renderComponent();
 
-    throw new Error('🚧 work in progress!');
+    harness.getName().should('eql', 'Burger');
   });
 
   function renderComponent() {

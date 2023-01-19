@@ -1,15 +1,16 @@
 import { RecipeFilterComponent } from './recipe-filter.component';
-import { RecipeFilter } from './recipe-filter';
-import { spyOutput } from '../../testing/cypress-observer';
-import { SinonStub } from 'cypress/types/sinon';
+import { getHarness } from '@jscutlery/cypress-harness';
+import { RecipeFilterHarness } from './recipe-filter.harness';
 
 describe(RecipeFilterComponent.name, () => {
   it('should trigger filterChange output', () => {
-    const { getFilterChangeSpy, typeInput } = renderComponent();
+    const { getFilterChangeSpy, harness } = renderComponent();
 
-    typeInput('Keywords', 'Burger');
-    typeInput('Max Ingredients', '3');
-    typeInput('Max Steps', '5');
+    harness.setValue({
+      keywords: 'Burger',
+      maxIngredientCount: 3,
+      maxStepCount: 5,
+    });
 
     getFilterChangeSpy().should('have.been.calledWith', {
       keywords: 'Burger',
@@ -19,17 +20,20 @@ describe(RecipeFilterComponent.name, () => {
   });
 
   function renderComponent() {
-    cy.mount(RecipeFilterComponent).then(spyOutput('filterChange'));
+    cy.mount(
+      '<wm-recipe-filter (filterChange)="onFilterChange($event)"></wm-recipe-filter>',
+      {
+        imports: [RecipeFilterComponent],
+        componentProperties: {
+          onFilterChange: cy.spy().as('filterChange'),
+        },
+      }
+    );
 
     return {
-      typeInput(
-        inputLabel: 'Keywords' | 'Max Ingredients' | 'Max Steps',
-        keywords: string
-      ) {
-        cy.findByLabelText(inputLabel).type(keywords, { force: true });
-      },
+      harness: getHarness(RecipeFilterHarness),
       getFilterChangeSpy() {
-        return cy.get<SinonStub<[RecipeFilter]>>('@filterChange');
+        return cy.get('@filterChange');
       },
     };
   }

@@ -6,36 +6,34 @@ import { MealPlanner } from '../meal-planner/meal-planner.service';
 import { firstValueFrom } from 'rxjs';
 import { MealRepositoryFake } from '../meal-planner/meal-repository.fake';
 import { MealRepository } from '../meal-planner/meal-repository.service';
+import { getHarness } from '@jscutlery/cypress-harness';
+import { RecipeSearchHarness } from './recipe-search.harness';
 
 describe(RecipeSearchComponent.name, () => {
   it('should show recipes', () => {
-    const { findRecipeNames } = renderComponent();
+    const { harness } = renderComponent();
 
-    findRecipeNames().should('have.length', 2);
-    findRecipeNames().eq(0).should('have.text', 'Burger');
-    findRecipeNames().eq(1).should('have.text', 'Salad');
+    harness.getRecipeNames().should('deep.equal', ['Burger', 'Salad']);
   });
 
   it('should filter recipes', () => {
-    const { findRecipeNames, setFilter } = renderComponent();
+    const { harness } = renderComponent();
 
-    setFilter({ keywords: 'Bur' });
+    harness.getFilter().setValue({ keywords: 'Bur' });
 
-    findRecipeNames().should('have.length', 1);
-    findRecipeNames().eq(0).should('have.text', 'Burger');
+    harness.getRecipeNames().should('deep.equal', ['Burger']);
   });
 
   it('should add recipe to meal plan', () => {
-    const { clickFirstAddButton, getMealPlannerRecipeNames } =
-      renderComponent();
+    const { harness, getMealPlannerRecipeNames } = renderComponent();
 
-    clickFirstAddButton();
+    harness.getFirstRecipeAddButton().invoke('click');
 
     getMealPlannerRecipeNames().should('eql', ['Burger']);
   });
 
   it('should disable add button if recipe is already in meal plan', () => {
-    const { mealRepoFake, findFirstAddButton, render } = setUpComponent();
+    const { mealRepoFake, harness, render } = setUpComponent();
 
     cy.then(() =>
       mealRepoFake.addMeal(recipeMother.withBasicInfo('Burger').build())
@@ -43,7 +41,7 @@ describe(RecipeSearchComponent.name, () => {
 
     render();
 
-    findFirstAddButton().should('be.disabled');
+    harness.getFirstRecipeAddButton().isDisabled().should('be.true');
   });
 
   function renderComponent() {
@@ -63,22 +61,9 @@ describe(RecipeSearchComponent.name, () => {
       recipeMother.withBasicInfo('Salad').build(),
     ]);
 
-    function findFirstAddButton() {
-      return cy.findAllByRole('button', { name: 'ADD' }).first();
-    }
-
     return {
+      harness: getHarness(RecipeSearchHarness),
       mealRepoFake,
-      clickFirstAddButton() {
-        return findFirstAddButton().click();
-      },
-      findFirstAddButton,
-      findRecipeNames() {
-        return cy.findAllByTestId('recipe-name');
-      },
-      setFilter({ keywords }: { keywords: string }) {
-        return cy.findByLabelText('Keywords').type(keywords);
-      },
       getMealPlannerRecipeNames() {
         return cy.inject(MealPlanner).then(async (mealPlanner) => {
           const recipes = await firstValueFrom(mealPlanner.recipes$);
@@ -86,7 +71,8 @@ describe(RecipeSearchComponent.name, () => {
         });
       },
       render() {
-        cy.mount(RecipeSearchComponent, {
+        cy.mount('<wm-recipe-search></wm-recipe-search>', {
+          imports: [RecipeSearchComponent],
           providers: [
             {
               provide: RecipeRepository,

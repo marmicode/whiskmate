@@ -1,5 +1,5 @@
-import { RecipeFilterComponent } from './recipe-filter.component';
 import { getHarness } from '@jscutlery/cypress-harness';
+import { RecipeFilterComponent } from './recipe-filter.component';
 import { RecipeFilterHarness } from './recipe-filter.harness';
 
 describe(RecipeFilterComponent.name, () => {

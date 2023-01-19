@@ -18,10 +18,7 @@ export const spyOutput =
     return args;
   };
 
-/**
- * Useful helper to spy on observables.
- */
-export function observe(source$: Observable<unknown>) {
+function observe(source$: Observable<unknown>) {
   const observer = cy.stub();
   subscription.add(source$.subscribe(observer));
   return observer;

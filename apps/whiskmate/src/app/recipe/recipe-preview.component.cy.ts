@@ -8,6 +8,8 @@ describe(RecipePreviewComponent.name, () => {
     const { harness } = renderComponent();
 
     harness.getName().should('eql', 'Burger');
+
+    cy.percySnapshot();
   });
 
   function renderComponent() {

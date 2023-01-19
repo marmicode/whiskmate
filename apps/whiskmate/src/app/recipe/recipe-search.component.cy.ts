@@ -14,6 +14,8 @@ describe(RecipeSearchComponent.name, () => {
     const { harness } = renderComponent();
 
     harness.getRecipeNames().should('deep.equal', ['Burger', 'Salad']);
+
+    cy.percySnapshot();
   });
 
   it('should filter recipes', () => {
@@ -42,6 +44,8 @@ describe(RecipeSearchComponent.name, () => {
     render();
 
     harness.getFirstRecipeAddButton().isDisabled().should('be.true');
+
+    cy.percySnapshot();
   });
 
   function renderComponent() {

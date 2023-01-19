@@ -17,6 +17,8 @@ describe(RecipeFilterComponent.name, () => {
       maxIngredientCount: 3,
       maxStepCount: 5,
     });
+
+    cy.percySnapshot();
   });
 
   function renderComponent() {

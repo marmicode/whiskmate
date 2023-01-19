@@ -35,6 +35,12 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-502-recipe-filter-harness \
   testing-503-recipe-search-harness \
   testing-504-recipe-search-harness-testing \
-  testing-600-cypress-component-testing-boilerplate \
-  testing-601-cypress-component-testing \
-  testing-602-visual-regression-testing
+  testing-600-recipe-preview-ct-boilerplate \
+  testing-601-recipe-preview-ct \
+  testing-602-recipe-filter-ct-boilerplate \
+  testing-603-recipe-filter-ct \
+  testing-604-recipe-search-ct-boilerplate \
+  testing-605-recipe-search-ct \
+  testing-606-ct-harness-boilerplate \
+  testing-607-ct-harness \
+  testing-608-visual-regression-testing

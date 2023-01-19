@@ -1,7 +1,7 @@
+import { SinonStub } from 'cypress/types/sinon';
 import { RecipeFilterComponent } from './recipe-filter.component';
 import { RecipeFilter } from './recipe-filter';
-import { spyOutput } from '../../testing/cypress-observer';
-import { SinonStub } from 'cypress/types/sinon';
+import { spyOutput } from '../../../cypress/support/spy-output';
 
 describe(RecipeFilterComponent.name, () => {
   it('should trigger filterChange output', () => {

@@ -24,9 +24,14 @@ describe(RecipeFilterComponent.name, () => {
     return {
       typeInput(
         inputLabel: 'Keywords' | 'Max Ingredients' | 'Max Steps',
-        keywords: string
+        value: string
       ) {
-        cy.findByLabelText(inputLabel).type(keywords, { force: true });
+        /* We have to click on the label first.
+         * Otherwise, the label catches the click when we try to click on the input.
+         * The other alternative is using the `force` option but this can cause false negatives,
+         * and we might miss issues likes overlays or layout errors. */
+        cy.findByText(inputLabel).click();
+        cy.findByLabelText(inputLabel).type(value);
       },
       getFilterChangeSpy() {
         return cy.get<SinonStub<[RecipeFilter]>>('@filterChange');

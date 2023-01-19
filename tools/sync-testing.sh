@@ -17,6 +17,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-203-meal-planner-indirect-input \
   testing-204-meal-repository-boilerplate \
   testing-205-meal-repository \
+  testing-206-meal-repository-contract \
   testing-300-recipe-search-boilerplate \
   testing-301-recipe-search-isolated-boilerplate \
   testing-302-recipe-search-isolated \

@@ -11,10 +11,10 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-100-meal-planner-boilerplate \
   testing-101-meal-planner \
   testing-102-meal-planner-reactive \
-  testing-200-meal-repository-fake-boilerplate \
-  testing-201-meal-repository-fake \
-  testing-202-meal-repository-sync-boilerplate \
-  testing-203-meal-repository-sync \
+  testing-200-meal-planner-indirect-output-boilerplate \
+  testing-201-meal-planner-indirect-output \
+  testing-202-meal-planner-indirect-input-boilerplate \
+  testing-203-meal-planner-indirect-input \
   testing-204-meal-repository-boilerplate \
   testing-205-meal-repository \
   testing-300-recipe-search-boilerplate \

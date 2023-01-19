@@ -8,39 +8,96 @@ import { MealRepositoryFake } from '../meal-planner/meal-repository.fake';
 import { MealRepository } from '../meal-planner/meal-repository.service';
 
 describe(RecipeSearchComponent.name, () => {
-  xit('🚧 should show recipes', () => {
-    throw new Error('🚧 work in progress!');
+  it('should show recipes', () => {
+    const { findRecipeNames } = renderComponent();
+
+    findRecipeNames().should('have.length', 2);
+    findRecipeNames().eq(0).should('have.text', 'Burger');
+    findRecipeNames().eq(1).should('have.text', 'Salad');
   });
 
-  xit('🚧 should filter recipes', () => {
-    throw new Error('🚧 work in progress!');
+  it('should filter recipes', () => {
+    const { findRecipeNames, setFilter } = renderComponent();
+
+    setFilter({ keywords: 'Bur' });
+
+    findRecipeNames().should('have.length', 1);
+    findRecipeNames().eq(0).should('have.text', 'Burger');
   });
 
-  xit('🚧 should add recipe to meal plan', () => {
-    throw new Error('🚧 work in progress!');
+  it('should add recipe to meal plan', () => {
+    const { clickFirstAddButton, getMealPlannerRecipeNames } =
+      renderComponent();
+
+    clickFirstAddButton();
+
+    getMealPlannerRecipeNames().should('eql', ['Burger']);
   });
 
-  xit('🚧 should disable add button if recipe is already in meal plan', () => {
-    throw new Error('🚧 work in progress!');
+  it('should disable add button if recipe is already in meal plan', () => {
+    const { mealRepoFake, findFirstAddButton, render } = setUpComponent();
+
+    cy.then(() =>
+      mealRepoFake.addMeal(recipeMother.withBasicInfo('Burger').build())
+    );
+
+    render();
+
+    findFirstAddButton().should('be.disabled');
   });
 
   function renderComponent() {
-    cy.mount(RecipeSearchComponent, {
-      providers: [],
-    });
+    const { render, ...utils } = setUpComponent();
+
+    render();
+
+    return { ...utils };
+  }
+
+  function setUpComponent() {
+    const recipeRepoFake = new RecipeRepositoryFake();
+    const mealRepoFake = new MealRepositoryFake();
+
+    recipeRepoFake.setRecipes([
+      recipeMother.withBasicInfo('Burger').build(),
+      recipeMother.withBasicInfo('Salad').build(),
+    ]);
+
+    function findFirstAddButton() {
+      return cy.findAllByRole('button', { name: 'ADD' }).first();
+    }
 
     return {
-      findFirstAddButton() {
-        throw new Error('🚧 work in progress!');
+      mealRepoFake,
+      clickFirstAddButton() {
+        return findFirstAddButton().click();
       },
+      findFirstAddButton,
       findRecipeNames() {
-        throw new Error('🚧 work in progress!');
-      },
-      getMealPlannerRecipeNames() {
-        throw new Error('🚧 work in progress!');
+        return cy.findAllByTestId('recipe-name');
       },
       setFilter({ keywords }: { keywords: string }) {
-        throw new Error('🚧 work in progress!');
+        return cy.findByLabelText('Keywords').type(keywords);
+      },
+      getMealPlannerRecipeNames() {
+        return cy.inject(MealPlanner).then(async (mealPlanner) => {
+          const recipes = await firstValueFrom(mealPlanner.recipes$);
+          return recipes.map((recipe) => recipe.name);
+        });
+      },
+      render() {
+        cy.mount(RecipeSearchComponent, {
+          providers: [
+            {
+              provide: RecipeRepository,
+              useValue: recipeRepoFake,
+            },
+            {
+              provide: MealRepository,
+              useValue: mealRepoFake,
+            },
+          ],
+        });
       },
     };
   }

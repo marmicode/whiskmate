@@ -3,15 +3,7 @@ export default {
   displayName: 'whiskmate',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
-    },
-  },
-  moduleNameMapper: {
-    '!!file-loader!(.*)': '$1',
-  },
+  globals: {},
   coverageDirectory: '../../coverage/apps/whiskmate',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
@@ -19,8 +11,13 @@ export default {
     'jest-preset-angular/build/serializers/html-comment',
   ],
   transform: {
-    '^.+\\.(ts|js|mjs|html)$': 'jest-preset-angular',
-    '^.+\\.jpg$': 'jest-file-loader',
+    '^.+\\.(ts|js|mjs|html)$': [
+      'jest-preset-angular',
+      {
+        tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.(html|svg)$',
+      },
+    ],
   },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
 };

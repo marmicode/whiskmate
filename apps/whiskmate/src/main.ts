@@ -1,17 +1,14 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { environment } from './environments/environment';
+import { enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+
+import { appConfig } from './app/app.config';
+import { environment } from './environments/environment';
 import { AppComponent } from './app/app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 
 if (environment.production) {
   enableProdMode();
 }
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    importProvidersFrom(BrowserAnimationsModule),
-    importProvidersFrom(HttpClientModule),
-  ],
-}).catch((err) => console.error(err));
+bootstrapApplication(AppComponent, appConfig).catch((err) =>
+  console.error(err)
+);

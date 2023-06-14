@@ -17,7 +17,7 @@ Let's clean up our `RecipeSearchComponent` tests from DOM logic and use the `Rec
 0. [✅ Already done] Set up Cypress Harness
 
 ```sh
-nx g @nrwl/angular:cypress-component-configuration whiskmate
+nx g @nx/angular:cypress-component-configuration whiskmate
 
 # Setup @jscutlery/cypress-harness
 yarn add -D  @jscutlery/cypress-harness cypress-pipe

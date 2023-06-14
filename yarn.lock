@@ -3204,9 +3204,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jscutlery/cypress-harness@npm:0.4.2":
-  version: 0.4.2
-  resolution: "@jscutlery/cypress-harness@npm:0.4.2"
+"@jscutlery/cypress-harness@npm:0.4.4":
+  version: 0.4.4
+  resolution: "@jscutlery/cypress-harness@npm:0.4.4"
   dependencies:
     "@cypress/webpack-batteries-included-preprocessor": ^2.2.4
     "@cypress/webpack-preprocessor": ^5.0.0
@@ -3217,7 +3217,7 @@ __metadata:
     cypress-pipe: "*"
     tslib: 2.4.0
     zone.js: "*"
-  checksum: 65e44eee197c58c969292572a054982edf313543ecabfd919baa6444348e3340a718d291b714dcf04afe0c10ea57e0603e6be0642957ac36b25a9b4798b2a4f6
+  checksum: b688f431e61ac4831f4dd840fb44e0bf98fd93cdc466b3364b18a78bf3fa0ae58db06a27bcfaff5534835d8ec451083db3b9a2fb254e8458d9b69c1b9c724385
   languageName: node
   linkType: hard
 
@@ -7810,7 +7810,7 @@ __metadata:
     "@angular/platform-browser-dynamic": 16.0.6
     "@angular/router": 16.0.6
     "@cypress/webpack-dev-server": ^2.0.0
-    "@jscutlery/cypress-harness": 0.4.2
+    "@jscutlery/cypress-harness": 0.4.4
     "@jscutlery/operators": ^0.1.6
     "@nx/angular": 16.3.2
     "@nx/cypress": 16.3.2

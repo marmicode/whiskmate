@@ -59,7 +59,7 @@
     "@angular/compiler-cli": "16.0.6",
     "@angular/language-service": "16.0.6",
     "@cypress/webpack-dev-server": "^2.0.0",
-    "@jscutlery/cypress-harness": "0.4.2",
+    "@jscutlery/cypress-harness": "0.4.4",
     "@jscutlery/operators": "^0.1.6",
     "@nx/cypress": "16.3.2",
     "@nx/eslint-plugin": "16.3.2",

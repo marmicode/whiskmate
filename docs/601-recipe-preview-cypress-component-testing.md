@@ -15,8 +15,9 @@ Let's test that `RecipeSearchComponent` is showing the recipe name properly.
 # 📝 Steps
 
 0. [✅ Already done] Set up Cypress Component Testing
+
 ```sh
-nx g @nrwl/angular:cypress-component-configuration whiskmate
+nx g @nx/angular:cypress-component-configuration whiskmate
 ```
 
 1. Run Cypress in component testing mode:
@@ -28,6 +29,7 @@ yarn ct --watch
 2. Open [`recipe-preview.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts).
 
 3. `RecipePreviewComponent` needs a `recipe` input. You can create a recipe using the `recipeMother` object mother and passing along to the component using the `componentProperties` option. e.g.:
+
 ```ts
 cy.mount(GreetingsComponent, {
   componentProperties: {
@@ -37,7 +39,7 @@ cy.mount(GreetingsComponent, {
 ```
 
 4. Check that the recipe name is shown.
- 
+
 There are different ways to achieve this. We can use the `cy.get()` command to find the right element and check its text but the selector would be coupled to the implementation details.
 
 Instead, we can use the `cy.contains()` command which is more resilient to changes in the DOM but it isn't as precise as `cy.get()`.

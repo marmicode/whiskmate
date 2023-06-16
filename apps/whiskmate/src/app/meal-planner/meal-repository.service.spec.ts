@@ -9,22 +9,33 @@ describe(MealRepository.name, () => {
   verifyMealRepositoryContract(createMealRepository);
 
   it('should return empty array when storage value is invalid', async () => {
-    const { mealRepo, setStorageValue } = createMealRepository();
+    const { getMealRepo, setStorageValue } = setUpMealRepository();
 
     setStorageValue('invalid-value');
+
+    /* Instantiate the repository once the storage is set up. */
+    const mealRepo = getMealRepo();
 
     expect(await lastValueFrom(mealRepo.getMeals())).toEqual([]);
   });
 
   function createMealRepository() {
+    const { getMealRepo, ...utils } = setUpMealRepository();
+    return {
+      ...utils,
+      mealRepo: getMealRepo(),
+    };
+  }
+
+  function setUpMealRepository() {
     TestBed.configureTestingModule({
       providers: [provideLocalStorageFake()],
     });
 
-    const mealRepo = TestBed.inject(MealRepository);
-
     return {
-      mealRepo,
+      getMealRepo() {
+        return TestBed.inject(MealRepository);
+      },
       setStorageValue(value: string) {
         TestBed.inject(LocalStorage).setItem('meals', value);
       },

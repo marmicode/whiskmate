@@ -38,7 +38,7 @@ export class MealRepository implements MealRepositoryDef {
 
     try {
       return JSON.parse(rawValue);
-    } catch (error) {
+    } catch {
       return [];
     }
   }

@@ -2,7 +2,6 @@
 export default {
   displayName: 'ottolenghi-scraper',
   preset: '../../jest.preset.js',
-  globals: {},
   transform: {
     '^.+\\.[tj]sx?$': [
       'ts-jest',

@@ -3,11 +3,8 @@ import { MealPlanner } from './meal-planner.service';
 import { recipeMother } from '../testing/recipe.mother';
 
 describe(MealPlanner.name, () => {
-  const burger = recipeMother.withBasicInfo('Burger').build();
-  const salad = recipeMother.withBasicInfo('Salad').build();
-
   it('should add recipe', () => {
-    const { mealPlanner } = createMealPlanner();
+    const { mealPlanner, burger, salad } = createMealPlanner();
 
     mealPlanner.addRecipe(burger);
     mealPlanner.addRecipe(salad);
@@ -19,38 +16,41 @@ describe(MealPlanner.name, () => {
   });
 
   it('should not allow recipe duplicates', () => {
-    const { mealPlanner } = createMealPlannerWithBurger();
+    const { mealPlanner, burgerDuplicate } = createMealPlannerWithBurger();
 
-    expect(mealPlanner.canAddRecipe(burger)).toBe(false);
+    expect(mealPlanner.canAddRecipe(burgerDuplicate)).toBe(false);
   });
 
   it('should allow new recipes', () => {
-    const { mealPlanner } = createMealPlannerWithBurger();
+    const { mealPlanner, salad } = createMealPlannerWithBurger();
 
     expect(mealPlanner.canAddRecipe(salad)).toBe(true);
   });
 
   it('should throw error if recipe is already present', () => {
-    const { mealPlanner } = createMealPlannerWithBurger();
+    const { mealPlanner, burgerDuplicate } = createMealPlannerWithBurger();
 
-    expect(() => mealPlanner.addRecipe(burger)).toThrowError(
+    expect(() => mealPlanner.addRecipe(burgerDuplicate)).toThrowError(
       `Can't add recipe.`
     );
   });
 
   function createMealPlannerWithBurger() {
-    const { mealPlanner, ...rest } = createMealPlanner();
+    const { mealPlanner, burger, ...utils } = createMealPlanner();
 
     mealPlanner.addRecipe(burger);
 
     return {
       mealPlanner,
-      ...rest,
+      ...utils,
     };
   }
 
   function createMealPlanner() {
     return {
+      burger: recipeMother.withBasicInfo('Burger').build(),
+      burgerDuplicate: recipeMother.withBasicInfo('Burger').build(),
+      salad: recipeMother.withBasicInfo('Salad').build(),
       mealPlanner: TestBed.inject(MealPlanner),
     };
   }

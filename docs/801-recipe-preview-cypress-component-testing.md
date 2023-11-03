@@ -10,7 +10,7 @@ Thanks to [Cypress Component Testing](https://docs.cypress.io/guides/component-t
 
 Let's test that `RecipeSearchComponent` is showing the recipe name properly.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [✅ Already done] Set up Cypress Component Testing
 

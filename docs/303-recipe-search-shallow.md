@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-307-recipe-search-shallow-starter
+git checkout origin/testing-306-recipe-search-shallow-starter
 ```
 
 # 🎯 Goal: Test `<wm-recipe-search>`

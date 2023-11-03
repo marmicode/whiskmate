@@ -48,3 +48,6 @@ Thumbs.db
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.nx/cache
+
+.cache

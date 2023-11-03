@@ -49,3 +49,5 @@ Thumbs.db
 !.yarn/sdks
 !.yarn/versions
 .nx/cache
+
+.cache

@@ -96,6 +96,13 @@
         "skipServe": true,
         "devServerTarget": "whiskmate:build"
       }
+    },
+    "test-ui": {
+      "executor": "@nx/playwright:playwright",
+      "outputs": ["{workspaceRoot}/dist/.playwright/apps/whiskmate"],
+      "options": {
+        "config": "apps/whiskmate/playwright.config.ts"
+      }
     }
   },
   "tags": []

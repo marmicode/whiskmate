@@ -7,7 +7,7 @@ TOOLS_PATH="$(dirname $0)"
 ${TOOLS_PATH}/cascade-changes.sh \
   $* \
   base \
-  testing-000-boilerplate \
+  testing-000-starter \
   testing-100-meal-planner-boilerplate \
   testing-101-meal-planner \
   testing-102-meal-planner-reactive \

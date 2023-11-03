@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-305-recipe-search-shallow-boilerplate
+git checkout origin/testing-305-recipe-search-shallow-starter
 ```
 
 # 🎯 Goal: Test `<wm-recipe-search>`

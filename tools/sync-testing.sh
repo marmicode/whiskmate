@@ -23,7 +23,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-302-recipe-search-isolated \
   testing-303-recipe-search-integration-starter \
   testing-304-recipe-search-integration \
-  testing-305-recipe-search-shallow-boilerplate \
+  testing-305-recipe-search-shallow-starter \
   testing-306-recipe-search-shallow \
   testing-307-recipe-search-async-pipe \
   testing-400-recipe-filter-boilerplate \

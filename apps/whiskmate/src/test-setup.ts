@@ -4,6 +4,7 @@
 
 import 'zone.js';
 import 'zone.js/testing';
+import '@testing-library/jest-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};

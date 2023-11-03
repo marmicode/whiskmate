@@ -1,8 +1,6 @@
-import { TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { RecipeFilterComponent } from './recipe-filter.component';
 import { render, screen } from '@testing-library/angular';
-import userEvent from '@testing-library/user-event/index';
+import userEvent from '@testing-library/user-event';
 
 describe(RecipeFilterComponent.name, () => {
   it.todo('🚧 should trigger filterChange output');

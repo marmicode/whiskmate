@@ -20,7 +20,7 @@ class MealPlanner {
 
 1. it notifies subscribers when new recipes are added.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 ```sh
@@ -49,7 +49,7 @@ class MealPlanner {
 
 1. it notifies subscribers when new recipes are added.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run tests:
 

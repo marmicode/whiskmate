@@ -12,7 +12,7 @@ describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
     const { getRecipeNames } = createComponent();
 
-    expect(await getRecipeNames()).toEqual(['Burger', 'Salad']);
+    expect(getRecipeNames()).toEqual(['Burger', 'Salad']);
   });
 
   function createComponent() {
@@ -28,10 +28,8 @@ describe(RecipeSearchComponent.name, () => {
     const component = TestBed.inject(RecipeSearchComponent);
 
     return {
-      component,
-      async getRecipeNames() {
-        const recipes = await firstValueFrom(component.recipes$);
-        return recipes.map((recipe) => recipe.name);
+      getRecipeNames() {
+        return component.recipes()?.map((recipe) => recipe.name);
       },
     };
   }

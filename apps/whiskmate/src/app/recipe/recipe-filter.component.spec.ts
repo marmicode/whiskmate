@@ -1,29 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RecipeFilterComponent } from './recipe-filter.component';
+import { render, screen } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event/index';
 
 describe(RecipeFilterComponent.name, () => {
   it.todo('🚧 should trigger filterChange output');
 
-  function renderComponent() {
-    const fixture = TestBed.createComponent(RecipeFilterComponent);
-
-    fixture.detectChanges();
+  async function renderComponent() {
+    const { fixture } = await render(RecipeFilterComponent);
 
     return {
       component: fixture.componentInstance,
-      setInputValue(
-        dataRole:
-          | 'keywords-input'
-          | 'max-ingredient-count-input'
-          | 'max-step-count-input',
+      async setInputValue(
+        label: 'Keywords' | 'Max Ingredients' | 'Max Steps',
         value: string
       ) {
-        const el = fixture.debugElement.query(
-          By.css(`[data-role="${dataRole}"]`)
-        );
-        el.nativeElement.value = value;
-        el.nativeElement.dispatchEvent(new Event('input'));
+        const inputEl = screen.getByLabelText(label);
+        await userEvent.type(inputEl, value);
       },
     };
   }

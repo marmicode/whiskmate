@@ -1,9 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-606-ct-harness-boilerplate
-
-yarn
+git checkout origin/testing-806-ct-harness-starter
 ```
 
 # 🎯 Goal: Test `RecipeSearchComponent` using Cypress Component Testing & Harnesses
@@ -12,7 +10,7 @@ Thanks to [@jscutlery/cypress-harness](https://github.com/jscutlery/devkit/tree/
 
 Let's clean up our `RecipeSearchComponent` tests from DOM logic and use the `RecipeSearchHarness` as an abstraction instead.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [✅ Already done] Set up Cypress Harness
 
@@ -20,14 +18,14 @@ Let's clean up our `RecipeSearchComponent` tests from DOM logic and use the `Rec
 nx g @nx/angular:cypress-component-configuration whiskmate
 
 # Setup @jscutlery/cypress-harness
-yarn add -D  @jscutlery/cypress-harness cypress-pipe
+pnpm install -D  @jscutlery/cypress-harness cypress-pipe
 echo "import '@jscutlery/cypress-harness/support-ct';" >> apps/whiskmate/cypress/support/commands.ts
 ```
 
 1. Run Cypress in component testing mode:
 
 ```sh
-yarn ct --watch
+pnpm ct --watch
 ```
 
 2. Refactor [`recipe-filter.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts) and get rid of all calls to `cy.find*()`.

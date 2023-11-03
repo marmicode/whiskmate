@@ -4,6 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { LocalStorage } from '../shared/local-storage';
 import { provideLocalStorageFake } from '../shared/local-storage.fake';
 import { verifyMealRepositoryContract } from './meal-repository.contract';
+import { recipeMother } from '../testing/recipe.mother';
 
 describe(MealRepository.name, () => {
   verifyMealRepositoryContract(createMealRepository);
@@ -32,7 +33,12 @@ describe(MealRepository.name, () => {
       providers: [provideLocalStorageFake()],
     });
 
+    const burger = recipeMother.withBasicInfo('Burger').build();
+    const salad = recipeMother.withBasicInfo('Salad').build();
+
     return {
+      burger,
+      salad,
       getMealRepo() {
         return TestBed.inject(MealRepository);
       },

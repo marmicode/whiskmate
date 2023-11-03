@@ -1,9 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-600-recipe-preview-ct-boilerplate
-
-yarn
+git checkout origin/testing-800-recipe-preview-ct-starter
 ```
 
 # 🎯 Goal: Test `RecipePreviewComponent` using Cypress Component Testing
@@ -12,7 +10,7 @@ Thanks to [Cypress Component Testing](https://docs.cypress.io/guides/component-t
 
 Let's test that `RecipeSearchComponent` is showing the recipe name properly.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [✅ Already done] Set up Cypress Component Testing
 
@@ -23,7 +21,7 @@ nx g @nx/angular:cypress-component-configuration whiskmate
 1. Run Cypress in component testing mode:
 
 ```sh
-yarn ct --watch
+pnpm ct --watch
 ```
 
 2. Open [`recipe-preview.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts).

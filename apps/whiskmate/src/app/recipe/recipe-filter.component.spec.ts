@@ -1,47 +1,39 @@
-import { TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { createObserver } from '../../testing/observer';
 import { RecipeFilter } from './recipe-filter';
 import { RecipeFilterComponent } from './recipe-filter.component';
+import { render, screen } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
 
 describe(RecipeFilterComponent.name, () => {
   const { observe } = createObserver();
 
-  it('should trigger filterChange output', () => {
-    const { component, setInputValue } = renderComponent();
+  it('should trigger filterChange output', async () => {
+    const { component, setInputValue } = await renderComponent();
 
     const observer = observe(component.filterChange);
 
-    setInputValue('keywords-input', 'Cauliflower');
-    setInputValue('max-ingredient-count-input', '3');
-    setInputValue('max-step-count-input', '10');
+    await setInputValue('Keywords', 'Cauliflower');
+    await setInputValue('Max Ingredients', '3');
+    await setInputValue('Max Steps', '10');
 
-    expect(observer.next).lastCalledWith({
+    expect(observer.next).toHaveBeenLastCalledWith({
       keywords: 'Cauliflower',
       maxIngredientCount: 3,
       maxStepCount: 10,
     } as RecipeFilter);
   });
 
-  function renderComponent() {
-    const fixture = TestBed.createComponent(RecipeFilterComponent);
-
-    fixture.detectChanges();
+  async function renderComponent() {
+    const { fixture } = await render(RecipeFilterComponent);
 
     return {
       component: fixture.componentInstance,
-      setInputValue(
-        dataRole:
-          | 'keywords-input'
-          | 'max-ingredient-count-input'
-          | 'max-step-count-input',
+      async setInputValue(
+        label: 'Keywords' | 'Max Ingredients' | 'Max Steps',
         value: string
       ) {
-        const el = fixture.debugElement.query(
-          By.css(`[data-role="${dataRole}"]`)
-        );
-        el.nativeElement.value = value;
-        el.nativeElement.dispatchEvent(new Event('input'));
+        const inputEl = screen.getByLabelText(label);
+        await userEvent.type(inputEl, value);
       },
     };
   }

@@ -7,6 +7,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "test-ui:watch": "PWTEST_WATCH=1 playwright test --config apps/whiskmate/playwright.config.ts --project chromium",
     "ct": "nx run-many --target component-test",
     "percy:ct": "percy exec -- nx run-many --target component-test --skip-nx-cache",
     "scrap-ottolenghi": "ts-node -P libs/ottolenghi-scraper/tsconfig.lib.json libs/ottolenghi-scraper/src/main.ts"

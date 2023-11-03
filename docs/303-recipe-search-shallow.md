@@ -14,7 +14,7 @@ But let's check children properties this time.
 
 1. recipes are passed to child components.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh

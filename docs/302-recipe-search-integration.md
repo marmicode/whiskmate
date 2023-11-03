@@ -18,7 +18,7 @@ But let's check the DOM this time.
 <h2 data-role="recipe-name">{{ recipe.name }}</h2>
 ```
 
-# 📝 Steps
+## 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh

@@ -8,7 +8,7 @@ git checkout origin/testing-307-recipe-search-shallow
 
 Let's go reactive and see what happens.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run tests:
 

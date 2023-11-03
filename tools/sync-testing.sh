@@ -44,4 +44,4 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-805-recipe-search-ct \
   testing-806-ct-harness-boilerplate \
   testing-807-ct-harness \
-  testing-608-visual-regression-testing
+  testing-808-visual-regression-testing

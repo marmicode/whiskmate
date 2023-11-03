@@ -1,49 +1,45 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { recipeMother } from '../testing/recipe.mother';
-import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
-import { RecipeRepositoryFake } from './recipe-repository.fake';
+import {
+  provideRecipeRepositoryFake,
+  RecipeRepositoryFake,
+} from './recipe-repository.fake';
+import { render } from '@testing-library/angular';
 
 describe(RecipeSearchComponent.name, () => {
-  it('should search recipes without filtering', () => {
-    const { getRecipeNames } = renderComponent();
+  it('should search recipes without filtering', async () => {
+    const { getRecipeNames } = await renderComponent();
 
     expect(getRecipeNames()).toEqual(['Burger', 'Salad']);
   });
 
-  function renderComponent() {
-    const fakeRepo = new RecipeRepositoryFake();
+  async function renderComponent() {
+    const { debugElement } = await render(RecipeSearchComponent, {
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [provideRecipeRepositoryFake()],
+      configureTestBed(testBed) {
+        testBed.overrideComponent(RecipeSearchComponent, {
+          set: {
+            imports: [CommonModule],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+          },
+        });
 
-    fakeRepo.setRecipes([
-      recipeMother.withBasicInfo('Burger').build(),
-      recipeMother.withBasicInfo('Salad').build(),
-    ]);
-
-    TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: RecipeRepository,
-          useValue: fakeRepo,
-        },
-      ],
-    });
-
-    TestBed.overrideComponent(RecipeSearchComponent, {
-      set: {
-        imports: [CommonModule],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        testBed
+          .inject(RecipeRepositoryFake)
+          .setRecipes([
+            recipeMother.withBasicInfo('Burger').build(),
+            recipeMother.withBasicInfo('Salad').build(),
+          ]);
       },
     });
 
-    const fixture = TestBed.createComponent(RecipeSearchComponent);
-    fixture.detectChanges();
-
     return {
       getRecipeNames() {
-        return fixture.debugElement
+        return debugElement
           .queryAll(By.css('wm-recipe-preview'))
           .map((previewEl) => previewEl.properties.recipe.name);
       },

@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   imports: [CardComponent, NgIf],
   template: `<wm-card *ngIf="recipe" [pictureUri]="recipe.pictureUri">
     <h2 data-role="recipe-name">{{ recipe.name }}</h2>
-    <ng-content></ng-content>
+    <ng-content/>
   </wm-card>`,
   styles: [
     `

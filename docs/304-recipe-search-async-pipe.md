@@ -1,14 +1,14 @@
 # Setup
 
 ```sh
-git checkout origin/testing-306-recipe-search-shallow
+git checkout origin/testing-307-recipe-search-shallow
 ```
 
 # 🎯 Goal: Use `async` pipe and fix tests
 
 Let's go reactive and see what happens.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run tests:
 
@@ -19,7 +19,7 @@ pnpm test --watch
 2. Checkout new `RecipeSearchComponent` implementation.
 
 ```sh
-git checkout origin/testing-307-recipe-search-async-pipe apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-308-recipe-search-async-pipe apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 > This will replace the imperative approach:

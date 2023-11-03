@@ -17,7 +17,7 @@ git checkout origin/testing-100-meal-planner-starter
 
 - `addRecipe` should throw an error if a recipe has already being added.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [optional] you can either checkout the `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 ```sh
@@ -54,7 +54,7 @@ pnpm test --watch
 
 - Recipe can only be added if not already present. _(i.e. recipes can't be added twice)_
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run tests:
 

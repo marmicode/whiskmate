@@ -30,7 +30,7 @@ describe(MealPlanner.name, () => {
   it('should throw error if recipe is already present', () => {
     const { mealPlanner, burgerDuplicate } = createMealPlannerWithBurger();
 
-    expect(() => mealPlanner.addRecipe(burgerDuplicate)).toThrowError(
+    expect(() => mealPlanner.addRecipe(burgerDuplicate)).toThrow(
       `Can't add recipe.`
     );
   });

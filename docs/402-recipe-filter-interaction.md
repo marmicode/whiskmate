@@ -2,8 +2,6 @@
 
 ```sh
 git checkout origin/testing-401-recipe-filter
-
-yarn
 ```
 
 # 🎯 Goal: Test `<wm-recipe-search>` interaction with `<wm-recipe-filter>`
@@ -22,7 +20,7 @@ git checkout origin/testing-402-recipe-search-filter-interaction apps/whiskmate/
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement tests:

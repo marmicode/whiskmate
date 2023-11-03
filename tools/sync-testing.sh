@@ -41,7 +41,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-802-recipe-filter-ct-boilerplate \
   testing-803-recipe-filter-ct \
   testing-804-recipe-search-ct-boilerplate \
-  testing-605-recipe-search-ct \
+  testing-805-recipe-search-ct \
   testing-606-ct-harness-boilerplate \
   testing-607-ct-harness \
   testing-608-visual-regression-testing

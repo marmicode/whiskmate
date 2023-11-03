@@ -40,7 +40,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-801-recipe-preview-ct \
   testing-802-recipe-filter-ct-starter \
   testing-803-recipe-filter-ct \
-  testing-804-recipe-search-ct-boilerplate \
+  testing-804-recipe-search-ct-starter \
   testing-805-recipe-search-ct \
   testing-806-ct-harness-boilerplate \
   testing-807-ct-harness \

@@ -36,7 +36,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-702-recipe-filter-harness \
   testing-703-recipe-search-harness \
   testing-704-recipe-search-harness-testing \
-  testing-800-recipe-preview-ct-boilerplate \
+  testing-800-recipe-preview-ct-starter \
   testing-801-recipe-preview-ct \
   testing-802-recipe-filter-ct-boilerplate \
   testing-803-recipe-filter-ct \

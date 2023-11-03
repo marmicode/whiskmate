@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-800-recipe-preview-ct-boilerplate
+git checkout origin/testing-800-recipe-preview-ct-starter
 ```
 
 # 🎯 Goal: Test `RecipePreviewComponent` using Cypress Component Testing

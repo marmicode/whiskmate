@@ -27,7 +27,7 @@ pnpm test --watch
 
    1. Spy on `filterChange` output. _(Note that an `EventEmitter` is an `Observable`)_
 
-   2. Form inputs have the following `data-role` attributes: `keywords-input`, `max-ingredient-count-input` and `max-step-count-input`.
+   2. Fill the form inputs using the following `aria-label` attributes: `Keywords`, `Max Ingredients` and `Max Steps`.
 
    3. Check that `filterChange` have been triggered.
 

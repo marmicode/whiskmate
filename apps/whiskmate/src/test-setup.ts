@@ -6,6 +6,13 @@ import 'zone.js';
 import 'zone.js/testing';
 import '@testing-library/jest-dom';
 
+import { getTestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
+import { configure } from '@testing-library/dom';
+
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -14,11 +21,9 @@ Zone['ProxyZoneSpec'] = {
   assertPresent: () => ({ onHasTask: noop, resetDelegate: noop }),
 };
 
-import { getTestBed } from '@angular/core/testing';
-import {
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting,
-} from '@angular/platform-browser-dynamic/testing';
+configure({
+  testIdAttribute: 'data-role',
+});
 
 getTestBed().resetTestEnvironment();
 getTestBed().initTestEnvironment(

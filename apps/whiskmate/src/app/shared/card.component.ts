@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   imports: [NgIf],
   template: ` <img *ngIf="pictureUri" class="picture" [src]="pictureUri" />
     <div class="content">
-      <ng-content></ng-content>
+      <ng-content/>
     </div>`,
   styles: [
     `

@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   standalone: true,
   selector: 'wm-recipe-preview',
   imports: [CardComponent, NgIf],
-  template: `<wm-card *ngIf="recipe" [pictureUri]="recipe.pictureUri">
+  template: `<wm-card [pictureUri]="recipe.pictureUri">
     <h2 data-role="recipe-name">{{ recipe.name }}</h2>
     <ng-content/>
   </wm-card>`,
@@ -25,5 +25,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   ],
 })
 export class RecipePreviewComponent {
-  @Input() recipe?: Recipe;
+  @Input({ required: true }) recipe!: Recipe;
 }

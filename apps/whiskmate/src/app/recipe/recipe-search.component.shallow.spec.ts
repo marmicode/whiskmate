@@ -3,9 +3,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { recipeMother } from '../testing/recipe.mother';
-import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
-import { RecipeRepositoryFake } from './recipe-repository.fake';
+import {
+  provideRecipeRepositoryFake,
+  RecipeRepositoryFake,
+} from './recipe-repository.fake';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', () => {
@@ -15,20 +17,8 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   function renderComponent() {
-    const fakeRepo = new RecipeRepositoryFake();
-
-    fakeRepo.setRecipes([
-      recipeMother.withBasicInfo('Burger').build(),
-      recipeMother.withBasicInfo('Salad').build(),
-    ]);
-
     TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: RecipeRepository,
-          useValue: fakeRepo,
-        },
-      ],
+      providers: [provideRecipeRepositoryFake()],
     });
 
     TestBed.overrideComponent(RecipeSearchComponent, {
@@ -37,6 +27,11 @@ describe(RecipeSearchComponent.name, () => {
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
       },
     });
+
+    TestBed.inject(RecipeRepositoryFake).setRecipes([
+      recipeMother.withBasicInfo('Burger').build(),
+      recipeMother.withBasicInfo('Salad').build(),
+    ]);
 
     const fixture = TestBed.createComponent(RecipeSearchComponent);
     fixture.detectChanges();

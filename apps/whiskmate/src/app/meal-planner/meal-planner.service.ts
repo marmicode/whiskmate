@@ -1,30 +1,47 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import {
+  BehaviorSubject,
+  merge,
+  mergeMap,
+  Observable,
+  Subject,
+  tap,
+} from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Recipe } from '../recipe/recipe';
 import { MealRepository } from './meal-repository.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MealPlanner implements OnDestroy {
+export class MealPlanner {
   recipes$: Observable<Recipe[]>;
 
   private _mealRepository = inject(MealRepository);
   private _recipes$ = new BehaviorSubject<Recipe[]>([]);
-  private _subscription = new Subscription();
+  private _addRecipe$ = new Subject<Recipe>();
 
   constructor() {
     this.recipes$ = this._recipes$.asObservable();
-    this._subscription.add(
+
+    const effects = [
+      /* Fetch meals from repository. */
       this._mealRepository
         .getMeals()
-        .subscribe((recipes) => this._recipes$.next(recipes))
-    );
-  }
+        .pipe(tap((recipes) => this._recipes$.next(recipes))),
+      /* Add meals to repository. */
+      this._addRecipe$.pipe(
+        mergeMap((recipe) =>
+          this._mealRepository.addMeal(recipe).pipe(map(() => recipe))
+        ),
+        tap((recipe) => this._recipes$.next([...this._recipes$.value, recipe]))
+      ),
+    ];
 
-  ngOnDestroy() {
-    this._subscription.unsubscribe();
+    merge(...effects)
+      .pipe(takeUntilDestroyed())
+      .subscribe();
   }
 
   addRecipe(recipe: Recipe) {
@@ -32,9 +49,7 @@ export class MealPlanner implements OnDestroy {
       throw new Error(`Can't add recipe.`);
     }
 
-    this._subscription.add(this._mealRepository.addMeal(recipe).subscribe());
-
-    this._recipes$.next([...this._recipes$.value, recipe]);
+    this._addRecipe$.next(recipe);
   }
 
   watchCanAddRecipe(recipe: Recipe): Observable<boolean> {

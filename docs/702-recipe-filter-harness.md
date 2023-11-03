@@ -1,9 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-501-recipe-filter-material-harness
-
-yarn
+git checkout origin/testing-701-recipe-filter-material-harness
 ```
 
 # 🎯 Goal: Create and use `RecipeFilterHarness`
@@ -12,12 +10,12 @@ Create a harness that abstracts interactions with `RecipeFilterComponent`.
 
 Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts) in order to use the `RecipeFilterHarness`.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Create harness:

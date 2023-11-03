@@ -1,9 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-100-meal-planner-boilerplate
-
-yarn
+git checkout origin/testing-100-meal-planner-starter
 ```
 
 # 🎯 Goal #1: Test `MealPlanner` service
@@ -19,7 +17,7 @@ yarn
 
 - `addRecipe` should throw an error if a recipe has already being added.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [optional] you can either checkout the `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 ```sh
@@ -37,7 +35,7 @@ import { Recipe } from '../recipe/recipe';
 3. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 4. Implement tests.
@@ -56,12 +54,12 @@ yarn test --watch
 
 - Recipe can only be added if not already present. _(i.e. recipes can't be added twice)_
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement tests.

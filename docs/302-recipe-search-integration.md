@@ -1,12 +1,10 @@
 # Setup
 
 ```sh
-git checkout origin/testing-303-recipe-search-integration-boilerplate
-
-yarn
+git checkout origin/testing-303-recipe-search-integration-starter
 ```
 
-# 🎯 Goal: Test `<wm-recipe-search>`
+# 🎯 Goal #1: Test `<wm-recipe-search>`
 
 Same goal as [previous exercise](301-recipe-search-isolated.md) _(i.e. `<wm-recipe-search>` should call `RecipeRepository.search()` on startup.)_
 
@@ -20,7 +18,7 @@ But let's check the DOM this time.
 <h2 data-role="recipe-name">{{ recipe.name }}</h2>
 ```
 
-# 📝 Steps
+## 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh
@@ -30,7 +28,7 @@ git checkout origin/testing-304-recipe-search-integration apps/whiskmate/src/app
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement tests:
@@ -38,6 +36,23 @@ yarn test --watch
    1. Query DOM and check names are displayed. (Cf. [query DOM with `fixture.debugElement`](#-tip-query-dom-with-fixturedebugelement)])
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+
+# 🎯 Goal #2: Test `<wm-recipe-search>` using `@testing-library/angular`
+
+Refactor the previous test using `@testing-library/angular` instead of `TestBed`.
+
+## 🍴 Cutleries
+- [render](https://testing-library.com/docs/angular-testing-library/api#render)
+- `configureTestBed` option:
+```ts
+render(..., {
+  configureTestBed(testBed) {
+    testBed.inject(MyService).doSomething()
+  }
+});
+```
+- [queries](https://testing-library.com/docs/queries/about/)
+
 
 # Appendices
 

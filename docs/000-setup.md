@@ -1,6 +1,6 @@
-# Install yarn
+# Install pnpm
 
-https://yarnpkg.com/getting-started/install
+https://pnpm.io/installation
 
 ```sh
 corepack enable
@@ -9,7 +9,7 @@ corepack enable
 or if you are using [Volta](https://volta.sh/)
 
 ```sh
-volta install yarn@3
+volta install pnpm
 ```
 
 # Retrieve source code and install dependencies
@@ -19,5 +19,5 @@ git clone git@github.com:marmicode/whiskmate.git --branch testing-000-boilerplat
 
 cd whiskmate
 
-yarn
+pnpm install
 ```

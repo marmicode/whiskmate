@@ -11,7 +11,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-100-meal-planner-starter \
   testing-101-meal-planner \
   testing-102-meal-planner-reactive \
-  testing-200-meal-planner-indirect-output-boilerplate \
+  testing-200-meal-planner-indirect-output-starter \
   testing-201-meal-planner-indirect-output \
   testing-202-meal-planner-indirect-input-boilerplate \
   testing-203-meal-planner-indirect-input \

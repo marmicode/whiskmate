@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-802-recipe-filter-ct-boilerplate
+git checkout origin/testing-802-recipe-filter-ct-starter
 ```
 
 # 🎯 Goal: Test `RecipeFilterComponent` using Cypress Component Testing

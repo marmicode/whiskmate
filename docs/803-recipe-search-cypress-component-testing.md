@@ -8,7 +8,7 @@ git checkout origin/testing-804-recipe-search-ct-starter
 
 `RecipeSearchComponent` should show all recipes returned by `RecipeRepository`.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run tests:
 
@@ -28,7 +28,7 @@ pnpm ct --watch
 
 `RecipeSearchComponent` should filter recipes based on user criteria.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Set the `keywords` input value as we already did in [`recipe-filter.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts).
 
@@ -38,7 +38,7 @@ pnpm ct --watch
 
 `RecipeSearchComponent` should add the recipe to the meal plan when "ADD" button is clicked.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Find the "ADD" button using `cy.findByRole()`.
 

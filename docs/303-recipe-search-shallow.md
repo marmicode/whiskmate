@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-305-recipe-search-shallow-starter
+git checkout origin/testing-306-recipe-search-shallow-starter
 ```
 
 # 🎯 Goal: Test `<wm-recipe-search>`
@@ -14,11 +14,11 @@ But let's check children properties this time.
 
 1. recipes are passed to child components.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-306-recipe-search-shallow apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-307-recipe-search-shallow apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 1. Run tests:

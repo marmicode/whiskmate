@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-500-recipe-filter-material-harness-boilerplate
+git checkout origin/testing-700-recipe-filter-material-harness-boilerplate
 ```
 
 # 🎯 Goal: Test `<wm-recipe-filter>` using `MatInputHarness`

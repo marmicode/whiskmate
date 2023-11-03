@@ -33,7 +33,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-404-recipe-filter-material \
   testing-700-recipe-filter-material-harness-boilerplate \
   testing-701-recipe-filter-material-harness \
-  testing-502-recipe-filter-harness \
+  testing-702-recipe-filter-harness \
   testing-503-recipe-search-harness \
   testing-504-recipe-search-harness-testing \
   testing-600-recipe-preview-ct-boilerplate \

@@ -1,9 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-202-meal-planner-indirect-input-boilerplate
-
-yarn
+git checkout origin/testing-202-meal-planner-indirect-input-starter
 ```
 
 # 🎯 Goal: Sync meals from the `MealRepository` to the `MealPlanner`
@@ -20,7 +18,7 @@ git checkout origin/testing-203-meal-planner-indirect-input apps/whiskmate/src/a
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Remove the fake and create & provide the spy instead. _(Cf. [Tip: Create & provide a type-safe spy](#-tip--create--provide-a-type-safe-spy))_
@@ -43,7 +41,7 @@ git checkout origin/testing-203-meal-planner-indirect-input apps/whiskmate/src/a
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Use the `setUpMealPlanner()` function instead of `createMealPlanner()` in order to configure the spy before creating the `MealPlanner`.

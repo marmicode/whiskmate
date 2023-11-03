@@ -8,7 +8,7 @@ git checkout origin/testing-700-recipe-filter-material-harness-starter
 
 Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts) using `MatInputHarness`.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run tests:
 

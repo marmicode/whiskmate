@@ -10,7 +10,7 @@ New component `<wm-recipe-filter>` should trigger `filterChange` output with a v
 
 This will be later used by `<wm-recipe-search>` to filter results based on user filtering.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeFilterComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh

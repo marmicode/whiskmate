@@ -8,7 +8,7 @@ git checkout origin/testing-802-recipe-filter-ct-starter
 
 Check that `RecipeFilterComponent` triggers the `filterChange` output with the right value when the user interacts with the form.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run Cypress in component testing mode:
 

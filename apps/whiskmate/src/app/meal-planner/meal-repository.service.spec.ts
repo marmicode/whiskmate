@@ -1,14 +1,9 @@
 import { MealRepository } from './meal-repository.service';
 import { TestBed } from '@angular/core/testing';
-import { lastValueFrom } from 'rxjs';
 import { recipeMother } from '../testing/recipe.mother';
-import { LocalStorage } from '../shared/local-storage';
-import { LocalStorageFake } from '../shared/local-storage.fake';
+import { provideLocalStorageFake } from '../shared/local-storage.fake';
 
 describe(MealRepository.name, () => {
-  const burger = recipeMother.withBasicInfo('Burger').build();
-  const salad = recipeMother.withBasicInfo('Salad').build();
-
   it.todo('🚧 should add recipe');
 
   it.todo('🚧 should return empty array when storage is empty');
@@ -16,10 +11,27 @@ describe(MealRepository.name, () => {
   it.todo('🚧 should return empty array when storage value is invalid');
 
   function createMealRepository() {
-    const mealRepo = TestBed.inject(MealRepository);
+    const { getMealRepo, ...utils } = setUpMealRepository();
+    return {
+      ...utils,
+      mealRepo: getMealRepo(),
+    };
+  }
+
+  function setUpMealRepository() {
+    TestBed.configureTestingModule({
+      providers: [provideLocalStorageFake()],
+    });
+
+    const burger = recipeMother.withBasicInfo('Burger').build();
+    const salad = recipeMother.withBasicInfo('Salad').build();
 
     return {
-      mealRepo,
+      burger,
+      salad,
+      getMealRepo() {
+        return TestBed.inject(MealRepository);
+      },
       setStorageValue(value: string) {
         // @todo
       },

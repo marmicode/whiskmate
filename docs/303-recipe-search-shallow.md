@@ -2,8 +2,6 @@
 
 ```sh
 git checkout origin/testing-305-recipe-search-shallow-boilerplate
-
-yarn
 ```
 
 # 🎯 Goal: Test `<wm-recipe-search>`
@@ -26,7 +24,7 @@ git checkout origin/testing-306-recipe-search-shallow apps/whiskmate/src/app/rec
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement tests:

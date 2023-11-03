@@ -2,8 +2,6 @@
 
 ```sh
 git checkout origin/testing-600-recipe-preview-ct-boilerplate
-
-yarn
 ```
 
 # 🎯 Goal: Test `RecipePreviewComponent` using Cypress Component Testing
@@ -23,7 +21,7 @@ nx g @nx/angular:cypress-component-configuration whiskmate
 1. Run Cypress in component testing mode:
 
 ```sh
-yarn ct --watch
+pnpm ct --watch
 ```
 
 2. Open [`recipe-preview.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts).

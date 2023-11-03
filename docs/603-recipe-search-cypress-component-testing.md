@@ -2,8 +2,6 @@
 
 ```sh
 git checkout origin/testing-604-recipe-search-ct-boilerplate
-
-yarn
 ```
 
 # 🎯 Goal #1: Check that `RecipeSearchComponent` shows all recipes
@@ -15,7 +13,7 @@ yarn
 1. Run tests:
 
 ```sh
-yarn ct --watch
+pnpm ct --watch
 ```
 
 2. Open [`recipe-search.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-search.component.cy.ts)

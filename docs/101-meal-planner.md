@@ -2,8 +2,6 @@
 
 ```sh
 git checkout origin/testing-100-meal-planner-boilerplate
-
-yarn
 ```
 
 # 🎯 Goal #1: Test `MealPlanner` service
@@ -37,7 +35,7 @@ import { Recipe } from '../recipe/recipe';
 3. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 4. Implement tests.
@@ -61,7 +59,7 @@ yarn test --watch
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement tests.

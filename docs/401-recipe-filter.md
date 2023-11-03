@@ -2,8 +2,6 @@
 
 ```sh
 git checkout origin/testing-400-recipe-filter-boilerplate
-
-yarn
 ```
 
 # 🎯 Goal: Test `<wm-recipe-filter>`
@@ -22,7 +20,7 @@ git checkout origin/testing-401-recipe-filter apps/whiskmate/src/app/recipe/reci
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement tests:

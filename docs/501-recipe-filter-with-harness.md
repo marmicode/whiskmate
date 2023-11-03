@@ -2,8 +2,6 @@
 
 ```sh
 git checkout origin/testing-500-recipe-filter-material-harness-boilerplate
-
-yarn
 ```
 
 # 🎯 Goal: Test `<wm-recipe-filter>` using `MatInputHarness`
@@ -15,7 +13,7 @@ Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/reci
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement tests:

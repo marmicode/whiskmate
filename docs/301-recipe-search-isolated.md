@@ -1,9 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-301-recipe-search-isolated-boilerplate
-
-yarn
+git checkout origin/testing-301-recipe-search-isolated-starter
 ```
 
 # 🎯 Goal: Test `<wm-recipe-search>`
@@ -30,7 +28,7 @@ git checkout origin/testing-302-recipe-search-isolated apps/whiskmate/src/app/re
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement tests:

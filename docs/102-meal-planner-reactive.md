@@ -2,8 +2,6 @@
 
 ```sh
 git checkout origin/testing-101-meal-planner
-
-yarn
 ```
 
 # 🎯 Goal #1: Test `MealPlanner.recipes$`
@@ -32,7 +30,7 @@ git checkout origin/testing-102-meal-planner-reactive apps/whiskmate/src/app/mea
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement tests.
@@ -56,7 +54,7 @@ class MealPlanner {
 1. Run tests:
 
 ```sh
-yarn test whiskmate --watch
+pnpm test whiskmate --watch
 ```
 
 2. Implement tests.

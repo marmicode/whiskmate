@@ -8,6 +8,7 @@ import '@testing-library/jest-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Zone = (globalThis as any)['Zone'] as any;
 Zone['ProxyZoneSpec'] = {
   assertPresent: () => ({ onHasTask: noop, resetDelegate: noop }),

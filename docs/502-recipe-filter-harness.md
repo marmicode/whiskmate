@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-501-recipe-filter-material-harness
+git checkout origin/testing-701-recipe-filter-material-harness
 ```
 
 # 🎯 Goal: Create and use `RecipeFilterHarness`

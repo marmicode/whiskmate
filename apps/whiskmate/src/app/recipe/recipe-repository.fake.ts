@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Provider } from '@angular/core';
 import { RecipeFilter } from './recipe-filter';
 import { Observable, of } from 'rxjs';
 import { Recipe } from './recipe';
-import { RecipeRepositoryDef } from './recipe-repository.service';
+import {
+  RecipeRepository,
+  RecipeRepositoryDef,
+} from './recipe-repository.service';
 
 @Injectable({
   providedIn: 'root',
@@ -39,4 +42,14 @@ export class RecipeRepositoryFake implements RecipeRepositoryDef {
   setRecipes(recipes: Recipe[]) {
     this._recipes = recipes;
   }
+}
+
+export function provideRecipeRepositoryFake(): Provider[] {
+  return [
+    RecipeRepositoryFake,
+    {
+      provide: RecipeRepository,
+      useExisting: RecipeRepositoryFake,
+    },
+  ];
 }

@@ -15,32 +15,17 @@ import { createRecipeFilter, RecipeFilter } from './recipe-filter';
     <form [formGroup]="filterFormGroup">
       <mat-form-field>
         <mat-label>Keywords</mat-label>
-        <input
-          data-role="keywords-input"
-          formControlName="keywords"
-          matInput
-          type="text"
-        />
+        <input formControlName="keywords" matInput type="text" />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Max Ingredients</mat-label>
-        <input
-          data-role="max-ingredient-count-input"
-          formControlName="maxIngredientCount"
-          matInput
-          type="number"
-        />
+        <input formControlName="maxIngredientCount" matInput type="number" />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Max Steps</mat-label>
-        <input
-          data-role="max-step-count-input"
-          formControlName="maxStepCount"
-          matInput
-          type="number"
-        />
+        <input formControlName="maxStepCount" matInput type="number" />
       </mat-form-field>
     </form>
   `,

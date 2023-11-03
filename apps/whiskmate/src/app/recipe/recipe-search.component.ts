@@ -1,83 +1,49 @@
-import { AsyncPipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { BehaviorSubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { MealPlanner } from './../meal-planner/meal-planner.service';
-import { CatalogComponent } from './../shared/catalog.component';
+import { NgForOf } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
+import { CatalogComponent } from '../shared/catalog.component';
 import { Recipe } from './recipe';
 import { RecipeFilter } from './recipe-filter';
 import { RecipeFilterComponent } from './recipe-filter.component';
 import { RecipePreviewComponent } from './recipe-preview.component';
 import { RecipeRepository } from './recipe-repository.service';
+import { rxComputed } from '@jscutlery/rx-computed';
+import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'wm-recipe-search',
   imports: [
-    AsyncPipe,
     CatalogComponent,
-    MatButtonModule,
     NgForOf,
+    RecipeAddButtonComponent,
     RecipeFilterComponent,
     RecipePreviewComponent,
   ],
   template: `
-    <wm-recipe-filter
-      (filterChange)="onFilterChange($event)"
-    ></wm-recipe-filter>
+    <wm-recipe-filter (filterChange)="filter.set($event)"></wm-recipe-filter>
     <wm-catalog>
       <wm-recipe-preview
-        *ngFor="let item of items$ | async; trackBy: trackById"
-        [recipe]="item.recipe"
+        *ngFor="let recipe of recipes(); trackBy: trackById"
+        [recipe]="recipe"
       >
-        <button
-          [disabled]="(item.canAdd$ | async) === false"
-          (click)="addRecipe(item.recipe)"
-          class="add-recipe-button"
-          color="primary"
-          data-role="add-recipe"
-          mat-stroked-button
-        >
-          ADD
-        </button>
+        <wm-recipe-add-button [recipe]="recipe"/>
       </wm-recipe-preview>
     </wm-catalog>
   `,
-  styles: [
-    `
-      .add-recipe-button {
-        display: block;
-        margin: auto;
-      }
-    `,
-  ],
 })
 export class RecipeSearchComponent {
-  filter$ = new BehaviorSubject<RecipeFilter>({});
-  items$ = this.filter$.pipe(
-    switchMap((filter) => this._recipeRepository.search(filter)),
-    map((recipes) =>
-      recipes.map((recipe) => ({
-        canAdd$: this._mealPlanner.watchCanAddRecipe(recipe),
-        recipe,
-      }))
-    )
-  );
+  filter = signal<RecipeFilter>({});
+  recipes = rxComputed(() => this._recipeRepository.search(this.filter()));
 
-  private _mealPlanner = inject(MealPlanner);
   private _recipeRepository = inject(RecipeRepository);
 
-  addRecipe(recipe: Recipe) {
-    this._mealPlanner.addRecipe(recipe);
-  }
-
-  onFilterChange(filter: RecipeFilter) {
-    this.filter$.next(filter);
-  }
-
-  trackById(_: number, { recipe }: { recipe: Recipe }) {
+  trackById(_: number, recipe: Recipe) {
     return recipe.id;
   }
 }

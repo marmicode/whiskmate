@@ -5,7 +5,7 @@ async function main() {
 
   if (recipeId == null) {
     console.error(`Please provide a recipe id:
-    Usage: yarn scrap-ottolenghi RECIPE_ID
+    Usage: pnpm scrap-ottolenghi RECIPE_ID
     `);
     return;
   }

@@ -2,8 +2,6 @@
 
 ```sh
 git checkout origin/testing-306-recipe-search-shallow
-
-yarn
 ```
 
 # 🎯 Goal: Use `async` pipe and fix tests
@@ -15,7 +13,7 @@ Let's go reactive and see what happens.
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Checkout new `RecipeSearchComponent` implementation.

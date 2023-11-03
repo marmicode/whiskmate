@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'wm-title',
-  template: `<h1><ng-content></ng-content></h1>`,
+  template: `<h1><ng-content/></h1>`,
   styles: [
     `
       :host {

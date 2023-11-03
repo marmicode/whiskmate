@@ -1,0 +1,55 @@
+name: ✅ Test
+on:
+  push:
+
+env:
+  # Using Nx Cloud is safer
+  NX_REJECT_UNKNOWN_LOCAL_CACHE: 0
+
+jobs:
+  test:
+    name: ✅ Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: ${{ github.ref_name }}
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Cache Nx
+        uses: actions/cache@v3
+        with:
+          path: .nx/cache
+          key: ${{ runner.os }}-nx-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-nx
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - run: pnpm install
+
+      - run: pnpm nx run-many --parallel=4 -t build,lint,test
+
+      # Skip Cypress Component tests on branches that don't have them
+      # this avoids no specs error and polluting the code base
+      # with some cypress test file from the beginning.
+      - id: has-cypress-tests
+        run: |
+          if [ $(find apps libs -name '*.cy.ts' | wc -l) -gt 0 ]; then
+            echo "::set-output name=has-cypress-tests::true"
+          else
+            echo "::set-output name=has-cypress-tests::false"
+          fi
+
+      - name: Cypress component tests
+        if: steps.has-cypress-tests.outputs.has-cypress-tests == 'true'
+        run: pnpm nx run-many --parallel=4 -t component-test

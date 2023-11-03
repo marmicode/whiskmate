@@ -8,11 +8,9 @@ import { MealRepository } from './meal-repository.service';
 
 describe(MealPlanner.name, () => {
   const { observe } = createObserver();
-  const burger = recipeMother.withBasicInfo('Burger').build();
-  const salad = recipeMother.withBasicInfo('Salad').build();
 
   it('should add recipe', async () => {
-    const { mealPlanner } = createMealPlanner();
+    const { mealPlanner, burger, salad } = createMealPlanner();
 
     mealPlanner.addRecipe(burger);
     mealPlanner.addRecipe(salad);
@@ -24,15 +22,15 @@ describe(MealPlanner.name, () => {
   });
 
   it('should throw error if recipe is already present', () => {
-    const { mealPlanner } = createMealPlannerWithBurger();
+    const { mealPlanner, burgerDuplicate } = createMealPlannerWithBurger();
 
-    expect(() => mealPlanner.addRecipe(burger)).toThrowError(
+    expect(() => mealPlanner.addRecipe(burgerDuplicate)).toThrow(
       `Can't add recipe.`
     );
   });
 
   it('should add recipe to meal repository', () => {
-    const { mealPlanner, mealRepoFake } = createMealPlanner();
+    const { mealPlanner, mealRepoFake, burger } = createMealPlanner();
 
     mealPlanner.addRecipe(burger);
 
@@ -49,12 +47,12 @@ describe(MealPlanner.name, () => {
 
       const observer = observe(mealPlanner.recipes$);
 
-      expect(observer.next).toBeCalledTimes(1);
-      expect(observer.next).toBeCalledWith([]);
+      expect(observer.next).toHaveBeenCalledTimes(1);
+      expect(observer.next).toHaveBeenCalledWith([]);
     });
 
     it('should emit recipes when added', () => {
-      const { mealPlanner } = createMealPlanner();
+      const { mealPlanner, burger, salad } = createMealPlanner();
 
       const observer = observe(mealPlanner.recipes$);
 
@@ -63,11 +61,11 @@ describe(MealPlanner.name, () => {
       mealPlanner.addRecipe(burger);
       mealPlanner.addRecipe(salad);
 
-      expect(observer.next).toBeCalledTimes(2);
-      expect(observer.next).nthCalledWith(1, [
+      expect(observer.next).toHaveBeenCalledTimes(2);
+      expect(observer.next).toHaveBeenNthCalledWith(1, [
         expect.objectContaining({ name: 'Burger' }),
       ]);
-      expect(observer.next).nthCalledWith(2, [
+      expect(observer.next).toHaveBeenNthCalledWith(2, [
         expect.objectContaining({ name: 'Burger' }),
         expect.objectContaining({ name: 'Salad' }),
       ]);
@@ -76,16 +74,16 @@ describe(MealPlanner.name, () => {
 
   describe('watchCanAddRecipe()', () => {
     it('should instantly emit if recipe can be added', () => {
-      const { mealPlanner } = createMealPlanner();
+      const { mealPlanner, burger } = createMealPlanner();
 
       const observer = observe(mealPlanner.watchCanAddRecipe(burger));
 
-      expect(observer.next).toBeCalledTimes(1);
-      expect(observer.next).toBeCalledWith(true);
+      expect(observer.next).toHaveBeenCalledTimes(1);
+      expect(observer.next).toHaveBeenCalledWith(true);
     });
 
     it(`should emit false when recipe is added and can't be added anymore`, () => {
-      const { mealPlanner } = createMealPlanner();
+      const { mealPlanner, burger } = createMealPlanner();
 
       const observer = observe(mealPlanner.watchCanAddRecipe(burger));
 
@@ -93,12 +91,12 @@ describe(MealPlanner.name, () => {
 
       mealPlanner.addRecipe(burger);
 
-      expect(observer.next).toBeCalledTimes(1);
-      expect(observer.next).toBeCalledWith(false);
+      expect(observer.next).toHaveBeenCalledTimes(1);
+      expect(observer.next).toHaveBeenCalledWith(false);
     });
 
     it(`should not emit if result didn't change`, () => {
-      const { mealPlanner } = createMealPlanner();
+      const { mealPlanner, burger, salad } = createMealPlanner();
 
       const observer = observe(mealPlanner.watchCanAddRecipe(burger));
 
@@ -108,18 +106,18 @@ describe(MealPlanner.name, () => {
 
       mealPlanner.addRecipe(salad);
 
-      expect(observer.next).not.toBeCalled();
+      expect(observer.next).not.toHaveBeenCalled();
     });
   });
 
   function createMealPlannerWithBurger() {
-    const { mealPlanner, ...rest } = createMealPlanner();
+    const { mealPlanner, burger, ...utils } = createMealPlanner();
 
     mealPlanner.addRecipe(burger);
 
     return {
       mealPlanner,
-      ...rest,
+      ...utils,
     };
   }
 
@@ -148,6 +146,9 @@ describe(MealPlanner.name, () => {
       getMealPlanner() {
         return TestBed.inject(MealPlanner);
       },
+      burger: recipeMother.withBasicInfo('Burger').build(),
+      burgerDuplicate: recipeMother.withBasicInfo('Burger').build(),
+      salad: recipeMother.withBasicInfo('Salad').build(),
       mealRepoFake,
     };
   }

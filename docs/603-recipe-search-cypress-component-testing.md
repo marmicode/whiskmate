@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-604-recipe-search-ct-boilerplate
+git checkout origin/testing-804-recipe-search-ct-boilerplate
 ```
 
 # 🎯 Goal #1: Check that `RecipeSearchComponent` shows all recipes

@@ -44,8 +44,8 @@ describe(MealPlanner.name, () => {
 
       const observer = observe(mealPlanner.recipes$);
 
-      expect(observer.next).toBeCalledTimes(1);
-      expect(observer.next).toBeCalledWith([]);
+      expect(observer.next).toHaveBeenCalledTimes(1);
+      expect(observer.next).toHaveBeenCalledWith([]);
     });
 
     it('should emit recipes when added', () => {
@@ -58,11 +58,11 @@ describe(MealPlanner.name, () => {
       mealPlanner.addRecipe(burger);
       mealPlanner.addRecipe(salad);
 
-      expect(observer.next).toBeCalledTimes(2);
-      expect(observer.next).nthCalledWith(1, [
+      expect(observer.next).toHaveBeenCalledTimes(2);
+      expect(observer.next).toHaveBeenNthCalledWith(1, [
         expect.objectContaining({ name: 'Burger' }),
       ]);
-      expect(observer.next).nthCalledWith(2, [
+      expect(observer.next).toHaveBeenNthCalledWith(2, [
         expect.objectContaining({ name: 'Burger' }),
         expect.objectContaining({ name: 'Salad' }),
       ]);
@@ -75,8 +75,8 @@ describe(MealPlanner.name, () => {
 
       const observer = observe(mealPlanner.watchCanAddRecipe(burger));
 
-      expect(observer.next).toBeCalledTimes(1);
-      expect(observer.next).toBeCalledWith(true);
+      expect(observer.next).toHaveBeenCalledTimes(1);
+      expect(observer.next).toHaveBeenCalledWith(true);
     });
 
     it(`should emit false when recipe is added and can't be added anymore`, () => {
@@ -88,8 +88,8 @@ describe(MealPlanner.name, () => {
 
       mealPlanner.addRecipe(burger);
 
-      expect(observer.next).toBeCalledTimes(1);
-      expect(observer.next).toBeCalledWith(false);
+      expect(observer.next).toHaveBeenCalledTimes(1);
+      expect(observer.next).toHaveBeenCalledWith(false);
     });
 
     it(`should not emit if result didn't change`, () => {
@@ -103,7 +103,7 @@ describe(MealPlanner.name, () => {
 
       mealPlanner.addRecipe(salad);
 
-      expect(observer.next).not.toBeCalled();
+      expect(observer.next).not.toHaveBeenCalled();
     });
   });
 

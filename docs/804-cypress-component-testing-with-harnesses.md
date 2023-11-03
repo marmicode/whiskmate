@@ -10,7 +10,7 @@ Thanks to [@jscutlery/cypress-harness](https://github.com/jscutlery/devkit/tree/
 
 Let's clean up our `RecipeSearchComponent` tests from DOM logic and use the `RecipeSearchHarness` as an abstraction instead.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [✅ Already done] Set up Cypress Harness
 

@@ -1,13 +1,17 @@
 import { AsyncPipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { CatalogComponent } from './../shared/catalog.component';
 import { Recipe } from './recipe';
 import { RecipeFilter } from './recipe-filter';
 import { RecipeFilterComponent } from './recipe-filter.component';
 import { RecipePreviewComponent } from './recipe-preview.component';
 import { RecipeRepository } from './recipe-repository.service';
+import { rxComputed } from '@jscutlery/rx-computed';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,28 +25,20 @@ import { RecipeRepository } from './recipe-repository.service';
     RecipePreviewComponent,
   ],
   template: `
-    <wm-recipe-filter
-      (filterChange)="onFilterChange($event)"
-    ></wm-recipe-filter>
+    <wm-recipe-filter (filterChange)="filter.set($event)"></wm-recipe-filter>
     <wm-catalog>
       <wm-recipe-preview
-        *ngFor="let recipe of recipes$ | async; trackBy: trackById"
+        *ngFor="let recipe of recipes(); trackBy: trackById"
         [recipe]="recipe"
       ></wm-recipe-preview>
     </wm-catalog>
   `,
 })
 export class RecipeSearchComponent {
-  filter$ = new BehaviorSubject<RecipeFilter>({});
-  recipes$ = this.filter$.pipe(
-    switchMap((filter) => this._recipeRepository.search(filter))
-  );
+  filter = signal<RecipeFilter>({});
+  recipes = rxComputed(() => this._recipeRepository.search(this.filter()));
 
-  constructor(private _recipeRepository: RecipeRepository) {}
-
-  onFilterChange(filter: RecipeFilter) {
-    this.filter$.next(filter);
-  }
+  private _recipeRepository = inject(RecipeRepository);
 
   trackById(_: number, recipe: Recipe) {
     return recipe.id;

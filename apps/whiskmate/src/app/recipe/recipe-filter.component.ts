@@ -12,19 +12,19 @@ import { createRecipeFilter, RecipeFilter } from './recipe-filter';
   template: `
     <form [formGroup]="filterFormGroup">
       <input
-        data-role="keywords-input"
+        aria-label="Keywords"
         formControlName="keywords"
         placeholder="keywords"
         type="text"
       />
       <input
-        data-role="max-ingredient-count-input"
+        aria-label="Max Ingredients"
         formControlName="maxIngredientCount"
         placeholder="max ingredients"
         type="number"
       />
       <input
-        data-role="max-step-count-input"
+        aria-label="Max Steps"
         formControlName="maxStepCount"
         placeholder="max steps"
         type="number"

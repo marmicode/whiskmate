@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-202-meal-planner-indirect-input-boilerplate
+git checkout origin/testing-202-meal-planner-indirect-input-starter
 ```
 
 # 🎯 Goal: Sync meals from the `MealRepository` to the `MealPlanner`

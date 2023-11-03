@@ -18,7 +18,7 @@ git push origin :$BRANCH
 
 # Rename branch in instructions & sync-testing.sh
 
-git checkout testing-000-boilerplate
+git checkout testing-000-starter
 
 sed -i '' "s/$BRANCH/$NEW_BRANCH/g" docs/*.md
 sed -i '' "s/$BRANCH/$NEW_BRANCH/g" tools/sync-*.sh

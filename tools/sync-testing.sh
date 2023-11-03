@@ -18,7 +18,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-204-meal-repository-starter \
   testing-205-meal-repository \
   testing-206-meal-repository-contract \
-  testing-300-recipe-search-boilerplate \
+  testing-300-recipe-search-starter \
   testing-301-recipe-search-isolated-boilerplate \
   testing-302-recipe-search-isolated \
   testing-303-recipe-search-integration-boilerplate \

@@ -5,6 +5,7 @@
     "esbenp.prettier-vscode",
     "firsttris.vscode-jest-runner",
     "dbaeumer.vscode-eslint",
-    "rebornix.project-snippets"
+    "rebornix.project-snippets",
+    "ms-playwright.playwright"
   ]
 }

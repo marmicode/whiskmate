@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-301-recipe-search-isolated-boilerplate
+git checkout origin/testing-301-recipe-search-isolated-starter
 ```
 
 # 🎯 Goal: Test `<wm-recipe-search>`

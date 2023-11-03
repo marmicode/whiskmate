@@ -1,9 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-602-recipe-filter-ct-boilerplate
-
-yarn
+git checkout origin/testing-802-recipe-filter-ct-starter
 ```
 
 # 🎯 Goal: Test `RecipeFilterComponent` using Cypress Component Testing
@@ -15,7 +13,7 @@ Check that `RecipeFilterComponent` triggers the `filterChange` output with the r
 1. Run Cypress in component testing mode:
 
 ```sh
-yarn ct --watch
+pnpm ct --watch
 ```
 
 2. Open [`recipe-filter.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts).

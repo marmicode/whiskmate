@@ -10,7 +10,7 @@ git checkout origin/testing-401-recipe-filter
 
 We will test the contract using a shallow test.
 
-# 📝 Steps
+## 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh

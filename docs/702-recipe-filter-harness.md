@@ -10,7 +10,7 @@ Create a harness that abstracts interactions with `RecipeFilterComponent`.
 
 Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts) in order to use the `RecipeFilterHarness`.
 
-# 📝 Steps
+## 📝 Steps
 
 1. Run tests:
 

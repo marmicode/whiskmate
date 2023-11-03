@@ -29,13 +29,13 @@ for CURRENT in $*; do
 
   if [ "$SKIP_TESTS" != "true" ]
   then
-    yarn
-    yarn nx run-many --target test
+    pnpm install
+    pnpm nx run-many --target test
 
     # Run component tests if `cy.ts` files exist.
     if [ $(find apps libs -name '*.cy.ts' | wc -l) -gt 0 ]
     then
-      yarn nx run-many --target component-test 
+      pnpm nx run-many --target component-test
     fi
   fi
 

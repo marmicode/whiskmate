@@ -1,9 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-200-meal-planner-indirect-output-boilerplate
-
-yarn
+git checkout origin/testing-200-meal-planner-indirect-output-starter
 ```
 
 # 🎯 Goal: Make sure that meals are persisted
@@ -25,7 +23,7 @@ git checkout origin/testing-201-meal-planner-indirect-output apps/whiskmate/src/
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Create & provide the spy. _(Cf. [Tip: Create & provide a type-safe spy](#-tip--create--provide-a-type-safe-spy))_
@@ -46,7 +44,7 @@ git checkout origin/testing-201-meal-planner-indirect-output apps/whiskmate/src/
 1. Run tests:
 
 ```sh
-yarn test --watch
+pnpm test --watch
 ```
 
 2. Implement the fake in [`meal-repository.fake.ts`](../apps/whiskmate/src/app/meal-planner/meal-repository.fake.ts) & provide it _(Cf. [Tip: Provide a fake](#-tip--provide-a-fake))_.

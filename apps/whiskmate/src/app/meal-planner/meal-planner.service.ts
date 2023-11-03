@@ -25,16 +25,23 @@ export class MealPlanner {
   constructor() {
     this.recipes$ = this._recipes$.asObservable();
 
-    this._addRecipe$
-      .pipe(
+    const effects = [
+      /* Fetch meals from repository. */
+      this._mealRepository
+        .getMeals()
+        .pipe(tap((recipes) => this._recipes$.next(recipes))),
+      /* Add meals to repository. */
+      this._addRecipe$.pipe(
         mergeMap((recipe) =>
           this._mealRepository.addMeal(recipe).pipe(map(() => recipe))
         ),
-        takeUntilDestroyed()
-      )
-      .subscribe((recipe) =>
-        this._recipes$.next([...this._recipes$.value, recipe])
-      );
+        tap((recipe) => this._recipes$.next([...this._recipes$.value, recipe]))
+      ),
+    ];
+
+    merge(...effects)
+      .pipe(takeUntilDestroyed())
+      .subscribe();
   }
 
   addRecipe(recipe: Recipe) {

@@ -31,7 +31,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-402-recipe-search-filter-interaction \
   testing-403-recipe-search-add-button \
   testing-404-recipe-filter-material \
-  testing-700-recipe-filter-material-harness-boilerplate \
+  testing-700-recipe-filter-material-harness-starter \
   testing-701-recipe-filter-material-harness \
   testing-702-recipe-filter-harness \
   testing-703-recipe-search-harness \

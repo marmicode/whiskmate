@@ -3,13 +3,17 @@ import { RecipeSearchTestContainerComponent } from './recipe-search.test-contain
 import { recipeMother } from '../testing/recipe.mother';
 
 test.describe('<wm-recipe-search>', () => {
-  test('should show recipes', async ({ mount }) => {
+  test('should show recipes', async ({ page, mount }) => {
     const component = await mount(RecipeSearchTestContainerComponent);
 
     await expect(component.getByRole('heading', { level: 2 })).toHaveText([
       'Burger',
       'Salad',
     ]);
+
+    await expect(page).toHaveScreenshot({
+      mask: [page.getByRole('img')],
+    });
   });
 
   test('should filter recipes', async ({ mount }) => {

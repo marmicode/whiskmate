@@ -24,6 +24,12 @@ jobs:
         with:
           node-version: 20
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - run: pnpm install
+
       - name: Cache Nx
         uses: actions/cache@v3
         with:
@@ -31,23 +37,18 @@ jobs:
           key: ${{ runner.os }}-nx-${{ github.sha }}
           restore-keys: ${{ runner.os }}-nx
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - run: pnpm install
-
-      - run: pnpm nx run-many --parallel=4 -t build,lint,test
+      - run: pnpm nx run-many --parallel=4 -t build,lint,test,test-ui
 
       # Skip Cypress Component tests on branches that don't have them
       # this avoids no specs error and polluting the code base
       # with some cypress test file from the beginning.
-      - id: has-cypress-tests
+      - name: Has Cypress tests
+        id: has-cypress-tests
         run: |
           if [ $(find apps libs -name '*.cy.ts' | wc -l) -gt 0 ]; then
-            echo "::set-output name=has-cypress-tests::true"
+            echo true > $GITHUB_OUTPUT
           else
-            echo "::set-output name=has-cypress-tests::false"
+            echo false > $GITHUB_OUTPUT
           fi
 
       - name: Cypress component tests

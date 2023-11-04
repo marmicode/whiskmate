@@ -14,7 +14,7 @@ test.describe('<wm-recipe-search>', () => {
   });
 
   test('should disable add button if recipe is already in meal plan', async ({
-    mounts,
+    mount,
   }) => {
     test.skip(true, '🚧 work in progress!');
   });

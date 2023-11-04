@@ -57,3 +57,10 @@ jobs:
       - name: Cypress component tests
         if: steps.has-cypress-tests.outputs.has-cypress-tests == 'true'
         run: pnpm nx run-many --parallel=4 -t component-test
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: 🎭 Playwright Report
+          path: dist/.playwright
+          retention-days: 7

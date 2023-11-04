@@ -3,8 +3,10 @@ import { firstValueFrom } from 'rxjs';
 import { createObserver } from '../../testing/observer';
 import { recipeMother } from '../testing/recipe.mother';
 import { MealPlanner } from './meal-planner.service';
-import { MealRepositoryFake } from './meal-repository.fake';
-import { MealRepository } from './meal-repository.service';
+import {
+  MealRepositoryFake,
+  provideMealRepositoryFake,
+} from './meal-repository.fake';
 
 describe(MealPlanner.name, () => {
   const { observe } = createObserver();
@@ -120,23 +122,18 @@ describe(MealPlanner.name, () => {
   }
 
   function createMealPlanner() {
-    const mealRepoFake = new MealRepositoryFake();
-
     TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: MealRepository,
-          useValue: mealRepoFake,
-        },
-      ],
+      providers: [provideMealRepositoryFake()],
     });
+
+    TestBed.inject(MealRepositoryFake);
 
     return {
       burger: recipeMother.withBasicInfo('Burger').build(),
       burgerDuplicate: recipeMother.withBasicInfo('Burger').build(),
       salad: recipeMother.withBasicInfo('Salad').build(),
       mealPlanner: TestBed.inject(MealPlanner),
-      mealRepoFake,
+      mealRepoFake: TestBed.inject(MealRepositoryFake),
     };
   }
 });

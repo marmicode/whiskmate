@@ -36,17 +36,6 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-404-recipe-filter-material \
   testing-500-recipe-preview-ct-starter \
   testing-501-recipe-preview-ct \
-  testing-700-recipe-filter-material-harness-starter \
-  testing-701-recipe-filter-material-harness \
-  testing-702-recipe-filter-harness \
-  testing-703-recipe-search-harness \
-  testing-704-recipe-search-harness-testing \
-  testing-800-recipe-preview-ct-starter \
-  testing-801-recipe-preview-ct \
-  testing-802-recipe-filter-ct-starter \
-  testing-803-recipe-filter-ct \
-  testing-804-recipe-search-ct-starter \
-  testing-805-recipe-search-ct \
-  testing-806-ct-harness-starter \
-  testing-807-ct-harness \
-  testing-808-visual-regression-testing
+  testing-502-recipe-filter-ct-starter \
+  testing-503-recipe-filter-ct \
+  testing-504-recipe-search-ct-starter

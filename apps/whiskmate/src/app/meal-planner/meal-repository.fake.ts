@@ -1,5 +1,5 @@
 import { Injectable, Provider } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Recipe } from '../recipe/recipe';
 import { MealRepository, MealRepositoryDef } from './meal-repository.service';
 

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, Provider } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Recipe } from '../recipe/recipe';
-import { MealRepositoryDef } from './meal-repository.service';
+import { MealRepository, MealRepositoryDef } from './meal-repository.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,4 +18,14 @@ export class MealRepositoryFake implements MealRepositoryDef {
   getMealsSync(): Recipe[] {
     throw new Error('🚧 work in progress!');
   }
+}
+
+export function provideMealRepositoryFake(): Provider[] {
+  return [
+    MealRepositoryFake,
+    {
+      provide: MealRepository,
+      useExisting: MealRepositoryFake,
+    },
+  ];
 }

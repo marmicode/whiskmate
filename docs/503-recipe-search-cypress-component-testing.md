@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-804-recipe-search-ct-starter
+git checkout origin/testing-504-recipe-search-ct-starter
 ```
 
 # 🎯 Goal #1: Check that `RecipeSearchComponent` shows all recipes
@@ -13,14 +13,14 @@ git checkout origin/testing-804-recipe-search-ct-starter
 1. Run tests:
 
 ```sh
-pnpm ct --watch
+pnpm nx component-test --watch
 ```
 
 2. Open [`recipe-search.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-search.component.cy.ts)
 
-3. Arrange fake recipe repository: create a `RecipeRepositoryFake`, add some recipes, then add it to `cy.mount()`'s `providers` option.
+3. Arrange fake recipe repository with some recipes. _(Cf. [🎁 Tip: Arrange fakes before component is mounted](#-tip-arrange-fakes-before-component-is-mounted))_
 
-4. Find all recipe names using `cy.findAllByTestId()`.
+4. Find all recipe names using `cy.findAllByRole()`.
 
 5. Check that all recipe names are shown.
  
@@ -52,46 +52,32 @@ pnpm ct --watch
 
 While we could simply click the "ADD" button and check that the button is disabled, we will instead check that the button is disabled from the start. The main reason to this is that we want to make sure that the button is disabled based on the meal plan and not just because the button was clicked.
 
-1. In order to allow the test to arrange the fakes before the component is mounted, we need a new setup function that will return a `render()` util that mounts the component on demand.
-
-```ts
-it('should ...', () => {
-  const { fake, render } = setUpComponent()
-  
-  // @todo arrange fakes
-  
-  render();
-  
-  // ...
-});
-
-function renderComponent() {
-  const { render, ...utils } = setUpComponent();
-  
-  render();
-  
-  return utils;
-}
-
-function setUpComponent() {
-  const fake = new Fake();
-  
-  // ...
-  
-  return {
-    fake,
-    render() {
-      return cy.mount(...);
-    }
-  }
-}
-```
-
-2. Arrange fake meal repository: create a `MealRepositoryFake`, add the recipe to the meal plan, then add it to `cy.mount()`'s `providers` option.
+2. Arrange fake meal repository by adding the recipe. _(Cf. [🎁 Tip: Arrange fakes before component is mounted](#-tip-arrange-fakes-before-component-is-mounted))_
 
 3. Check that the "ADD" button is disabled.
 
 # Appendices
+
+##  🎁 Tip: Arrange fakes before component is mounted
+In order to allow the test to arrange the fakes before the component is mounted, we can provide an `APP_INITIALIZER` and run our logic there.
+You can use the `provideAppInitializer()` function to reduce the boilerplate.
+
+```ts
+it('should ...', () => {
+   const { ... } = renderComponent(() => inject(MyFake).doSomething()); 
+});
+
+function renderComponent(configure?: () => void) {
+  cy.mount(GreetingsComponent, {
+    providers: [
+      provideAppInitializer(() => {
+          configure?.();
+      })
+    ]
+  });
+...
+}
+```
 
 ## 🎁 Tip: Accessing a service
 

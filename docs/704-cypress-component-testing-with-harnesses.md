@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-806-ct-harness-starter
+git checkout origin/testing-705-ct-harness-starter
 ```
 
 # 🎯 Goal: Test `RecipeSearchComponent` using Cypress Component Testing & Harnesses

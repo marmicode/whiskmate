@@ -20,6 +20,24 @@ pnpm nx test-ui --ui
 
 3. Arrange fake recipe repository in the constructor of the [Test Container component](../apps/whiskmate/src/app/recipe/recipe-search.test-container.ts).
 
+```typescript
+import {recipeMother} from './recipe.mother';
+
+@Component({
+  providers: [provideRecipeRepositoryFake()]
+})
+class RecipeSearchTestContainerComponent {
+  private _recipeRepositoryFake = inject(RecipeRepositoryFake);
+
+  constructor() {
+    this._recipeRepositoryFake.setRecipes([
+      recipeMother.withBasicInfo('Burger').build(),
+      recipeMother.withBasicInfo('Salad').build(),
+    ]);
+  }
+}
+```
+
 4. Find all recipe names using `getByRole()`.
 
 5. Check that all recipe names are shown.

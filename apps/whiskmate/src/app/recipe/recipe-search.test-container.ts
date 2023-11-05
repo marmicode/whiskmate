@@ -19,7 +19,6 @@ import { Observable } from 'rxjs';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search-test-container',
-
   providers: [provideRecipeRepositoryFake()],
   imports: [RecipeSearchComponent],
   template: `

@@ -85,6 +85,8 @@ describe(RecipeSearchComponent.name, () => {
         },
       }
     );
+    /* @hack trigger a second round of change detection after effects are flushed. */
+    detectChanges();
 
     /* This is required to flush effects and update views accordingly. */
     detectChanges();

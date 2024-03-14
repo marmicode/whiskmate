@@ -30,13 +30,7 @@ for CURRENT in $*; do
   if [ "$SKIP_TESTS" != "true" ]
   then
     yarn
-    yarn nx run-many --target test
-
-    # Run component tests if `cy.ts` files exist.
-    if [ $(find apps libs -name '*.cy.ts' | wc -l) -gt 0 ]
-    then
-      yarn nx run-many --target component-test 
-    fi
+    yarn nx run-many --target test,test-ui
   fi
 
   PARENT_BRANCH="$CURRENT"

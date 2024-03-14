@@ -29,8 +29,8 @@ for CURRENT in $*; do
 
   if [ "$SKIP_TESTS" != "true" ]
   then
-    yarn
-    yarn nx run-many --target test,test-ui
+    pnpm install
+    pnpm nx run-many --target test,test-ui
   fi
 
   PARENT_BRANCH="$CURRENT"

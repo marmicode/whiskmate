@@ -72,20 +72,13 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/whiskmate/src/**/*.ts",
-          "apps/whiskmate/src/**/*.html"
-        ]
-      },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/whiskmate"],
       "options": {
-        "jestConfig": "apps/whiskmate/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/whiskmate/jest.config.ts"
       }
     },
     "component-test": {

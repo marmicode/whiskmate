@@ -51,6 +51,8 @@ describe(RecipeSearchComponent.name, () => {
         },
       }
     );
+    /* @hack trigger a second round of change detection after effects are flushed. */
+    detectChanges();
 
     return {
       getRecipeNames() {

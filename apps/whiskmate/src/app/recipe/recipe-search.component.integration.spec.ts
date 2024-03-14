@@ -14,7 +14,7 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   async function renderComponent() {
-    await render(RecipeSearchComponent, {
+    const { detectChanges } = await render(RecipeSearchComponent, {
       providers: [provideRecipeRepositoryFake()],
       configureTestBed(testBed) {
         testBed
@@ -25,6 +25,8 @@ describe(RecipeSearchComponent.name, () => {
           ]);
       },
     });
+    /* @hack trigger a second round of change detection after effects are flushed. */
+    detectChanges();
 
     return {
       getRecipeNames() {

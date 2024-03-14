@@ -1,4 +1,4 @@
-import { defineConfig } from '@jscutlery/playwright-ct-angular';
+import { defineConfig, devices } from '@jscutlery/playwright-ct-angular';
 import { nxE2EPreset } from '@nx/playwright/preset';
 
 /**
@@ -11,7 +11,6 @@ export default defineConfig({
   use: {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-
     ctViteConfig: {
       resolve: {
         /* @angular/material is using "style" as a Custom Conditional export to expose prebuilt styles etc... */
@@ -19,5 +18,10 @@ export default defineConfig({
       },
     },
   },
-  timeout: 10_000,
+  timeout: 10000,
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+  ],
 });

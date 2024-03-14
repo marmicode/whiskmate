@@ -6,17 +6,13 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["libs/ottolenghi-scraper/**/*.ts"]
-      },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/ottolenghi-scraper"],
       "options": {
-        "jestConfig": "libs/ottolenghi-scraper/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/ottolenghi-scraper/jest.config.ts"
       }
     }
   },

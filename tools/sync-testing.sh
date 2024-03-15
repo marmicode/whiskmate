@@ -8,36 +8,44 @@ ${TOOLS_PATH}/cascade-changes.sh \
   $* \
   base \
   testing-000-starter \
-  testing-100-meal-planner-starter \
-  testing-101-meal-planner \
-  testing-102-meal-planner-reactive \
-  testing-200-meal-planner-indirect-output-starter \
-  testing-201-meal-planner-indirect-output \
+  testing-101-meal-planner-starter \
+  testing-101-meal-planner-solution \
+  testing-102-meal-planner-reactive-starter \
+  testing-102-meal-planner-reactive-solution \
+  testing-201-meal-planner-indirect-output-starter \
+  testing-201-meal-planner-indirect-output-solution \
   testing-202-meal-planner-indirect-input-starter \
-  testing-203-meal-planner-indirect-input \
-  testing-204-meal-repository-starter \
-  testing-205-meal-repository \
-  testing-206-meal-repository-contract \
+  testing-202-meal-planner-indirect-input-solution \
+  testing-203-meal-repository-starter \
+  testing-203-meal-repository-solution \
+  testing-204-meal-repository-contract-starter \
+  testing-204-meal-repository-contract-solution \
   testing-300-recipe-search-starter \
   testing-301-recipe-search-isolated-starter \
-  testing-302-recipe-search-isolated \
-  testing-303-recipe-search-integration-starter \
-  testing-304-recipe-search-integration \
-  testing-305-recipe-search-integration-testing-library \
-  testing-306-recipe-search-shallow-starter \
-  testing-307-recipe-search-shallow \
-  testing-308-recipe-search-shallow-testing-library \
-  testing-309-recipe-search-async-pipe \
-  testing-310-recipe-search-signals \
-  testing-400-recipe-filter-starter \
-  testing-401-recipe-filter \
-  testing-402-recipe-search-filter-interaction \
-  testing-403-recipe-search-add-button \
-  testing-404-recipe-filter-material \
-  testing-500-recipe-preview-ct-starter \
-  testing-501-recipe-preview-ct \
+  testing-301-recipe-search-isolated-solution \
+  testing-302-recipe-search-integration-starter \
+  testing-302-recipe-search-integration-solution-test-bed \
+  testing-302-recipe-search-integration-solution-testing-library \
+  testing-303-recipe-search-shallow-starter \
+  testing-303-recipe-search-shallow-solution-test-bed \
+  testing-303-recipe-search-shallow-solution-testing-library \
+  testing-304-recipe-search-async-pipe-starter \
+  testing-304-recipe-search-async-pipe-solution \
+  testing-305-recipe-search-signals-starter \
+  testing-305-recipe-search-signals-solution \
+  testing-401-recipe-filter-starter \
+  testing-401-recipe-filter-solution \
+  testing-402-recipe-search-filter-interaction-starter \
+  testing-402-recipe-search-filter-interaction-solution \
+  testing-403-recipe-search-add-button-starter \
+  testing-403-recipe-search-add-button-solution \
+  testing-404-recipe-filter-material-starter \
+  testing-404-recipe-filter-material-solution \
+  testing-501-recipe-preview-ct-starter \
+  testing-501-recipe-preview-ct-solution \
   testing-502-recipe-filter-ct-starter \
-  testing-503-recipe-filter-ct \
-  testing-504-recipe-search-ct-starter \
-  testing-505-recipe-search-ct \
-  testing-506-playwright-visual-regression-testing
+  testing-502-recipe-filter-ct-solution \
+  testing-503-recipe-search-ct-starter \
+  testing-503-recipe-search-ct-solution \
+  testing-504-playwright-visual-regression-testing-starter \
+  testing-504-playwright-visual-regression-testing-solution

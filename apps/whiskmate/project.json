@@ -90,6 +90,9 @@
         "devServerTarget": "whiskmate:build"
       }
     },
+    "reset": {
+      "command": "rm -rf {projectRoot}/playwright/.cache"
+    },
     "test-ui": {
       "executor": "@nx/playwright:playwright",
       "outputs": ["{workspaceRoot}/dist/.playwright/apps/whiskmate"],

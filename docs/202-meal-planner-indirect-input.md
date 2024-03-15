@@ -12,7 +12,7 @@ On startup, the `MealPlanner` should fetch meals from the `MealRepository`.
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-203-meal-planner-indirect-input apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+git checkout origin/testing-202-meal-planner-indirect-input-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
 
 1. Run tests:
@@ -35,7 +35,7 @@ pnpm test --watch
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-203-meal-planner-indirect-input apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+git checkout origin/testing-202-meal-planner-indirect-input-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
 
 1. Run tests:

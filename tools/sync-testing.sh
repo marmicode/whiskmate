@@ -8,7 +8,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   $* \
   base \
   testing-000-starter \
-  testing-101-meal-planner-solution-starter \
+  testing-101-meal-planner-starter \
   testing-101-meal-planner-solution \
   testing-102-meal-planner-reactive \
   testing-200-meal-planner-indirect-output-starter \

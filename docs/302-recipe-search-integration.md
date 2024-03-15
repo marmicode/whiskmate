@@ -22,7 +22,7 @@ But let's check the DOM this time.
 
 0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-302-recipe-search-integration-solution apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-302-recipe-search-integration-solution-test-bed apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 1. Run tests:

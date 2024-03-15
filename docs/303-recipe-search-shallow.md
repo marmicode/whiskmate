@@ -18,7 +18,7 @@ But let's check children properties this time.
 
 0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-307-recipe-search-shallow apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-303-recipe-search-shallow-solution apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 1. Run tests:

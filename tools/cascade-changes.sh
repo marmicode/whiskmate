@@ -30,6 +30,7 @@ for CURRENT in $*; do
   if [ "$SKIP_TESTS" != "true" ]
   then
     pnpm install
+    pnpm nx run-many --target reset
     pnpm nx run-many --target test,test-ui
   fi
 

@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-500-recipe-preview-ct-starter
+git checkout origin/testing-501-recipe-preview-ct-starter
 ```
 
 # 🎯 Goal: Test `RecipePreviewComponent` using Playwright Component Testing

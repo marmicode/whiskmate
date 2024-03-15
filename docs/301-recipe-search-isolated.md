@@ -22,7 +22,7 @@ export class RecipeSearchComponent {
 
 0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-302-recipe-search-isolated apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-301-recipe-search-isolated-solution apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 1. Run tests:

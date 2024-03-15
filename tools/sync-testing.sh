@@ -22,7 +22,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-204-meal-repository-contract-solution \
   testing-300-recipe-search-starter \
   testing-301-recipe-search-isolated-starter \
-  testing-302-recipe-search-isolated \
+  testing-301-recipe-search-isolated-solution \
   testing-303-recipe-search-integration-starter \
   testing-304-recipe-search-integration \
   testing-305-recipe-search-integration-testing-library \

@@ -19,7 +19,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-203-meal-repository-starter \
   testing-203-meal-repository-solution \
   testing-204-meal-repository-contract-starter \
-  testing-206-meal-repository-contract \
+  testing-204-meal-repository-contract-solution \
   testing-300-recipe-search-starter \
   testing-301-recipe-search-isolated-starter \
   testing-302-recipe-search-isolated \

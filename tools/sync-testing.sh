@@ -15,7 +15,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-201-meal-planner-indirect-output-starter \
   testing-201-meal-planner-indirect-output-solution \
   testing-202-meal-planner-indirect-input-starter \
-  testing-203-meal-planner-indirect-input \
+  testing-202-meal-planner-indirect-input-solution \
   testing-204-meal-repository-starter \
   testing-205-meal-repository \
   testing-206-meal-repository-contract \

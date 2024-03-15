@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-303-recipe-search-shallow-solution-test-bed
+git checkout origin/testing-304-recipe-search-async-pipe-starter
 ```
 
 # 🎯 Goal: Use `async` pipe and fix tests

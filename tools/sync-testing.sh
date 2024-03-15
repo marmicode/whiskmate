@@ -28,7 +28,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-302-recipe-search-integration-solution-testing-library \
   testing-303-recipe-search-shallow-starter \
   testing-303-recipe-search-shallow-solution-test-bed \
-  testing-308-recipe-search-shallow-testing-library \
+  testing-303-recipe-search-shallow-solution-testing-library \
   testing-309-recipe-search-async-pipe \
   testing-310-recipe-search-signals \
   testing-400-recipe-filter-starter \

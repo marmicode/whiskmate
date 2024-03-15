@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-200-meal-planner-indirect-output-starter
+git checkout origin/testing-201-meal-planner-indirect-output-starter
 ```
 
 # 🎯 Goal: Make sure that meals are persisted
@@ -17,7 +17,7 @@ You can use a [Spy](#-steps-with-a-spy), a [Fake](#-steps-with-a-fake), or try b
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-201-meal-planner-indirect-output apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+git checkout origin/testing-201-meal-planner-indirect-output-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
 
 1. Run tests:
@@ -38,7 +38,7 @@ pnpm test --watch
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-201-meal-planner-indirect-output apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+git checkout origin/testing-201-meal-planner-indirect-output-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
 
 1. Run tests:

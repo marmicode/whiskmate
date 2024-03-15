@@ -41,7 +41,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-403-recipe-search-add-button-solution \
   testing-404-recipe-filter-material-starter \
   testing-404-recipe-filter-material-solution \
-  testing-500-recipe-preview-ct-starter \
+  testing-501-recipe-preview-ct-starter \
   testing-501-recipe-preview-ct-solution \
   testing-502-recipe-filter-ct-starter \
   testing-503-recipe-filter-ct \

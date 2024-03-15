@@ -14,7 +14,7 @@ This will be later used by `<wm-recipe-search>` to filter results based on user 
 
 0. [optional] you can either checkout the updated `RecipeFilterComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-401-recipe-filter apps/whiskmate/src/app/recipe/recipe-filter.component.ts
+git checkout origin/testing-401-recipe-filter-solution apps/whiskmate/src/app/recipe/recipe-filter.component.ts
 ```
 
 1. Run tests:

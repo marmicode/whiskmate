@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-401-recipe-filter
+git checkout origin/testing-401-recipe-filter-solution
 ```
 
 # 🎯 Goal: Test `<wm-recipe-search>` interaction with `<wm-recipe-filter>`

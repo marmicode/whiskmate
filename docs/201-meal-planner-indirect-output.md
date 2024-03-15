@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-200-meal-planner-indirect-output-starter
+git checkout origin/testing-201-meal-planner-indirect-output-starter
 ```
 
 # 🎯 Goal: Make sure that meals are persisted

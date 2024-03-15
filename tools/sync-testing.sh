@@ -33,7 +33,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-304-recipe-search-async-pipe-solution \
   testing-305-recipe-search-signals-starter \
   testing-305-recipe-search-signals-solution \
-  testing-400-recipe-filter-starter \
+  testing-401-recipe-filter-starter \
   testing-401-recipe-filter-solution \
   testing-402-recipe-search-filter-interaction \
   testing-403-recipe-search-add-button \

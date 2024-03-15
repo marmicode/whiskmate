@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-400-recipe-filter-starter
+git checkout origin/testing-401-recipe-filter-starter
 ```
 
 # 🎯 Goal: Test `<wm-recipe-filter>`

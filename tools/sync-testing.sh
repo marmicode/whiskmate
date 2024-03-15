@@ -47,4 +47,5 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-502-recipe-filter-ct-solution \
   testing-503-recipe-search-ct-starter \
   testing-503-recipe-search-ct-solution \
+  testing-504-playwright-visual-regression-testing-starter \
   testing-504-playwright-visual-regression-testing-solution

@@ -23,7 +23,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-300-recipe-search-starter \
   testing-301-recipe-search-isolated-starter \
   testing-301-recipe-search-isolated-solution \
-  testing-303-recipe-search-integration-starter \
+  testing-302-recipe-search-integration-starter \
   testing-304-recipe-search-integration \
   testing-305-recipe-search-integration-testing-library \
   testing-306-recipe-search-shallow-starter \

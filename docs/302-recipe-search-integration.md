@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-303-recipe-search-integration-starter
+git checkout origin/testing-302-recipe-search-integration-starter
 ```
 
 # 🎯 Goal #1: Test `<wm-recipe-search>`

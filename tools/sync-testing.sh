@@ -10,6 +10,7 @@ ${TOOLS_PATH}/cascade-changes.sh \
   testing-000-starter \
   testing-101-meal-planner-starter \
   testing-101-meal-planner-solution \
+  testing-102-meal-planner-reactive-starter \
   testing-102-meal-planner-reactive-solution \
   testing-200-meal-planner-indirect-output-starter \
   testing-201-meal-planner-indirect-output \

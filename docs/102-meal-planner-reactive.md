@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-101-meal-planner-solution
+git checkout origin/testing-102-meal-planner-reactive-starter
 ```
 
 # 🎯 Goal #1: Test `MealPlanner.recipes$`

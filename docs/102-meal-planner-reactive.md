@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-101-meal-planner
+git checkout origin/testing-101-meal-planner-solution
 ```
 
 # 🎯 Goal #1: Test `MealPlanner.recipes$`

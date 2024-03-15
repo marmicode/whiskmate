@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-401-recipe-filter
+git checkout origin/testing-402-recipe-search-filter-interaction-starter
 ```
 
 # 🎯 Goal: Test `<wm-recipe-search>` interaction with `<wm-recipe-filter>`
@@ -14,7 +14,7 @@ We will test the contract using a shallow test.
 
 0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-402-recipe-search-filter-interaction apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-402-recipe-search-filter-interaction-solution apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
 
 1. Run tests:

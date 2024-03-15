@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-101-meal-planner
+git checkout origin/testing-102-meal-planner-reactive-starter
 ```
 
 # 🎯 Goal #1: Test `MealPlanner.recipes$`
@@ -24,7 +24,7 @@ class MealPlanner {
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 ```sh
-git checkout origin/testing-102-meal-planner-reactive apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+git checkout origin/testing-102-meal-planner-reactive-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
 
 1. Run tests:

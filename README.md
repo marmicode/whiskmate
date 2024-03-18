@@ -15,12 +15,9 @@
 9. [Recipe Search Async Pipe](docs/304-recipe-search-async-pipe.md)
 10. [Recipe Filter](docs/401-recipe-filter.md)
 11. [Recipe Filter Interaction](docs/402-recipe-filter-interaction.md)
-12. [Recipe Filter With Harness](docs/501-recipe-filter-with-harness.md)
-13. [Recipe Filter Harness](docs/502-recipe-filter-harness.md)
-14. [Recipe Preview Cypress Component Testing](docs/601-recipe-preview-cypress-component-testing.md)
-15. [Recipe Filter Cypress Component Testing](docs/602-recipe-filter-cypress-component-testing.md)
-16. [Recipe Search Cypress Component Testing](docs/603-recipe-search-cypress-component-testing.md)
-17. [Cypress Component Testing with Harnesses](docs/604-cypress-component-testing-with-harnesses.md)
+12. [Recipe Preview Playwright Component Testing](docs/501-recipe-preview-playwright-component-testing.md)
+13. [Recipe Filter Playwright Component Testing](docs/502-recipe-filter-playwright-component-testing.md)
+14. [Recipe Search Playwright Component Testing](docs/503-recipe-search-playwright-component-testing.md)
 
 ## [FAQ](docs/faq.md)
 

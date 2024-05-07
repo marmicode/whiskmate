@@ -1,6 +1,7 @@
 import { expect, test } from '@jscutlery/playwright-ct-angular';
 import { RecipeSearchTestContainerComponent } from './recipe-search.test-container';
 import { recipeMother } from '../testing/recipe.mother';
+import { Recipe } from './recipe';
 
 test.describe('<wm-recipe-search>', () => {
   test('should show recipes', async ({ page, mount }) => {
@@ -27,23 +28,26 @@ test.describe('<wm-recipe-search>', () => {
   });
 
   test('should add recipe to meal plan', async ({ mount }) => {
+    let recipes: Recipe[] | undefined;
     const component = await mount(RecipeSearchTestContainerComponent, {
-      spyOutputs: ['mealPlannerRecipesChange'],
+      on: {
+        mealPlannerRecipesChange(_recipes: Recipe[]) {
+          recipes = _recipes;
+        },
+      },
     });
 
     await component.getByRole('button', { name: 'ADD' }).first().click();
 
     /* There is only a burger in the meal planner. */
-    expect(component.spies.mealPlannerRecipesChange).toHaveBeenLastCalledWith([
-      expect.objectContaining({ name: 'Burger' }),
-    ]);
+    expect(recipes).toContainEqual(expect.objectContaining({ name: 'Burger' }));
   });
 
   test('should disable add button if recipe is already in meal plan', async ({
     mount,
   }) => {
     const component = await mount(RecipeSearchTestContainerComponent, {
-      inputs: {
+      props: {
         mealPlannerRecipes: [recipeMother.withBasicInfo('Burger').build()],
       },
     });

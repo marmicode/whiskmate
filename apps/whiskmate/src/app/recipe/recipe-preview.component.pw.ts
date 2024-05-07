@@ -12,7 +12,7 @@ test.describe('<wm-recipe-preview>', () => {
       .then((response) => response.finished());
 
     const locator = await mount(RecipePreviewComponent, {
-      inputs: {
+      props: {
         recipe,
       },
     });

@@ -1,18 +1,22 @@
 import { expect, test } from '@jscutlery/playwright-ct-angular';
 import { RecipeFilterComponent } from './recipe-filter.component';
+import { RecipeFilter } from './recipe-filter';
 
 test.describe('<wm-recipe-filter>', () => {
   test('should show recipe name', async ({ mount }) => {
+    let filter: RecipeFilter | undefined;
     const component = await mount(RecipeFilterComponent, {
-      spyOutputs: ['filterChange'],
+      on: {
+        filterChange(_filter: RecipeFilter) {
+          filter = _filter;
+        },
+      },
     });
 
     await component.getByLabel('Keywords').fill('Burger');
 
-    expect(component.spies.filterChange).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        keywords: 'Burger',
-      })
-    );
+    expect(filter).toMatchObject({
+      keywords: 'Burger',
+    });
   });
 });

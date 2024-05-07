@@ -3,10 +3,12 @@ import { RecipePreviewComponent } from './recipe-preview.component';
 import { recipeMother } from '../testing/recipe.mother';
 
 test.describe('<wm-recipe-preview>', () => {
-  test('should show recipe name', async ({ mount }) => {
+  test('should show recipe name', async ({ page, mount }) => {
+    const recipe = recipeMother.withBasicInfo('Burger').build();
+
     const locator = await mount(RecipePreviewComponent, {
-      inputs: {
-        recipe: recipeMother.withBasicInfo('Burger').build(),
+      props: {
+        recipe,
       },
     });
 

@@ -7,13 +7,19 @@ export function createObserver() {
   afterEach(() => subscription.unsubscribe());
 
   return {
-    observe<T>(observable: Observable<T>) {
-      const observer: jest.Mocked<Observer<T>> = {
-        next: jest.fn<void, [T]>(),
+    observe<T>(observable: Subscribable<T>) {
+      const next = jest.fn<void, [T]>();
+
+      /* Making our observer compatible with Angular's OutputRef.. */
+      const observer = next as jest.Mocked<Observer<T>> & jest.Mock<void, [T]>;
+      Object.assign(observer, {
+        next,
         error: jest.fn<void, [unknown]>(),
         complete: jest.fn<void, []>(),
-      };
+      });
+
       subscription.add(observable.subscribe(observer));
+
       return {
         ...observer,
         mockClear() {
@@ -30,3 +36,7 @@ export function createObserver() {
     },
   };
 }
+
+type Subscribable<T> =
+  | Observable<T>
+  | { subscribe(fn: (v: T) => void): Subscription };

@@ -1,11 +1,13 @@
 /* eslint-disable */
+import { swcAngularJestTransformer } from '@jscutlery/swc-angular';
+
 export default {
   displayName: 'whiskmate',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/apps/whiskmate',
   transform: {
-    '^.+\\.m?(t|j)sx?$': ['@swc/jest'],
+    '^.+\\.m?(t|j)sx?$': swcAngularJestTransformer(),
   },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [

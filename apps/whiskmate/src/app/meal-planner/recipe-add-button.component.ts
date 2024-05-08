@@ -2,13 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Input,
+  input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { Recipe } from '../recipe/recipe';
+import type { Recipe } from '../recipe/recipe';
 import { rxComputed } from '@jscutlery/rx-computed';
 import { MealPlanner } from './meal-planner.service';
-import { safeSignal } from '../shared/safe-signal';
 
 @Component({
   standalone: true,
@@ -36,11 +35,8 @@ import { safeSignal } from '../shared/safe-signal';
   ],
 })
 export class RecipeAddButtonComponent {
-  @Input({ alias: 'recipe', required: true }) set _recipe(recipe: Recipe) {
-    this.recipe.set(recipe);
-  }
+  recipe = input.required<Recipe>();
   canAdd = rxComputed(() => this._mealPlanner.watchCanAddRecipe(this.recipe()));
-  recipe = safeSignal<Recipe>();
 
   private _mealPlanner = inject(MealPlanner);
 

@@ -54,3 +54,4 @@ Thumbs.db
 
 # Useful when running pnpm install in a docker image for playwright visual snapshots
 .pnpm-store
+.swc

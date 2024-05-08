@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecipeFilter } from './recipe-filter';
 
@@ -15,5 +10,5 @@ import { RecipeFilter } from './recipe-filter';
   template: ` &lt;🚧 wm-recipe-filter&gt; `,
 })
 export class RecipeFilterComponent {
-  @Output() filterChange = new EventEmitter<RecipeFilter>();
+  filterChange = output<RecipeFilter>();
 }

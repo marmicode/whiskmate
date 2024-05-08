@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Output } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { createRecipeFilter, RecipeFilter } from './recipe-filter';
+import { createRecipeFilter } from './recipe-filter';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,17 +40,15 @@ import { createRecipeFilter, RecipeFilter } from './recipe-filter';
   ],
 })
 export class RecipeFilterComponent {
-  @Output() filterChange: Observable<RecipeFilter>;
-
   filterFormGroup = new FormGroup({
     keywords: new FormControl(),
     maxIngredientCount: new FormControl(),
     maxStepCount: new FormControl(),
   });
 
-  constructor() {
-    this.filterChange = this.filterFormGroup.valueChanges.pipe(
+  filterChange = outputFromObservable(
+    this.filterFormGroup.valueChanges.pipe(
       map((value) => createRecipeFilter(value))
-    );
-  }
+    )
+  );
 }

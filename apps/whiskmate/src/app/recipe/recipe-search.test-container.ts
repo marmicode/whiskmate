@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   inject,
-  Input,
-  Output,
+  input,
 } from '@angular/core';
 import { RecipeSearchComponent } from './recipe-search.component';
 import {
@@ -13,7 +13,8 @@ import {
 import { recipeMother } from '../testing/recipe.mother';
 import { MealPlanner } from '../meal-planner/meal-planner.service';
 import { Recipe } from './recipe';
-import { Observable } from 'rxjs';
+import { defer } from 'rxjs';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   standalone: true,
@@ -22,22 +23,23 @@ import { Observable } from 'rxjs';
   providers: [provideRecipeRepositoryFake()],
   imports: [RecipeSearchComponent],
   template: `
-      <wm-recipe-search/>`,
+    <wm-recipe-search/>`,
 })
 export class RecipeSearchTestContainerComponent {
-  @Input() set mealPlannerRecipes(meals: Recipe[]) {
-    for (const meal of meals) {
-      this._mealPlanner.addRecipe(meal);
-    }
-  }
-
-  @Output() mealPlannerRecipesChange: Observable<Recipe[]>;
+  mealPlannerRecipes = input<Recipe[]>([]);
+  mealPlannerRecipesChange = outputFromObservable(
+    defer(() => this._mealPlanner.recipes$)
+  );
 
   private _mealPlanner = inject(MealPlanner);
   private _recipeRepositoryFake = inject(RecipeRepositoryFake);
+  private _syncMealPlanner = effect(() => {
+    for (const recipe of this.mealPlannerRecipes()) {
+      this._mealPlanner.addRecipe(recipe);
+    }
+  });
 
   constructor() {
-    this.mealPlannerRecipesChange = this._mealPlanner.recipes$;
     this._recipeRepositoryFake.setRecipes([
       recipeMother.withBasicInfo('Burger').build(),
       recipeMother.withBasicInfo('Salad').build(),

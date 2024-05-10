@@ -1,14 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
-import { firstValueFrom } from 'rxjs';
-
-import { MealPlanner } from '../meal-planner/meal-planner.service';
-import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
-import { provideLocalStorageFake } from '../shared/local-storage.fake';
 import { recipeMother } from '../testing/recipe.mother';
 import { RecipeFilter } from './recipe-filter';
 import {
@@ -16,6 +11,10 @@ import {
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
 import { RecipeSearchComponent } from './recipe-search.component';
+import { MealPlanner } from '../meal-planner/meal-planner.service';
+import { firstValueFrom } from 'rxjs';
+import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
+import { provideMealRepositoryFake } from '../meal-planner/meal-repository.fake';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
@@ -27,7 +26,7 @@ describe(RecipeSearchComponent.name, () => {
   it('should search recipes using given filter', async () => {
     const { getRecipeNames, updateFilter } = await renderComponent();
 
-    updateFilter({
+    await updateFilter({
       keywords: 'Burg',
       maxIngredientCount: 3,
     });
@@ -53,49 +52,45 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   async function renderComponentWithBurgerInMealPlanner() {
-    const { mealPlanner, detectChanges, ...utils } = await renderComponent();
+    const { mealPlanner, whenStable, ...utils } = await renderComponent();
 
     mealPlanner.addRecipe(recipeMother.withBasicInfo('Burger').build());
-    detectChanges();
+
+    await whenStable();
 
     return { ...utils };
   }
 
   async function renderComponent() {
-    const { debugElement, detectChanges } = await render(
-      RecipeSearchComponent,
-      {
-        detectChangesOnRender: true,
-        schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        providers: [provideLocalStorageFake(), provideRecipeRepositoryFake()],
-        configureTestBed(testBed) {
-          testBed.overrideComponent(RecipeSearchComponent, {
-            set: {
-              imports: [CommonModule, RecipeAddButtonComponent],
-              schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            },
-          });
+    const { debugElement, fixture } = await render(RecipeSearchComponent, {
+      providers: [
+        provideMealRepositoryFake(),
+        provideRecipeRepositoryFake(),
+        { provide: ComponentFixtureAutoDetect, useValue: true },
+      ],
+      configureTestBed(testBed) {
+        testBed.overrideComponent(RecipeSearchComponent, {
+          set: {
+            imports: [CommonModule, RecipeAddButtonComponent],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+          },
+        });
 
-          testBed
-            .inject(RecipeRepositoryFake)
-            .setRecipes([
-              recipeMother.withBasicInfo('Burger').build(),
-              recipeMother.withBasicInfo('Salad').build(),
-            ]);
-        },
-      }
-    );
-    /* @hack trigger a second round of change detection after effects are flushed. */
-    detectChanges();
+        testBed
+          .inject(RecipeRepositoryFake)
+          .setRecipes([
+            recipeMother.withBasicInfo('Burger').build(),
+            recipeMother.withBasicInfo('Salad').build(),
+          ]);
+      },
+    });
 
-    /* This is required to flush effects and update views accordingly. */
-    detectChanges();
+    await fixture.whenStable();
 
     const mealPlanner = TestBed.inject(MealPlanner);
 
     return {
       mealPlanner,
-      detectChanges,
       getFirstAddButton() {
         const addButtonEl = screen.getAllByRole<HTMLButtonElement>('button', {
           name: 'ADD',
@@ -114,11 +109,16 @@ describe(RecipeSearchComponent.name, () => {
           .queryAll(By.css('wm-recipe-preview'))
           .map((previewEl) => previewEl.properties.recipe.name);
       },
-      updateFilter(filter: RecipeFilter) {
+      async updateFilter(filter: RecipeFilter) {
         debugElement
           .query(By.css('wm-recipe-filter'))
           .triggerEventHandler('filterChange', filter);
-        detectChanges();
+        await fixture.whenStable();
+      },
+      async whenStable() {
+        // TODO remove this once we upgrade to Angular 18
+        fixture.detectChanges();
+        return fixture.whenStable();
       },
     };
   }

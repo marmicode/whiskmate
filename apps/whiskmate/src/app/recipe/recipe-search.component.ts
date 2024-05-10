@@ -1,6 +1,5 @@
 import { RecipePreviewComponent } from './recipe-preview.component';
-import { CatalogComponent } from './../shared/catalog.component';
-import { NgForOf } from '@angular/common';
+import { CatalogComponent } from '../shared/catalog.component';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,13 +15,12 @@ import { RecipeRepository } from './recipe-repository.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'wm-recipe-search',
-  imports: [CatalogComponent, NgForOf, RecipePreviewComponent],
+  imports: [CatalogComponent, RecipePreviewComponent],
   template: `
     <wm-catalog>
-      <wm-recipe-preview
-        *ngFor="let recipe of recipes; trackBy: trackById"
-        [recipe]="recipe"
-      ></wm-recipe-preview>
+      @for (recipe of recipes; track recipe.id) {
+        <wm-recipe-preview [recipe]="recipe"/>
+      }
     </wm-catalog>
   `,
 })

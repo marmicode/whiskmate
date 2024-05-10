@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { RecipeSearchComponent } from './recipe-search.component';
 import {
   provideRecipeRepositoryFake,
@@ -9,9 +9,15 @@ import { recipeMother } from '../testing/recipe.mother';
 describe(RecipeSearchComponent.name, () => {
   it.todo('🚧 should search recipes without filtering');
 
-  function renderComponent() {
+  async function renderComponent() {
     TestBed.configureTestingModule({
-      providers: [provideRecipeRepositoryFake()],
+      providers: [
+        provideRecipeRepositoryFake(),
+        {
+          provide: ComponentFixtureAutoDetect,
+          useValue: true,
+        },
+      ],
     });
 
     TestBed.inject(RecipeRepositoryFake).setRecipes([
@@ -20,7 +26,7 @@ describe(RecipeSearchComponent.name, () => {
     ]);
 
     const fixture = TestBed.createComponent(RecipeSearchComponent);
-    fixture.detectChanges();
+    await fixture.whenStable();
 
     return {};
   }

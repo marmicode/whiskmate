@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -9,6 +8,7 @@ import {
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
 import { render } from '@testing-library/angular';
+import { AsyncPipe } from '@angular/common';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
@@ -26,7 +26,7 @@ describe(RecipeSearchComponent.name, () => {
       configureTestBed(testBed) {
         testBed.overrideComponent(RecipeSearchComponent, {
           set: {
-            imports: [CommonModule],
+            imports: [AsyncPipe],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
           },
         });

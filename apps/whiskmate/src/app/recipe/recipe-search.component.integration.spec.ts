@@ -1,6 +1,5 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RecipeRepository } from './recipe-repository.service';
 import { RecipeSearchComponent } from './recipe-search.component';
 import {
   provideRecipeRepositoryFake,
@@ -9,15 +8,21 @@ import {
 import { recipeMother } from '../testing/recipe.mother';
 
 describe(RecipeSearchComponent.name, () => {
-  it('should search recipes without filtering', () => {
-    const { getRecipeNames } = renderComponent();
+  it('should search recipes without filtering', async () => {
+    const { getRecipeNames } = await renderComponent();
 
     expect(getRecipeNames()).toEqual(['Burger', 'Salad']);
   });
 
-  function renderComponent() {
+  async function renderComponent() {
     TestBed.configureTestingModule({
-      providers: [provideRecipeRepositoryFake()],
+      providers: [
+        provideRecipeRepositoryFake(),
+        {
+          provide: ComponentFixtureAutoDetect,
+          useValue: true,
+        },
+      ],
     });
 
     TestBed.inject(RecipeRepositoryFake).setRecipes([
@@ -26,7 +31,7 @@ describe(RecipeSearchComponent.name, () => {
     ]);
 
     const fixture = TestBed.createComponent(RecipeSearchComponent);
-    fixture.detectChanges();
+    await fixture.whenStable();
 
     return {
       getRecipeNames() {

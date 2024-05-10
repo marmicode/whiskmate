@@ -18,10 +18,7 @@ describe(RecipeSearchComponent.name, () => {
     TestBed.configureTestingModule({
       providers: [
         provideRecipeRepositoryFake(),
-        {
-          provide: ComponentFixtureAutoDetect,
-          useValue: true,
-        },
+        { provide: ComponentFixtureAutoDetect, useValue: true },
       ],
     });
 

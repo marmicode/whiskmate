@@ -1,7 +1,7 @@
-import { AsyncPipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CatalogComponent } from './../shared/catalog.component';
 import { RecipePreviewComponent } from './recipe-preview.component';
+import { CatalogComponent } from '../shared/catalog.component';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
@@ -10,13 +10,12 @@ import { RecipeRepository } from './recipe-repository.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'wm-recipe-search',
-  imports: [AsyncPipe, CatalogComponent, NgForOf, RecipePreviewComponent],
+  imports: [AsyncPipe, CatalogComponent, RecipePreviewComponent],
   template: `
     <wm-catalog>
-      <wm-recipe-preview
-        *ngFor="let recipe of recipes$ | async; trackBy: trackById"
-        [recipe]="recipe"
-      ></wm-recipe-preview>
+      @for (recipe of recipes$ | async; track recipe.id) {
+        <wm-recipe-preview [recipe]="recipe"/>
+      }
     </wm-catalog>
   `,
 })

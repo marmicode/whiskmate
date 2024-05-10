@@ -1,4 +1,4 @@
-import { Observable, Observer, Subscription } from 'rxjs';
+import { Observable, Observer, Subscription, Unsubscribable } from 'rxjs';
 
 export function createObserver() {
   let subscription: Subscription;
@@ -39,4 +39,4 @@ export function createObserver() {
 
 type Subscribable<T> =
   | Observable<T>
-  | { subscribe(fn: (v: T) => void): Subscription };
+  | { subscribe(fn: (v: T) => void): Unsubscribable };

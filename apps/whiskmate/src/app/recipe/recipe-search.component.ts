@@ -39,8 +39,4 @@ export class RecipeSearchComponent implements OnDestroy, OnInit {
   ngOnDestroy() {
     this._subscription?.unsubscribe();
   }
-
-  trackById(_: number, recipe: Recipe) {
-    return recipe.id;
-  }
 }

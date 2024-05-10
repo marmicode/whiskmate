@@ -70,17 +70,6 @@
         "buildTarget": "whiskmate:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/whiskmate"],
-      "options": {
-        "jestConfig": "{projectRoot}/jest.config.ts"
-      }
-    },
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
@@ -92,13 +81,6 @@
     },
     "reset": {
       "command": "rm -rf .swc {projectRoot}/playwright/.cache"
-    },
-    "test-ui": {
-      "executor": "@nx/playwright:playwright",
-      "outputs": ["{workspaceRoot}/dist/.playwright/{projectRoot}"],
-      "options": {
-        "config": "{projectRoot}/playwright-ct.config.ts"
-      }
     }
   },
   "tags": []

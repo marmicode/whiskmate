@@ -3,7 +3,8 @@ import { recipeMother } from '../testing/recipe.mother';
 
 describe(RecipePreviewComponent.name, () => {
   it('should show recipe name', () => {
-    cy.mount(RecipePreviewComponent, {
+    cy.mount(`<wm-recipe-preview [recipe]="recipe">`, {
+      imports: [RecipePreviewComponent],
       componentProperties: {
         recipe: recipeMother.withBasicInfo('Burger').build(),
       },

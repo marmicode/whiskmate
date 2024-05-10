@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Unsubscribable } from 'rxjs';
 
 let subscription: Subscription;
 beforeEach(() => (subscription = new Subscription()));
@@ -25,5 +25,9 @@ function observe(source$: Observable<unknown>) {
 }
 
 type OutputKeys<T extends object> = {
-  [K in keyof T]: T[K] extends Observable<unknown> ? K : never;
+  [K in keyof T]: T[K] extends Subscribable<unknown> ? K : never;
 }[keyof T];
+
+export interface Subscribable<T> {
+  subscribe(observer: (value: T) => void): Unsubscribable;
+}

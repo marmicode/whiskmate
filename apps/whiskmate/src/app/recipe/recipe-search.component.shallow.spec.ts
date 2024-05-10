@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -15,6 +14,7 @@ import { MealPlanner } from '../meal-planner/meal-planner.service';
 import { firstValueFrom } from 'rxjs';
 import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
 import { provideMealRepositoryFake } from '../meal-planner/meal-repository.fake';
+import { AsyncPipe } from '@angular/common';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
@@ -71,7 +71,7 @@ describe(RecipeSearchComponent.name, () => {
       configureTestBed(testBed) {
         testBed.overrideComponent(RecipeSearchComponent, {
           set: {
-            imports: [CommonModule, RecipeAddButtonComponent],
+            imports: [AsyncPipe, RecipeAddButtonComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
           },
         });

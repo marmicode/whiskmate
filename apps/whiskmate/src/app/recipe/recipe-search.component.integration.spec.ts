@@ -18,10 +18,7 @@ describe(RecipeSearchComponent.name, () => {
     const { fixture } = await render(RecipeSearchComponent, {
       providers: [
         provideRecipeRepositoryFake(),
-        {
-          provide: ComponentFixtureAutoDetect,
-          useValue: true,
-        },
+        { provide: ComponentFixtureAutoDetect, useValue: true },
       ],
       configureTestBed(testBed) {
         testBed

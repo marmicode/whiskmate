@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -26,7 +25,7 @@ describe(RecipeSearchComponent.name, () => {
       configureTestBed(testBed) {
         testBed.overrideComponent(RecipeSearchComponent, {
           set: {
-            imports: [CommonModule],
+            imports: [],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
           },
         });

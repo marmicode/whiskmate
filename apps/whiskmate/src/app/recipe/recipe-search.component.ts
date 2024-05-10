@@ -27,8 +27,4 @@ export class RecipeSearchComponent {
   constructor() {
     this.recipes$ = this._recipeRepository.search();
   }
-
-  trackById(_: number, recipe: Recipe) {
-    return recipe.id;
-  }
 }

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { recipeMother } from '../testing/recipe.mother';
 import { RecipeSearchComponent } from './recipe-search.component';
@@ -17,9 +18,11 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   async function renderComponent() {
-    const { debugElement } = await render(RecipeSearchComponent, {
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [provideRecipeRepositoryFake()],
+    const { debugElement, fixture } = await render(RecipeSearchComponent, {
+      providers: [
+        provideRecipeRepositoryFake(),
+        { provide: ComponentFixtureAutoDetect, useValue: true },
+      ],
       configureTestBed(testBed) {
         testBed.overrideComponent(RecipeSearchComponent, {
           set: {
@@ -36,6 +39,8 @@ describe(RecipeSearchComponent.name, () => {
           ]);
       },
     });
+
+    await fixture.whenStable();
 
     return {
       getRecipeNames() {

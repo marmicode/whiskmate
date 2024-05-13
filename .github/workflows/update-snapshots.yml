@@ -1,0 +1,36 @@
+name: 🌅 Update Snapshots
+on:
+  - workflow_dispatch
+
+env:
+  # Using Nx Cloud is safer
+  NX_REJECT_UNKNOWN_LOCAL_CACHE: 0
+
+jobs:
+  update-snapshots:
+    name: 🌅 Update Snapshots
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Playwright browsers install
+        run: pnpm playwright install --with-deps
+
+      - run: pnpm nx run-many --parallel=4 -t test-ui --update-snapshots
+
+      - run: |
+          git config --global user.email "bot@marmicode.io"
+          git config --global user.name "Marmicode Bot"
+          git diff --quiet || git commit -a -m "test: ✅ update snapshots"
+          git push
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: 🎭 Playwright Report
+          path: dist/.playwright
+          retention-days: 7

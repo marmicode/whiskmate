@@ -1,8 +1,32 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "defaultProject": "whiskmate",
+  "parallel": 1,
+  "plugins": [
+    {
+      "plugin": "@nx/cypress/plugin",
+      "options": {
+        "componentTestingTargetName": "test-ui-cypress"
+      }
+    },
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "test-ui"
+      }
+    },
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "testTargetName": "vitest"
+      }
+    },
+    "@nx/jest/plugin",
+    "@nx/eslint/plugin"
+  ],
   "generators": {
     "@nx/angular:application": {
       "style": "css",
@@ -31,7 +55,6 @@
       }
     }
   },
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
@@ -74,6 +97,5 @@
       "!{projectRoot}/.eslintrc.json",
       "!{projectRoot}/src/test-setup.[jt]s"
     ]
-  },
-  "parallel": 1
+  }
 }

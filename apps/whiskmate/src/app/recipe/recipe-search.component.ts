@@ -13,6 +13,7 @@ import { rxComputed } from '@jscutlery/rx-computed';
 import { CatalogComponent } from '../shared/catalog.component';
 
 @Component({
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'wm-recipe-search',

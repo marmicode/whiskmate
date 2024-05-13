@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     }
 
     <div class="content">
-      <ng-content></ng-content>
+      <ng-content/>
     </div>`,
   styles: [
     `

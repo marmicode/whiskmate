@@ -9,7 +9,6 @@ import { RecipeRepository } from './recipe-repository.service';
 @Component({
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   selector: 'wm-recipe-search',
   imports: [AsyncPipe, CatalogComponent, RecipePreviewComponent],
   template: `

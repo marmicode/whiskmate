@@ -1,10 +1,4 @@
-import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  NgModule,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -17,10 +11,3 @@ export class RecipeSearchComponent implements OnInit {
     throw new Error('🚧 Work in progress!');
   }
 }
-
-@NgModule({
-  declarations: [RecipeSearchComponent],
-  exports: [RecipeSearchComponent],
-  imports: [CommonModule],
-})
-export class RecipeSearchModule {}

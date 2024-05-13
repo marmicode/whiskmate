@@ -15,7 +15,6 @@ import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.comp
 @Component({
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   selector: 'wm-recipe-search',
   imports: [
     CatalogComponent,

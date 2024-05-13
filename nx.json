@@ -18,6 +18,12 @@
         "targetName": "test-ui"
       }
     },
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "testTargetName": "vitest"
+      }
+    },
     "@nx/jest/plugin",
     "@nx/eslint/plugin"
   ],

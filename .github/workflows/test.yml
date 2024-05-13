@@ -1,4 +1,4 @@
-name: ✅ Test
+name: Test
 on:
   push:
 
@@ -7,40 +7,67 @@ env:
   NX_REJECT_UNKNOWN_LOCAL_CACHE: 0
 
 jobs:
+  build:
+    name: 📦 Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - run: pnpm nx run-many --parallel=4 -t build
+
+  lint:
+    name: 🧹 Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - run: pnpm nx run-many --parallel=4 -t lint
+
   test:
     name: ✅ Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - run: pnpm nx run-many --parallel=4 -t test,vitest --pass-with-no-tests
 
-      - uses: nrwl/nx-set-shas@v3
+  playwright-ct:
+    name: 🎭 Playwright CT
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
         with:
-          main-branch-name: ${{ github.ref_name }}
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - run: pnpm install
-
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Playwright browsers install
         run: pnpm playwright install --with-deps
-
-      - name: Cache Nx
-        uses: actions/cache@v3
+      - run: pnpm nx run-many --parallel=4 -t test-ui --pass-with-no-tests
+      - uses: actions/upload-artifact@v3
+        if: always()
         with:
-          path: .nx/cache
-          key: ${{ runner.os }}-nx-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-nx
+          name: 🎭 Playwright Report
+          path: dist/.playwright
+          retention-days: 7
 
-      - run: pnpm nx run-many --parallel=4 -t build,lint,test,test-ui,vitest
+  cypress-ct:
+    name: Cypress CT
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
 
       # Skip Cypress Component tests on branches that don't have them
       # this avoids no specs error and polluting the code base
@@ -57,10 +84,3 @@ jobs:
       - name: Cypress component tests
         if: steps.has-cypress-tests.outputs.has-cypress-tests == 'true'
         run: pnpm nx run-many --parallel=4 -t test-ui-cypress
-
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: 🎭 Playwright Report
-          path: dist/.playwright
-          retention-days: 7

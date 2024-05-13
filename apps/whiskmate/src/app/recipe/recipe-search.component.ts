@@ -13,6 +13,7 @@ import { RecipeRepository } from './recipe-repository.service';
 import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
 
 @Component({
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'wm-recipe-search',

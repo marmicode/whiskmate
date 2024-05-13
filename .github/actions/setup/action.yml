@@ -1,0 +1,29 @@
+name: Setup
+
+description: Setup Node.js, cache and install dependencies
+
+runs:
+  using: composite
+  steps:
+    - uses: nrwl/nx-set-shas@v3
+      with:
+        main-branch-name: ${{ github.ref_name }}
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
+
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+
+    - run: pnpm install
+      shell: sh
+
+    - name: Cache Nx
+      uses: actions/cache@v3
+      with:
+        path: .nx/cache
+        key: ${{ runner.os }}-nx-${{ github.sha }}
+        restore-keys: ${{ runner.os }}-nx

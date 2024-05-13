@@ -31,7 +31,7 @@ for CURRENT in $*; do
   then
     pnpm install
     pnpm reset
-    pnpm nx run-many --target test,test-ui,vitest
+    pnpm nx run-many --target test,test-ui,vitest --pass-with-no-tests
   fi
 
   PARENT_BRANCH="$CURRENT"

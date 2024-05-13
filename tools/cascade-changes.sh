@@ -5,6 +5,9 @@ set -e
 while :;
 do
     case "$1" in
+        "--skip-reset" )
+          SKIP_RESET=true
+          shift;;
         "--skip-tests" )
           SKIP_TESTS=true
           shift;;
@@ -30,8 +33,13 @@ for CURRENT in $*; do
   if [ "$SKIP_TESTS" != "true" ]
   then
     pnpm install
-    pnpm nx run-many --target reset
-    pnpm nx run-many --target test,test-ui
+
+    if [ "$SKIP_RESET" != "true" ]
+    then
+      pnpm reset
+    fi
+
+    pnpm nx run-many --target test,test-ui,vitest --pass-with-no-tests
   fi
 
   PARENT_BRANCH="$CURRENT"

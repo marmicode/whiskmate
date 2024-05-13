@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { MealPlanner } from './meal-planner.service';
 
 describe(MealPlanner.name, () => {
-  xit('should add recipe', () => {
+  it.todo('should add recipe', () => {
     const { mealPlanner } = createMealPlanner();
 
     throw new Error('🚧 work in progress!');

@@ -30,6 +30,4 @@ pnpm test --watch
 
    4. Have fun with the harness.
 
-   5. You can remove `fixture.detectChanges()` as harnesses trigger change detection under the hood.
-
-   6. Don't forget to wait for promises to resolve 😉.
+   5. Don't forget to wait for promises to resolve 😉.

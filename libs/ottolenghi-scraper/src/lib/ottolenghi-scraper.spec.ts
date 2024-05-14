@@ -88,6 +88,5 @@ describe(scrapRecipeByUrl.name, () => {
         'Mix the za’atar with the remaining tablespoon of oil and brush over the eggs. Serve at once, straight from the pan.',
       ],
     });
-  }, /* Test is too slow probably due to puppeteer bootstrap. */
-  15000);
+  } /* Test is too slow probably due to puppeteer bootstrap. */, 15000);
 });

@@ -2,6 +2,7 @@
 export default {
   displayName: 'ottolenghi-scraper',
   preset: '../../jest.preset.js',
+  testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]sx?$': [
       'ts-jest',

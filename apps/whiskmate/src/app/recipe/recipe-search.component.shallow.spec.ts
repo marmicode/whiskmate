@@ -8,7 +8,6 @@ import {
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
 import { render } from '@testing-library/angular';
-import { AsyncPipe } from '@angular/common';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
@@ -26,7 +25,7 @@ describe(RecipeSearchComponent.name, () => {
       configureTestBed(testBed) {
         testBed.overrideComponent(RecipeSearchComponent, {
           set: {
-            imports: [AsyncPipe],
+            imports: [],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
           },
         });

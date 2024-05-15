@@ -1,11 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { createObserver } from '../../testing/observer';
 import { MealPlanner } from './meal-planner.service';
 import { recipeMother } from '../testing/recipe.mother';
+import { observe } from '../../testing/observe';
 
 describe(MealPlanner.name, () => {
-  const { observe } = createObserver();
-
   it('should add recipe', () => {
     const { mealPlanner, burger, salad } = createMealPlanner();
 
@@ -34,7 +32,7 @@ describe(MealPlanner.name, () => {
     const { mealPlanner, burgerDuplicate } = createMealPlannerWithBurger();
 
     expect(() => mealPlanner.addRecipe(burgerDuplicate)).toThrow(
-      `Can't add recipe.`
+      `Can't add recipe.`,
     );
   });
 
@@ -42,7 +40,7 @@ describe(MealPlanner.name, () => {
     it('should emit empty array when no recipes', async () => {
       const { mealPlanner } = createMealPlanner();
 
-      const observer = observe(mealPlanner.recipes$);
+      using observer = observe(mealPlanner.recipes$);
 
       expect(observer.next).toHaveBeenCalledTimes(1);
       expect(observer.next).toHaveBeenCalledWith([]);
@@ -51,9 +49,9 @@ describe(MealPlanner.name, () => {
     it('should emit recipes when added', () => {
       const { mealPlanner, burger, salad } = createMealPlanner();
 
-      const observer = observe(mealPlanner.recipes$);
+      using observer = observe(mealPlanner.recipes$);
 
-      observer.mockClear();
+      observer.clear();
 
       mealPlanner.addRecipe(burger);
       mealPlanner.addRecipe(salad);
@@ -73,7 +71,7 @@ describe(MealPlanner.name, () => {
     it('should instantly emit if recipe can be added', () => {
       const { mealPlanner, burger } = createMealPlanner();
 
-      const observer = observe(mealPlanner.watchCanAddRecipe(burger));
+      using observer = observe(mealPlanner.watchCanAddRecipe(burger));
 
       expect(observer.next).toHaveBeenCalledTimes(1);
       expect(observer.next).toHaveBeenCalledWith(true);
@@ -82,9 +80,9 @@ describe(MealPlanner.name, () => {
     it(`should emit false when recipe is added and can't be added anymore`, () => {
       const { mealPlanner, burger } = createMealPlanner();
 
-      const observer = observe(mealPlanner.watchCanAddRecipe(burger));
+      using observer = observe(mealPlanner.watchCanAddRecipe(burger));
 
-      observer.mockClear();
+      observer.clear();
 
       mealPlanner.addRecipe(burger);
 
@@ -95,11 +93,11 @@ describe(MealPlanner.name, () => {
     it(`should not emit if result didn't change`, () => {
       const { mealPlanner, burger, salad } = createMealPlanner();
 
-      const observer = observe(mealPlanner.watchCanAddRecipe(burger));
+      using observer = observe(mealPlanner.watchCanAddRecipe(burger));
 
       mealPlanner.addRecipe(burger);
 
-      observer.mockClear();
+      observer.clear();
 
       mealPlanner.addRecipe(salad);
 

@@ -89,7 +89,7 @@
     "jest-file-loader": "^1.0.3",
     "jest-preset-angular": "14.0.4",
     "nx": "19.0.3",
-    "prettier": "2.7.1",
+    "prettier": "3.2.5",
     "reflect-metadata": "0.2.2",
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
@@ -99,4 +99,3 @@
     "vitest": "1.6.0"
   }
 }
-

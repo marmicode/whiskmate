@@ -11,19 +11,6 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
-import { configure } from '@testing-library/dom';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => {};
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Zone = (globalThis as any)['Zone'] as any;
-Zone['ProxyZoneSpec'] = {
-  assertPresent: () => ({ onHasTask: noop, resetDelegate: noop }),
-};
-
-configure({
-  testIdAttribute: 'data-role',
-});
 
 getTestBed().resetTestEnvironment();
 getTestBed().initTestEnvironment(

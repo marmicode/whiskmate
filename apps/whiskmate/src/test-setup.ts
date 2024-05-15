@@ -15,7 +15,7 @@ import {
 getTestBed().resetTestEnvironment();
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting()
+  platformBrowserDynamicTesting(),
 );
 
 const originalItTodo = it.todo.bind(it);
@@ -23,3 +23,7 @@ const originalItTodo = it.todo.bind(it);
  * "todo must be called with only a description." */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 it.todo = ((name: string) => originalItTodo(name)) as any;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(Symbol as any).dispose ??= Symbol('Symbol.dispose');
+(Symbol as any).asyncDispose ??= Symbol('Symbol.asyncDispose');

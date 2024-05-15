@@ -1,5 +1,5 @@
 module.exports = () => ({
   testFramework: {
-    configFile: 'vitest.config.ts',
+    configFile: 'vitest.config.mts',
   },
 });

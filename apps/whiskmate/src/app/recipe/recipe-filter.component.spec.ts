@@ -1,16 +1,14 @@
-import { createObserver } from '../../testing/observer';
-import { RecipeFilter } from './recipe-filter';
-import { RecipeFilterComponent } from './recipe-filter.component';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
+import { observe } from '../../testing/observe';
+import { RecipeFilter } from './recipe-filter';
+import { RecipeFilterComponent } from './recipe-filter.component';
 
 describe(RecipeFilterComponent.name, () => {
-  const { observe } = createObserver();
-
   it('should trigger filterChange output', async () => {
     const { component, setInputValue } = await renderComponent();
 
-    const observer = observe(component.filterChange);
+    using observer = observe(component.filterChange);
 
     await setInputValue('Keywords', 'Cauliflower');
     await setInputValue('Max Ingredients', '3');
@@ -30,7 +28,7 @@ describe(RecipeFilterComponent.name, () => {
       component: fixture.componentInstance,
       async setInputValue(
         label: 'Keywords' | 'Max Ingredients' | 'Max Steps',
-        value: string
+        value: string,
       ) {
         const inputEl = screen.getByLabelText(label);
         await userEvent.type(inputEl, value);

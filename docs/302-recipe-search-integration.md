@@ -12,10 +12,10 @@ But let's check the DOM this time.
 
 **Implement tests** for `<wm-recipe-search>` and make sure that:
 
-1. recipe names are displayed. Recipe name elements can be queried using `[data-role="recipe-name"]`:
+1. recipe names are displayed. Recipe name elements can be queried using `heading` role or `[data-testid="recipe-name"]`:
 
 ```html
-<h2 data-role="recipe-name">{{ recipe.name }}</h2>
+<h2 data-testid="recipe-name">{{ recipe.name }}</h2>
 ```
 
 ## 📝 Steps

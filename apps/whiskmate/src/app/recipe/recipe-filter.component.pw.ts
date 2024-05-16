@@ -3,7 +3,7 @@ import { RecipeFilterComponent } from './recipe-filter.component';
 import { RecipeFilter } from './recipe-filter';
 
 test.describe('<wm-recipe-filter>', () => {
-  test('should show recipe name', async ({ mount }) => {
+  test('should trigger filterChange', async ({ mount }) => {
     let filter: RecipeFilter | undefined;
     const component = await mount(RecipeFilterComponent, {
       on: {

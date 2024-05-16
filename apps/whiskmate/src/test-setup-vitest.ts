@@ -3,6 +3,8 @@ import '@testing-library/jest-dom';
 import 'reflect-metadata';
 import { getTestBed } from '@angular/core/testing';
 
+import './styles.css';
+
 import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting,
@@ -10,5 +12,5 @@ import {
 
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting()
+  platformBrowserDynamicTesting(),
 );

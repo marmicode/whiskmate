@@ -38,7 +38,7 @@ Instead, we can use the `cy.contains()` command which is more resilient to chang
 
 One of the most resilient and robust alternatives is using [`@testing-library/cypress`](https://github.com/testing-library/cypress-testing-library) which provides a set of helpful commands _(Cf. https://testing-library.com/docs/queries/about/#priority)_.
 
-Note that `@testing-library/cypress` is already set up, and that the test-id was already configured to use `data-role` attribute instead of `data-testid`. _Cf. [apps/whiskmate/cypress/support/commands.ts](../apps/whiskmate/cypress/support/commands.ts)._
+Note that `@testing-library/cypress` is already set up. _Cf. [apps/whiskmate/cypress/support/commands.ts](../apps/whiskmate/cypress/support/commands.ts)._
 
 # Appendices
 

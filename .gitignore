@@ -56,4 +56,5 @@ Thumbs.db
 .pnpm-store
 .swc
 # Skip mjs vite config temporarily by vitest as it confuses Nx crystal
+vite.config.mts.*.mjs
 vitest.config.mts.*.mjs

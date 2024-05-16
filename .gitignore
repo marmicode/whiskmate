@@ -55,3 +55,5 @@ Thumbs.db
 # Useful when running pnpm install in a docker image for playwright visual snapshots
 .pnpm-store
 .swc
+# Skip mjs vite config temporarily by vitest as it confuses Nx crystal
+vitest.config.mts.*.mjs

@@ -57,6 +57,6 @@ pnpm test --watch
 const getItem = this.locatorFor('.item');
 (await getItem()).click();
 
-const getCalendar = this.locatorFor(MatCalendarHarness.with({selector: '[data-role="start-date-cal"]'}));
+const getCalendar = this.locatorFor(MatCalendarHarness.with({selector: '[data-testid="start-date-cal"]'}));
 (await getCalendar()).openCalendar();
 ```

@@ -18,8 +18,6 @@ declare global {
   }
 }
 
-configure({ testIdAttribute: 'data-role' });
-
 Cypress.Commands.add(
   'mount',
   <T>(component: Type<T> | string, config?: MountConfig<T>) => {
@@ -27,7 +25,7 @@ Cypress.Commands.add(
       ...config,
       imports: [BrowserAnimationsModule, ...(config?.imports || [])],
     });
-  }
+  },
 );
 
 Cypress.Commands.add('inject', inject);

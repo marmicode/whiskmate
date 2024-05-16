@@ -70,15 +70,6 @@
         "buildTarget": "whiskmate:build"
       }
     },
-    "component-test": {
-      "executor": "@nx/cypress:cypress",
-      "options": {
-        "cypressConfig": "{projectRoot}/cypress.config.ts",
-        "testingType": "component",
-        "skipServe": true,
-        "devServerTarget": "whiskmate:build"
-      }
-    },
     "reset": {
       "command": "rm -rf .swc {projectRoot}/playwright/.cache"
     }

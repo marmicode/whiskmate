@@ -127,7 +127,7 @@ devDependencies:
     version: 19.0.3(@swc/core@1.5.3)(@types/node@18.19.24)(nx@19.0.3)(ts-node@10.9.1)(typescript@5.4.5)
   '@nx/playwright':
     specifier: 19.0.3
-    version: 19.0.3(@swc/core@1.5.3)(@types/node@18.19.24)(nx@19.0.3)(typescript@5.4.5)
+    version: 19.0.3(@playwright/test@1.43.1)(@swc/core@1.5.3)(@types/node@18.19.24)(nx@19.0.3)(typescript@5.4.5)
   '@nx/vite':
     specifier: 19.0.3
     version: 19.0.3(@swc/core@1.5.3)(@types/node@18.19.24)(nx@19.0.3)(typescript@5.4.5)(vite@5.2.11)(vitest@1.6.0)
@@ -140,6 +140,9 @@ devDependencies:
   '@percy/cypress':
     specifier: 3.1.2
     version: 3.1.2(cypress@13.8.1)
+  '@playwright/test':
+    specifier: 1.43.1
+    version: 1.43.1
   '@schematics/angular':
     specifier: 17.3.0
     version: 17.3.0
@@ -5729,7 +5732,7 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@nx/playwright@19.0.3(@swc/core@1.5.3)(@types/node@18.19.24)(nx@19.0.3)(typescript@5.4.5):
+  /@nx/playwright@19.0.3(@playwright/test@1.43.1)(@swc/core@1.5.3)(@types/node@18.19.24)(nx@19.0.3)(typescript@5.4.5):
     resolution: {integrity: sha512-ncj8HN8RMu5qmJGqtFgRbvq5ZpTWHrxZZqA0qh4ir9hX3FpvSCHWBXhdBhlDUQsnB0lQqU+SgP+isojfSZgNkg==}
     peerDependencies:
       '@playwright/test': ^1.36.0
@@ -5741,6 +5744,7 @@ packages:
       '@nx/eslint': 19.0.3(@swc/core@1.5.3)(@types/node@18.19.24)(nx@19.0.3)
       '@nx/js': 19.0.3(@swc/core@1.5.3)(@types/node@18.19.24)(nx@19.0.3)(typescript@5.4.5)
       '@phenomnomnominal/tsquery': 5.0.1(typescript@5.4.5)
+      '@playwright/test': 1.43.1
       minimatch: 9.0.3
       tslib: 2.6.2
     transitivePeerDependencies:

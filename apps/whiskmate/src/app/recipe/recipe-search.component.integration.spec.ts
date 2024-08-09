@@ -33,7 +33,7 @@ describe(RecipeSearchComponent.name, () => {
     return {
       getRecipeNames() {
         return fixture.debugElement
-          .queryAll(By.css('[data-role=recipe-name]'))
+          .queryAll(By.css('[data-testid=recipe-name]'))
           .map((el) => el.nativeElement.textContent);
       },
     };

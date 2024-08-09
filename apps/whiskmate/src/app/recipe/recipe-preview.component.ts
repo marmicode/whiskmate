@@ -8,8 +8,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   selector: 'wm-recipe-preview',
   imports: [CardComponent],
   template: `<wm-card [pictureUri]="recipe().pictureUri">
-    <h2 data-role="recipe-name">{{ recipe().name }}</h2>
-    <ng-content/>
+    <h2 data-testid="recipe-name">{{ recipe().name }}</h2>
+    <ng-content />
   </wm-card>`,
   styles: [
     `

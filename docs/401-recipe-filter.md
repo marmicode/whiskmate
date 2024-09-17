@@ -20,7 +20,7 @@ git checkout origin/testing-401-recipe-filter-solution apps/whiskmate/src/app/re
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Implement tests:

@@ -25,7 +25,7 @@ jobs:
       - run: |
           git config --global user.email "bot@marmicode.io"
           git config --global user.name "Marmicode Bot"
-          git diff --quiet || git commit -a -m "test: ✅ update snapshots"
+          git diff --cached --quiet || git commit -a -m "test: ✅ update snapshots"
           git push
 
       - uses: actions/upload-artifact@v3

@@ -28,7 +28,7 @@ git checkout origin/testing-301-recipe-search-isolated-solution apps/whiskmate/s
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Implement tests:

@@ -30,9 +30,16 @@ component.getByLabel('Keywords').fill('...');
 ## 🎁 Tip: Spying on component outputs
 
 ```ts
+let filter: RecipeFilter;
 const component = mount({
-  spyOutputs: ['filterChange']
+  on: {
+    filterChange(_filter) {
+      filter = _filter;
+    }
+  }
 })
 
-expect(component.spies.filterChange).toHave...;
+// do something that triggers the output
+
+expect(filter).toEqual(...);
 ```

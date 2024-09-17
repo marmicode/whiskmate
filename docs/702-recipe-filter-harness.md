@@ -15,7 +15,7 @@ Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/reci
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Create harness:

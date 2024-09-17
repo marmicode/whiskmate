@@ -24,7 +24,7 @@ git checkout origin/testing-303-recipe-search-shallow-solution-test-bed apps/whi
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Implement tests:

@@ -35,7 +35,7 @@ import { Recipe } from '../recipe/recipe';
 3. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 4. Implement tests.
@@ -59,7 +59,7 @@ pnpm test --watch
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Implement tests.

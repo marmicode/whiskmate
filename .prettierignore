@@ -6,3 +6,5 @@
 /.nx/cache
 
 **/__tests__/fixtures/**
+
+/.nx/workspace-data

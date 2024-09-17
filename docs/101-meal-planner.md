@@ -35,7 +35,7 @@ import { Recipe } from '../recipe/recipe';
 3. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 4. Implement tests.
@@ -59,7 +59,7 @@ pnpm test --watch
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Implement tests.
@@ -77,7 +77,9 @@ The example below tests the `Calculator.add` method. You can use it as a boilerp
 ```typescript
 describe(Calculator.name, () => {
   it('should return sum', () => {
-    const result = createCalculator().add(1, 2);
+    const { calculator } = createCalculator();
+    
+    const result = calculator.add(1, 2);
 
     expect(result).toEqual(3);
   });

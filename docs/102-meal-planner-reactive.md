@@ -30,7 +30,7 @@ git checkout origin/testing-102-meal-planner-reactive-solution apps/whiskmate/sr
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Implement tests.
@@ -54,7 +54,7 @@ class MealPlanner {
 1. Run tests:
 
 ```sh
-pnpm test whiskmate --watch
+pnpm test
 ```
 
 2. Implement tests.

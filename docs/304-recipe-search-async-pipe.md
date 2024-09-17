@@ -13,7 +13,7 @@ Let's go reactive and see what happens.
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Checkout new `RecipeSearchComponent` implementation.

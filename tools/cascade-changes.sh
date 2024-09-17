@@ -39,7 +39,8 @@ for CURRENT in $*; do
       pnpm reset
     fi
 
-    pnpm nx run-many --target test,test-ui,vitest --pass-with-no-tests
+    pnpm nx run-many --target test,vitest --watch false
+    pnpm nx run-many --target test-ui --pass-with-no-tests
   fi
 
   PARENT_BRANCH="$CURRENT"

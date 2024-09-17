@@ -20,7 +20,7 @@ git checkout origin/testing-402-recipe-search-filter-interaction-solution apps/w
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Implement tests:

@@ -28,7 +28,7 @@ git checkout origin/testing-302-recipe-search-integration-solution-test-bed apps
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Implement tests:

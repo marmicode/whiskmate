@@ -18,7 +18,7 @@ git checkout origin/testing-202-meal-planner-indirect-input-solution apps/whiskm
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Remove the fake and create & provide the spy instead. _(Cf. [Tip: Create & provide a type-safe spy](#-tip--create--provide-a-type-safe-spy))_
@@ -41,7 +41,7 @@ git checkout origin/testing-202-meal-planner-indirect-input-solution apps/whiskm
 1. Run tests:
 
 ```sh
-pnpm test --watch
+pnpm test
 ```
 
 2. Use the `setUpMealPlanner()` function instead of `createMealPlanner()` in order to configure the spy before creating the `MealPlanner`.

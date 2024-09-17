@@ -77,7 +77,9 @@ The example below tests the `Calculator.add` method. You can use it as a boilerp
 ```typescript
 describe(Calculator.name, () => {
   it('should return sum', () => {
-    const result = createCalculator().add(1, 2);
+    const { calculator } = createCalculator();
+    
+    const result = calculator.add(1, 2);
 
     expect(result).toEqual(3);
   });

@@ -9,7 +9,7 @@ env:
 jobs:
   build:
     name: 📦 Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,7 +20,7 @@ jobs:
 
   lint:
     name: 🧹 Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,7 +31,7 @@ jobs:
 
   test:
     name: ✅ Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,7 +42,7 @@ jobs:
 
   playwright-ct:
     name: 🎭 Playwright CT
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -52,7 +52,7 @@ jobs:
       - name: Playwright browsers install
         run: pnpm playwright install --with-deps
       - run: pnpm nx run-many --parallel=4 -t test-ui --pass-with-no-tests
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: 🎭 Playwright Report
@@ -61,7 +61,7 @@ jobs:
 
   cypress-ct:
     name: Cypress CT
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:

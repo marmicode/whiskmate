@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "playwright install && puppeteer browsers install chrome",
+    "postinstall": "playwright install",
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
@@ -108,8 +108,17 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@percy/core",
       "@swc/core",
-      "nx"
+      "cypress",
+      "esbuild",
+      "fsevents",
+      "lmdb",
+      "msgpackr-extract",
+      "nice-napi",
+      "nx",
+      "puppeteer"
     ]
   }
 }

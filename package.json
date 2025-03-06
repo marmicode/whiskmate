@@ -2,8 +2,9 @@
   "name": "whiskmate",
   "version": "0.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
-    "postinstall": "puppeteer browsers install chrome",
+    "postinstall": "playwright install && puppeteer browsers install chrome",
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
@@ -16,7 +17,6 @@
     "scrap-ottolenghi": "ts-node -P libs/ottolenghi-scraper/tsconfig.lib.json libs/ottolenghi-scraper/src/main.ts",
     "reset": "nx reset && nx run-many -t reset"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "19.1.8",
     "@angular/cdk": "19.1.5",

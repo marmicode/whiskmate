@@ -58,29 +58,3 @@ jobs:
           name: 🎭 Playwright Report
           path: dist/.playwright
           retention-days: 7
-
-  cypress-ct:
-    name: Cypress CT
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup
-        uses: ./.github/actions/setup
-
-      # Skip Cypress Component tests on branches that don't have them
-      # this avoids no specs error and polluting the code base
-      # with some cypress test file from the beginning.
-      - name: Has Cypress tests
-        id: has-cypress-tests
-        run: |
-          if [ $(find apps libs -name '*.cy.ts' | wc -l) -gt 0 ]; then
-            echo "has-cypress-tests=true" >> $GITHUB_OUTPUT
-          else
-            echo "has-cypress-tests=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Cypress component tests
-        if: steps.has-cypress-tests.outputs.has-cypress-tests == 'true'
-        run: pnpm nx run-many --parallel=4 -t test-ui-cypress

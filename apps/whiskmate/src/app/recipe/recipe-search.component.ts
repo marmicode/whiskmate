@@ -13,7 +13,6 @@ import { RecipeRepository } from './recipe-repository.service';
 import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search',
   imports: [
@@ -27,7 +26,7 @@ import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.comp
     <wm-catalog>
       @for (recipe of recipes(); track recipe.id) {
         <wm-recipe-preview [recipe]="recipe">
-          <wm-recipe-add-button [recipe]="recipe"/>
+          <wm-recipe-add-button [recipe]="recipe" />
         </wm-recipe-preview>
       }
     </wm-catalog>

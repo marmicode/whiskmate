@@ -4,7 +4,6 @@ import { TitleComponent } from './shared/title.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   selector: 'wm-app',
   imports: [TitleComponent, RecipeSearchComponent],
   template: `

@@ -5,7 +5,6 @@ import { CatalogComponent } from '../shared/catalog.component';
 import { RecipeRepository } from './recipe-repository.service';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search',
   imports: [CatalogComponent, RecipePreviewComponent],

@@ -7,7 +7,6 @@ import { Recipe } from './recipe';
 import { RecipeRepository } from './recipe-repository.service';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search',
   imports: [AsyncPipe, CatalogComponent, RecipePreviewComponent],

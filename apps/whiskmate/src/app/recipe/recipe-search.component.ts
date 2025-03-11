@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,20 +12,14 @@ import { rxComputed } from '@jscutlery/rx-computed';
 import { CatalogComponent } from '../shared/catalog.component';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search',
-  imports: [
-    AsyncPipe,
-    CatalogComponent,
-    RecipeFilterComponent,
-    RecipePreviewComponent,
-  ],
+  imports: [CatalogComponent, RecipeFilterComponent, RecipePreviewComponent],
   template: `
     <wm-recipe-filter (filterChange)="filter.set($event)"></wm-recipe-filter>
     <wm-catalog>
       @for (recipe of recipes(); track recipe.id) {
-        <wm-recipe-preview [recipe]="recipe"/>
+        <wm-recipe-preview [recipe]="recipe" />
       }
     </wm-catalog>
   `,

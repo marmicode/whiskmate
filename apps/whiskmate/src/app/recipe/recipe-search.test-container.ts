@@ -17,18 +17,16 @@ import { defer } from 'rxjs';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search-test-container',
   providers: [provideRecipeRepositoryFake()],
   imports: [RecipeSearchComponent],
-  template: `
-    <wm-recipe-search/>`,
+  template: ` <wm-recipe-search />`,
 })
 export class RecipeSearchTestContainerComponent {
   mealPlannerRecipes = input<Recipe[]>([]);
   mealPlannerRecipesChange = outputFromObservable(
-    defer(() => this._mealPlanner.recipes$)
+    defer(() => this._mealPlanner.recipes$),
   );
 
   private _mealPlanner = inject(MealPlanner);

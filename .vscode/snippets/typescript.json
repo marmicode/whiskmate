@@ -33,7 +33,6 @@
       "",
       "@Component({",
       "  changeDetection: ChangeDetectionStrategy.OnPush,",
-      "  standalone: true,",
       "  selector: '$2',",
       "  imports: [],",
       "  template: `🚧 &lt;$2&gt; 🚧`",

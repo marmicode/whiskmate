@@ -15,7 +15,7 @@ volta install pnpm
 # Retrieve source code and install dependencies
 
 ```sh
-git clone git@github.com:marmicode/whiskmate.git --branch testing-000-boilerplate
+git clone https://github.com/marmicode/whiskmate.git --branch testing-000-starter
 
 cd whiskmate
 

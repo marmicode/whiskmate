@@ -1,8 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "affected": {
-    "defaultBase": "main"
-  },
+  "defaultBase": "main",
   "defaultProject": "whiskmate",
   "parallel": 1,
   "plugins": [
@@ -19,12 +17,17 @@
       }
     },
     {
-      "plugin": "@nx/vite/plugin",
+      "plugin": "@nx/jest/plugin",
       "options": {
-        "testTargetName": "vitest"
+        "targetName": "jest"
       }
     },
-    "@nx/jest/plugin",
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "testTargetName": "test"
+      }
+    },
     "@nx/eslint/plugin"
   ],
   "generators": {

@@ -73,6 +73,10 @@ pnpm test
 
 # Appendices
 
+## Vitest Matchers
+
+- [https://vitest.dev/api/expect](https://vitest.dev/api/expect)
+
 ## Jest Matchers
 
 - [https://jestjs.io/docs/expect](https://jestjs.io/docs/expect)

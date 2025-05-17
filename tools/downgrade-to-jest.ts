@@ -15,8 +15,9 @@ function main() {
     'tsconfig.spec.json',
   );
 
-  updateJson(nxJsonPath, updateNxJson);
-  updateJson(tsConfigSpecJsonPath, updateTsconfigSpecJson);
+  updateJson(nxJsonPath, downgradeNxJson);
+  updateJson(tsConfigSpecJsonPath, downgradeTsconfigSpecJson);
+  downgradeTestSetupTs();
 
   execSync('pnpm nx format --base HEAD');
 }
@@ -27,7 +28,7 @@ function updateJson(filePath: string, updaterFn: (json: any) => any) {
   writeFileSync(filePath, JSON.stringify(updatedJson, null, 2));
 }
 
-function updateNxJson(nxJson: NxJsonConfiguration) {
+function downgradeNxJson(nxJson: NxJsonConfiguration) {
   const plugins = nxJson.plugins?.map((plugin) => {
     if (typeof plugin === 'string') {
       return plugin;
@@ -60,7 +61,7 @@ function updateNxJson(nxJson: NxJsonConfiguration) {
   };
 }
 
-function updateTsconfigSpecJson(tsconfigSpecJson: any) {
+function downgradeTsconfigSpecJson(tsconfigSpecJson: any) {
   if (tsconfigSpecJson?.compilerOptions?.types) {
     tsconfigSpecJson.compilerOptions.types =
       tsconfigSpecJson.compilerOptions.types.map((type) => {
@@ -71,4 +72,14 @@ function updateTsconfigSpecJson(tsconfigSpecJson: any) {
       });
   }
   return tsconfigSpecJson;
+}
+
+function downgradeTestSetupTs() {
+  const testSetupPath = join(workspaceRoot, PROJECT_PATH, 'src/test-setup.ts');
+  let content = readFileSync(testSetupPath, 'utf-8');
+  content = content.replace(
+    `import '@testing-library/jest-dom/vitest';`,
+    `import '@testing-library/jest-dom';`,
+  );
+  writeFileSync(testSetupPath, content);
 }

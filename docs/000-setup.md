@@ -1,3 +1,7 @@
+# Install NodeJS `>=22`
+
+https://nodejs.org/en/download
+
 # Install pnpm
 
 https://pnpm.io/installation

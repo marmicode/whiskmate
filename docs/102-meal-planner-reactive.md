@@ -23,6 +23,7 @@ class MealPlanner {
 ## 📝 Steps
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
+
 ```sh
 git checkout origin/testing-102-meal-planner-reactive-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
@@ -61,10 +62,33 @@ pnpm test
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-
 # Appendices
 
 ## 🎁 Tip: Spying on observables
+
+### with our cross-test-runner `observe` function
+
+```ts
+import { observe } from '../../testing/observe';
+
+const observer = observe(source$);
+
+expect(observer.next).toBeCalledTimes(1);
+expect(observer.next).toBeCalledWith('🍔');
+```
+
+### with Vitest
+
+```ts
+const observer = vi.fn();
+
+source$.subscribe(observer);
+
+expect(observer).toBeCalledTimes(1);
+expect(observer).toBeCalledWith('🍔');
+```
+
+### with Jest
 
 ```ts
 const observer = jest.fn();

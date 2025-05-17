@@ -20,6 +20,7 @@ function main() {
   downgradeTestSetupTs();
 
   execSync('pnpm nx format --base HEAD');
+  execSync('pnpm nx reset');
 }
 
 function updateJson(filePath: string, updaterFn: (json: any) => any) {

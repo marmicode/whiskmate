@@ -1,6 +1,5 @@
 import { Observable, Unsubscribable } from 'rxjs';
-import { type Mock, type MockedFunction } from 'vitest';
-import { OutputEmitterRef } from '@angular/core';
+import { type MockedFunction } from 'vitest';
 
 export function observe<T>(observable: Subscribable<T>) {
   const next = createSpy<[T], void>();

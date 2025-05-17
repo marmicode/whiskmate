@@ -1,3 +1,9 @@
+# Install NodeJS `>=22.6.0`
+
+⚠️ make sure to pick a NodeJS version `>=22.6.0`
+
+https://nodejs.org/en/download
+
 # Install pnpm
 
 https://pnpm.io/installation
@@ -21,3 +27,17 @@ cd whiskmate
 
 pnpm install
 ```
+
+# Choose a test runner
+
+- [Vitest](https://vitest.dev/) _(default and recommended)_
+- [Jest](https://jestjs.io/)
+
+By default, this workspace uses Vitest, but you can downgrade to Jest if you prefer:
+
+```sh
+# You will have to run this command each time you reset your local changes
+pnpm downgrade-to-jest
+```
+
+_Note that the solutions are compatible with both test runners._

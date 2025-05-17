@@ -16,6 +16,7 @@ You can use a [Spy](#-steps-with-a-spy), a [Fake](#-steps-with-a-fake), or try b
 ## 📝 Steps with a Spy
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
+
 ```sh
 git checkout origin/testing-201-meal-planner-indirect-output-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
@@ -37,6 +38,7 @@ pnpm test
 ## 📝 Steps with a Fake
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
+
 ```sh
 git checkout origin/testing-201-meal-planner-indirect-output-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
@@ -57,45 +59,59 @@ pnpm test
 
 # Appendices
 
-## 🎁 Tip: Create & provide a type-safe spy
+## 🎁 Tip: Create & provide a type-safe spy with Vitest
 
 ```ts
-const myRepoSpy: jest.Mocked<MyRepoDef> = {
+import { type Mocked } from 'vitest';
+
+const myRepoSpy: Mocked<MyRepoDef> = {
   /* Do not stub the returned value or implementation here
    * as it won't be type-safe... */
-  getItems: jest.fn()
+  getItems: vi.fn(),
 };
 
 /* ... do it here instead so it's type-safe. */
 myRepoSpy.getItems.mockReturnValue(of([]));
 
 TestBed.configureTestingModule({
-  providers: [
-    { provide: MyRepo, useValue: myRepoSpy }
-  ]
+  providers: [{ provide: MyRepo, useValue: myRepoSpy }],
+});
+```
+
+## 🎁 Tip: Create & provide a type-safe spy with Jest
+
+```ts
+const myRepoSpy: jest.Mocked<MyRepoDef> = {
+  /* Do not stub the returned value or implementation here
+   * as it won't be type-safe... */
+  getItems: jest.fn(),
+};
+
+/* ... do it here instead so it's type-safe. */
+myRepoSpy.getItems.mockReturnValue(of([]));
+
+TestBed.configureTestingModule({
+  providers: [{ provide: MyRepo, useValue: myRepoSpy }],
 });
 ```
 
 ## 🎁 Tip: Provide a fake
 
 ### a. by instantiating the fake manually
+
 ```ts
 const myRepoFake = new MyRepoFake();
 
 TestBed.configureTestingModule({
-  providers: [
-    { provide: MyRepo, useValue: myRepoFake }
-  ]
+  providers: [{ provide: MyRepo, useValue: myRepoFake }],
 });
 ```
 
 ### b. by using providers _(useful if the fake has dependencies which is not common though)_
+
 ```ts
 TestBed.configureTestingModule({
-  providers: [
-    MyRepoFake,
-    { provide: MyRepo, useExisting: MyRepoFake }
-  ]
+  providers: [MyRepoFake, { provide: MyRepo, useExisting: MyRepoFake }],
 });
 
 const myRepoFake = TestBed.inject(MyRepoFake);

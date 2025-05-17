@@ -1,10 +1,8 @@
 /* Webstorm seems to need this even though the types
  * are properly defined in tsconfig.spec.json */
-/// <reference types="jest" />
-
 import 'zone.js';
 import 'zone.js/testing';
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
 
 import { getTestBed } from '@angular/core/testing';
 import {

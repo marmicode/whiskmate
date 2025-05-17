@@ -1,3 +1,9 @@
+# Prerequisites
+
+Did you set up `pnpm`? Are you on the right branch?
+
+👉 [Initial Setup](./000-setup.md)
+
 # Setup
 
 ```sh
@@ -20,6 +26,7 @@ git checkout origin/testing-101-meal-planner-starter
 ## 📝 Steps
 
 0. [optional] you can either checkout the `MealPlanner` implementation first or go full-on TDD and implement the tests first.
+
 ```sh
 git checkout origin/testing-101-meal-planner-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
 ```
@@ -66,6 +73,10 @@ pnpm test
 
 # Appendices
 
+## Vitest Matchers
+
+- [https://vitest.dev/api/expect](https://vitest.dev/api/expect)
+
 ## Jest Matchers
 
 - [https://jestjs.io/docs/expect](https://jestjs.io/docs/expect)
@@ -78,7 +89,7 @@ The example below tests the `Calculator.add` method. You can use it as a boilerp
 describe(Calculator.name, () => {
   it('should return sum', () => {
     const { calculator } = createCalculator();
-    
+
     const result = calculator.add(1, 2);
 
     expect(result).toEqual(3);

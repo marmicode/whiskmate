@@ -22,7 +22,12 @@
         "targetName": "jest"
       }
     },
-    "@nx/vite/plugin",
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "testTargetName": "test"
+      }
+    },
     "@nx/eslint/plugin"
   ],
   "generators": {

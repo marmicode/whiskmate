@@ -59,3 +59,5 @@ Thumbs.db
 # Skip mjs vite config temporarily by vitest as it confuses Nx crystal
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md

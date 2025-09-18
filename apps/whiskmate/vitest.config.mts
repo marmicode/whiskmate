@@ -15,6 +15,7 @@ export default mergeConfig(
         reportsDirectory: '../../coverage/apps/whiskmate',
         provider: 'v8',
       },
+      watch: false,
     },
   }),
 );

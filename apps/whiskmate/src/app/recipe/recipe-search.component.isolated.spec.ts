@@ -1,18 +1,17 @@
+import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { firstValueFrom } from 'rxjs';
-import { RecipeRepository } from './recipe-repository.service';
-import { RecipeSearchComponent } from './recipe-search.component';
+import { recipeMother } from '../testing/recipe.mother';
 import {
   provideRecipeRepositoryFake,
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
-import { recipeMother } from '../testing/recipe.mother';
+import { RecipeSearchComponent } from './recipe-search.component';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
     const { getRecipeNames } = createComponent();
 
-    expect(getRecipeNames()).toEqual(['Burger', 'Salad']);
+    expect(await getRecipeNames()).toEqual(['Burger', 'Salad']);
   });
 
   function createComponent() {
@@ -29,9 +28,10 @@ describe(RecipeSearchComponent.name, () => {
 
     return {
       component,
-      getRecipeNames() {
-        TestBed.flushEffects();
-        return component.recipes()?.map((recipe) => recipe.name);
+      async getRecipeNames() {
+        TestBed.tick();
+        await TestBed.inject(ApplicationRef).whenStable();
+        return component.recipes.value()?.map((recipe) => recipe.name);
       },
     };
   }

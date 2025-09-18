@@ -1,8 +1,13 @@
+import { AsyncPipe } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
+import { firstValueFrom } from 'rxjs';
+import { MealPlanner } from '../meal-planner/meal-planner.service';
+import { provideMealRepositoryFake } from '../meal-planner/meal-repository.fake';
+import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
 import { recipeMother } from '../testing/recipe.mother';
 import { RecipeFilter } from './recipe-filter';
 import {
@@ -10,11 +15,6 @@ import {
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
 import { RecipeSearchComponent } from './recipe-search.component';
-import { MealPlanner } from '../meal-planner/meal-planner.service';
-import { firstValueFrom } from 'rxjs';
-import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
-import { provideMealRepositoryFake } from '../meal-planner/meal-repository.fake';
-import { AsyncPipe } from '@angular/common';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
@@ -63,11 +63,7 @@ describe(RecipeSearchComponent.name, () => {
 
   async function renderComponent() {
     const { debugElement, fixture } = await render(RecipeSearchComponent, {
-      providers: [
-        provideMealRepositoryFake(),
-        provideRecipeRepositoryFake(),
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
+      providers: [provideMealRepositoryFake(), provideRecipeRepositoryFake()],
       configureTestBed(testBed) {
         testBed.overrideComponent(RecipeSearchComponent, {
           set: {
@@ -116,9 +112,7 @@ describe(RecipeSearchComponent.name, () => {
         await fixture.whenStable();
       },
       async whenStable() {
-        // TODO remove this once we upgrade to Angular 18
-        fixture.detectChanges();
-        return fixture.whenStable();
+        await fixture.whenStable();
       },
     };
   }

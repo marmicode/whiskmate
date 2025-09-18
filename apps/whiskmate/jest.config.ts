@@ -4,7 +4,8 @@ import { swcAngularJestTransformer } from '@jscutlery/swc-angular';
 export default {
   displayName: 'whiskmate',
   preset: '../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup-jest.ts'],
+  testPathIgnorePatterns: ['\\.browser\\.spec\\.ts$'],
   coverageDirectory: '../../coverage/apps/whiskmate',
   transform: {
     '^.+\\.m?(t|j)sx?$': swcAngularJestTransformer(),

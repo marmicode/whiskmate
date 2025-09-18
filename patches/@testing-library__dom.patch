@@ -1,0 +1,27 @@
+diff --git a/dist/get-queries-for-element.js b/dist/get-queries-for-element.js
+index 8a07d3b4fa47ba5694b92977e47325d1c8276ab0..6a86928cf46e3ebc1ce28aa028f534cc45767433 100644
+--- a/dist/get-queries-for-element.js
++++ b/dist/get-queries-for-element.js
+@@ -19,7 +19,7 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
+ function getQueriesForElement(element, queries = defaultQueries, initialValue = {}) {
+   return Object.keys(queries).reduce((helpers, key) => {
+     const fn = queries[key];
+-    helpers[key] = fn.bind(null, element);
++    helpers[key] = (...args) => fn.bind(null, element ?? document.body)(...args);
+     return helpers;
+   }, initialValue);
+ }
+\ No newline at end of file
+diff --git a/dist/screen.js b/dist/screen.js
+index d1d2d08c46e4683c210e38d400f37819a0a57d2c..d674278a94f8b697bdb077c2ebf183c07f13e18e 100644
+--- a/dist/screen.js
++++ b/dist/screen.js
+@@ -46,7 +46,7 @@ const initialValue = {
+   logTestingPlaygroundURL
+ };
+ const screen = exports.screen = typeof document !== 'undefined' && document.body // eslint-disable-line @typescript-eslint/no-unnecessary-condition
+-? (0, _getQueriesForElement.getQueriesForElement)(document.body, queries, initialValue) : Object.keys(queries).reduce((helpers, key) => {
++? (0, _getQueriesForElement.getQueriesForElement)(null, queries, initialValue) : Object.keys(queries).reduce((helpers, key) => {
+   // `key` is for all intents and purposes the type of keyof `helpers`, which itself is the type of `initialValue` plus incoming properties from `queries`
+   // if `Object.keys(something)` returned Array<keyof typeof something> this explicit type assertion would not be necessary
+   // see https://stackoverflow.com/questions/55012174/why-doesnt-object-keys-return-a-keyof-type-in-typescript

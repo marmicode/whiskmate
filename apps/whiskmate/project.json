@@ -74,6 +74,16 @@
     },
     "reset": {
       "command": "rm -rf .swc {projectRoot}/playwright/.cache"
+    },
+    "test": {
+      "configurations": {
+        "debug": {
+          "args": ["--inspect", "--no-file-parallelism"],
+          "env": {
+            "DEBUG": "1"
+          }
+        }
+      }
     }
   }
 }

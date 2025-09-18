@@ -4,13 +4,13 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { rxComputed } from '@jscutlery/rx-computed';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
 import { CatalogComponent } from '../shared/catalog.component';
 import { RecipeFilter } from './recipe-filter';
 import { RecipeFilterComponent } from './recipe-filter.component';
 import { RecipePreviewComponent } from './recipe-preview.component';
 import { RecipeRepository } from './recipe-repository.service';
-import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,18 +23,23 @@ import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.comp
   ],
   template: `
     <wm-recipe-filter (filterChange)="filter.set($event)"></wm-recipe-filter>
-    <wm-catalog>
-      @for (recipe of recipes(); track recipe.id) {
-        <wm-recipe-preview [recipe]="recipe">
-          <wm-recipe-add-button [recipe]="recipe" />
-        </wm-recipe-preview>
-      }
-    </wm-catalog>
+    @if (recipes.hasValue()) {
+      <wm-catalog>
+        @for (recipe of recipes.value(); track recipe.id) {
+          <wm-recipe-preview [recipe]="recipe">
+            <wm-recipe-add-button [recipe]="recipe" />
+          </wm-recipe-preview>
+        }
+      </wm-catalog>
+    }
   `,
 })
 export class RecipeSearchComponent {
   filter = signal<RecipeFilter>({});
-  recipes = rxComputed(() => this._recipeRepository.search(this.filter()));
+  recipes = rxResource({
+    params: this.filter,
+    stream: ({ params }) => this._recipeRepository.search(params),
+  });
 
   private _recipeRepository = inject(RecipeRepository);
 }

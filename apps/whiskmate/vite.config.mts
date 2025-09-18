@@ -1,10 +1,9 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import swc from 'unplugin-swc';
 import { defineConfig } from 'vite';
-import { swcAngularUnpluginOptions } from '@jscutlery/swc-angular';
+import angular from '@analogjs/vite-plugin-angular';
 
 export default defineConfig({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/tests/whiskmate',
-  plugins: [swc.vite(swcAngularUnpluginOptions())],
+  plugins: [angular()],
 });

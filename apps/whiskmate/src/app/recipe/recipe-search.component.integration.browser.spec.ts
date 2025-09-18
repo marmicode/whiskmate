@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/angular';
+import { render } from '@testing-library/angular';
+import { page } from '@vitest/browser/context';
 import { recipeMother } from '../testing/recipe.mother';
 import {
   provideRecipeRepositoryFake,
@@ -10,11 +11,13 @@ describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
     const { getRecipeNames } = await renderComponent();
 
-    expect(getRecipeNames()).toEqual(['Burger', 'Salad']);
+    await expect.poll(() => getRecipeNames()).toHaveLength(2);
+    await expect.element(getRecipeNames()[0]).toHaveTextContent('Burger');
+    await expect.element(getRecipeNames()[1]).toHaveTextContent('Salad');
   });
 
   async function renderComponent() {
-    const { fixture } = await render(RecipeSearchComponent, {
+    await render(RecipeSearchComponent, {
       providers: [provideRecipeRepositoryFake()],
       configureTestBed(testBed) {
         testBed
@@ -26,11 +29,9 @@ describe(RecipeSearchComponent.name, () => {
       },
     });
 
-    await fixture.whenStable();
-
     return {
       getRecipeNames() {
-        return screen.queryAllByRole('heading').map((el) => el.textContent);
+        return page.getByRole('heading').all();
       },
     };
   }

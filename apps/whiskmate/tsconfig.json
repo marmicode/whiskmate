@@ -13,9 +13,6 @@
       "path": "./tsconfig.editor.json"
     },
     {
-      "path": "./cypress/tsconfig.json"
-    },
-    {
       "path": "./playwright/tsconfig.json"
     }
   ],

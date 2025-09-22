@@ -2,10 +2,6 @@ name: 🌅 Update Snapshots
 on:
   - workflow_dispatch
 
-env:
-  # Using Nx Cloud is safer
-  NX_REJECT_UNKNOWN_LOCAL_CACHE: 0
-
 jobs:
   update-snapshots:
     name: 🌅 Update Snapshots
@@ -28,7 +24,7 @@ jobs:
           git diff --cached --quiet || git commit -a -m "test: ✅ update snapshots"
           git push
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: 🎭 Playwright Report

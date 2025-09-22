@@ -1,9 +1,11 @@
-export interface RecipeFilter {
+export interface RecipeFilterCriteria {
   keywords?: string;
   maxIngredientCount?: number;
   maxStepCount?: number;
 }
 
-export function createRecipeFilter(filter: RecipeFilter): RecipeFilter {
+export function createRecipeFilterCriteria(
+  filter: RecipeFilterCriteria,
+): RecipeFilterCriteria {
   return filter;
 }

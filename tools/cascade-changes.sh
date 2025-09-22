@@ -44,10 +44,8 @@ for CURRENT in $*; do
 
     if [ "$SKIP_RESET" != "true" ]
     then
-      nx reset
-
       # Retry reset 3 times as the daemon is sometimes not ready
-      RESET="nx run-many --target reset"
+      RESET="pnpm reset"
       $RESET || (sleep 1 && $RESET) || (sleep 3 && $RESET)
     fi
 

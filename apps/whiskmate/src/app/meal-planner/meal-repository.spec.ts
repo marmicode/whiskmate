@@ -1,4 +1,4 @@
-import { MealRepository } from './meal-repository.service';
+import { MealRepository } from './meal-repository';
 import { TestBed } from '@angular/core/testing';
 import { lastValueFrom } from 'rxjs';
 import { LocalStorage } from '../shared/local-storage';

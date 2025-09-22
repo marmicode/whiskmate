@@ -14,7 +14,7 @@ import { RecipeRepository } from './recipe-repository.service';
   selector: 'wm-recipe-search',
   template: `🚧 &lt;wm-recipe-search&gt;`,
 })
-export class RecipeSearchComponent implements OnDestroy, OnInit {
+export class RecipeSearch implements OnDestroy, OnInit {
   recipes?: Recipe[];
 
   private _recipeRepository = inject(RecipeRepository);

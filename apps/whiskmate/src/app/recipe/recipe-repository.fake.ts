@@ -1,11 +1,8 @@
 import { Injectable, Provider } from '@angular/core';
-import { RecipeFilter } from './recipe-filter';
+import { RecipeFilterCriteria } from './recipe-filter-criteria';
 import { defer, Observable, of } from 'rxjs';
 import { Recipe } from './recipe';
-import {
-  RecipeRepository,
-  RecipeRepositoryDef,
-} from './recipe-repository.service';
+import { RecipeRepository, RecipeRepositoryDef } from './recipe-repository';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +14,7 @@ export class RecipeRepositoryFake implements RecipeRepositoryDef {
     keywords,
     maxIngredientCount,
     maxStepCount,
-  }: RecipeFilter = {}): Observable<Recipe[]> {
+  }: RecipeFilterCriteria = {}): Observable<Recipe[]> {
     return defer(() => {
       const recipes = this._recipes.filter((recipe) => {
         const conditions = [

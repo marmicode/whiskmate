@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   selector: 'wm-recipe-search',
   template: `🚧 &lt;wm-recipe-search&gt;`,
 })
-export class RecipeSearchComponent implements OnInit {
+export class RecipeSearch implements OnInit {
   ngOnInit() {
     throw new Error('🚧 Work in progress!');
   }

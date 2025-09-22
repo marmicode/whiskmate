@@ -5,6 +5,9 @@ set -e
 while :;
 do
     case "$1" in
+        "--skip-install" )
+          SKIP_INSTALL=true
+          shift;;
         "--skip-reset" )
           SKIP_RESET=true
           shift;;
@@ -34,14 +37,15 @@ for CURRENT in $*; do
 
   if [ "$SKIP_TESTS" != "true" ]
   then
-    pnpm install
+    if [ "$SKIP_INSTALL" != "true" ]
+    then
+      pnpm install
+    fi
 
     if [ "$SKIP_RESET" != "true" ]
     then
-      nx reset
-
       # Retry reset 3 times as the daemon is sometimes not ready
-      RESET="nx run-many --target reset"
+      RESET="pnpm reset"
       $RESET || (sleep 1 && $RESET) || (sleep 3 && $RESET)
     fi
 

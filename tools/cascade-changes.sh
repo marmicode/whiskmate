@@ -20,6 +20,8 @@ do
 done
 
 
+export NX_TUI=false
+
 PARENT_BRANCH=$1
 
 shift
@@ -36,11 +38,14 @@ for CURRENT in $*; do
 
     if [ "$SKIP_RESET" != "true" ]
     then
-      pnpm reset
+      nx reset
+
+      # Retry reset 3 times as the daemon is sometimes not ready
+      RESET="nx run-many --target reset"
+      $RESET || (sleep 1 && $RESET) || (sleep 3 && $RESET)
     fi
 
-    pnpm nx run-many --target test,vitest --watch false
-    pnpm nx run-many --target test-ui --pass-with-no-tests
+    pnpm nx run-many --target test,test-ui,vitest --pass-with-no-tests
   fi
 
   PARENT_BRANCH="$CURRENT"

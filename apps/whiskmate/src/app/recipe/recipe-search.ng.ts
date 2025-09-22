@@ -23,7 +23,7 @@ import { RecipeRepository } from './recipe-repository.service';
     </wm-catalog>
   `,
 })
-export class RecipeSearchComponent implements OnDestroy, OnInit {
+export class RecipeSearch implements OnDestroy, OnInit {
   recipes?: Recipe[];
 
   private _recipeRepository = inject(RecipeRepository);

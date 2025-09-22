@@ -1,16 +1,15 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { render } from '@testing-library/angular';
 import { recipeMother } from '../testing/recipe.mother';
-import { RecipeFilter } from './recipe-filter';
+import { RecipeFilterCriteria } from './recipe-filter-criteria';
 import {
   provideRecipeRepositoryFake,
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
-import { RecipeSearchComponent } from './recipe-search.component';
-import { render } from '@testing-library/angular';
+import { RecipeSearch } from './recipe-search.ng';
 
-describe(RecipeSearchComponent.name, () => {
+describe(RecipeSearch.name, () => {
   it('should search recipes without filtering', async () => {
     const { getRecipeNames } = await renderComponent();
 
@@ -29,13 +28,10 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   async function renderComponent() {
-    const { debugElement, fixture } = await render(RecipeSearchComponent, {
-      providers: [
-        provideRecipeRepositoryFake(),
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
+    const { debugElement, fixture } = await render(RecipeSearch, {
+      providers: [provideRecipeRepositoryFake()],
       configureTestBed(testBed) {
-        testBed.overrideComponent(RecipeSearchComponent, {
+        testBed.overrideComponent(RecipeSearch, {
           set: {
             imports: [],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -58,7 +54,7 @@ describe(RecipeSearchComponent.name, () => {
           .queryAll(By.css('wm-recipe-preview'))
           .map((previewEl) => previewEl.properties.recipe.name);
       },
-      async updateFilter(filter: RecipeFilter) {
+      async updateFilter(filter: RecipeFilterCriteria) {
         debugElement
           .query(By.css('wm-recipe-filter'))
           .triggerEventHandler('filterChange', filter);

@@ -4,17 +4,17 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { RecipeFilter } from './recipe-filter';
-import { RecipeFilterComponent } from './recipe-filter.component';
-import { RecipePreviewComponent } from './recipe-preview.component';
-import { RecipeRepository } from './recipe-repository.service';
 import { rxComputed } from '@jscutlery/rx-computed';
-import { CatalogComponent } from '../shared/catalog.component';
+import { Catalog } from '../shared/catalog.ng';
+import { RecipeFilterCriteria } from './recipe-filter-criteria';
+import { RecipeFilter } from './recipe-filter.ng';
+import { RecipePreview } from './recipe-preview.ng';
+import { RecipeRepository } from './recipe-repository';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search',
-  imports: [CatalogComponent, RecipeFilterComponent, RecipePreviewComponent],
+  imports: [Catalog, RecipeFilter, RecipePreview],
   template: `
     <wm-recipe-filter (filterChange)="filter.set($event)"></wm-recipe-filter>
     <wm-catalog>
@@ -24,8 +24,8 @@ import { CatalogComponent } from '../shared/catalog.component';
     </wm-catalog>
   `,
 })
-export class RecipeSearchComponent {
-  filter = signal<RecipeFilter>({});
+export class RecipeSearch {
+  filter = signal<RecipeFilterCriteria>({});
   recipes = rxComputed(() => this._recipeRepository.search(this.filter()));
 
   private _recipeRepository = inject(RecipeRepository);

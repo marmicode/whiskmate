@@ -1,13 +1,13 @@
-import { toSignal } from '@angular/core/rxjs-interop';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RecipePreviewComponent } from './recipe-preview.component';
-import { CatalogComponent } from '../shared/catalog.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RecipeRepository } from './recipe-repository.service';
+import { RecipePreview } from './recipe-preview.ng';
+import { Catalog } from '../shared/catalog.ng';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search',
-  imports: [CatalogComponent, RecipePreviewComponent],
+  imports: [Catalog, RecipePreview],
   template: `
     <wm-catalog>
       @for (recipe of recipes(); track recipe.id) {
@@ -16,6 +16,6 @@ import { RecipeRepository } from './recipe-repository.service';
     </wm-catalog>
   `,
 })
-export class RecipeSearchComponent {
+export class RecipeSearch {
   recipes = toSignal(inject(RecipeRepository).search());
 }

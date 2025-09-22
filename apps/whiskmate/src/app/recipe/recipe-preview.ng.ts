@@ -4,7 +4,6 @@ import type { Recipe } from './recipe';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   selector: 'wm-recipe-preview',
   imports: [Card],
   template: `<wm-card [pictureUri]="recipe().pictureUri">

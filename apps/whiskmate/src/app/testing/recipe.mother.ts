@@ -33,13 +33,13 @@ class RecipeMother {
         ingredients: [],
         pictureUri: this._derivatePictureUri(slug),
         steps: [],
-      })
+      }),
     );
   }
 
   private _derivatePictureUri(slug: string) {
     const recipePicture = this._recipePictures.find((recipePicture) =>
-      slug.includes(recipePicture.keyword)
+      slug.includes(recipePicture.keyword),
     );
     return recipePicture
       ? recipePicture.pictureUri

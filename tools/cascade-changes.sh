@@ -45,7 +45,7 @@ for CURRENT in $*; do
       $RESET || (sleep 1 && $RESET) || (sleep 3 && $RESET)
     fi
 
-    pnpm nx run-many --target test,test-ui,vitest --pass-with-no-tests
+    pnpm nx run-many --target jest,test,test-ui --pass-with-no-tests
   fi
 
   PARENT_BRANCH="$CURRENT"

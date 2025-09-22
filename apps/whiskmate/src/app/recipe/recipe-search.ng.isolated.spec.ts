@@ -1,13 +1,12 @@
-import { RecipeRepository } from './recipe-repository.service';
 import { TestBed } from '@angular/core/testing';
-import { RecipeSearchComponent } from './recipe-search.component';
+import { recipeMother } from '../testing/recipe.mother';
 import {
   provideRecipeRepositoryFake,
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
-import { recipeMother } from '../testing/recipe.mother';
+import { RecipeSearch } from './recipe-search.ng';
 
-describe(RecipeSearchComponent.name, () => {
+describe(RecipeSearch.name, () => {
   it('should search recipes without filtering', () => {
     const { component } = createComponent();
 
@@ -19,7 +18,7 @@ describe(RecipeSearchComponent.name, () => {
 
   function createComponent() {
     TestBed.configureTestingModule({
-      providers: [RecipeSearchComponent, provideRecipeRepositoryFake()],
+      providers: [RecipeSearch, provideRecipeRepositoryFake()],
     });
 
     TestBed.inject(RecipeRepositoryFake).setRecipes([
@@ -27,7 +26,7 @@ describe(RecipeSearchComponent.name, () => {
       recipeMother.withBasicInfo('Salad').build(),
     ]);
 
-    const component = TestBed.inject(RecipeSearchComponent);
+    const component = TestBed.inject(RecipeSearch);
 
     component.ngOnInit();
 

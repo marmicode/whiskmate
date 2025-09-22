@@ -9,7 +9,7 @@ import {
 } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Recipe } from '../recipe/recipe';
-import { MealRepository } from './meal-repository.service';
+import { MealRepository } from './meal-repository';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -33,9 +33,9 @@ export class MealPlanner {
       /* Add meals to repository. */
       this._addRecipe$.pipe(
         mergeMap((recipe) =>
-          this._mealRepository.addMeal(recipe).pipe(map(() => recipe))
+          this._mealRepository.addMeal(recipe).pipe(map(() => recipe)),
         ),
-        tap((recipe) => this._recipes$.next([...this._recipes$.value, recipe]))
+        tap((recipe) => this._recipes$.next([...this._recipes$.value, recipe])),
       ),
     ];
 
@@ -55,7 +55,7 @@ export class MealPlanner {
   watchCanAddRecipe(recipe: Recipe): Observable<boolean> {
     return this._recipes$.pipe(
       map((recipes) => this._canAddRecipe({ recipe, recipes })),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
   }
 

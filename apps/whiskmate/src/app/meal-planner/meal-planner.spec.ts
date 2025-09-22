@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { MealPlanner } from './meal-planner.service';
 import { recipeMother } from '../testing/recipe.mother';
+import { MealPlanner } from './meal-planner';
 
 describe(MealPlanner.name, () => {
   it('should add recipe', () => {
@@ -31,7 +31,7 @@ describe(MealPlanner.name, () => {
     const { mealPlanner, burgerDuplicate } = createMealPlannerWithBurger();
 
     expect(() => mealPlanner.addRecipe(burgerDuplicate)).toThrow(
-      `Can't add recipe.`
+      `Can't add recipe.`,
     );
   });
 

@@ -1,5 +1,5 @@
-import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { whenAppStable } from '../../testing/when-app-stable';
 import { recipeMother } from '../testing/recipe.mother';
 import {
   provideRecipeRepositoryFake,
@@ -28,8 +28,7 @@ describe(RecipeSearch.name, () => {
 
     return {
       async getRecipeNames() {
-        TestBed.tick();
-        await TestBed.inject(ApplicationRef).whenStable();
+        await whenAppStable();
         return component.recipes.value()?.map((recipe) => recipe.name);
       },
     };

@@ -10,6 +10,11 @@ import {
 getTestBed().initTestEnvironment(
   BrowserTestingModule,
   platformBrowserTesting(),
+  {
+    teardown: {
+      destroyAfterEach: process.env.DEBUG_BROWSER == null,
+    },
+  },
 );
 
 beforeEach(() => {

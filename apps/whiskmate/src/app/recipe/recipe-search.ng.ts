@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Recipe } from './recipe';
-import { RecipeRepository } from './recipe-repository.service';
+import { RecipeRepository } from './recipe-repository';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

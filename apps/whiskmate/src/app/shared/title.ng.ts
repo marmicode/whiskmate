@@ -16,4 +16,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
   `,
 })
-export class TitleComponent {}
+export class Title {}

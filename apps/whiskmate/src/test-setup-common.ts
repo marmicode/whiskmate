@@ -7,12 +7,15 @@ import {
   platformBrowserTesting,
 } from '@angular/platform-browser/testing';
 
+const isDebugBrowserMode =
+  typeof process !== 'undefined' && process.env.DEBUG_BROWSER != null;
+
 getTestBed().initTestEnvironment(
   BrowserTestingModule,
   platformBrowserTesting(),
   {
     teardown: {
-      destroyAfterEach: process.env.DEBUG_BROWSER == null,
+      destroyAfterEach: !isDebugBrowserMode,
     },
   },
 );

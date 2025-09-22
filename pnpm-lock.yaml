@@ -59,8 +59,8 @@ importers:
         version: 0.15.0
     devDependencies:
       '@analogjs/vite-plugin-angular':
-        specifier: 1.19.4
-        version: 1.19.4(@angular-devkit/build-angular@20.2.2(26bbdc19abd8f1117383db52c8adcaf4))(@angular/build@20.2.2(@angular/compiler-cli@20.2.4(@angular/compiler@20.2.4)(typescript@5.9.2))(@angular/compiler@20.2.4)(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0))(@angular/platform-browser@20.2.4(@angular/animations@20.2.4(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@20.2.4(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0)))(@types/node@18.19.24)(chokidar@4.0.3)(jiti@2.4.2)(less@4.4.0)(postcss@8.4.49)(sass-embedded@1.92.1)(stylus@0.64.0)(terser@5.43.1)(tslib@2.6.2)(tsx@4.19.4)(typescript@5.9.2)(vitest@3.2.4)(yaml@2.7.0))
+        specifier: 1.21.1
+        version: 1.21.1(@angular-devkit/build-angular@20.2.2(26bbdc19abd8f1117383db52c8adcaf4))(@angular/build@20.2.2(@angular/compiler-cli@20.2.4(@angular/compiler@20.2.4)(typescript@5.9.2))(@angular/compiler@20.2.4)(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0))(@angular/platform-browser@20.2.4(@angular/animations@20.2.4(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@20.2.4(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0)))(@types/node@18.19.24)(chokidar@4.0.3)(jiti@2.4.2)(less@4.4.0)(postcss@8.4.49)(sass-embedded@1.92.1)(stylus@0.64.0)(terser@5.43.1)(tslib@2.6.2)(tsx@4.19.4)(typescript@5.9.2)(vitest@3.2.4)(yaml@2.7.0))
       '@angular-devkit/build-angular':
         specifier: 20.2.2
         version: 20.2.2(26bbdc19abd8f1117383db52c8adcaf4)
@@ -331,8 +331,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@analogjs/vite-plugin-angular@1.19.4':
-    resolution: {integrity: sha512-DqGFF4Y+WDcXLcgi7dse9Ljvqy6F4mg79MKGAjjCOf5ujJyVp9bzjj/57Tch5p0t7j7cYCYT7PW/UGw3PcHYmg==}
+  '@analogjs/vite-plugin-angular@1.21.1':
+    resolution: {integrity: sha512-rXDmhZz29y8HbUG11cgJ/c2gafL1sV4u0Z7IhG6X4rZ+MzRWyjAQdv9ZwPEvfkxDCJFKHNOjMG81Br8+iDcBew==}
     peerDependencies:
       '@angular-devkit/build-angular': ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0
       '@angular/build': ^18.0.0 || ^19.0.0 || ^20.0.0
@@ -6885,10 +6885,6 @@ packages:
   es-array-method-boxes-properly@1.0.0:
     resolution: {integrity: sha512-wd6JXUmyHmt8T5a2xreUwKcGPq6f1f+WwIJkijUqiGcJz1qqnZgP6XIK+QyIWU5lT7imeNxUll48bziG+TSYcA==}
 
-  es-define-property@1.0.0:
-    resolution: {integrity: sha512-jxayLKShrEqqzJ0eumQbVhTYQM27CfT1T35+gCgDFoL82JLsXqTJ76zv6A0YLOgEnLUMvLzsDsGIrl8NFpT2gQ==}
-    engines: {node: '>= 0.4'}
-
   es-define-property@1.0.1:
     resolution: {integrity: sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==}
     engines: {node: '>= 0.4'}
@@ -7562,9 +7558,6 @@ packages:
   globby@12.2.0:
     resolution: {integrity: sha512-wiSuFQLZ+urS9x2gGPl1H5drc5twabmm4m2gTR27XDFyjUHJUNsS8o/2aKyIF6IoBaR630atdher0XJ5g6OMmA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  gopd@1.0.1:
-    resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
 
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
@@ -12175,7 +12168,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@analogjs/vite-plugin-angular@1.19.4(@angular-devkit/build-angular@20.2.2(26bbdc19abd8f1117383db52c8adcaf4))(@angular/build@20.2.2(@angular/compiler-cli@20.2.4(@angular/compiler@20.2.4)(typescript@5.9.2))(@angular/compiler@20.2.4)(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0))(@angular/platform-browser@20.2.4(@angular/animations@20.2.4(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@20.2.4(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0)))(@types/node@18.19.24)(chokidar@4.0.3)(jiti@2.4.2)(less@4.4.0)(postcss@8.4.49)(sass-embedded@1.92.1)(stylus@0.64.0)(terser@5.43.1)(tslib@2.6.2)(tsx@4.19.4)(typescript@5.9.2)(vitest@3.2.4)(yaml@2.7.0))':
+  '@analogjs/vite-plugin-angular@1.21.1(@angular-devkit/build-angular@20.2.2(26bbdc19abd8f1117383db52c8adcaf4))(@angular/build@20.2.2(@angular/compiler-cli@20.2.4(@angular/compiler@20.2.4)(typescript@5.9.2))(@angular/compiler@20.2.4)(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0))(@angular/platform-browser@20.2.4(@angular/animations@20.2.4(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@20.2.4(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@20.2.4(@angular/compiler@20.2.4)(rxjs@7.8.1)(zone.js@0.15.0)))(@types/node@18.19.24)(chokidar@4.0.3)(jiti@2.4.2)(less@4.4.0)(postcss@8.4.49)(sass-embedded@1.92.1)(stylus@0.64.0)(terser@5.43.1)(tslib@2.6.2)(tsx@4.19.4)(typescript@5.9.2)(vitest@3.2.4)(yaml@2.7.0))':
     dependencies:
       ts-morph: 21.0.1
       vfile: 6.0.3
@@ -19905,10 +19898,10 @@ snapshots:
 
   call-bind@1.0.7:
     dependencies:
-      es-define-property: 1.0.0
+      es-define-property: 1.0.1
       es-errors: 1.3.0
       function-bind: 1.1.2
-      get-intrinsic: 1.2.4
+      get-intrinsic: 1.3.0
       set-function-length: 1.2.2
 
   call-bound@1.0.4:
@@ -20966,10 +20959,6 @@ snapshots:
 
   es-array-method-boxes-properly@1.0.0: {}
 
-  es-define-property@1.0.0:
-    dependencies:
-      get-intrinsic: 1.2.4
-
   es-define-property@1.0.1: {}
 
   es-errors@1.3.0: {}
@@ -21903,10 +21892,6 @@ snapshots:
       ignore: 5.3.1
       merge2: 1.4.1
       slash: 4.0.0
-
-  gopd@1.0.1:
-    dependencies:
-      get-intrinsic: 1.2.4
 
   gopd@1.2.0: {}
 
@@ -24189,7 +24174,7 @@ snapshots:
     dependencies:
       call-bind: 1.0.7
       define-properties: 1.2.1
-      has-symbols: 1.0.3
+      has-symbols: 1.1.0
       object-keys: 1.1.1
 
   object.getownpropertydescriptors@2.1.8:
@@ -25582,8 +25567,8 @@ snapshots:
       define-data-property: 1.1.4
       es-errors: 1.3.0
       function-bind: 1.1.2
-      get-intrinsic: 1.2.4
-      gopd: 1.0.1
+      get-intrinsic: 1.3.0
+      gopd: 1.2.0
       has-property-descriptors: 1.0.2
 
   set-function-name@2.0.2:

@@ -11,10 +11,7 @@ describe(RecipeSearch.name, () => {
 
   async function renderComponent() {
     TestBed.configureTestingModule({
-      providers: [
-        provideRecipeRepositoryFake(),
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
+      providers: [provideRecipeRepositoryFake()],
     });
 
     TestBed.inject(RecipeRepositoryFake).setRecipes([

@@ -1,4 +1,4 @@
-import { MealRepository } from './meal-repository.service';
+import { MealRepository } from './meal-repository';
 import { TestBed } from '@angular/core/testing';
 import { recipeMother } from '../testing/recipe.mother';
 import { LocalStorage } from '../shared/local-storage';

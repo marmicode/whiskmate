@@ -1,22 +1,22 @@
+import { AsyncPipe } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
+import { firstValueFrom } from 'rxjs';
+import { MealPlanner } from '../meal-planner/meal-planner';
+import { provideMealRepositoryFake } from '../meal-planner/meal-repository.fake';
+import { RecipeAddButton } from '../meal-planner/recipe-add-button.ng';
 import { recipeMother } from '../testing/recipe.mother';
-import { RecipeFilter } from './recipe-filter';
+import { RecipeFilterCriteria } from './recipe-filter-criteria';
 import {
   provideRecipeRepositoryFake,
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
-import { RecipeSearchComponent } from './recipe-search.component';
-import { MealPlanner } from '../meal-planner/meal-planner.service';
-import { firstValueFrom } from 'rxjs';
-import { RecipeAddButtonComponent } from '../meal-planner/recipe-add-button.component';
-import { provideMealRepositoryFake } from '../meal-planner/meal-repository.fake';
-import { AsyncPipe } from '@angular/common';
+import { RecipeSearch } from './recipe-search.ng';
 
-describe(RecipeSearchComponent.name, () => {
+describe(RecipeSearch.name, () => {
   it('should search recipes without filtering', async () => {
     const { getRecipeNames } = await renderComponent();
 
@@ -62,16 +62,12 @@ describe(RecipeSearchComponent.name, () => {
   }
 
   async function renderComponent() {
-    const { debugElement, fixture } = await render(RecipeSearchComponent, {
-      providers: [
-        provideMealRepositoryFake(),
-        provideRecipeRepositoryFake(),
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
+    const { debugElement, fixture } = await render(RecipeSearch, {
+      providers: [provideMealRepositoryFake(), provideRecipeRepositoryFake()],
       configureTestBed(testBed) {
-        testBed.overrideComponent(RecipeSearchComponent, {
+        testBed.overrideComponent(RecipeSearch, {
           set: {
-            imports: [AsyncPipe, RecipeAddButtonComponent],
+            imports: [AsyncPipe, RecipeAddButton],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
           },
         });
@@ -109,7 +105,7 @@ describe(RecipeSearchComponent.name, () => {
           .queryAll(By.css('wm-recipe-preview'))
           .map((previewEl) => previewEl.properties.recipe.name);
       },
-      async updateFilter(filter: RecipeFilter) {
+      async updateFilter(filter: RecipeFilterCriteria) {
         debugElement
           .query(By.css('wm-recipe-filter'))
           .triggerEventHandler('filterChange', filter);

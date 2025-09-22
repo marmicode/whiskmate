@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Catalog } from '../shared/catalog.ng';
 import { Recipe } from './recipe';
 import { RecipePreview } from './recipe-preview.ng';
-import { RecipeRepository } from './recipe-repository.service';
+import { RecipeRepository } from './recipe-repository';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

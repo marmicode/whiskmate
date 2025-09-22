@@ -5,25 +5,25 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { RecipeSearchComponent } from './recipe-search.component';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
+import { defer } from 'rxjs';
+import { MealPlanner } from '../meal-planner/meal-planner';
+import { recipeMother } from '../testing/recipe.mother';
+import { Recipe } from './recipe';
 import {
   provideRecipeRepositoryFake,
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
-import { recipeMother } from '../testing/recipe.mother';
-import { MealPlanner } from '../meal-planner/meal-planner.service';
-import { Recipe } from './recipe';
-import { defer } from 'rxjs';
-import { outputFromObservable } from '@angular/core/rxjs-interop';
+import { RecipeSearch } from './recipe-search.ng';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search-test-container',
   providers: [provideRecipeRepositoryFake()],
-  imports: [RecipeSearchComponent],
+  imports: [RecipeSearch],
   template: ` <wm-recipe-search />`,
 })
-export class RecipeSearchTestContainerComponent {
+export class RecipeSearchTestContainer {
   mealPlannerRecipes = input<Recipe[]>([]);
   mealPlannerRecipesChange = outputFromObservable(
     defer(() => this._mealPlanner.recipes$),

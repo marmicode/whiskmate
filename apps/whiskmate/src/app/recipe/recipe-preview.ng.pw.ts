@@ -1,6 +1,6 @@
 import { expect, test } from '@jscutlery/playwright-ct-angular';
-import { RecipePreviewComponent } from './recipe-preview.component';
 import { recipeMother } from '../testing/recipe.mother';
+import { RecipePreview } from './recipe-preview.ng';
 
 test.describe('<wm-recipe-preview>', () => {
   test('should show recipe name', async ({ page, mount }) => {
@@ -11,13 +11,13 @@ test.describe('<wm-recipe-preview>', () => {
       .waitForResponse(recipe.pictureUri)
       .then((response) => response.finished());
 
-    const locator = await mount(RecipePreviewComponent, {
+    await mount(RecipePreview, {
       props: {
         recipe,
       },
     });
 
-    await expect(locator.getByRole('heading')).toHaveText('Burger');
+    await expect(page.getByRole('heading')).toHaveText('Burger');
 
     /* Make sure the picture is loaded before taking screenshot. */
     await pictureFinishedPromise;

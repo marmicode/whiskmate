@@ -4,9 +4,9 @@ import {
   provideRecipeRepositoryFake,
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
-import { RecipeSearchComponent } from './recipe-search.component';
+import { RecipeSearch } from './recipe-search.ng';
 
-describe(RecipeSearchComponent.name, () => {
+describe(RecipeSearch.name, () => {
   it('should search recipes without filtering', async () => {
     const { getRecipeNames } = await renderComponent();
 
@@ -14,7 +14,7 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   async function renderComponent() {
-    const { fixture } = await render(RecipeSearchComponent, {
+    const { fixture } = await render(RecipeSearch, {
       providers: [provideRecipeRepositoryFake()],
       configureTestBed(testBed) {
         testBed

@@ -1,13 +1,13 @@
 import { expect, test } from '@jscutlery/playwright-ct-angular';
-import { RecipeSearchTestContainerComponent } from './recipe-search.test-container';
 import { recipeMother } from '../testing/recipe.mother';
 import { Recipe } from './recipe';
+import { RecipeSearchTestContainer } from './recipe-search.test-container.ng';
 
 test.describe('<wm-recipe-search>', () => {
   test('should show recipes', async ({ page, mount }) => {
-    const component = await mount(RecipeSearchTestContainerComponent);
+    await mount(RecipeSearchTestContainer);
 
-    await expect(component.getByRole('heading', { level: 2 })).toHaveText([
+    await expect(page.getByRole('heading', { level: 2 })).toHaveText([
       'Burger',
       'Salad',
     ]);
@@ -17,19 +17,19 @@ test.describe('<wm-recipe-search>', () => {
     });
   });
 
-  test('should filter recipes', async ({ mount }) => {
-    const component = await mount(RecipeSearchTestContainerComponent);
+  test('should filter recipes', async ({ page, mount }) => {
+    await mount(RecipeSearchTestContainer);
 
-    await component.getByLabel('Keywords').fill('Bur');
+    await page.getByLabel('Keywords').fill('Bur');
 
-    await expect(component.getByRole('heading', { level: 2 })).toHaveText([
+    await expect(page.getByRole('heading', { level: 2 })).toHaveText([
       'Burger',
     ]);
   });
 
-  test('should add recipe to meal plan', async ({ mount }) => {
+  test('should add recipe to meal plan', async ({ page, mount }) => {
     let recipes: Recipe[] | undefined;
-    const component = await mount(RecipeSearchTestContainerComponent, {
+    await mount(RecipeSearchTestContainer, {
       on: {
         mealPlannerRecipesChange(_recipes: Recipe[]) {
           recipes = _recipes;
@@ -37,23 +37,24 @@ test.describe('<wm-recipe-search>', () => {
       },
     });
 
-    await component.getByRole('button', { name: 'ADD' }).first().click();
+    await page.getByRole('button', { name: 'ADD' }).first().click();
 
     /* There is only a burger in the meal planner. */
     expect(recipes).toContainEqual(expect.objectContaining({ name: 'Burger' }));
   });
 
   test('should disable add button if recipe is already in meal plan', async ({
+    page,
     mount,
   }) => {
-    const component = await mount(RecipeSearchTestContainerComponent, {
+    await mount(RecipeSearchTestContainer, {
       props: {
         mealPlannerRecipes: [recipeMother.withBasicInfo('Burger').build()],
       },
     });
 
     await expect(
-      component.getByRole('button', { name: 'ADD' }).first()
+      page.getByRole('button', { name: 'ADD' }).first(),
     ).toBeDisabled();
   });
 });

@@ -13,8 +13,8 @@ export default mergeConfig(
     define:
       process.env.DEBUG_BROWSER != null
         ? {
-            'process.env.ATL_SKIP_AUTO_CLEANUP': true,
-            'process.env.DEBUG_BROWSER': true,
+            'process.env.ATL_SKIP_AUTO_CLEANUP': 'true',
+            'process.env.DEBUG_BROWSER': 'true',
           }
         : {},
     test: {

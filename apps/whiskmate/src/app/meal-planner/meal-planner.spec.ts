@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { MealPlanner } from './meal-planner.service';
-import { recipeMother } from '../testing/recipe.mother';
 import { observe } from '../../testing/observe';
+import { recipeMother } from '../testing/recipe.mother';
+import { MealPlanner } from './meal-planner';
 
 describe(MealPlanner.name, () => {
   it('should add recipe', () => {

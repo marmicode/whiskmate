@@ -1,18 +1,22 @@
-import 'zone.js';
-import 'zone.js/testing';
 import '@testing-library/jest-dom';
 
-import { getTestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { getTestBed, TestBed } from '@angular/core/testing';
 import {
   BrowserTestingModule,
   platformBrowserTesting,
 } from '@angular/platform-browser/testing';
 
-getTestBed().resetTestEnvironment();
 getTestBed().initTestEnvironment(
   BrowserTestingModule,
   platformBrowserTesting(),
 );
+
+beforeEach(() => {
+  TestBed.configureTestingModule({
+    providers: [provideZonelessChangeDetection()],
+  });
+});
 
 const originalItTodo = it.todo.bind(it);
 /* Strip extra arguments to align with vitest and avoid the following error:

@@ -1,11 +1,10 @@
-import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { render, screen } from '@testing-library/angular';
-import { RecipeSearchComponent } from './recipe-search.component';
+import { recipeMother } from '../testing/recipe.mother';
 import {
   provideRecipeRepositoryFake,
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
-import { recipeMother } from '../testing/recipe.mother';
+import { RecipeSearchComponent } from './recipe-search.component';
 
 describe(RecipeSearchComponent.name, () => {
   it('should search recipes without filtering', async () => {
@@ -16,10 +15,7 @@ describe(RecipeSearchComponent.name, () => {
 
   async function renderComponent() {
     const { fixture } = await render(RecipeSearchComponent, {
-      providers: [
-        provideRecipeRepositoryFake(),
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
+      providers: [provideRecipeRepositoryFake()],
       configureTestBed(testBed) {
         testBed
           .inject(RecipeRepositoryFake)

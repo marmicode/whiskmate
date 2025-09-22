@@ -1,5 +1,5 @@
-import { RecipePreviewComponent } from './recipe-preview.component';
-import { CatalogComponent } from '../shared/catalog.component';
+import { RecipePreview } from './recipe-preview.ng';
+import { Catalog } from '../shared/catalog.ng';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,11 +14,11 @@ import { RecipeRepository } from './recipe-repository.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search',
-  imports: [CatalogComponent, RecipePreviewComponent],
+  imports: [Catalog, RecipePreview],
   template: `
     <wm-catalog>
       @for (recipe of recipes; track recipe.id) {
-        <wm-recipe-preview [recipe]="recipe"/>
+        <wm-recipe-preview [recipe]="recipe" />
       }
     </wm-catalog>
   `,

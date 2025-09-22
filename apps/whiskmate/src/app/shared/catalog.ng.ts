@@ -15,4 +15,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
   `,
 })
-export class CatalogComponent {}
+export class Catalog {}

@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { recipeMother } from '../testing/recipe.mother';
 import {
@@ -17,10 +17,7 @@ describe(RecipeSearch.name, () => {
 
   async function renderComponent() {
     TestBed.configureTestingModule({
-      providers: [
-        provideRecipeRepositoryFake(),
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
+      providers: [provideRecipeRepositoryFake()],
     });
 
     TestBed.overrideComponent(RecipeSearch, {

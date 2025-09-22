@@ -5,9 +5,9 @@ import {
   input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { rxComputed } from '@jscutlery/rx-computed';
 import type { Recipe } from '../recipe/recipe';
 import { MealPlanner } from './meal-planner';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   standalone: true,
@@ -16,7 +16,7 @@ import { MealPlanner } from './meal-planner';
   imports: [MatButtonModule],
   template: `
     <button
-      [disabled]="!canAdd()"
+      [disabled]="!canAdd.value()"
       (click)="addRecipe()"
       class="add-recipe-button"
       color="primary"
@@ -36,7 +36,11 @@ import { MealPlanner } from './meal-planner';
 })
 export class RecipeAddButton {
   recipe = input.required<Recipe>();
-  canAdd = rxComputed(() => this._mealPlanner.watchCanAddRecipe(this.recipe()));
+  canAdd = rxResource({
+    params: () => this.recipe(),
+    stream: ({ params }) => this._mealPlanner.watchCanAddRecipe(params),
+    defaultValue: false,
+  });
 
   private _mealPlanner = inject(MealPlanner);
 

@@ -10,7 +10,6 @@ import { MealPlanner } from './meal-planner';
 import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-add-button',
   imports: [MatButtonModule],

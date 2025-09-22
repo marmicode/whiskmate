@@ -5,12 +5,6 @@
   "parallel": 1,
   "plugins": [
     {
-      "plugin": "@nx/cypress/plugin",
-      "options": {
-        "componentTestingTargetName": "test-ui-cypress"
-      }
-    },
-    {
       "plugin": "@nx/playwright/plugin",
       "options": {
         "targetName": "test-ui"
@@ -34,12 +28,12 @@
     "@nx/angular:application": {
       "style": "css",
       "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
+      "unitTestRunner": "vitest",
+      "e2eTestRunner": "playwright"
     },
     "@nx/angular:library": {
       "linter": "eslint",
-      "unitTestRunner": "jest"
+      "unitTestRunner": "vitest"
     },
     "@nx/angular:component": {
       "style": "css",
@@ -153,9 +147,6 @@
     "sharedGlobals": [],
     "production": [
       "default",
-      "!{projectRoot}/cypress/**/*",
-      "!{projectRoot}/**/*.cy.[jt]s?(x)",
-      "!{projectRoot}/cypress.config.[jt]s",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",

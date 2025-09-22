@@ -1,14 +1,13 @@
-import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { map } from 'rxjs/operators';
-import { createRecipeFilter } from './recipe-filter';
+import { createRecipeFilterCriteria } from './recipe-filter-criteria';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   selector: 'wm-recipe-filter',
   imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule],
   template: `
@@ -37,7 +36,7 @@ import { createRecipeFilter } from './recipe-filter';
     `,
   ],
 })
-export class RecipeFilterComponent {
+export class RecipeFilter {
   filterFormGroup = new FormGroup({
     keywords: new FormControl(),
     maxIngredientCount: new FormControl(),
@@ -46,7 +45,7 @@ export class RecipeFilterComponent {
 
   filterChange = outputFromObservable(
     this.filterFormGroup.valueChanges.pipe(
-      map((value) => createRecipeFilter(value))
-    )
+      map((value) => createRecipeFilterCriteria(value)),
+    ),
   );
 }

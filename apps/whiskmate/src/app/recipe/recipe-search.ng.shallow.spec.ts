@@ -112,8 +112,6 @@ describe(RecipeSearch.name, () => {
         await fixture.whenStable();
       },
       async whenStable() {
-        // TODO remove this once we upgrade to Angular 18
-        fixture.detectChanges();
         return fixture.whenStable();
       },
     };

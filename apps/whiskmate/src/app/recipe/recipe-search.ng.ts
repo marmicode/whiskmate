@@ -4,7 +4,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { rxComputed } from '@jscutlery/rx-computed';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { Catalog } from '../shared/catalog.ng';
 import { RecipeFilterCriteria } from './recipe-filter-criteria';
 import { RecipeFilter } from './recipe-filter.ng';
@@ -18,15 +18,20 @@ import { RecipeRepository } from './recipe-repository';
   template: `
     <wm-recipe-filter (filterChange)="filter.set($event)"></wm-recipe-filter>
     <wm-catalog>
-      @for (recipe of recipes(); track recipe.id) {
-        <wm-recipe-preview [recipe]="recipe" />
+      @if (recipes.hasValue()) {
+        @for (recipe of recipes.value(); track recipe.id) {
+          <wm-recipe-preview [recipe]="recipe" />
+        }
       }
     </wm-catalog>
   `,
 })
 export class RecipeSearch {
   filter = signal<RecipeFilterCriteria>({});
-  recipes = rxComputed(() => this._recipeRepository.search(this.filter()));
+  recipes = rxResource({
+    params: () => this.filter(),
+    stream: ({ params }) => this._recipeRepository.search(params),
+  });
 
   private _recipeRepository = inject(RecipeRepository);
 }

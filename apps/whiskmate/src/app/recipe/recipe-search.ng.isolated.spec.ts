@@ -1,3 +1,4 @@
+import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { recipeMother } from '../testing/recipe.mother';
 import {
@@ -10,7 +11,7 @@ describe(RecipeSearch.name, () => {
   it('should search recipes without filtering', async () => {
     const { getRecipeNames } = createComponent();
 
-    expect(getRecipeNames()).toEqual(['Burger', 'Salad']);
+    expect(await getRecipeNames()).toEqual(['Burger', 'Salad']);
   });
 
   function createComponent() {
@@ -26,9 +27,10 @@ describe(RecipeSearch.name, () => {
     const component = TestBed.inject(RecipeSearch);
 
     return {
-      getRecipeNames() {
-        TestBed.flushEffects();
-        return component.recipes()?.map((recipe) => recipe.name);
+      async getRecipeNames() {
+        TestBed.tick();
+        await TestBed.inject(ApplicationRef).whenStable();
+        return component.recipes.value()?.map((recipe) => recipe.name);
       },
     };
   }

@@ -1,10 +1,10 @@
+import { RecipeFilter } from './recipe-filter.ng';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { observe } from '../../testing/observe';
-import { RecipeFilter } from './recipe-filter';
-import { RecipeFilterComponent } from './recipe-filter.component';
+import { RecipeFilterCriteria } from './recipe-filter-criteria';
 
-describe(RecipeFilterComponent.name, () => {
+describe(RecipeFilter.name, () => {
   it('should trigger filterChange output', async () => {
     const { component, setInputValue } = await renderComponent();
 
@@ -18,11 +18,11 @@ describe(RecipeFilterComponent.name, () => {
       keywords: 'Cauliflower',
       maxIngredientCount: 3,
       maxStepCount: 10,
-    } as RecipeFilter);
+    } satisfies RecipeFilterCriteria);
   });
 
   async function renderComponent() {
-    const { fixture } = await render(RecipeFilterComponent);
+    const { fixture } = await render(RecipeFilter);
 
     return {
       component: fixture.componentInstance,

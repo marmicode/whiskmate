@@ -5,9 +5,9 @@ import {
   input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import type { Recipe } from '../recipe/recipe';
 import { rxComputed } from '@jscutlery/rx-computed';
-import { MealPlanner } from './meal-planner.service';
+import type { Recipe } from '../recipe/recipe';
+import { MealPlanner } from './meal-planner';
 
 @Component({
   standalone: true,
@@ -34,7 +34,7 @@ import { MealPlanner } from './meal-planner.service';
     `,
   ],
 })
-export class RecipeAddButtonComponent {
+export class RecipeAddButton {
   recipe = input.required<Recipe>();
   canAdd = rxComputed(() => this._mealPlanner.watchCanAddRecipe(this.recipe()));
 

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { MealPlanner } from './meal-planner.service';
+import { MealPlanner } from './meal-planner';
 
 describe(MealPlanner.name, () => {
   it.todo('should add recipe', () => {

@@ -1,24 +1,24 @@
-import { RecipePreviewComponent } from './recipe-preview.component';
-import { CatalogComponent } from '../shared/catalog.component';
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Catalog } from '../shared/catalog.ng';
 import { Recipe } from './recipe';
+import { RecipePreview } from './recipe-preview.ng';
 import { RecipeRepository } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-search',
-  imports: [AsyncPipe, CatalogComponent, RecipePreviewComponent],
+  imports: [AsyncPipe, Catalog, RecipePreview],
   template: `
     <wm-catalog>
       @for (recipe of recipes$ | async; track recipe.id) {
-        <wm-recipe-preview [recipe]="recipe"/>
+        <wm-recipe-preview [recipe]="recipe" />
       }
     </wm-catalog>
   `,
 })
-export class RecipeSearchComponent {
+export class RecipeSearch {
   recipes$: Observable<Recipe[]>;
 
   private _recipeRepository = inject(RecipeRepository);

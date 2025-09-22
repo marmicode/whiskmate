@@ -1,5 +1,4 @@
 import { Observable, Unsubscribable } from 'rxjs';
-import { type MockedFunction } from 'vitest';
 
 export function observe<T>(observable: Subscribable<T>) {
   const next = createSpy<[T], void>();
@@ -51,9 +50,13 @@ type Subscribable<T> =
   | Observable<T>
   | { subscribe(fn: (v: T) => void): Unsubscribable };
 
-function createSpy<PARAMS extends unknown[], RETURN>(): MockedFunction<
+/* Using jest.Mock as a return type instead of MockedFunction
+ * because vitest implements [Symbol.dispose] but not jest.
+ * We downgrade to Jest API. */
+function createSpy<PARAMS extends unknown[], RETURN>(): jest.Mock<
   (...args: PARAMS) => RETURN
 > {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const global = globalThis as any;
-  return global.vi ? global.vi.fn() : jest.fn();
+  return typeof jest !== 'undefined' ? jest.fn() : global.vi.fn();
 }

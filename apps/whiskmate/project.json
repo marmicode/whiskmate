@@ -12,7 +12,6 @@
         "outputPath": "dist/apps/whiskmate",
         "index": "apps/whiskmate/src/index.html",
         "main": "apps/whiskmate/src/main.ts",
-        "polyfills": "apps/whiskmate/src/polyfills.ts",
         "tsConfig": "apps/whiskmate/tsconfig.app.json",
         "assets": [
           "apps/whiskmate/src/favicon.ico",
@@ -74,6 +73,16 @@
     },
     "reset": {
       "command": "rm -rf .swc {projectRoot}/playwright/.cache"
+    },
+    "test": {
+      "configurations": {
+        "debug": {
+          "args": "--watch",
+          "env": {
+            "DEBUG_BROWSER": "true"
+          }
+        }
+      }
     }
   }
 }

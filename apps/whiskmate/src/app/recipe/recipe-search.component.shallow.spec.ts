@@ -1,15 +1,14 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { render } from '@testing-library/angular';
 import { recipeMother } from '../testing/recipe.mother';
-import { RecipeSearchComponent } from './recipe-search.component';
 import {
   provideRecipeRepositoryFake,
   RecipeRepositoryFake,
 } from './recipe-repository.fake';
-import { render } from '@testing-library/angular';
+import { RecipeSearch } from './recipe-search.ng';
 
-describe(RecipeSearchComponent.name, () => {
+describe(RecipeSearch.name, () => {
   it('should search recipes without filtering', async () => {
     const { getRecipeNames } = await renderComponent();
 
@@ -17,13 +16,10 @@ describe(RecipeSearchComponent.name, () => {
   });
 
   async function renderComponent() {
-    const { debugElement, fixture } = await render(RecipeSearchComponent, {
-      providers: [
-        provideRecipeRepositoryFake(),
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
+    const { debugElement, fixture } = await render(RecipeSearch, {
+      providers: [provideRecipeRepositoryFake()],
       configureTestBed(testBed) {
-        testBed.overrideComponent(RecipeSearchComponent, {
+        testBed.overrideComponent(RecipeSearch, {
           set: {
             imports: [],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],

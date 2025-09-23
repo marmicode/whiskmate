@@ -3,6 +3,7 @@ import viteConfig from './vite.config.mjs';
 
 const testPatterns = ['src/**/*.spec.ts'];
 const browserTestPatterns = ['src/**/*.browser.spec.ts'];
+
 export default mergeConfig(
   viteConfig,
   defineConfig({
@@ -19,7 +20,6 @@ export default mergeConfig(
         : {},
     test: {
       globals: true,
-      environment: 'jsdom',
       setupFiles: ['src/test-setup.ts'],
       reporters: ['default'],
       testTimeout: 1_000,
@@ -28,11 +28,12 @@ export default mergeConfig(
         provider: 'v8',
       },
       watch: false,
+      pool: 'threads',
       projects: [
         {
           extends: true,
           test: {
-            name: 'jsdom',
+            name: 'emulated',
             environment: 'jsdom',
             include: testPatterns,
             exclude: browserTestPatterns,

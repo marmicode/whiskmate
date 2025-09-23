@@ -97,10 +97,6 @@
     "vite": "7.1.5",
     "vitest": "3.2.4"
   },
-  "resolutions": {
-    "jsdom": "24.0.0",
-    "tough-cookie": "5.0.0-rc.1"
-  },
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",

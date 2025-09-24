@@ -1,29 +1,35 @@
-# Setup
+---
+sidebar_label: 501 - Playwright CT - Recipe Preview
+---
+
+# Recipe Preview Playwright Component Testing
+
+## Setup
 
 ```sh
-git checkout origin/testing-501-recipe-preview-ct-starter
+git switch testing-501-recipe-preview-ct-starter
 ```
 
-# 🎯 Goal: Test `RecipePreviewComponent` using Playwright Component Testing
+## 🎯 Goal: Test `RecipePreview` using Playwright Component Testing
 
 Thanks to [Playwright Component Testing](https://playwright.dev/docs/test-components), we can isolate a component or a block and test it in Playwright.
 
-Let's test that `RecipePreviewComponent` is showing the recipe name properly.
+Let's test that `RecipePreview` is showing the recipe name properly.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run Playwright component tests:
 
 ```sh
-pnpm nx test-ui --ui
+pnpm test-ui --ui
 ```
 
-2. Open [`recipe-preview.component.pw.ts`](../apps/whiskmate/src/app/recipe/recipe-preview.component.pw.ts).
+2. Open `apps/whiskmate/src/app/recipe/recipe-preview.pw.ts`.
 
-3. `RecipePreviewComponent` needs a `recipe` input. You can create a recipe using the `recipeMother` object mother and passing along to the component using the `componentProperties` option. e.g.:
+3. `RecipePreview` needs a `recipe` input. You can create a recipe using the `recipeMother` object mother and passing along to the component using the `inputs` option. e.g.:
 
 ```ts
-const component = mount(GreetingsComponent, {
+const component = mount(Greetings, {
   inputs: {
     name: 'Foo',
   },
@@ -34,8 +40,8 @@ const component = mount(GreetingsComponent, {
 
 Playwright provides built-in locators similar to Testing Library. Cf. [https://playwright.dev/docs/locators](https://playwright.dev/docs/locators)
 
-# Appendices
+## Appendices
 
-## Playwright Assertions
+### Playwright Assertions
 
 - [https://playwright.dev/docs/test-assertions](https://playwright.dev/docs/test-assertions)

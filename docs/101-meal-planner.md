@@ -1,16 +1,22 @@
-# Prerequisites
+---
+sidebar_label: 101 - Meal Planner
+---
 
-Did you set up `pnpm`? Are you on the right branch?
+# Meal Planner
+
+## Prerequisites
+
+🚨 Did you set up `pnpm`? Are you on the right branch?
 
 👉 [Initial Setup](./000-setup.md)
 
-# Setup
+## Setup
 
 ```sh
-git checkout origin/testing-101-meal-planner-starter
+git switch origin/testing-101-meal-planner-starter
 ```
 
-# 🎯 Goal #1: Test `MealPlanner` service
+## 🎯 Goal #1: Test `MealPlanner` service
 
 `MealPlanner` is a stateful service storing recipes that the user selects from a recipe catalog.
 
@@ -19,19 +25,19 @@ git checkout origin/testing-101-meal-planner-starter
 - `addRecipe(recipe: Recipe)`: adds new recipes.
 - `getRecipes(): Recipe[]`: returns the list of recipes added.
 
-## Business rules
+### Business rules
 
 - `addRecipe` should throw an error if a recipe has already being added.
 
-## 📝 Steps
+### 📝 Steps
 
 0. [optional] you can either checkout the `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 
 ```sh
-git checkout origin/testing-101-meal-planner-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+git checkout origin/testing-101-meal-planner-solution apps/whiskmate/src/app/meal-planner/meal-planner.ts
 ```
 
-1. Go to [`apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts`](../apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts) _(Cf. use [example below](#test-example))_
+1. Go to `apps/whiskmate/src/app/meal-planner/meal-planner.spec.ts` _(Cf. use [example below](#test-example))_
 
 2. You can import `Recipe` from `apps/whiskmate/src/app/recipe/recipe.ts`
 
@@ -49,7 +55,7 @@ pnpm test
 
 5. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-# 🎯 Goal #2: Test `MealPlanner.canAddRecipe`
+## 🎯 Goal #2: Test `MealPlanner.canAddRecipe`
 
 `canAddRecipe` tells if a recipe can be added to the meal planning or not.
 
@@ -57,11 +63,11 @@ pnpm test
 
 - `canAddRecipe(recipe: Recipe): boolean`: returns true if recipe can be added and false otherwise.
 
-## Business rules
+### Business rules
 
 - Recipe can only be added if not already present. _(i.e. recipes can't be added twice)_
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 
@@ -71,17 +77,17 @@ pnpm test
 
 2. Implement tests.
 
-# Appendices
+## Appendices
 
-## Vitest Matchers
+### Vitest Matchers
 
 - [https://vitest.dev/api/expect](https://vitest.dev/api/expect)
 
-## Jest Matchers
+### Jest Matchers
 
 - [https://jestjs.io/docs/expect](https://jestjs.io/docs/expect)
 
-## Test Example
+### Test Example
 
 The example below tests the `Calculator.add` method. You can use it as a boilerplate.
 
@@ -103,23 +109,7 @@ describe(Calculator.name, () => {
 });
 ```
 
-## Nested describe
-
-You can group tests with a nested describe and setup something common but don't use it too much as it can affect readability, maintainability, thus the cost.
-
-```ts
-describe(Shop.name, () => {
-  describe('when closed', () => {
-    beforeEach(() => shop.close());
-
-    it.todo('should throw error on open');
-
-    it.todo('should close');
-  });
-});
-```
-
-## Check that a function throws
+### Check that a function throws
 
 ```ts
 expect(() => myFunction()).toThrow('my error');

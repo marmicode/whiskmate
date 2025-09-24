@@ -79,7 +79,8 @@ export const exercises: Exercise[] = [
     name: '504 - Playwright Visual Regression Testing',
   },
 ];
-interface Exercise {
+
+export interface Exercise {
   id: string;
   name: string;
   implementationFiles?: string[];

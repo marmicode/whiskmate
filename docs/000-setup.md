@@ -1,10 +1,22 @@
-# Install NodeJS `>=22.6.0`
+# Setup
 
-⚠️ make sure to pick a NodeJS version `>=22.6.0`
+## Install git `>= 2.23`
+
+https://git-scm.com/downloads
+
+:::warning
+Make sure to pick a git version `>= 2.23`
+:::
+
+## Install NodeJS `>=22.12.0`
+
+:::warning
+Make sure to pick a NodeJS version `>=22.12.0`
+:::
 
 https://nodejs.org/en/download
 
-# Install pnpm
+## Install pnpm
 
 https://pnpm.io/installation
 
@@ -18,7 +30,7 @@ or if you are using [Volta](https://volta.sh/)
 volta install pnpm
 ```
 
-# Retrieve source code and install dependencies
+## Retrieve source code and install dependencies
 
 ```sh
 git clone https://github.com/marmicode/whiskmate.git --branch testing-000-starter
@@ -28,7 +40,21 @@ cd whiskmate
 pnpm install
 ```
 
-# Choose a test runner
+## Open the instructions
+
+```sh
+pnpm start-docs
+```
+
+## Go to an exercise
+
+```sh
+pnpm lets-cook
+```
+
+## Appendices
+
+### Choose a test runner
 
 - [Vitest](https://vitest.dev/) _(default and recommended)_
 - [Jest](https://jestjs.io/)
@@ -36,7 +62,7 @@ pnpm install
 By default, this workspace uses Vitest, but you can downgrade to Jest if you prefer:
 
 ```sh
-# You will have to run this command each time you reset your local changes
+## You will have to run this command each time you reset your local changes
 pnpm downgrade-to-jest
 ```
 

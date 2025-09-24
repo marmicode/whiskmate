@@ -1,14 +1,20 @@
-# Setup
+---
+sidebar_label: 304 - Recipe Search Async Pipe
+---
+
+# Recipe Search Async Pipe
+
+## Setup
 
 ```sh
-git checkout origin/testing-304-recipe-search-async-pipe-starter
+git switch testing-304-recipe-search-async-pipe-starter
 ```
 
-# 🎯 Goal: Use `async` pipe and fix tests
+## 🎯 Goal: Use `async` pipe and fix tests
 
 Let's go reactive and see what happens.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 
@@ -16,20 +22,22 @@ Let's go reactive and see what happens.
 pnpm test
 ```
 
-2. Checkout new `RecipeSearchComponent` implementation.
+2. Checkout new `RecipeSearch` implementation.
 
 ```sh
-git checkout origin/testing-304-recipe-search-async-pipe-solution apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-304-recipe-search-async-pipe-solution apps/whiskmate/src/app/recipe/recipe-search.ng.ts
 ```
 
 > This will replace the imperative approach:
 >
 > ```ts
 > @Component({
->  template: `{{ recipes }}`,
+>   template: `{{ recipes }}`,
 > })
-> class {
->   ngOnInit() {this._repo.search().subscribe((recipes) => (this.recipes = recipes));
+> class RecipeSearch {
+>   ngOnInit() {
+>     this._repo.search().subscribe((recipes) => (this.recipes = recipes));
+>   }
 > }
 > ```
 >
@@ -39,7 +47,7 @@ git checkout origin/testing-304-recipe-search-async-pipe-solution apps/whiskmate
 > @Component({
 >   template: `{{ recipes$ | async }}`,
 > })
-> class {
+> class RecipeSearch {
 >   recipes$ = this._repo.search();
 > }
 > ```

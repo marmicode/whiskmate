@@ -1,16 +1,16 @@
-# Setup
+## Setup
 
 ```sh
-git checkout origin/testing-501-recipe-preview-ct-starter
+git switch testing-501-recipe-preview-ct-starter
 ```
 
-# 🎯 Goal: Test `RecipePreviewComponent` using Cypress Component Testing
+## 🎯 Goal: Test `RecipePreviewComponent` using Cypress Component Testing
 
 Thanks to [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction), we can isolate a component or a block and test it in Cypress.
 
 Let's test that `RecipePreviewComponent` is showing the recipe name properly.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run Cypress component tests:
 
@@ -18,7 +18,7 @@ Let's test that `RecipePreviewComponent` is showing the recipe name properly.
 pnpm nx component-test --watch
 ```
 
-2. Open [`recipe-preview.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts).
+2. Open `apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts`.
 
 3. `RecipePreviewComponent` needs a `recipe` input. You can create a recipe using the `recipeMother` object mother and passing along to the component using the `componentProperties` option. e.g.:
 
@@ -40,12 +40,12 @@ One of the most resilient and robust alternatives is using [`@testing-library/cy
 
 Note that `@testing-library/cypress` is already set up. _Cf. [apps/whiskmate/cypress/support/commands.ts](../apps/whiskmate/cypress/support/commands.ts)._
 
-# Appendices
+## Appendices
 
-## Cypress Assertions
+### Cypress Assertions
 
 - [https://docs.cypress.io/guides/references/assertions#Common-Assertions](https://docs.cypress.io/guides/references/assertions#Common-Assertions)
 
-## Testing Library Queries & Priority
+### Testing Library Queries & Priority
 
 - [https://testing-library.com/docs/queries/about/#priority](https://testing-library.com/docs/queries/about/#priority)

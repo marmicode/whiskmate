@@ -22,7 +22,6 @@ do
    esac
 done
 
-
 export NX_TUI=false
 
 PARENT_BRANCH=$1
@@ -50,11 +49,11 @@ for CURRENT in $*; do
     fi
 
     pnpm nx run-many --target jest,test,test-ui --pass-with-no-tests
+  fi
 
-    if [ "$PUSH" = "true" ]
-    then
-      git push
-    fi
+  if [ "$PUSH" = "true" ]
+  then
+    git push
   fi
 
   PARENT_BRANCH="$CURRENT"

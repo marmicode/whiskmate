@@ -30,7 +30,7 @@ async function main() {
       },
       {
         name: 'solution',
-        message: 'Show solution',
+        message: 'Checkout the solution',
       },
     ] satisfies Array<{ name: Command; message: string }>,
   });
@@ -43,7 +43,7 @@ async function main() {
       checkoutImplementation(currentExercise);
       break;
     case 'solution':
-      await goToSolution(currentExercise);
+      await checkoutSolution(currentExercise);
       break;
     default:
       console.error('Invalid choice');
@@ -53,10 +53,10 @@ async function main() {
 
 type Command = 'start' | 'checkout-impl' | 'solution';
 
-async function goToSolution(exercise: Exercise, flavor?: string) {
+async function checkoutSolution(exercise: Exercise, flavor?: string) {
   const branch = getSolutionBranch(exercise, flavor);
   await wipeout();
-  switchToBranch(branch);
+  executeGitCommand(`checkout origin/${branch} apps/whiskmate`);
 }
 
 async function goToExercise() {

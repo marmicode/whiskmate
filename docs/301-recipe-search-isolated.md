@@ -1,3 +1,9 @@
+---
+sidebar_label: 301 - Recipe Search Isolated
+---
+
+# Recipe Search Isolated
+
 # Setup
 
 ```sh

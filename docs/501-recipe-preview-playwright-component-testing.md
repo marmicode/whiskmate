@@ -1,3 +1,9 @@
+---
+sidebar_label: 501 - Playwright CT - Recipe Preview
+---
+
+# Recipe Preview Playwright Component Testing
+
 # Setup
 
 ```sh

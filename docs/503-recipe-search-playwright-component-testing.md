@@ -1,4 +1,8 @@
-# Setup
+---
+sidebar_label: 503 - Playwright CT - Recipe Search
+---
+
+# Recipe Search Playwright Component Testing
 
 ```sh
 git switch testing-503-recipe-search-ct-starter

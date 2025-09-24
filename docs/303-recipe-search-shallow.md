@@ -1,3 +1,9 @@
+---
+sidebar_label: 303 - Recipe Search Shallow
+---
+
+# Recipe Search Shallow
+
 # Setup
 
 ```sh
@@ -41,7 +47,7 @@ pnpm test
    });
    ```
 
-   2. Query DOM and check child components properties. (Cf. [query DOM with `fixture.debugElement`](04-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](#-tip-access-element-properties))
+   2. Query DOM and check child components properties. (Cf. [query DOM with `fixture.debugElement`](302-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](#-tip-access-element-properties))
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 

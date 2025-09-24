@@ -1,3 +1,9 @@
+---
+sidebar_label: 101 - Meal Planner
+---
+
+# Meal Planner
+
 # Prerequisites
 
 🚨 Did you set up `pnpm`? Are you on the right branch?

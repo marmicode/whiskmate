@@ -1,3 +1,9 @@
+---
+sidebar_label: 401 - Recipe Filter
+---
+
+# Recipe Filter
+
 # Setup
 
 ```sh

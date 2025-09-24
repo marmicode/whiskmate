@@ -1,3 +1,9 @@
+---
+sidebar_label: 201 - Meal Planner Indirect Output
+---
+
+# Meal Planner Indirect Output
+
 # Setup
 
 ```sh

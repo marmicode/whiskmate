@@ -1,3 +1,9 @@
+---
+sidebar_label: 102 - Meal Planner Reactive
+---
+
+# Meal Planner Reactive
+
 # Setup
 
 ```sh

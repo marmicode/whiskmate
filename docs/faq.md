@@ -26,8 +26,3 @@ You can use `of` function to create a hardcoded observable.
 ```typescript
 stub.mockReturnValue(of(42));
 ```
-
-## Cypress harness error `cy.click() failed because it requires a DOM element.`
-
-There could be some collisions between harnesses and Cypress functions.
-If this happens, you can use `harness.invoke('click')` instead.

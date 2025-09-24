@@ -1,3 +1,9 @@
+---
+sidebar_label: 302 - Recipe Search Integration
+---
+
+# Recipe Search Integration
+
 # Setup
 
 ```sh

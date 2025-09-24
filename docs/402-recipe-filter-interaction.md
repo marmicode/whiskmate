@@ -1,3 +1,9 @@
+---
+sidebar_label: 402 - Recipe Filter Interaction
+---
+
+# Recipe Filter Interaction
+
 # Setup
 
 ```sh
@@ -32,7 +38,7 @@ pnpm test
 
    3. Trigger `filterChange` on `RecipeFilter`. (Cf. [trigger events using `debugElement.triggerEventHandler`](#-tip-trigger-events-using-debugelementtriggereventhandler))
 
-   4. Query DOM and check child recipe preview components properties. (Cf. [query DOM with `fixture.debugElement`](04-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](05-recipe-search-shallow.md#-tip-access-element-properties))
+   4. Query DOM and check child recipe preview components properties. (Cf. [query DOM with `fixture.debugElement`](./302-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](./303-recipe-search-shallow.md#-tip-access-element-properties))
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 

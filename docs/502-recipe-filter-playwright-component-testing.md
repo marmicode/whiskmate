@@ -1,3 +1,9 @@
+---
+sidebar_label: 502 - Playwright CT - Recipe Filter
+---
+
+# Recipe Filter Playwright Component Testing
+
 # Setup
 
 ```sh

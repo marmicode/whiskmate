@@ -9,7 +9,7 @@
     "start": "nx serve",
     "build": "nx build",
     "downgrade-to-jest": "node --experimental-strip-types tools/downgrade-to-jest.ts",
-    "test": "nx test",
+    "test": "nx test --watch",
     "test-ui": "nx test-ui",
     "test-ui:watch": "PWTEST_WATCH=1 nx test-ui",
     "ct": "nx run-many --target component-test",

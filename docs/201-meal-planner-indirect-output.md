@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git switch origin/testing-201-meal-planner-indirect-output-starter
+git switch testing-201-meal-planner-indirect-output-starter
 ```
 
 # 🎯 Goal: Make sure that meals are persisted
@@ -59,6 +59,16 @@ pnpm test
 
 # Appendices
 
+## 🎁 Tip: Provide a fake
+
+```ts
+TestBed.configureTestingModule({
+  providers: [MyRepoFake, { provide: MyRepo, useExisting: MyRepoFake }],
+});
+
+const myRepoFake = TestBed.inject(MyRepoFake);
+```
+
 ## 🎁 Tip: Create & provide a type-safe spy with Vitest
 
 ```ts
@@ -93,14 +103,4 @@ myRepoSpy.getItems.mockReturnValue(of([]));
 TestBed.configureTestingModule({
   providers: [{ provide: MyRepo, useValue: myRepoSpy }],
 });
-```
-
-## 🎁 Tip: Provide a fake
-
-```ts
-TestBed.configureTestingModule({
-  providers: [MyRepoFake, { provide: MyRepo, useExisting: MyRepoFake }],
-});
-
-const myRepoFake = TestBed.inject(MyRepoFake);
 ```

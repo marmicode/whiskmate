@@ -1,11 +1,12 @@
 import { execSync } from 'child_process';
 import enquirer from 'enquirer';
+import { fileURLToPath } from 'node:url';
 import { exercises, type Exercise } from './exercises.mts';
 const { prompt } = enquirer;
 
 const BRANCH_PREFIX = 'testing-';
 
-async function main({
+export async function main({
   gitAdapter = new GitAdapter(),
   promptAdapter = new PromptAdapter(),
 }: { gitAdapter?: GitAdapter; promptAdapter?: PromptAdapter } = {}) {
@@ -54,7 +55,7 @@ async function main({
 
 type Command = 'start' | 'checkout-impl' | 'solution';
 
-async function checkoutSolution(
+export async function checkoutSolution(
   exercise: Exercise,
   {
     gitAdapter,
@@ -67,7 +68,7 @@ async function checkoutSolution(
   gitAdapter.executeGitCommand(`checkout origin/${branch} apps/whiskmate`);
 }
 
-async function goToExercise({
+export async function goToExercise({
   gitAdapter,
   promptAdapter,
 }: {
@@ -109,7 +110,7 @@ async function goToExercise({
     const tddChoice = await promptAdapter.prompt<{ useTdd: boolean }>({
       type: 'confirm',
       name: 'useTdd',
-      message: 'Do you want to use TDD or checkout the implementation first?',
+      message: 'Do you want to use TDD?',
       initial: true,
     });
     tdd = tddChoice.useTdd;
@@ -125,7 +126,13 @@ async function goToExercise({
     gitAdapter,
   });
 
-  checkoutImplementation(selectedExercise, { gitAdapter }, flavor ?? undefined);
+  if (!tdd) {
+    checkoutImplementation(
+      selectedExercise,
+      { gitAdapter },
+      flavor ?? undefined,
+    );
+  }
 
   console.log('\n✅ Exercise setup complete!');
   console.log(
@@ -133,7 +140,7 @@ async function goToExercise({
   );
 }
 
-function checkoutImplementation(
+export function checkoutImplementation(
   exercise: Exercise,
   { gitAdapter }: { gitAdapter: GitAdapter },
   flavor?: string,
@@ -188,19 +195,21 @@ async function wipeout({
   gitAdapter: GitAdapter;
   promptAdapter: PromptAdapter;
 }) {
-  if (gitAdapter.hasLocalChanges()) {
-    const confirmOverwrite = await promptAdapter.prompt<{ confirm: boolean }>({
-      type: 'confirm',
-      name: 'confirm',
-      message:
-        'You have local changes (including untracked files). This will overwrite all your local changes. Continue?',
-      initial: true,
-    });
+  if (!gitAdapter.hasLocalChanges()) {
+    return;
+  }
 
-    if (!confirmOverwrite.confirm) {
-      console.log('Operation cancelled.');
-      process.exit(0);
-    }
+  const confirmOverwrite = await promptAdapter.prompt<{ confirm: boolean }>({
+    type: 'confirm',
+    name: 'confirm',
+    message:
+      'You have local changes (including untracked files). This will overwrite all your local changes. Continue?',
+    initial: true,
+  });
+
+  if (!confirmOverwrite.confirm) {
+    console.log('Operation cancelled.');
+    process.exit(0);
   }
 
   console.log('Resetting to clean state...');
@@ -210,7 +219,7 @@ async function wipeout({
   gitAdapter.executeGitCommand('clean -df');
 }
 
-class GitAdapter {
+export class GitAdapter {
   executeGitCommand(command: string) {
     execSync(`git ${command}`, { stdio: 'inherit' });
   }
@@ -225,7 +234,7 @@ class GitAdapter {
   }
 }
 
-class PromptAdapter {
+export class PromptAdapter {
   prompt<T>(
     ...args: Parameters<typeof prompt<T>>
   ): ReturnType<typeof prompt<T>> {
@@ -233,4 +242,7 @@ class PromptAdapter {
   }
 }
 
-main();
+const __filename = fileURLToPath(import.meta.url);
+if (process.argv[1] === __filename) {
+  main();
+}

@@ -16,7 +16,7 @@ git checkout origin/testing-503-recipe-search-ct-starter
 pnpm nx component-test --watch
 ```
 
-2. Open [`recipe-search.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-search.component.cy.ts)
+2. Open `apps/whiskmate/src/app/recipe/recipe-search.component.cy.ts`
 
 3. Arrange fake recipe repository with some recipes. _(Cf. [🎁 Tip: Arrange fakes before component is mounted](#-tip-arrange-fakes-before-component-is-mounted))_
 
@@ -30,7 +30,7 @@ pnpm nx component-test --watch
 
 ### 📝 Steps
 
-1. Set the `keywords` input value as we already did in [`recipe-filter.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts).
+1. Set the `keywords` input value as we already did in `apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts`.
 
 2. Check that only recipes with matching keywords are shown.
 
@@ -86,7 +86,7 @@ We can access an Angular service in Cypress component testing using the `TestBed
 
 The only gotcha here is that we have to make this chainable and run it at the right moment (i.e. after the component has been mounted).
 
-In order to help with that, we added a `cy.inject()` command in [`support/commands.ts`](../apps/whiskmate/cypress/support/commands.ts):
+In order to help with that, we added a `cy.inject()` command in `apps/whiskmate/cypress/support/commands.ts`:
 
 ```ts
 cy.inject(MyService).then((service) => {

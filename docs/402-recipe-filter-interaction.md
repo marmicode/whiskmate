@@ -32,7 +32,7 @@ pnpm test
 
 2. Implement tests:
 
-   1. Open [`recipe-search.ng.shallow.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-search.ng.shallow.spec.ts).
+   1. Open `apps/whiskmate/src/app/recipe/recipe-search.ng.shallow.spec.ts`.
 
    2. Add a new test: `it('should search recipes using given filter', ...)`.
 

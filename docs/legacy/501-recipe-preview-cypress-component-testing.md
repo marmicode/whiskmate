@@ -18,7 +18,7 @@ Let's test that `RecipePreviewComponent` is showing the recipe name properly.
 pnpm nx component-test --watch
 ```
 
-2. Open [`recipe-preview.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts).
+2. Open `apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts`.
 
 3. `RecipePreviewComponent` needs a `recipe` input. You can create a recipe using the `recipeMother` object mother and passing along to the component using the `componentProperties` option. e.g.:
 

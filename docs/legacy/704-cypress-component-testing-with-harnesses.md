@@ -28,9 +28,9 @@ echo "import '@jscutlery/cypress-harness/support-ct';" >> apps/whiskmate/cypress
 pnpm ct --watch
 ```
 
-2. Refactor [`recipe-filter.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts) and get rid of all calls to `cy.find*()`.
-3. Refactor [`recipe-preview.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts) and get rid of all calls to `cy.find*()`.
-4. Refactor [`recipe-search.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-search.component.cy.ts) and get rid of all calls to `cy.find*()`.
+2. Refactor `apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts` and get rid of all calls to `cy.find*()`.
+3. Refactor `apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts` and get rid of all calls to `cy.find*()`.
+4. Refactor `apps/whiskmate/src/app/recipe/recipe-search.component.cy.ts` and get rid of all calls to `cy.find*()`.
 
 ## Appendices
 

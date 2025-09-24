@@ -55,7 +55,7 @@ git checkout origin/testing-201-meal-planner-indirect-output-solution apps/whisk
 pnpm test
 ```
 
-2. Implement the fake in [`meal-repository.fake.ts`](../apps/whiskmate/src/app/meal-planner/meal-repository.fake.ts) & provide it _(Cf. [Tip: Provide a fake](#-tip--provide-a-fake))_.
+2. Implement the fake in `apps/whiskmate/src/app/meal-planner/meal-repository.fake.ts` & provide it _(Cf. [Tip: Provide a fake](#-tip--provide-a-fake))_.
 
 3. Add a recipe using `mealPlanner.addRecipe(...)`.
 

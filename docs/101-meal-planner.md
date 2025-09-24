@@ -37,7 +37,7 @@ git switch origin/testing-101-meal-planner-starter
 git checkout origin/testing-101-meal-planner-solution apps/whiskmate/src/app/meal-planner/meal-planner.ts
 ```
 
-1. Go to [`apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts`](../apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts) _(Cf. use [example below](#test-example))_
+1. Go to `apps/whiskmate/src/app/meal-planner/meal-planner.spec.ts` _(Cf. use [example below](#test-example))_
 
 2. You can import `Recipe` from `apps/whiskmate/src/app/recipe/recipe.ts`
 

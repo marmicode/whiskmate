@@ -8,7 +8,7 @@ git checkout origin/testing-701-recipe-filter-material-harness
 
 Create a harness that abstracts interactions with `RecipeFilterComponent`.
 
-Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts) in order to use the `RecipeFilterHarness`.
+Update `apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts` in order to use the `RecipeFilterHarness`.
 
 ### 📝 Steps
 
@@ -20,7 +20,7 @@ pnpm test
 
 2. Create harness:
 
-   1. Create `RecipeFilterHarness` in [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts).
+   1. Create `RecipeFilterHarness` in `apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts`.
 
    2. Extend `ComponentHarness`.
 

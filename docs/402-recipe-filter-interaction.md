@@ -1,20 +1,27 @@
-# Setup
+---
+sidebar_label: 402 - Recipe Filter Interaction
+---
+
+# Recipe Filter Interaction
+
+## Setup
 
 ```sh
-git checkout origin/testing-402-recipe-search-filter-interaction-starter
+git switch testing-402-recipe-search-filter-interaction-starter
 ```
 
-# 🎯 Goal: Test `<wm-recipe-search>` interaction with `<wm-recipe-filter>`
+## 🎯 Goal: Test `RecipeSearch` interaction with `RecipeFilter`
 
-`<wm-recipe-filter>`'s `filterChange` output should trigger a new search with the given filter and refresh results.
+`RecipeFilter`'s `filterChange` output should trigger a new search with the given filter and refresh results.
 
 We will test the contract using a shallow test.
 
-## 📝 Steps
+### 📝 Steps
 
-0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
+0. [optional] you can either checkout the updated `RecipeSearch` implementation first or go full-on TDD and implement the tests first.
+
 ```sh
-git checkout origin/testing-402-recipe-search-filter-interaction-solution apps/whiskmate/src/app/recipe/recipe-search.component.ts
+git checkout origin/testing-402-recipe-search-filter-interaction-solution apps/whiskmate/src/app/recipe/recipe-search.ng.ts
 ```
 
 1. Run tests:
@@ -25,19 +32,19 @@ pnpm test
 
 2. Implement tests:
 
-   1. Open [`recipe-search.component.shallow.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-search.component.shallow.spec.ts).
+   1. Open `apps/whiskmate/src/app/recipe/recipe-search.ng.shallow.spec.ts`.
 
    2. Add a new test: `it('should search recipes using given filter', ...)`.
 
-   3. Trigger `filterChange` on `<wm-recipe-filter>`. (Cf. [trigger events using `debugElement.triggerEventHandler`](#-tip-trigger-events-using-debugelementtriggereventhandler))
+   3. Trigger `filterChange` on `RecipeFilter`. (Cf. [trigger events using `debugElement.triggerEventHandler`](#-tip-trigger-events-using-debugelementtriggereventhandler))
 
-   4. Query DOM and check child recipe preview components properties. (Cf. [query DOM with `fixture.debugElement`](04-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](05-recipe-search-shallow.md#-tip-access-element-properties))
+   4. Query DOM and check child recipe preview components properties. (Cf. [query DOM with `fixture.debugElement`](./302-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](./303-recipe-search-shallow.md#-tip-access-element-properties))
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Trigger events using `DebugElement.triggerEventHandler`
+### 🎁 Tip: Trigger events using `DebugElement.triggerEventHandler`
 
 You can trigger both native and custom events using `DebugElement.triggerEventHandler`.
 

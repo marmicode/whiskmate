@@ -1,14 +1,14 @@
-# Setup
+## Setup
 
 ```sh
 git checkout origin/testing-502-recipe-filter-ct-starter
 ```
 
-# 🎯 Goal: Test `RecipeFilterComponent` using Cypress Component Testing
+## 🎯 Goal: Test `RecipeFilterComponent` using Cypress Component Testing
 
 Check that `RecipeFilterComponent` triggers the `filterChange` output with the right value when the user interacts with the form.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run Cypress component tests:
 
@@ -16,23 +16,24 @@ Check that `RecipeFilterComponent` triggers the `filterChange` output with the r
 pnpm nx component-test --watch
 ```
 
-2. Open [`recipe-filter.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts).
+2. Open `apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts`.
 
 3. Fill the form by finding the inputs with their labels _(Keywords, Max Ingredients, Max Steps)_ then type using the `type()` command.
+
 ```ts
 cy.findByLabelText('Keywords').type('...');
 ```
 
 4. Spy on the `filterChange` output _(Cf. [🎁 Tip: Spying on component outputs](#-tip--spying-on-component-outputs))_ and check that it was called with the right filter object.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Spying on component outputs
+### 🎁 Tip: Spying on component outputs
 
 There are multiple ways of spying on component outputs with Cypress Component Testing.
 Here are some of them.
 
-### A. The `autoSpyOutputs` option
+#### A. The `autoSpyOutputs` option
 
 This will create a spy for each output of the component. The spy will use the output name as its alias.
 
@@ -41,17 +42,17 @@ cy.mount(RecipeFormComponent, {
   autoSpyOutputs: true,
 });
 
-cy.get('@recipeChange').should('be.calledWith', {name: 'Burger'});
+cy.get('@recipeChange').should('be.calledWith', { name: 'Burger' });
 ```
 
-#### ⚠️ This will not work with `RecipeFilterComponent`
+##### ⚠️ This will not work with `RecipeFilterComponent`
 
 The problem with this approach is that it only works with outputs implemented using `EventEmitter`.
 If the output is implemented differently, like using another `Observable` implementation, this will replace the output property with a spy and break the component instead of subscribing to the observable.
 
 Cf. [related issue https://github.com/cypress-io/cypress/issues/24445](https://github.com/cypress-io/cypress/issues/24445)
 
-### B. The `createOutputSpy` helper
+#### B. The `createOutputSpy` helper
 
 This will create a spy for the given output name with the alias of our choice.
 
@@ -67,7 +68,7 @@ cy.mount(RecipeFormComponent, {
 
 This will have the same limitation as [the previous approach](#a-the-autospyoutputs-option).
 
-### C. The template + spy approach
+#### C. The template + spy approach
 
 Instead of mounting the component we can use a template which will create a wrapper component for us.
 
@@ -80,22 +81,22 @@ cy.mount('<wm-recipe-form (recipeChange)="onRecipeChange($event)"></wm-recipe-fo
   componentProperties: {
     onRecipeChange: cy.spy().as('recipeChange'),
   },
-})
+});
 ```
 
 This approach has two main advantages:
+
 - it will work with any `Observable` implementation,
 - and it makes the test more readable and inspiring. Remember that the tests are also documentation.
 
 The only drawback is that it is a bit more verbose and will require more boilerplate to forward all inputs.
 
-### D. The custom `spyOuput` helper
+#### D. The custom `spyOuput` helper
 
-As a trade-off between the previous approaches, we created a custom helper in [`apps/whiskmate/cypress/support/spy-output.ts`](../apps/whiskmate/cypress/support/spy-output.ts) that works like this:
+As a trade-off between the previous approaches, we created a custom helper in `apps/whiskmate/cypress/support/spy-output.ts` that works like this:
 
 ```ts
-cy.mount(RecipeFormComponent)
-  .then(spyOutput('recipeChange'));
+cy.mount(RecipeFormComponent).then(spyOutput('recipeChange'));
 
-cy.get('@recipeChange').should('be.calledWith', {name: 'Burger'});
+cy.get('@recipeChange').should('be.calledWith', { name: 'Burger' });
 ```

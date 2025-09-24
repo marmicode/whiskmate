@@ -58,3 +58,34 @@ jobs:
           name: 🎭 Playwright Report
           path: dist/.playwright
           retention-days: 7
+
+  deploy-gh-pages:
+    name: 🚀 Deploy to GitHub Pages
+    if: github.ref == 'refs/heads/testing-000-starter'
+    runs-on: ubuntu-22.04
+    needs:
+      - build
+      - lint
+      - test
+      - playwright-ct
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Build docs
+        run: pnpm nx build docusaurus
+      - name: Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docusaurus/build
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

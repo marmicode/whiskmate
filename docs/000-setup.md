@@ -1,6 +1,6 @@
-# Install NodeJS `>=22.6.0`
+# Install NodeJS `>=22.12.0`
 
-⚠️ make sure to pick a NodeJS version `>=22.6.0`
+⚠️ make sure to pick a NodeJS version `>=22.12.0`
 
 https://nodejs.org/en/download
 

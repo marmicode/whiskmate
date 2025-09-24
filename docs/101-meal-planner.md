@@ -1,6 +1,6 @@
 # Prerequisites
 
-Did you set up `pnpm`? Are you on the right branch?
+🚨 Did you set up `pnpm`? Are you on the right branch?
 
 👉 [Initial Setup](./000-setup.md)
 
@@ -100,22 +100,6 @@ describe(Calculator.name, () => {
       calculator: new Calculator(),
     };
   }
-});
-```
-
-## Nested describe
-
-You can group tests with a nested describe and setup something common but don't use it too much as it can affect readability, maintainability, thus the cost.
-
-```ts
-describe(Shop.name, () => {
-  describe('when closed', () => {
-    beforeEach(() => shop.close());
-
-    it.todo('should throw error on open');
-
-    it.todo('should close');
-  });
 });
 ```
 

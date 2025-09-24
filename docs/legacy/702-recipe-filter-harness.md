@@ -1,16 +1,16 @@
-# Setup
+## Setup
 
 ```sh
 git checkout origin/testing-701-recipe-filter-material-harness
 ```
 
-# 🎯 Goal: Create and use `RecipeFilterHarness`
+## 🎯 Goal: Create and use `RecipeFilterHarness`
 
 Create a harness that abstracts interactions with `RecipeFilterComponent`.
 
-Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts) in order to use the `RecipeFilterHarness`.
+Update `apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts` in order to use the `RecipeFilterHarness`.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 
@@ -20,7 +20,7 @@ pnpm test
 
 2. Create harness:
 
-   1. Create `RecipeFilterHarness` in [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts).
+   1. Create `RecipeFilterHarness` in `apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts`.
 
    2. Extend `ComponentHarness`.
 
@@ -39,24 +39,21 @@ pnpm test
       This is one of the reasons why we need to use the special static method `harnessForFixture` when we need a harness for the tested component.
 
    ```ts
-   const harness = await TestbedHarnessEnvironment.harnessForFixture(
-     fixture,
-     RecipeFilterHarness
-   );
+   const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, RecipeFilterHarness);
    ```
 
    3. Have fun with the harness!
 
    4. Don't forget to wait for promises to resolve 😉.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Use `locatorFor`
+### 🎁 Tip: Use `locatorFor`
 
 ```ts
 const getItem = this.locatorFor('.item');
 (await getItem()).click();
 
-const getCalendar = this.locatorFor(MatCalendarHarness.with({selector: '[data-testid="start-date-cal"]'}));
+const getCalendar = this.locatorFor(MatCalendarHarness.with({ selector: '[data-testid="start-date-cal"]' }));
 (await getCalendar()).openCalendar();
 ```

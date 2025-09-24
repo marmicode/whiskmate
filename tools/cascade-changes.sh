@@ -50,13 +50,13 @@ for CURRENT in $*; do
     fi
 
     pnpm nx run-many --target jest,test,test-ui --pass-with-no-tests
+
+    if [ "$PUSH" = "true" ]
+    then
+      git push
+    fi
   fi
 
   PARENT_BRANCH="$CURRENT"
 
 done
-
-if [ "$PUSH" = "true" ]
-then
-  git push --all
-fi

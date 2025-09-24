@@ -4,19 +4,19 @@
 git switch testing-502-recipe-filter-ct-starter
 ```
 
-# 🎯 Goal: Test `RecipeFilterComponent` using Playwright Component Testing
+# 🎯 Goal: Test `RecipeFilter` using Playwright Component Testing
 
-Check that `RecipeFilterComponent` triggers the `filterChange` output with the right value when the user interacts with the form.
+Check that `RecipeFilter` triggers the `filterChange` output with the right value when the user interacts with the form.
 
 ## 📝 Steps
 
 1. Run Playwright component tesets:
 
 ```sh
-pnpm nx test-ui --ui
+pnpm test-ui --ui
 ```
 
-2. Open [`recipe-filter.component.pw.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.pw.ts).
+2. Open [`recipe-filter.pw.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.pw.ts).
 
 3. Fill the form by finding the inputs with their labels _(Keywords, Max Ingredients, Max Steps)_ then type using the `type()` command.
 
@@ -40,7 +40,7 @@ const component = mount({
   }
 })
 
-// do something that triggers the output
+// TODO: do something that triggers the output
 
 expect(filter).toEqual(...);
 ```

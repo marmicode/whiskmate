@@ -7,9 +7,9 @@ This is a shallow test. We don't want to load child components as they are proba
 Apply `CUSTOM_ELEMENTS_SCHEMA` to allow unknown elements:
 
 ```typescript
-TestBed.overrideComponent(MyComponent, {
+TestBed.overrideComponent(MyThing, {
   set: {
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   },
 });
 ```

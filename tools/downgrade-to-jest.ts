@@ -17,7 +17,6 @@ function main() {
 
   updateJson(nxJsonPath, downgradeNxJson);
   updateJson(tsConfigSpecJsonPath, downgradeTsconfigSpecJson);
-  downgradeTestSetupTs();
 
   execSync('pnpm nx format --base HEAD');
   execSync('pnpm nx reset');
@@ -73,14 +72,4 @@ function downgradeTsconfigSpecJson(tsconfigSpecJson: any) {
       });
   }
   return tsconfigSpecJson;
-}
-
-function downgradeTestSetupTs() {
-  const testSetupPath = join(workspaceRoot, PROJECT_PATH, 'src/test-setup.ts');
-  let content = readFileSync(testSetupPath, 'utf-8');
-  content = content.replace(
-    `import '@testing-library/jest-dom/vitest';`,
-    `import '@testing-library/jest-dom';`,
-  );
-  writeFileSync(testSetupPath, content);
 }

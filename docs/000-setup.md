@@ -40,7 +40,21 @@ cd whiskmate
 pnpm install
 ```
 
-## Choose a test runner
+## Open the instructions
+
+```sh
+pnpm start-docs
+```
+
+## Go to an exercise
+
+```sh
+pnpm lets-cook
+```
+
+## Appendices
+
+### Choose a test runner
 
 - [Vitest](https://vitest.dev/) _(default and recommended)_
 - [Jest](https://jestjs.io/)

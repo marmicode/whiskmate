@@ -22,7 +22,7 @@ Let's go reactive and see what happens.
 pnpm test
 ```
 
-2. Checkout new `RecipeSearchComponent` implementation.
+2. Checkout new `RecipeSearch` implementation.
 
 ```sh
 git checkout origin/testing-304-recipe-search-async-pipe-solution apps/whiskmate/src/app/recipe/recipe-search.ng.ts

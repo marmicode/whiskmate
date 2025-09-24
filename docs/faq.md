@@ -7,9 +7,9 @@ This is a shallow test. We don't want to load child components as they are proba
 Apply `CUSTOM_ELEMENTS_SCHEMA` to allow unknown elements:
 
 ```typescript
-TestBed.overrideComponent(MyComponent, {
+TestBed.overrideComponent(MyThing, {
   set: {
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   },
 });
 ```
@@ -26,8 +26,3 @@ You can use `of` function to create a hardcoded observable.
 ```typescript
 stub.mockReturnValue(of(42));
 ```
-
-## Cypress harness error `cy.click() failed because it requires a DOM element.`
-
-There could be some collisions between harnesses and Cypress functions.
-If this happens, you can use `harness.invoke('click')` instead.

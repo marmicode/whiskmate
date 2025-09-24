@@ -1,26 +1,29 @@
 # Setup
 
 ```sh
-git checkout origin/testing-302-recipe-search-integration-starter
+git switch testing-302-recipe-search-integration-starter
 ```
 
-# 🎯 Goal #1: Test `<wm-recipe-search>`
+# 🎯 Goal #1: Test `RecipeSearch`
 
-Same goal as [previous exercise](301-recipe-search-isolated.md) _(i.e. `<wm-recipe-search>` should call `RecipeRepository.search()` on startup.)_
+Same goal as [previous exercise](301-recipe-search-isolated.md) _(i.e. `RecipeSearch` should call `RecipeRepository.search()` on startup.)_
 
 But let's check the DOM this time.
 
-**Implement tests** for `<wm-recipe-search>` and make sure that:
+**Implement tests** for `RecipeSearch` and make sure that:
 
-1. recipe names are displayed. Recipe name elements can be queried using `heading` role or `[data-testid="recipe-name"]`:
+1. recipe names are displayed:
 
 ```html
-<h2 data-testid="recipe-name">{{ recipe.name }}</h2>
+...
+<h2>Burger</h2>
+...
 ```
 
 ## 📝 Steps
 
-0. [optional] you can either checkout the updated `RecipeSearchComponent` implementation first or go full-on TDD and implement the tests first.
+0. [optional] you can either checkout the updated `RecipeSearch` implementation first or go full-on TDD and implement the tests first.
+
 ```sh
 git checkout origin/testing-302-recipe-search-integration-solution-test-bed apps/whiskmate/src/app/recipe/recipe-search.component.ts
 ```
@@ -37,22 +40,23 @@ pnpm test
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-# 🎯 Goal #2: Test `<wm-recipe-search>` using `@testing-library/angular`
+# 🎯 Goal #2: Test `RecipeSearch` using `@testing-library/angular`
 
 Refactor the previous test using `@testing-library/angular` instead of `TestBed`.
 
 ## 🍴 Cutleries
-- [render](https://testing-library.com/docs/angular-testing-library/api#render)
-- `configureTestBed` option:
+
+- [🔗 Render function docs](https://testing-library.com/docs/angular-testing-library/api#render)
+- [🔗 Testing Library Queries docs — or how to choose the right query](https://testing-library.com/docs/queries/about/)
+- How to configure TestBed before mounting the component with Testing Library:
+
 ```ts
-render(..., {
+render(MyThing, {
   configureTestBed(testBed) {
-    testBed.inject(MyService).doSomething()
-  }
+    testBed.inject(MyFake).configure(someData);
+  },
 });
 ```
-- [queries](https://testing-library.com/docs/queries/about/)
-
 
 # Appendices
 
@@ -61,16 +65,7 @@ render(..., {
 You can query one or multiple elements using, respectively, `query` and `queryAll` methods.
 
 ```ts
-const step = fixture.debugElement.query(By.css('.step')).nativeElement
-  .textContent;
+const step = fixture.debugElement.query(By.css('.step')).nativeElement.textContent;
 
-const steps = fixture.debugElement
-  .queryAll(By.css('.step'))
-  .map((el) => el.nativeElement.textContent);
-```
-
-You can also query a component or directive using `By.directive` but we won't need it 😉.
-
-```ts
-fixture.debugElement.query(By.directive(RecipePreviewComponent));
+const steps = fixture.debugElement.queryAll(By.css('.step')).map((el) => el.nativeElement.textContent);
 ```

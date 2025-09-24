@@ -1,3 +1,9 @@
+# Install git `>= 2.23`
+
+https://git-scm.com/downloads
+
+⚠️ make sure to pick a git version `>= 2.23`
+
 # Install NodeJS `>=22.12.0`
 
 ⚠️ make sure to pick a NodeJS version `>=22.12.0`

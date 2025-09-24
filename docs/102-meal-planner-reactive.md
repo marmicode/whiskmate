@@ -71,10 +71,10 @@ pnpm test
 ```ts
 import { observe } from '../../testing/observe';
 
-const observer = observe(source$);
+using observer = observe(source$);
 
-expect(observer.next).toBeCalledTimes(1);
-expect(observer.next).toBeCalledWith('🍔');
+expect(observer.next).toHaveBeenCalledTimes(1);
+expect(observer.next).toHaveBeenCalledWith('🍔');
 ```
 
 ### with Vitest
@@ -84,8 +84,7 @@ const observer = vi.fn();
 
 source$.subscribe(observer);
 
-expect(observer).toBeCalledTimes(1);
-expect(observer).toBeCalledWith('🍔');
+expect(observer).toHaveBeenCalledExactlyOnceWith('🍔');
 ```
 
 ### with Jest
@@ -95,6 +94,6 @@ const observer = jest.fn();
 
 source$.subscribe(observer);
 
-expect(observer).toBeCalledTimes(1);
-expect(observer).toBeCalledWith('🍔');
+expect(observer).toHaveBeenCalledTimes(1);
+expect(observer).toHaveBeenCalledWith('🍔');
 ```

@@ -1,39 +1,42 @@
-# Setup
+---
+sidebar_label: 503 - Playwright CT - Recipe Search
+---
+
+# Recipe Search Playwright Component Testing
+
+## Setup
 
 ```sh
-git checkout origin/testing-503-recipe-search-ct-starter
+git switch testing-503-recipe-search-ct-starter
 ```
 
-# 🎯 Goal #1: Check that `RecipeSearchComponent` shows all recipes
+## 🎯 Goal #1: Check that `RecipeSearch` shows all recipes
 
-`RecipeSearchComponent` should show all recipes returned by `RecipeRepository`.
+`RecipeSearch` should show all recipes returned by `RecipeRepository`.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 
 ```sh
-pnpm nx test-ui --ui
+pnpm test-ui --ui
 ```
 
-2. Open [`recipe-search.component.pw.ts`](../apps/whiskmate/src/app/recipe/recipe-search.component.pw.ts)
+2. Open `apps/whiskmate/src/app/recipe/recipe-search.pw.ts`
 
-3. Arrange fake recipe repository in the constructor of the [Test Container component](../apps/whiskmate/src/app/recipe/recipe-search.test-container.ts).
+3. Arrange fake recipe repository in the constructor of the Test Container component (`apps/whiskmate/src/app/recipe/recipe-search.test-container.ts`).
 
 ```typescript
-import {recipeMother} from './recipe.mother';
+import { recipeMother } from './recipe.mother';
 
 @Component({
-  providers: [provideRecipeRepositoryFake()]
+  providers: [provideRecipeRepositoryFake()],
 })
 class RecipeSearchTestContainerComponent {
   private _recipeRepositoryFake = inject(RecipeRepositoryFake);
 
   constructor() {
-    this._recipeRepositoryFake.setRecipes([
-      recipeMother.withBasicInfo('Burger').build(),
-      recipeMother.withBasicInfo('Salad').build(),
-    ]);
+    this._recipeRepositoryFake.setRecipes([recipeMother.withBasicInfo('Burger').build(), recipeMother.withBasicInfo('Salad').build()]);
   }
 }
 ```
@@ -41,22 +44,22 @@ class RecipeSearchTestContainerComponent {
 4. Find all recipe names using `getByRole()`.
 
 5. Check that all recipe names are shown.
- 
-# 🎯 Goal #2: Check that `RecipeSearchComponent` filters recipes based on user criteria
 
-`RecipeSearchComponent` should filter recipes based on user criteria.
+## 🎯 Goal #2: Check that `RecipeSearch` filters recipes based on user criteria
 
-## 📝 Steps
+`RecipeSearch` should filter recipes based on user criteria.
 
-1. Set the `keywords` input value as we already did in [`recipe-filter.component.pw.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.pw.ts).
+### 📝 Steps
+
+1. Set the `keywords` input value as we already did in `apps/whiskmate/src/app/recipe/recipe-filter.pw.ts`.
 
 2. Check that only recipes with matching keywords are shown.
 
-# 🎯 Goal #3: Check that click "ADD" button adds the recipe to the meal plan
+## 🎯 Goal #3: Check that click "ADD" button adds the recipe to the meal plan
 
-`RecipeSearchComponent` should add the recipe to the meal plan when "ADD" button is clicked.
+`RecipeSearch` should add the recipe to the meal plan when "ADD" button is clicked.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Find the "ADD" button using `getByRole()`.
 
@@ -64,34 +67,39 @@ class RecipeSearchTestContainerComponent {
 
 3. Check that the recipe has been added to the meal plan. _(Cf. [🎁 Tip: Notifying test of state changes](#-tip-notifying-test-of-state-changes))_
 
-# 🎯 Goal #4: Check that the "ADD" button is disabled when the recipe is already in the meal plan
+## 🎯 Goal #4: Check that the "ADD" button is disabled when the recipe is already in the meal plan
 
-`RecipeSearchComponent` should disable the "ADD" button when the recipe is already in the meal plan.
+`RecipeSearch` should disable the "ADD" button when the recipe is already in the meal plan.
 
 While we could simply click the "ADD" button and check that the button is disabled, we will instead check that the button is disabled from the start. The main reason to this is that we want to make sure that the button is disabled based on the meal plan and not just because the button was clicked.
 
-1. In order to arrange the state, we can add an input to our Test Container and control it from our test. 
+1. In order to arrange the state, we can add an input to our Test Container and control it from our test.
+
 ```typescript
 class MyTestContainer {
-    @Input() set mealPlannerRecipes(recipes: Recipe[]) {
-        for (const recipe of recipes) {
-          this._mealPlanner.addRecipe(recipe)
-        }
-    }
+  mealPlannerRecipes = input<Recipe[]>([]);
+
+  constructor() {
+    effect(() => {
+      for (const recipe of recipes) {
+        this._mealPlanner.addRecipe(recipe);
+      }
+    });
+  }
 }
 ```
 
 2. Check that the "ADD" button is disabled.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Notifying test of state changes
+### 🎁 Tip: Notifying test of state changes
 
 In order to notify the test when some state of the app changes, we can simply add outputs to the Test Container then spy them.
 
 ```typescript
 class MyTestContainer {
-    @Output() mealPlannerRecipesChange = inject(MealPlanner).recipes$;
+    mealPlannerRecipesChange = outputFromObservable(inject(MealPlanner).recipes$);
 }
 ...
 test(..., async ({mount}) => {

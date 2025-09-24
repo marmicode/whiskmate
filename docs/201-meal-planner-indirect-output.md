@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-201-meal-planner-indirect-output-starter
+git switch origin/testing-201-meal-planner-indirect-output-starter
 ```
 
 # 🎯 Goal: Make sure that meals are persisted
@@ -96,18 +96,6 @@ TestBed.configureTestingModule({
 ```
 
 ## 🎁 Tip: Provide a fake
-
-### a. by instantiating the fake manually
-
-```ts
-const myRepoFake = new MyRepoFake();
-
-TestBed.configureTestingModule({
-  providers: [{ provide: MyRepo, useValue: myRepoFake }],
-});
-```
-
-### b. by using providers _(useful if the fake has dependencies which is not common though)_
 
 ```ts
 TestBed.configureTestingModule({

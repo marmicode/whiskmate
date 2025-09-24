@@ -4,13 +4,13 @@ sidebar_label: 303 - Recipe Search Shallow
 
 # Recipe Search Shallow
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-303-recipe-search-shallow-starter
 ```
 
-# 🎯 Goal: Test `RecipeSearch`
+## 🎯 Goal: Test `RecipeSearch`
 
 Same goal as [previous exercise](302-recipe-search-integration.md) _(i.e. `RecipeSearch` should call `RecipeRepository.search()` on startup.)_
 
@@ -20,7 +20,7 @@ But let's check children properties this time.
 
 1. recipes are passed to child components.
 
-## 📝 Steps
+### 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeSearch` implementation first or go full-on TDD and implement the tests first.
 
@@ -51,9 +51,9 @@ pnpm test
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Access element properties
+### 🎁 Tip: Access element properties
 
 ```ts
 fixture.query(By.css('...')).properties;

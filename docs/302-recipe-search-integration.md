@@ -4,13 +4,13 @@ sidebar_label: 302 - Recipe Search Integration
 
 # Recipe Search Integration
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-302-recipe-search-integration-starter
 ```
 
-# 🎯 Goal #1: Test `RecipeSearch`
+## 🎯 Goal #1: Test `RecipeSearch`
 
 Same goal as [previous exercise](301-recipe-search-isolated.md) _(i.e. `RecipeSearch` should call `RecipeRepository.search()` on startup.)_
 
@@ -26,7 +26,7 @@ But let's check the DOM this time.
 ...
 ```
 
-## 📝 Steps
+### 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeSearch` implementation first or go full-on TDD and implement the tests first.
 
@@ -46,11 +46,11 @@ pnpm test
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-# 🎯 Goal #2: Test `RecipeSearch` using `@testing-library/angular`
+## 🎯 Goal #2: Test `RecipeSearch` using `@testing-library/angular`
 
 Refactor the previous test using `@testing-library/angular` instead of `TestBed`.
 
-## 🍴 Cutleries
+### 🍴 Cutleries
 
 - [🔗 Render function docs](https://testing-library.com/docs/angular-testing-library/api#render)
 - [🔗 Testing Library Queries docs — or how to choose the right query](https://testing-library.com/docs/queries/about/)
@@ -64,9 +64,9 @@ render(MyThing, {
 });
 ```
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Query DOM with `fixture.debugElement`
+### 🎁 Tip: Query DOM with `fixture.debugElement`
 
 You can query one or multiple elements using, respectively, `query` and `queryAll` methods.
 

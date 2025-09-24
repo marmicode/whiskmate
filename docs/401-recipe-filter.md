@@ -4,19 +4,19 @@ sidebar_label: 401 - Recipe Filter
 
 # Recipe Filter
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-401-recipe-filter-starter
 ```
 
-# 🎯 Goal: Test `RecipeFilter`
+## 🎯 Goal: Test `RecipeFilter`
 
 New component `RecipeFilter` should trigger `filterChange` output with a value of type `RecipeFilterCriteria`.
 
 This will be later used by `RecipeSearch` to filter results based on user filtering.
 
-## 📝 Steps
+### 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeFilter` implementation first or go full-on TDD and implement the tests first.
 

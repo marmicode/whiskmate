@@ -4,13 +4,13 @@ sidebar_label: 102 - Meal Planner Reactive
 
 # Meal Planner Reactive
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-102-meal-planner-reactive-starter
 ```
 
-# 🎯 Goal #1: Test `MealPlanner.recipes$`
+## 🎯 Goal #1: Test `MealPlanner.recipes$`
 
 It's time to get reactive!
 
@@ -26,7 +26,7 @@ class MealPlanner {
 
 1. it notifies subscribers when new recipes are added.
 
-## 📝 Steps
+### 📝 Steps
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 
@@ -42,7 +42,7 @@ pnpm test
 
 2. Implement tests.
 
-# 🎯 Goal #2: Test `MealPlanner.watchCanAddRecipe()`
+## 🎯 Goal #2: Test `MealPlanner.watchCanAddRecipe()`
 
 Instead of letting Angular poll recipes using `MealPlanner.canAddRecipe(recipe: Recipe)`, we will implement a reactive alternative:
 
@@ -56,7 +56,7 @@ class MealPlanner {
 
 1. it notifies subscribers when new recipes are added.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 
@@ -68,11 +68,11 @@ pnpm test
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Spying on observables
+### 🎁 Tip: Spying on observables
 
-### with our cross-test-runner `observe` function
+#### with our cross-test-runner `observe` function
 
 ```ts
 import { observe } from '../../testing/observe';
@@ -83,7 +83,7 @@ expect(observer.next).toHaveBeenCalledTimes(1);
 expect(observer.next).toHaveBeenCalledWith('🍔');
 ```
 
-### with Vitest
+#### with Vitest
 
 ```ts
 const observer = vi.fn();
@@ -93,7 +93,7 @@ source$.subscribe(observer);
 expect(observer).toHaveBeenCalledExactlyOnceWith('🍔');
 ```
 
-### with Jest
+#### with Jest
 
 ```ts
 const observer = jest.fn();

@@ -4,13 +4,13 @@ sidebar_label: 201 - Meal Planner Indirect Output
 
 # Meal Planner Indirect Output
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-201-meal-planner-indirect-output-starter
 ```
 
-# 🎯 Goal: Make sure that meals are persisted
+## 🎯 Goal: Make sure that meals are persisted
 
 Persisting the recipes added to the meal planning will require the `MealPlanner` to use a `MealRepository` service.
 We don't know yet how the `MealRepository` will be implemented, but we know how we want to use it.
@@ -19,7 +19,7 @@ In order to test that the `MealPlanner` is adding the meals in the correct way, 
 
 You can use a [Spy](#-steps-with-a-spy), a [Fake](#-steps-with-a-fake), or try both if you have enough time.
 
-## 📝 Steps with a Spy
+### 📝 Steps with a Spy
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 
@@ -41,7 +41,7 @@ pnpm test
 
 5. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-## 📝 Steps with a Fake
+### 📝 Steps with a Fake
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 
@@ -63,9 +63,9 @@ pnpm test
 
 5. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Provide a fake
+### 🎁 Tip: Provide a fake
 
 ```ts
 TestBed.configureTestingModule({
@@ -75,7 +75,7 @@ TestBed.configureTestingModule({
 const myRepoFake = TestBed.inject(MyRepoFake);
 ```
 
-## 🎁 Tip: Create & provide a type-safe spy with Vitest
+### 🎁 Tip: Create & provide a type-safe spy with Vitest
 
 ```ts
 import { type Mocked } from 'vitest';
@@ -94,7 +94,7 @@ TestBed.configureTestingModule({
 });
 ```
 
-## 🎁 Tip: Create & provide a type-safe spy with Jest
+### 🎁 Tip: Create & provide a type-safe spy with Jest
 
 ```ts
 const myRepoSpy: jest.Mocked<MyRepoDef> = {

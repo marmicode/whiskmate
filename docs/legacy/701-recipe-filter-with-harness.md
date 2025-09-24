@@ -1,14 +1,14 @@
-# Setup
+## Setup
 
 ```sh
 git checkout origin/testing-700-recipe-filter-material-harness-starter
 ```
 
-# 🎯 Goal: Test `<wm-recipe-filter>` using `MatInputHarness`
+## 🎯 Goal: Test `<wm-recipe-filter>` using `MatInputHarness`
 
 Update [`recipe-filter.component.spec.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts) using `MatInputHarness`.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 

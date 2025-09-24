@@ -4,19 +4,19 @@ sidebar_label: 501 - Playwright CT - Recipe Preview
 
 # Recipe Preview Playwright Component Testing
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-501-recipe-preview-ct-starter
 ```
 
-# 🎯 Goal: Test `RecipePreview` using Playwright Component Testing
+## 🎯 Goal: Test `RecipePreview` using Playwright Component Testing
 
 Thanks to [Playwright Component Testing](https://playwright.dev/docs/test-components), we can isolate a component or a block and test it in Playwright.
 
 Let's test that `RecipePreview` is showing the recipe name properly.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run Playwright component tests:
 
@@ -40,8 +40,8 @@ const component = mount(Greetings, {
 
 Playwright provides built-in locators similar to Testing Library. Cf. [https://playwright.dev/docs/locators](https://playwright.dev/docs/locators)
 
-# Appendices
+## Appendices
 
-## Playwright Assertions
+### Playwright Assertions
 
 - [https://playwright.dev/docs/test-assertions](https://playwright.dev/docs/test-assertions)

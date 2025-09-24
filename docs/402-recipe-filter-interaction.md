@@ -4,19 +4,19 @@ sidebar_label: 402 - Recipe Filter Interaction
 
 # Recipe Filter Interaction
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-402-recipe-search-filter-interaction-starter
 ```
 
-# 🎯 Goal: Test `RecipeSearch` interaction with `RecipeFilter`
+## 🎯 Goal: Test `RecipeSearch` interaction with `RecipeFilter`
 
 `RecipeFilter`'s `filterChange` output should trigger a new search with the given filter and refresh results.
 
 We will test the contract using a shallow test.
 
-## 📝 Steps
+### 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeSearch` implementation first or go full-on TDD and implement the tests first.
 
@@ -42,9 +42,9 @@ pnpm test
 
 3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Trigger events using `DebugElement.triggerEventHandler`
+### 🎁 Tip: Trigger events using `DebugElement.triggerEventHandler`
 
 You can trigger both native and custom events using `DebugElement.triggerEventHandler`.
 

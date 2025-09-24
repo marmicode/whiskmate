@@ -4,19 +4,19 @@ sidebar_label: 101 - Meal Planner
 
 # Meal Planner
 
-# Prerequisites
+## Prerequisites
 
 🚨 Did you set up `pnpm`? Are you on the right branch?
 
 👉 [Initial Setup](./000-setup.md)
 
-# Setup
+## Setup
 
 ```sh
 git switch origin/testing-101-meal-planner-starter
 ```
 
-# 🎯 Goal #1: Test `MealPlanner` service
+## 🎯 Goal #1: Test `MealPlanner` service
 
 `MealPlanner` is a stateful service storing recipes that the user selects from a recipe catalog.
 
@@ -25,11 +25,11 @@ git switch origin/testing-101-meal-planner-starter
 - `addRecipe(recipe: Recipe)`: adds new recipes.
 - `getRecipes(): Recipe[]`: returns the list of recipes added.
 
-## Business rules
+### Business rules
 
 - `addRecipe` should throw an error if a recipe has already being added.
 
-## 📝 Steps
+### 📝 Steps
 
 0. [optional] you can either checkout the `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 
@@ -55,7 +55,7 @@ pnpm test
 
 5. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-# 🎯 Goal #2: Test `MealPlanner.canAddRecipe`
+## 🎯 Goal #2: Test `MealPlanner.canAddRecipe`
 
 `canAddRecipe` tells if a recipe can be added to the meal planning or not.
 
@@ -63,11 +63,11 @@ pnpm test
 
 - `canAddRecipe(recipe: Recipe): boolean`: returns true if recipe can be added and false otherwise.
 
-## Business rules
+### Business rules
 
 - Recipe can only be added if not already present. _(i.e. recipes can't be added twice)_
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 
@@ -77,17 +77,17 @@ pnpm test
 
 2. Implement tests.
 
-# Appendices
+## Appendices
 
-## Vitest Matchers
+### Vitest Matchers
 
 - [https://vitest.dev/api/expect](https://vitest.dev/api/expect)
 
-## Jest Matchers
+### Jest Matchers
 
 - [https://jestjs.io/docs/expect](https://jestjs.io/docs/expect)
 
-## Test Example
+### Test Example
 
 The example below tests the `Calculator.add` method. You can use it as a boilerplate.
 
@@ -109,7 +109,7 @@ describe(Calculator.name, () => {
 });
 ```
 
-## Check that a function throws
+### Check that a function throws
 
 ```ts
 expect(() => myFunction()).toThrow('my error');

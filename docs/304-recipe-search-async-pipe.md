@@ -4,17 +4,17 @@ sidebar_label: 304 - Recipe Search Async Pipe
 
 # Recipe Search Async Pipe
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-304-recipe-search-async-pipe-starter
 ```
 
-# 🎯 Goal: Use `async` pipe and fix tests
+## 🎯 Goal: Use `async` pipe and fix tests
 
 Let's go reactive and see what happens.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 

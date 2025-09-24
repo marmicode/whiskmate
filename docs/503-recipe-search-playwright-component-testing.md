@@ -4,15 +4,17 @@ sidebar_label: 503 - Playwright CT - Recipe Search
 
 # Recipe Search Playwright Component Testing
 
+## Setup
+
 ```sh
 git switch testing-503-recipe-search-ct-starter
 ```
 
-# 🎯 Goal #1: Check that `RecipeSearch` shows all recipes
+## 🎯 Goal #1: Check that `RecipeSearch` shows all recipes
 
 `RecipeSearch` should show all recipes returned by `RecipeRepository`.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 
@@ -43,21 +45,21 @@ class RecipeSearchTestContainerComponent {
 
 5. Check that all recipe names are shown.
 
-# 🎯 Goal #2: Check that `RecipeSearch` filters recipes based on user criteria
+## 🎯 Goal #2: Check that `RecipeSearch` filters recipes based on user criteria
 
 `RecipeSearch` should filter recipes based on user criteria.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Set the `keywords` input value as we already did in [`recipe-filter.pw.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.pw.ts).
 
 2. Check that only recipes with matching keywords are shown.
 
-# 🎯 Goal #3: Check that click "ADD" button adds the recipe to the meal plan
+## 🎯 Goal #3: Check that click "ADD" button adds the recipe to the meal plan
 
 `RecipeSearch` should add the recipe to the meal plan when "ADD" button is clicked.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Find the "ADD" button using `getByRole()`.
 
@@ -65,7 +67,7 @@ class RecipeSearchTestContainerComponent {
 
 3. Check that the recipe has been added to the meal plan. _(Cf. [🎁 Tip: Notifying test of state changes](#-tip-notifying-test-of-state-changes))_
 
-# 🎯 Goal #4: Check that the "ADD" button is disabled when the recipe is already in the meal plan
+## 🎯 Goal #4: Check that the "ADD" button is disabled when the recipe is already in the meal plan
 
 `RecipeSearch` should disable the "ADD" button when the recipe is already in the meal plan.
 
@@ -89,9 +91,9 @@ class MyTestContainer {
 
 2. Check that the "ADD" button is disabled.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Notifying test of state changes
+### 🎁 Tip: Notifying test of state changes
 
 In order to notify the test when some state of the app changes, we can simply add outputs to the Test Container then spy them.
 

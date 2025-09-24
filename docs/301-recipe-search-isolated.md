@@ -4,13 +4,13 @@ sidebar_label: 301 - Recipe Search Isolated
 
 # Recipe Search Isolated
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-301-recipe-search-isolated-starter
 ```
 
-# 🎯 Goal: Test `RecipeSearch`
+## 🎯 Goal: Test `RecipeSearch`
 
 New component `RecipeSearch` should call `RecipeRepository.search()` on startup.
 
@@ -24,7 +24,7 @@ export class RecipeSearch {
 }
 ```
 
-## 📝 Steps
+### 📝 Steps
 
 0. [optional] you can either checkout the updated `RecipeSearch` implementation first or go full-on TDD and implement the tests first.
 

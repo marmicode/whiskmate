@@ -4,17 +4,17 @@ sidebar_label: 202 - Meal Planner Indirect Input
 
 # Meal Planner Indirect Input
 
-# Setup
+## Setup
 
 ```sh
 git switch origin/testing-202-meal-planner-indirect-input-starter
 ```
 
-# 🎯 Goal: Sync meals from the `MealRepository` to the `MealPlanner`
+## 🎯 Goal: Sync meals from the `MealRepository` to the `MealPlanner`
 
 On startup, the `MealPlanner` should fetch meals from the `MealRepository`.
 
-## 📝 Steps with a Fake
+### 📝 Steps with a Fake
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 
@@ -34,7 +34,7 @@ pnpm test
 
 4. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
-## 📝 Steps with a Spy
+### 📝 Steps with a Spy
 
 0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 

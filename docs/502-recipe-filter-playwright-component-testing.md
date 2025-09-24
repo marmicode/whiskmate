@@ -4,17 +4,17 @@ sidebar_label: 502 - Playwright CT - Recipe Filter
 
 # Recipe Filter Playwright Component Testing
 
-# Setup
+## Setup
 
 ```sh
 git switch testing-502-recipe-filter-ct-starter
 ```
 
-# 🎯 Goal: Test `RecipeFilter` using Playwright Component Testing
+## 🎯 Goal: Test `RecipeFilter` using Playwright Component Testing
 
 Check that `RecipeFilter` triggers the `filterChange` output with the right value when the user interacts with the form.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run Playwright component tesets:
 
@@ -32,9 +32,9 @@ component.getByLabel('Keywords').fill('...');
 
 4. Spy on the `filterChange` output _(Cf. [🎁 Tip: Spying on component outputs](#-tip--spying-on-component-outputs))_ and check that it was called with the right filter object.
 
-# Appendices
+## Appendices
 
-## 🎁 Tip: Spying on component outputs
+### 🎁 Tip: Spying on component outputs
 
 ```ts
 let filter: RecipeFilter;

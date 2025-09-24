@@ -1,16 +1,16 @@
-# Setup
+## Setup
 
 ```sh
 git switch testing-501-recipe-preview-ct-starter
 ```
 
-# 🎯 Goal: Test `RecipePreviewComponent` using Cypress Component Testing
+## 🎯 Goal: Test `RecipePreviewComponent` using Cypress Component Testing
 
 Thanks to [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction), we can isolate a component or a block and test it in Cypress.
 
 Let's test that `RecipePreviewComponent` is showing the recipe name properly.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run Cypress component tests:
 
@@ -40,12 +40,12 @@ One of the most resilient and robust alternatives is using [`@testing-library/cy
 
 Note that `@testing-library/cypress` is already set up. _Cf. [apps/whiskmate/cypress/support/commands.ts](../apps/whiskmate/cypress/support/commands.ts)._
 
-# Appendices
+## Appendices
 
-## Cypress Assertions
+### Cypress Assertions
 
 - [https://docs.cypress.io/guides/references/assertions#Common-Assertions](https://docs.cypress.io/guides/references/assertions#Common-Assertions)
 
-## Testing Library Queries & Priority
+### Testing Library Queries & Priority
 
 - [https://testing-library.com/docs/queries/about/#priority](https://testing-library.com/docs/queries/about/#priority)

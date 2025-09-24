@@ -1,14 +1,14 @@
-# Setup
+## Setup
 
 ```sh
 git checkout origin/testing-503-recipe-search-ct-starter
 ```
 
-# 🎯 Goal #1: Check that `RecipeSearchComponent` shows all recipes
+## 🎯 Goal #1: Check that `RecipeSearchComponent` shows all recipes
 
 `RecipeSearchComponent` should show all recipes returned by `RecipeRepository`.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Run tests:
 
@@ -23,22 +23,22 @@ pnpm nx component-test --watch
 4. Find all recipe names using `cy.findAllByRole()`.
 
 5. Check that all recipe names are shown.
- 
-# 🎯 Goal #2: Check that `RecipeSearchComponent` filters recipes based on user criteria
+
+## 🎯 Goal #2: Check that `RecipeSearchComponent` filters recipes based on user criteria
 
 `RecipeSearchComponent` should filter recipes based on user criteria.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Set the `keywords` input value as we already did in [`recipe-filter.component.cy.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts).
 
 2. Check that only recipes with matching keywords are shown.
 
-# 🎯 Goal #3: Check that click "ADD" button adds the recipe to the meal plan
+## 🎯 Goal #3: Check that click "ADD" button adds the recipe to the meal plan
 
 `RecipeSearchComponent` should add the recipe to the meal plan when "ADD" button is clicked.
 
-## 📝 Steps
+### 📝 Steps
 
 1. Find the "ADD" button using `cy.findByRole()`.
 
@@ -46,7 +46,7 @@ pnpm nx component-test --watch
 
 3. Check that the recipe has been added to the meal plan. _(Cf. [🎁 Tip: Accessing a service](#-tip--accessing-a-service))_
 
-# 🎯 Goal #4: Check that the "ADD" button is disabled when the recipe is already in the meal plan
+## 🎯 Goal #4: Check that the "ADD" button is disabled when the recipe is already in the meal plan
 
 `RecipeSearchComponent` should disable the "ADD" button when the recipe is already in the meal plan.
 
@@ -56,15 +56,16 @@ While we could simply click the "ADD" button and check that the button is disabl
 
 3. Check that the "ADD" button is disabled.
 
-# Appendices
+## Appendices
 
-##  🎁 Tip: Arrange fakes before component is mounted
+### 🎁 Tip: Arrange fakes before component is mounted
+
 In order to allow the test to arrange the fakes before the component is mounted, we can provide an `APP_INITIALIZER` and run our logic there.
 You can use the `provideAppInitializer()` function to reduce the boilerplate.
 
 ```ts
 it('should ...', () => {
-   const { ... } = renderComponent(() => inject(MyFake).doSomething()); 
+   const { ... } = renderComponent(() => inject(MyFake).doSomething());
 });
 
 function renderComponent(configure?: () => void) {
@@ -79,7 +80,7 @@ function renderComponent(configure?: () => void) {
 }
 ```
 
-## 🎁 Tip: Accessing a service
+### 🎁 Tip: Accessing a service
 
 We can access an Angular service in Cypress component testing using the `TestBed.inject()` static method just like we would do in Jest.
 
@@ -88,8 +89,7 @@ The only gotcha here is that we have to make this chainable and run it at the ri
 In order to help with that, we added a `cy.inject()` command in [`support/commands.ts`](../apps/whiskmate/cypress/support/commands.ts):
 
 ```ts
-cy.inject(MyService)
-  .then(service => {
-    // ...
-  });
+cy.inject(MyService).then((service) => {
+  // ...
+});
 ```

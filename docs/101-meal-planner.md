@@ -28,7 +28,7 @@ git switch origin/testing-101-meal-planner-starter
 0. [optional] you can either checkout the `MealPlanner` implementation first or go full-on TDD and implement the tests first.
 
 ```sh
-git checkout origin/testing-101-meal-planner-solution apps/whiskmate/src/app/meal-planner/meal-planner.service.ts
+git checkout origin/testing-101-meal-planner-solution apps/whiskmate/src/app/meal-planner/meal-planner.ts
 ```
 
 1. Go to [`apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts`](../apps/whiskmate/src/app/meal-planner/meal-planner.service.spec.ts) _(Cf. use [example below](#test-example))_

@@ -7,7 +7,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-101-meal-planner-starter
+git switch origin/testing-101-meal-planner-starter
 ```
 
 # 🎯 Goal #1: Test `MealPlanner` service

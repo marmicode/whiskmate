@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-502-recipe-filter-ct-starter
+git switch testing-502-recipe-filter-ct-starter
 ```
 
 # 🎯 Goal: Test `RecipeFilterComponent` using Playwright Component Testing
@@ -19,6 +19,7 @@ pnpm nx test-ui --ui
 2. Open [`recipe-filter.component.pw.ts`](../apps/whiskmate/src/app/recipe/recipe-filter.component.pw.ts).
 
 3. Fill the form by finding the inputs with their labels _(Keywords, Max Ingredients, Max Steps)_ then type using the `type()` command.
+
 ```ts
 component.getByLabel('Keywords').fill('...');
 ```

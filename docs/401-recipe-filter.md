@@ -1,20 +1,21 @@
 # Setup
 
 ```sh
-git checkout origin/testing-401-recipe-filter-starter
+git switch testing-401-recipe-filter-starter
 ```
 
-# 🎯 Goal: Test `<wm-recipe-filter>`
+# 🎯 Goal: Test `RecipeFilter`
 
-New component `<wm-recipe-filter>` should trigger `filterChange` output with a value of type `RecipeFilter`.
+New component `RecipeFilter` should trigger `filterChange` output with a value of type `RecipeFilterCriteria`.
 
-This will be later used by `<wm-recipe-search>` to filter results based on user filtering.
+This will be later used by `RecipeSearch` to filter results based on user filtering.
 
 ## 📝 Steps
 
-0. [optional] you can either checkout the updated `RecipeFilterComponent` implementation first or go full-on TDD and implement the tests first.
+0. [optional] you can either checkout the updated `RecipeFilter` implementation first or go full-on TDD and implement the tests first.
+
 ```sh
-git checkout origin/testing-401-recipe-filter-solution apps/whiskmate/src/app/recipe/recipe-filter.component.ts
+git checkout origin/testing-401-recipe-filter-solution apps/whiskmate/src/app/recipe/recipe-filter.ng.ts
 ```
 
 1. Run tests:

@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-git checkout origin/testing-503-recipe-search-ct-starter
+git switch testing-503-recipe-search-ct-starter
 ```
 
 # 🎯 Goal #1: Check that `RecipeSearchComponent` shows all recipes
@@ -21,19 +21,16 @@ pnpm nx test-ui --ui
 3. Arrange fake recipe repository in the constructor of the [Test Container component](../apps/whiskmate/src/app/recipe/recipe-search.test-container.ts).
 
 ```typescript
-import {recipeMother} from './recipe.mother';
+import { recipeMother } from './recipe.mother';
 
 @Component({
-  providers: [provideRecipeRepositoryFake()]
+  providers: [provideRecipeRepositoryFake()],
 })
 class RecipeSearchTestContainerComponent {
   private _recipeRepositoryFake = inject(RecipeRepositoryFake);
 
   constructor() {
-    this._recipeRepositoryFake.setRecipes([
-      recipeMother.withBasicInfo('Burger').build(),
-      recipeMother.withBasicInfo('Salad').build(),
-    ]);
+    this._recipeRepositoryFake.setRecipes([recipeMother.withBasicInfo('Burger').build(), recipeMother.withBasicInfo('Salad').build()]);
   }
 }
 ```
@@ -41,7 +38,7 @@ class RecipeSearchTestContainerComponent {
 4. Find all recipe names using `getByRole()`.
 
 5. Check that all recipe names are shown.
- 
+
 # 🎯 Goal #2: Check that `RecipeSearchComponent` filters recipes based on user criteria
 
 `RecipeSearchComponent` should filter recipes based on user criteria.
@@ -70,14 +67,15 @@ class RecipeSearchTestContainerComponent {
 
 While we could simply click the "ADD" button and check that the button is disabled, we will instead check that the button is disabled from the start. The main reason to this is that we want to make sure that the button is disabled based on the meal plan and not just because the button was clicked.
 
-1. In order to arrange the state, we can add an input to our Test Container and control it from our test. 
+1. In order to arrange the state, we can add an input to our Test Container and control it from our test.
+
 ```typescript
 class MyTestContainer {
-    @Input() set mealPlannerRecipes(recipes: Recipe[]) {
-        for (const recipe of recipes) {
-          this._mealPlanner.addRecipe(recipe)
-        }
+  @Input() set mealPlannerRecipes(recipes: Recipe[]) {
+    for (const recipe of recipes) {
+      this._mealPlanner.addRecipe(recipe);
     }
+  }
 }
 ```
 

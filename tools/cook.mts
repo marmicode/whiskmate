@@ -5,17 +5,18 @@ const { prompt } = enquirer;
 
 const BRANCH_PREFIX = 'testing-';
 
-main();
-
-async function main() {
-  const currentExercise = maybeGetCurrentExercise();
+async function main({
+  gitAdapter = new GitAdapter(),
+  promptAdapter = new PromptAdapter(),
+}: { gitAdapter?: GitAdapter; promptAdapter?: PromptAdapter } = {}) {
+  const currentExercise = maybeGetCurrentExercise({ gitAdapter });
 
   if (!currentExercise) {
-    goToExercise();
+    await goToExercise({ gitAdapter, promptAdapter });
     return;
   }
 
-  const { command } = await prompt<{ command: Command }>({
+  const { command } = await promptAdapter.prompt<{ command: Command }>({
     type: 'autocomplete',
     name: 'command',
     message: 'Choose an option:',
@@ -37,13 +38,13 @@ async function main() {
 
   switch (command) {
     case 'start':
-      await goToExercise();
+      await goToExercise({ gitAdapter, promptAdapter });
       break;
     case 'checkout-impl':
-      checkoutImplementation(currentExercise);
+      checkoutImplementation(currentExercise, { gitAdapter });
       break;
     case 'solution':
-      await checkoutSolution(currentExercise);
+      await checkoutSolution(currentExercise, { gitAdapter, promptAdapter });
       break;
     default:
       console.error('Invalid choice');
@@ -53,14 +54,27 @@ async function main() {
 
 type Command = 'start' | 'checkout-impl' | 'solution';
 
-async function checkoutSolution(exercise: Exercise, flavor?: string) {
+async function checkoutSolution(
+  exercise: Exercise,
+  {
+    gitAdapter,
+    promptAdapter,
+  }: { gitAdapter: GitAdapter; promptAdapter: PromptAdapter },
+  flavor?: string,
+) {
   const branch = getSolutionBranch(exercise, flavor);
-  await wipeout();
-  executeGitCommand(`checkout origin/${branch} apps/whiskmate`);
+  await wipeout({ gitAdapter, promptAdapter });
+  gitAdapter.executeGitCommand(`checkout origin/${branch} apps/whiskmate`);
 }
 
-async function goToExercise() {
-  const exerciseChoice = await prompt<{ exercise: string }>({
+async function goToExercise({
+  gitAdapter,
+  promptAdapter,
+}: {
+  gitAdapter: GitAdapter;
+  promptAdapter: PromptAdapter;
+}) {
+  const exerciseChoice = await promptAdapter.prompt<{ exercise: string }>({
     type: 'autocomplete',
     name: 'exercise',
     message: 'Choose an exercise:',
@@ -80,7 +94,7 @@ async function goToExercise() {
 
   let flavor: string | null = null;
   if (selectedExercise.flavors) {
-    const flavorChoice = await prompt<{ flavor: string }>({
+    const flavorChoice = await promptAdapter.prompt<{ flavor: string }>({
       type: 'autocomplete',
       name: 'flavor',
       message: 'Choose a flavor:',
@@ -92,7 +106,7 @@ async function goToExercise() {
   let tdd = true;
 
   if (selectedExercise.implementationFiles) {
-    const tddChoice = await prompt<{ useTdd: boolean }>({
+    const tddChoice = await promptAdapter.prompt<{ useTdd: boolean }>({
       type: 'confirm',
       name: 'useTdd',
       message: 'Do you want to use TDD or checkout the implementation first?',
@@ -105,11 +119,13 @@ async function goToExercise() {
   console.log(`TDD mode: ${tdd ? 'Yes' : 'No'}`);
   console.log('Running git commands...\n');
 
-  await wipeout();
+  await wipeout({ gitAdapter, promptAdapter });
 
-  switchToBranch(`${BRANCH_PREFIX}${selectedExercise.id}-starter`);
+  switchToBranch(`${BRANCH_PREFIX}${selectedExercise.id}-starter`, {
+    gitAdapter,
+  });
 
-  checkoutImplementation(selectedExercise);
+  checkoutImplementation(selectedExercise, { gitAdapter }, flavor ?? undefined);
 
   console.log('\n✅ Exercise setup complete!');
   console.log(
@@ -117,7 +133,11 @@ async function goToExercise() {
   );
 }
 
-function checkoutImplementation(exercise: Exercise, flavor?: string) {
+function checkoutImplementation(
+  exercise: Exercise,
+  { gitAdapter }: { gitAdapter: GitAdapter },
+  flavor?: string,
+) {
   console.log(`Checking out solution files...`);
   if (exercise.implementationFiles) {
     const filesToCheckout = exercise.implementationFiles.join(' ');
@@ -125,7 +145,9 @@ function checkoutImplementation(exercise: Exercise, flavor?: string) {
     const branch = flavor
       ? `${BRANCH_PREFIX}${exercise.id}-solution-${flavor}`
       : `${BRANCH_PREFIX}${exercise.id}-solution`;
-    executeGitCommand(`checkout origin/${branch} ${filesToCheckout}`);
+    gitAdapter.executeGitCommand(
+      `checkout origin/${branch} ${filesToCheckout}`,
+    );
   }
 }
 
@@ -135,13 +157,12 @@ function getSolutionBranch(exercise: Exercise, flavor?: string) {
     : `${BRANCH_PREFIX}${exercise.id}-solution`;
 }
 
-function hasLocalChanges(): boolean {
-  const status = execSync('git status --porcelain', { encoding: 'utf8' });
-  return status.trim().length > 0;
-}
-
-function maybeGetCurrentExercise(): Exercise | null {
-  const currentBranch = getCurrentBranch();
+function maybeGetCurrentExercise({
+  gitAdapter,
+}: {
+  gitAdapter: GitAdapter;
+}): Exercise | null {
+  const currentBranch = gitAdapter.getCurrentBranch();
   if (!currentBranch.endsWith('-starter')) {
     return null;
   }
@@ -152,18 +173,23 @@ function maybeGetCurrentExercise(): Exercise | null {
   return exercises.find((exercise) => exercise.id === exerciseId) ?? null;
 }
 
-function getCurrentBranch() {
-  return execSync('git branch --show-current', { encoding: 'utf8' }).trim();
-}
-
-function switchToBranch(branch: string) {
+function switchToBranch(
+  branch: string,
+  { gitAdapter }: { gitAdapter: GitAdapter },
+) {
   console.log(`Switching to ${branch}...`);
-  executeGitCommand(`switch ${branch}`);
+  gitAdapter.executeGitCommand(`switch ${branch}`);
 }
 
-async function wipeout() {
-  if (hasLocalChanges()) {
-    const confirmOverwrite = await prompt<{ confirm: boolean }>({
+async function wipeout({
+  gitAdapter,
+  promptAdapter,
+}: {
+  gitAdapter: GitAdapter;
+  promptAdapter: PromptAdapter;
+}) {
+  if (gitAdapter.hasLocalChanges()) {
+    const confirmOverwrite = await promptAdapter.prompt<{ confirm: boolean }>({
       type: 'confirm',
       name: 'confirm',
       message:
@@ -178,12 +204,33 @@ async function wipeout() {
   }
 
   console.log('Resetting to clean state...');
-  executeGitCommand('reset --hard');
+  gitAdapter.executeGitCommand('reset --hard');
 
   console.log('Cleaning untracked files...');
-  executeGitCommand('clean -df');
+  gitAdapter.executeGitCommand('clean -df');
 }
 
-function executeGitCommand(command: string) {
-  execSync(`git ${command}`, { stdio: 'inherit' });
+class GitAdapter {
+  executeGitCommand(command: string) {
+    execSync(`git ${command}`, { stdio: 'inherit' });
+  }
+
+  getCurrentBranch() {
+    return execSync('git branch --show-current', { encoding: 'utf8' }).trim();
+  }
+
+  hasLocalChanges() {
+    const status = execSync('git status --porcelain', { encoding: 'utf8' });
+    return status.trim().length > 0;
+  }
 }
+
+class PromptAdapter {
+  prompt<T>(
+    ...args: Parameters<typeof prompt<T>>
+  ): ReturnType<typeof prompt<T>> {
+    return prompt(...args);
+  }
+}
+
+main();

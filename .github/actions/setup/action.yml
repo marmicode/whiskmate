@@ -20,10 +20,3 @@ runs:
 
     - run: pnpm install
       shell: sh
-
-    - name: Cache Nx
-      uses: actions/cache@v3
-      with:
-        path: .nx/cache
-        key: ${{ runner.os }}-nx-${{ github.sha }}
-        restore-keys: ${{ runner.os }}-nx

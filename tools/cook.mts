@@ -10,9 +10,9 @@ export async function main({
   gitAdapter = new GitAdapter(),
   promptAdapter = new PromptAdapter(),
 }: { gitAdapter?: GitAdapter; promptAdapter?: PromptAdapter } = {}) {
-  const currentExercise = maybeGetCurrentExercise({ gitAdapter });
+  const exercise = maybeGetCurrentExercise({ gitAdapter });
 
-  if (!currentExercise) {
+  if (!exercise) {
     await goToExercise({ gitAdapter, promptAdapter });
     return;
   }
@@ -42,11 +42,22 @@ export async function main({
       await goToExercise({ gitAdapter, promptAdapter });
       break;
     case 'checkout-impl':
-      checkoutImplementation({ exercise: currentExercise, gitAdapter });
+      checkoutImplementation({
+        exercise,
+        flavor: await maybeSelectFlavor({
+          exercise,
+          promptAdapter,
+        }),
+        gitAdapter,
+      });
       break;
     case 'solution':
       await checkoutSolution({
-        exercise: currentExercise,
+        exercise,
+        flavor: await maybeSelectFlavor({
+          exercise,
+          promptAdapter,
+        }),
         gitAdapter,
         promptAdapter,
       });
@@ -68,7 +79,7 @@ export async function checkoutSolution({
   exercise: Exercise;
   gitAdapter: GitAdapter;
   promptAdapter: PromptAdapter;
-  flavor?: string;
+  flavor: string | null;
 }) {
   const branch = getSolutionBranch({ exercise, flavor });
   await wipeout({ gitAdapter, promptAdapter });
@@ -100,16 +111,10 @@ export async function goToExercise({
     process.exit(1);
   }
 
-  let flavor: string | null = null;
-  if (selectedExercise.flavors) {
-    const flavorChoice = await promptAdapter.prompt<{ flavor: string }>({
-      type: 'autocomplete',
-      name: 'flavor',
-      message: 'Choose a flavor:',
-      choices: selectedExercise.flavors,
-    });
-    flavor = flavorChoice.flavor;
-  }
+  const flavor = await maybeSelectFlavor({
+    exercise: selectedExercise,
+    promptAdapter,
+  });
 
   let tdd = true;
 
@@ -138,7 +143,7 @@ export async function goToExercise({
     checkoutImplementation({
       exercise: selectedExercise,
       gitAdapter,
-      flavor: flavor ?? undefined,
+      flavor,
     });
   }
 
@@ -155,7 +160,7 @@ export function checkoutImplementation({
 }: {
   exercise: Exercise;
   gitAdapter: GitAdapter;
-  flavor?: string;
+  flavor: string | null;
 }) {
   console.log(`Checking out solution files...`);
   if (exercise.implementationFiles) {
@@ -175,7 +180,7 @@ function getSolutionBranch({
   flavor,
 }: {
   exercise: Exercise;
-  flavor?: string;
+  flavor: string | null;
 }) {
   return flavor
     ? `${BRANCH_PREFIX}${exercise.id}-solution-${flavor}`
@@ -196,6 +201,26 @@ export function maybeGetCurrentExercise({
     .replace('-starter', '');
 
   return exercises.find((exercise) => exercise.id === exerciseId) ?? null;
+}
+
+async function maybeSelectFlavor({
+  exercise,
+  promptAdapter,
+}: {
+  exercise: Exercise;
+  promptAdapter: PromptAdapter;
+}) {
+  if (exercise.flavors) {
+    const flavorChoice = await promptAdapter.prompt<{ flavor: string }>({
+      type: 'autocomplete',
+      name: 'flavor',
+      message: 'Choose a flavor:',
+      choices: exercise.flavors,
+    });
+    return flavorChoice.flavor;
+  }
+
+  return null;
 }
 
 function switchToBranch({

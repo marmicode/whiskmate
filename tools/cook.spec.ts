@@ -1,11 +1,5 @@
 import enquirer from 'enquirer';
-import {
-  checkoutSolution,
-  GitAdapter,
-  goToExercise,
-  maybeGetCurrentExercise,
-  PromptAdapter,
-} from './cook.mts';
+import { GitAdapter, main, PromptAdapter } from './cook.mts';
 
 describe('cook', () => {
   it('does not checkout the implementation if TDD is enabled', async () => {
@@ -22,14 +16,14 @@ describe('cook', () => {
       },
     });
 
-    await goToExercise({ gitAdapter, promptAdapter });
+    await main({ gitAdapter, promptAdapter });
 
     expect(gitAdapter.getExecutedCommands()).toEqual([
       'switch testing-101-meal-planner-starter',
     ]);
   });
 
-  it('checks out the implementation from flavor solution branch', async () => {
+  it('goes to exercise and checks out the implementation from flavor solution branch', async () => {
     const gitAdapter = new GitFake();
     const promptAdapter = new PromptFake();
 
@@ -45,7 +39,7 @@ describe('cook', () => {
       },
     });
 
-    await goToExercise({ gitAdapter, promptAdapter });
+    await main({ gitAdapter, promptAdapter });
 
     expect(gitAdapter.getExecutedCommands()).toEqual([
       'switch testing-302-recipe-search-integration-starter',
@@ -63,16 +57,12 @@ describe('cook', () => {
 
     promptAdapter.configure({
       choices: {
+        command: 'solution',
         flavor: 'test-bed',
       },
     });
 
-    await checkoutSolution({
-      exercise: maybeGetCurrentExercise({ gitAdapter })!,
-      flavor: 'test-bed',
-      gitAdapter,
-      promptAdapter,
-    });
+    await main({ gitAdapter, promptAdapter });
 
     expect(gitAdapter.getExecutedCommands()).toEqual([
       'checkout origin/testing-302-recipe-search-integration-solution-test-bed apps/whiskmate',

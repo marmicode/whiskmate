@@ -164,7 +164,7 @@ function getSolutionBranch(exercise: Exercise, flavor?: string) {
     : `${BRANCH_PREFIX}${exercise.id}-solution`;
 }
 
-function maybeGetCurrentExercise({
+export function maybeGetCurrentExercise({
   gitAdapter,
 }: {
   gitAdapter: GitAdapter;

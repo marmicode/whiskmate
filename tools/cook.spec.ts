@@ -1,5 +1,11 @@
 import enquirer from 'enquirer';
-import { GitAdapter, goToExercise, PromptAdapter } from './cook.mts';
+import {
+  checkoutSolution,
+  GitAdapter,
+  goToExercise,
+  maybeGetCurrentExercise,
+  PromptAdapter,
+} from './cook.mts';
 
 describe('cook', () => {
   it('does not checkout the implementation if TDD is enabled', async () => {
@@ -20,6 +26,55 @@ describe('cook', () => {
 
     expect(gitAdapter.getExecutedCommands()).toEqual([
       'switch testing-101-meal-planner-starter',
+    ]);
+  });
+
+  it('checks out the implementation from flavor solution branch', async () => {
+    const gitAdapter = new GitFake();
+    const promptAdapter = new PromptFake();
+
+    gitAdapter.configure({
+      currentBranch: 'testing-000-starter',
+    });
+
+    promptAdapter.configure({
+      choices: {
+        exercise: '302-recipe-search-integration',
+        flavor: 'test-bed',
+        useTdd: false,
+      },
+    });
+
+    await goToExercise({ gitAdapter, promptAdapter });
+
+    expect(gitAdapter.getExecutedCommands()).toEqual([
+      'switch testing-302-recipe-search-integration-starter',
+      'checkout origin/testing-302-recipe-search-integration-solution-test-bed apps/whiskmate/src/app/recipe/recipe-search.ng.ts',
+    ]);
+  });
+
+  it('checks out solution from flavor solution branch', async () => {
+    const gitAdapter = new GitFake();
+    const promptAdapter = new PromptFake();
+
+    gitAdapter.configure({
+      currentBranch: 'testing-302-recipe-search-integration-starter',
+    });
+
+    promptAdapter.configure({
+      choices: {
+        flavor: 'test-bed',
+      },
+    });
+
+    await checkoutSolution(
+      maybeGetCurrentExercise({ gitAdapter })!,
+      { gitAdapter, promptAdapter },
+      'test-bed',
+    );
+
+    expect(gitAdapter.getExecutedCommands()).toEqual([
+      'checkout origin/testing-302-recipe-search-integration-solution-test-bed apps/whiskmate',
     ]);
   });
 });

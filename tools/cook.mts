@@ -42,10 +42,14 @@ export async function main({
       await goToExercise({ gitAdapter, promptAdapter });
       break;
     case 'checkout-impl':
-      checkoutImplementation(currentExercise, { gitAdapter });
+      checkoutImplementation({ exercise: currentExercise, gitAdapter });
       break;
     case 'solution':
-      await checkoutSolution(currentExercise, { gitAdapter, promptAdapter });
+      await checkoutSolution({
+        exercise: currentExercise,
+        gitAdapter,
+        promptAdapter,
+      });
       break;
     default:
       console.error('Invalid choice');
@@ -55,15 +59,18 @@ export async function main({
 
 type Command = 'start' | 'checkout-impl' | 'solution';
 
-export async function checkoutSolution(
-  exercise: Exercise,
-  {
-    gitAdapter,
-    promptAdapter,
-  }: { gitAdapter: GitAdapter; promptAdapter: PromptAdapter },
-  flavor?: string,
-) {
-  const branch = getSolutionBranch(exercise, flavor);
+export async function checkoutSolution({
+  exercise,
+  gitAdapter,
+  promptAdapter,
+  flavor,
+}: {
+  exercise: Exercise;
+  gitAdapter: GitAdapter;
+  promptAdapter: PromptAdapter;
+  flavor?: string;
+}) {
+  const branch = getSolutionBranch({ exercise, flavor });
   await wipeout({ gitAdapter, promptAdapter });
   gitAdapter.executeGitCommand(`checkout origin/${branch} apps/whiskmate`);
 }
@@ -122,16 +129,17 @@ export async function goToExercise({
 
   await wipeout({ gitAdapter, promptAdapter });
 
-  switchToBranch(`${BRANCH_PREFIX}${selectedExercise.id}-starter`, {
+  switchToBranch({
+    branch: `${BRANCH_PREFIX}${selectedExercise.id}-starter`,
     gitAdapter,
   });
 
   if (!tdd) {
-    checkoutImplementation(
-      selectedExercise,
-      { gitAdapter },
-      flavor ?? undefined,
-    );
+    checkoutImplementation({
+      exercise: selectedExercise,
+      gitAdapter,
+      flavor: flavor ?? undefined,
+    });
   }
 
   console.log('\n✅ Exercise setup complete!');
@@ -140,11 +148,15 @@ export async function goToExercise({
   );
 }
 
-export function checkoutImplementation(
-  exercise: Exercise,
-  { gitAdapter }: { gitAdapter: GitAdapter },
-  flavor?: string,
-) {
+export function checkoutImplementation({
+  exercise,
+  gitAdapter,
+  flavor,
+}: {
+  exercise: Exercise;
+  gitAdapter: GitAdapter;
+  flavor?: string;
+}) {
   console.log(`Checking out solution files...`);
   if (exercise.implementationFiles) {
     const filesToCheckout = exercise.implementationFiles.join(' ');
@@ -158,7 +170,13 @@ export function checkoutImplementation(
   }
 }
 
-function getSolutionBranch(exercise: Exercise, flavor?: string) {
+function getSolutionBranch({
+  exercise,
+  flavor,
+}: {
+  exercise: Exercise;
+  flavor?: string;
+}) {
   return flavor
     ? `${BRANCH_PREFIX}${exercise.id}-solution-${flavor}`
     : `${BRANCH_PREFIX}${exercise.id}-solution`;
@@ -180,10 +198,13 @@ export function maybeGetCurrentExercise({
   return exercises.find((exercise) => exercise.id === exerciseId) ?? null;
 }
 
-function switchToBranch(
-  branch: string,
-  { gitAdapter }: { gitAdapter: GitAdapter },
-) {
+function switchToBranch({
+  branch,
+  gitAdapter,
+}: {
+  branch: string;
+  gitAdapter: GitAdapter;
+}) {
   console.log(`Switching to ${branch}...`);
   gitAdapter.executeGitCommand(`switch ${branch}`);
 }

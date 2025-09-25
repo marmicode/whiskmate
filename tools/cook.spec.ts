@@ -67,11 +67,12 @@ describe('cook', () => {
       },
     });
 
-    await checkoutSolution(
-      maybeGetCurrentExercise({ gitAdapter })!,
-      { gitAdapter, promptAdapter },
-      'test-bed',
-    );
+    await checkoutSolution({
+      exercise: maybeGetCurrentExercise({ gitAdapter })!,
+      flavor: 'test-bed',
+      gitAdapter,
+      promptAdapter,
+    });
 
     expect(gitAdapter.getExecutedCommands()).toEqual([
       'checkout origin/testing-302-recipe-search-integration-solution-test-bed apps/whiskmate',

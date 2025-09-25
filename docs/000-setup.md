@@ -49,7 +49,7 @@ pnpm start-docs
 ## Go to an exercise
 
 ```sh
-pnpm lets-cook
+pnpm cook
 ```
 
 ## Appendices

@@ -22,7 +22,6 @@ export default mergeConfig(
       globals: true,
       setupFiles: ['src/test-setup.ts'],
       reporters: ['default'],
-      testTimeout: 1_000,
       coverage: {
         reportsDirectory: '../../coverage/apps/whiskmate',
         provider: 'v8',

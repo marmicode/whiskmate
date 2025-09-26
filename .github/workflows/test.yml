@@ -77,11 +77,11 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
       - name: Build docs
-        run: pnpm nx build docusaurus
+        run: pnpm nx build docs
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docusaurus/build
+          path: docs/build
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

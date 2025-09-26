@@ -7,7 +7,6 @@
     "postinstall": "playwright install",
     "nx": "nx",
     "start": "nx serve",
-    "start-docs": "nx start docusaurus",
     "build": "nx build",
     "cook": "node --experimental-strip-types tools/cook/main.ts",
     "downgrade-to-jest": "node --experimental-strip-types tools/downgrade-to-jest.ts",

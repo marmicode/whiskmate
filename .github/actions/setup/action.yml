@@ -9,14 +9,15 @@ runs:
       with:
         main-branch-name: ${{ github.ref_name }}
 
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 10
+
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 24
-
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 10
+        cache: pnpm
 
     - run: pnpm install
       shell: sh

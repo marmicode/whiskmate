@@ -64,7 +64,7 @@ pnpm cook
 By default, this workspace uses Vitest, but you can downgrade to Jest if you prefer:
 
 ```sh
-## You will have to run this command each time you reset your local changes
+# You will have to run this command each time you reset your local changes
 pnpm downgrade-to-jest
 ```
 

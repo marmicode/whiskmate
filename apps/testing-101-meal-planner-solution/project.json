@@ -1,0 +1,88 @@
+{
+  "name": "whiskmate",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/whiskmate/src",
+  "prefix": "wm",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser-esbuild",
+      "options": {
+        "outputPath": "dist/apps/whiskmate",
+        "index": "apps/whiskmate/src/index.html",
+        "main": "apps/whiskmate/src/main.ts",
+        "tsConfig": "apps/whiskmate/tsconfig.app.json",
+        "assets": [
+          "apps/whiskmate/src/favicon.ico",
+          "apps/whiskmate/src/assets"
+        ],
+        "styles": ["apps/whiskmate/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/whiskmate/src/environments/environment.ts",
+              "with": "apps/whiskmate/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "whiskmate:build:production"
+        },
+        "development": {
+          "buildTarget": "whiskmate:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "continuous": true
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "whiskmate:build"
+      }
+    },
+    "reset": {
+      "command": "rm -rf .swc {projectRoot}/playwright/.cache"
+    },
+    "test": {
+      "configurations": {
+        "debug": {
+          "args": "--watch",
+          "env": {
+            "DEBUG_BROWSER": "true"
+          }
+        }
+      }
+    }
+  }
+}

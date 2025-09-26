@@ -1,10 +1,12 @@
+import { type Config, type Exercise } from './core.ts';
+
 const files = {
-  mealPlanner: 'apps/whiskmate/src/app/meal-planner/meal-planner.ts',
-  recipeFilter: 'apps/whiskmate/src/app/recipe/recipe-filter.ng.ts',
-  recipeSearch: 'apps/whiskmate/src/app/recipe/recipe-search.ng.ts',
+  mealPlanner: 'src/app/meal-planner/meal-planner.ts',
+  recipeFilter: 'src/app/recipe/recipe-filter.ng.ts',
+  recipeSearch: 'src/app/recipe/recipe-search.ng.ts',
 };
 
-export const exercises: Exercise[] = [
+const exercises: Exercise[] = [
   {
     id: '101-meal-planner',
     name: '101 - Meal Planner',
@@ -31,16 +33,21 @@ export const exercises: Exercise[] = [
     implementationFiles: [files.recipeSearch],
   },
   {
-    id: '302-recipe-search-integration',
-    name: '302 - Recipe Search Integration',
-    flavors: ['test-bed', 'testing-library'],
+    id: '302-recipe-search-integration-test-bed',
+    name: '302 - Recipe Search Integration (TestBed)',
     implementationFiles: [files.recipeSearch],
   },
   {
-    id: '303-recipe-search-shallow',
-    name: '303 - Recipe Search Shallow',
-    flavors: ['test-bed', 'testing-library'],
-    implementationFiles: [files.recipeSearch],
+    id: '302-recipe-search-integration-testing-library',
+    name: '302 - Recipe Search Integration (Testing Library)',
+  },
+  {
+    id: '303-recipe-search-shallow-test-bed',
+    name: '303 - Recipe Search Shallow (TestBed)',
+  },
+  {
+    id: '303-recipe-search-shallow-testing-library',
+    name: '303 - Recipe Search Shallow (Testing Library)',
   },
   {
     id: '304-recipe-search-async-pipe',
@@ -58,8 +65,8 @@ export const exercises: Exercise[] = [
     implementationFiles: [files.recipeFilter],
   },
   {
-    id: '402-recipe-filter-interaction',
-    name: '402 - Recipe Filter Interaction',
+    id: '402-recipe-search-filter-interaction',
+    name: '402 - Recipe Search & Filter Interaction',
     implementationFiles: [files.recipeFilter],
   },
   {
@@ -75,14 +82,12 @@ export const exercises: Exercise[] = [
     name: '503 - Recipe Search Playwright Component Testing',
   },
   {
-    id: 'testing-504-playwright-visual-regression-testing',
+    id: '504-playwright-visual-regression-testing',
     name: '504 - Playwright Visual Regression Testing',
   },
 ];
 
-export interface Exercise {
-  id: string;
-  name: string;
-  implementationFiles?: string[];
-  flavors?: string[];
-}
+export const config: Config = {
+  base: 'pragmatic-angular-testing',
+  exercises,
+};

@@ -1,5 +1,5 @@
 {
-  "name": "whiskmate",
+  "name": "@whiskmate/source",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,13 +9,11 @@
     "start": "nx serve",
     "start-docs": "nx start docusaurus",
     "build": "nx build",
-    "cook": "node --experimental-strip-types tools/cook.mts",
+    "cook": "node --experimental-strip-types tools/cook/main.ts",
     "downgrade-to-jest": "node --experimental-strip-types tools/downgrade-to-jest.ts",
     "test": "nx test --watch",
     "test-ui": "nx test-ui",
     "test-ui:watch": "PWTEST_WATCH=1 nx test-ui",
-    "ct": "nx run-many --target component-test",
-    "percy:ct": "percy exec -- nx run-many --target component-test --skip-nx-cache",
     "playwright-docker": "docker run --rm --network host -v $(pwd):/work/ -w /work/ -it mcr.microsoft.com/playwright:v1.39.0-jammy /bin/bash",
     "reset": "nx reset && nx run-many -t reset"
   },

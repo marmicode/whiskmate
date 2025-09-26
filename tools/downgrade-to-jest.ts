@@ -1,22 +1,24 @@
 import { workspaceRoot, type NxJsonConfiguration } from '@nx/devkit';
 import { execSync } from 'child_process';
-import { readFileSync, writeFileSync } from 'fs';
+import { readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path/posix';
 
-const PROJECT_PATH = 'apps/whiskmate';
+const APPS_PATH = 'apps';
 
 main();
 
 function main() {
-  const nxJsonPath = join(workspaceRoot, 'nx.json');
-  const tsConfigSpecJsonPath = join(
-    workspaceRoot,
-    PROJECT_PATH,
-    'tsconfig.spec.json',
-  );
+  updateJson(join(workspaceRoot, 'nx.json'), donwgradeNxJsonUpdater);
 
-  updateJson(nxJsonPath, downgradeNxJson);
-  updateJson(tsConfigSpecJsonPath, downgradeTsconfigSpecJson);
+  for (const project of readdirSync(join(workspaceRoot, APPS_PATH))) {
+    const tsConfigSpecJsonPath = join(
+      workspaceRoot,
+      APPS_PATH,
+      project,
+      'tsconfig.spec.json',
+    );
+    updateJson(tsConfigSpecJsonPath, downgradeTsconfigSpecJsonUpdater);
+  }
 
   execSync('pnpm nx format --base HEAD');
   execSync('pnpm nx reset');
@@ -28,7 +30,7 @@ function updateJson(filePath: string, updaterFn: (json: any) => any) {
   writeFileSync(filePath, JSON.stringify(updatedJson, null, 2));
 }
 
-function downgradeNxJson(nxJson: NxJsonConfiguration) {
+function donwgradeNxJsonUpdater(nxJson: NxJsonConfiguration) {
   const plugins = nxJson.plugins?.map((plugin) => {
     if (typeof plugin === 'string') {
       return plugin;
@@ -61,7 +63,7 @@ function downgradeNxJson(nxJson: NxJsonConfiguration) {
   };
 }
 
-function downgradeTsconfigSpecJson(tsconfigSpecJson: any) {
+function downgradeTsconfigSpecJsonUpdater(tsconfigSpecJson: any) {
   if (tsconfigSpecJson?.compilerOptions?.types) {
     tsconfigSpecJson.compilerOptions.types =
       tsconfigSpecJson.compilerOptions.types.map((type) => {

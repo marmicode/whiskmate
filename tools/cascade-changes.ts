@@ -1,5 +1,6 @@
 import { execSync } from 'child_process';
-import { exercises } from './exercices.ts';
+import { config } from './cook/config.ts';
+const { exercises } = config;
 
 async function main(args: string[]) {
   const [startProject = computeExerciseProjects(exercises[0].id).starter] =
@@ -28,7 +29,7 @@ async function main(args: string[]) {
   );
 
   for (const [source, destination] of pairwisedProjects) {
-    execSync(`pnpm clone-changes ${source} ${destination}`, {
+    execSync(`pnpm nx run tools:clone-changes ${source} ${destination}`, {
       stdio: 'inherit',
     });
   }

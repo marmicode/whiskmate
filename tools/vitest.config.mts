@@ -7,7 +7,6 @@ export default mergeConfig(
     test: {
       globals: true,
       reporters: ['default'],
-      testTimeout: 1_000,
       coverage: {
         reportsDirectory: '../coverage/tools',
         provider: 'v8',

@@ -17,7 +17,6 @@
     "ct": "nx run-many --target component-test",
     "percy:ct": "percy exec -- nx run-many --target component-test --skip-nx-cache",
     "playwright-docker": "docker run --rm --network host -v $(pwd):/work/ -w /work/ -it mcr.microsoft.com/playwright:v1.39.0-jammy /bin/bash",
-    "scrap-ottolenghi": "ts-node -P libs/ottolenghi-scraper/tsconfig.lib.json libs/ottolenghi-scraper/src/main.ts",
     "reset": "nx reset && nx run-many -t reset"
   },
   "dependencies": {

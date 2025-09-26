@@ -14,15 +14,52 @@ const SOLUTION_SUFFIX = '-solution';
 const COOKING_BRANCH = 'cooking';
 
 export async function main(ctx: Context) {
+  const command = await prepareCommand(ctx);
+
+  switch (command.type) {
+    case 'start':
+      await goToExercise(ctx);
+      break;
+    case 'checkout-impl':
+      checkoutImplementation(ctx, command.exercise);
+      break;
+    case 'solution':
+      await checkoutSolution(ctx, command.exercise);
+      break;
+    default:
+      console.error('Invalid choice');
+      process.exit(1);
+  }
+}
+
+type CommandType = 'start' | 'checkout-impl' | 'solution';
+
+type Command =
+  | {
+      type: 'start';
+    }
+  | {
+      type: 'checkout-impl' | 'solution';
+      exercise: Exercise;
+    };
+
+interface Context {
+  config: Config;
+  commandRunner: CommandRunner;
+  fileSystemAdapter: FileSystemAdapter;
+  gitAdapter: GitAdapter;
+  promptAdapter: PromptAdapter;
+}
+
+export async function prepareCommand(ctx: Context): Promise<Command> {
   const { promptAdapter } = ctx;
   const exercise = maybeGetCurrentExercise(ctx);
 
   if (!exercise) {
-    await goToExercise(ctx);
-    return;
+    return { type: 'start' };
   }
 
-  const { command } = await promptAdapter.prompt<{ command: Command }>({
+  const choice = await promptAdapter.prompt<{ command: CommandType }>({
     type: 'autocomplete',
     name: 'command',
     message: 'Choose an option:',
@@ -43,33 +80,10 @@ export async function main(ctx: Context) {
         name: 'solution',
         message: 'Go to solution',
       },
-    ] satisfies Array<{ name: Command; message: string }>,
+    ] satisfies Array<{ name: CommandType; message: string }>,
   });
 
-  switch (command) {
-    case 'start':
-      await goToExercise(ctx);
-      break;
-    case 'checkout-impl':
-      checkoutImplementation(ctx, exercise);
-      break;
-    case 'solution':
-      await checkoutSolution(ctx, exercise);
-      break;
-    default:
-      console.error('Invalid choice');
-      process.exit(1);
-  }
-}
-
-type Command = 'start' | 'checkout-impl' | 'solution';
-
-interface Context {
-  config: Config;
-  commandRunner: CommandRunner;
-  fileSystemAdapter: FileSystemAdapter;
-  gitAdapter: GitAdapter;
-  promptAdapter: PromptAdapter;
+  return { type: choice.command, exercise };
 }
 
 export async function checkoutSolution(ctx: Context, exercise: Exercise) {

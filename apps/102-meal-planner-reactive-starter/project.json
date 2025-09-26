@@ -1,8 +1,8 @@
 {
-  "name": "testing-101-meal-planner-solution",
+  "name": "102-meal-planner-reactive-starter",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/testing-101-meal-planner-solution/src",
+  "sourceRoot": "apps/102-meal-planner-reactive-starter/src",
   "prefix": "wm",
   "tags": [],
   "targets": {

@@ -14,10 +14,16 @@ sidebar_label: 101 - Meal Planner
 
 ```sh
 pnpm cook start 101-meal-planner
-# ♻️ TDD: You can choose to:
-# - go full-on TDD and implement the tests first then checkout the implementation later,
-# - or checkout the implementation first and then implement the tests.
 ```
+
+:::info ♻️ TDD option
+
+You can choose to:
+
+- go full-on TDD and implement the tests first then checkout the implementation later,
+- or checkout the implementation first and then implement the tests.
+
+:::
 
 ## 🎯 Goal #1: Test `MealPlanner` service
 

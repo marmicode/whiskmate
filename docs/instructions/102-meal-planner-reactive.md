@@ -8,10 +8,16 @@ sidebar_label: 102 - Meal Planner Reactive
 
 ```sh
 pnpm cook start 102-meal-planner-reactive
-# ♻️ TDD: You can choose to:
-# - go full-on TDD and implement the tests first then checkout the implementation later,
-# - or checkout the implementation first and then implement the tests.
 ```
+
+:::info ♻️ TDD option
+
+You can choose to:
+
+- go full-on TDD and implement the tests first then checkout the implementation later,
+- or checkout the implementation first and then implement the tests.
+
+:::
 
 ## 🎯 Goal #1: Test `MealPlanner.recipes$`
 

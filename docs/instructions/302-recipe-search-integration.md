@@ -8,10 +8,16 @@ sidebar_label: 302 - Recipe Search Integration
 
 ```sh
 pnpm cook start 302-recipe-search-integration-test-bed
-# ♻️ TDD: You can choose to:
-# - go full-on TDD and implement the tests first then checkout the implementation later,
-# - or checkout the implementation first and then implement the tests.
 ```
+
+:::info ♻️ TDD option
+
+You can choose to:
+
+- go full-on TDD and implement the tests first then checkout the implementation later,
+- or checkout the implementation first and then implement the tests.
+
+:::
 
 ## 🎯 Goal #1: Test `RecipeSearch`
 

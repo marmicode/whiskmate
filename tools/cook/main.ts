@@ -13,12 +13,12 @@ const STARTER_SUFFIX = '-starter';
 const SOLUTION_SUFFIX = '-solution';
 const COOKING_BRANCH = 'cooking';
 
-export async function main(ctx: Context) {
-  const command = await prepareCommand(ctx);
+async function main(args: string[], ctx: Context) {
+  const command = await prepareCommand(args, ctx);
 
   switch (command.type) {
     case 'start':
-      await goToExercise(ctx);
+      await goToExercise(ctx, command.exerciseId);
       break;
     case 'checkout-impl':
       checkoutImplementation(ctx, command.exercise);
@@ -37,6 +37,7 @@ type CommandType = 'start' | 'checkout-impl' | 'solution';
 type Command =
   | {
       type: 'start';
+      exerciseId?: string;
     }
   | {
       type: 'checkout-impl' | 'solution';
@@ -51,9 +52,30 @@ interface Context {
   promptAdapter: PromptAdapter;
 }
 
-export async function prepareCommand(ctx: Context): Promise<Command> {
+async function prepareCommand(args: string[], ctx: Context): Promise<Command> {
   const { promptAdapter } = ctx;
   const exercise = maybeGetCurrentExercise(ctx);
+
+  if (args.length > 0) {
+    const command = args[0];
+    switch (command) {
+      case 'start':
+        return { type: 'start', exerciseId: args[1] };
+      case 'checkout-impl':
+        assertExerciseSelected('checkout-impl', exercise);
+        return { type: 'checkout-impl', exercise };
+      case 'solution':
+        assertExerciseSelected('solution', exercise);
+        return { type: 'solution', exercise };
+      default:
+        console.error(`Invalid command: ${command}`);
+        console.log(`Usage:
+  cook start [exercise]
+  cook checkout-impl|solution
+`);
+        process.exit(1);
+    }
+  }
 
   if (!exercise) {
     return { type: 'start' };
@@ -86,28 +108,40 @@ export async function prepareCommand(ctx: Context): Promise<Command> {
   return { type: choice.command, exercise };
 }
 
-export async function checkoutSolution(ctx: Context, exercise: Exercise) {
+function assertExerciseSelected(
+  commandType: CommandType,
+  exercise: Exercise | null,
+): asserts exercise is Exercise {
+  if (exercise === null) {
+    throw new Error(`${commandType} requires an exercise to be selected`);
+  }
+}
+
+async function checkoutSolution(ctx: Context, exercise: Exercise) {
   await prepareCookingBranch(ctx);
   focusOnProject(ctx, `${exercise.id}${SOLUTION_SUFFIX}`);
 }
 
-export async function goToExercise(ctx: Context) {
+async function goToExercise(ctx: Context, exerciseId?: string) {
   const {
     promptAdapter,
     config: { exercises },
   } = ctx;
-  const exerciseChoice = await promptAdapter.prompt<{ exercise: string }>({
-    type: 'autocomplete',
-    name: 'exercise',
-    message: 'Choose an exercise:',
-    choices: exercises.map((exercise) => ({
-      name: exercise.id,
-      message: exercise.name,
-    })),
-  });
+  if (exerciseId == null) {
+    const exerciseChoice = await promptAdapter.prompt<{ exercise: string }>({
+      type: 'autocomplete',
+      name: 'exercise',
+      message: 'Choose an exercise:',
+      choices: exercises.map((exercise) => ({
+        name: exercise.id,
+        message: exercise.name,
+      })),
+    });
+    exerciseId = exerciseChoice.exercise;
+  }
 
   const selectedExercise = exercises.find(
-    (exercise) => exercise.id === exerciseChoice.exercise,
+    (exercise) => exercise.id === exerciseId,
   );
   if (!selectedExercise) {
     console.error('Selected exercise not found');
@@ -141,7 +175,7 @@ export async function goToExercise(ctx: Context) {
   console.log('\n✅ Exercise setup complete!');
 }
 
-export function checkoutImplementation(ctx: Context, exercise: Exercise) {
+function checkoutImplementation(ctx: Context, exercise: Exercise) {
   const {
     commandRunner,
     config: { base },
@@ -242,7 +276,7 @@ async function maybeWipeout(ctx: Context) {
 
 const __filename = fileURLToPath(import.meta.url);
 if (process.argv[1] === __filename) {
-  main({
+  main(process.argv.slice(2), {
     config,
     commandRunner: new CommandRunner(),
     fileSystemAdapter: new FileSystemAdapter(),

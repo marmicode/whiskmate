@@ -108,7 +108,7 @@ async function runMain({
     { id: '2-test-double', name: 'Test Double' },
   ];
 
-  await main({
+  await main([], {
     config: {
       base: 'angular-vitest-mini-workshop',
       exercises,

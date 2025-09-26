@@ -213,10 +213,14 @@ function focusOnProject(ctx: Context, project: string) {
   const nxJson = JSON.parse(fileSystemAdapter.readFile('nx.json'));
   fileSystemAdapter.writeFile(
     'nx.json',
-    JSON.stringify({
-      ...nxJson,
-      defaultProject: project,
-    }),
+    JSON.stringify(
+      {
+        ...nxJson,
+        defaultProject: project,
+      },
+      null,
+      2,
+    ),
   );
 
   const appsFolder = 'apps';
@@ -226,7 +230,6 @@ function focusOnProject(ctx: Context, project: string) {
     }
   }
 
-  commandRunner.executeCommand(`pnpm nx format --files nx.json`);
   commandRunner.executeCommand(`git add .`);
   commandRunner.executeCommand(`git commit -m "feat: ✨ focus on ${project}"`);
 }

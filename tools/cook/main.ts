@@ -274,6 +274,16 @@ async function maybeWipeout(ctx: Context) {
   commandRunner.executeCommand('git clean -df');
 }
 
+process.on('SIGINT', () => {
+  console.log('\n\nOperation cancelled by user.');
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  console.log('\n\nOperation terminated.');
+  process.exit(0);
+});
+
 const __filename = fileURLToPath(import.meta.url);
 if (process.argv[1] === __filename) {
   main(process.argv.slice(2), {
@@ -284,3 +294,15 @@ if (process.argv[1] === __filename) {
     promptAdapter: new PromptAdapter(),
   });
 }
+
+process.on('uncaughtException', (error) => {
+  if (
+    error instanceof Error &&
+    'code' in error &&
+    error.code === 'ERR_USE_AFTER_CLOSE'
+  ) {
+    process.exit(0);
+  }
+
+  throw error;
+});

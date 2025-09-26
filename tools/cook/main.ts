@@ -113,7 +113,8 @@ function assertExerciseSelected(
   exercise: Exercise | null,
 ): asserts exercise is Exercise {
   if (exercise === null) {
-    throw new Error(`${commandType} requires an exercise to be selected`);
+    console.error(`${commandType} requires an exercise to be selected`);
+    process.exit(1);
   }
 }
 

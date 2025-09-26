@@ -7,7 +7,10 @@ sidebar_label: 202 - Meal Planner Indirect Input
 ## Setup
 
 ```sh
-git switch origin/testing-202-meal-planner-indirect-input-starter
+pnpm cook start 202-meal-planner-indirect-input
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal: Sync meals from the `MealRepository` to the `MealPlanner`
@@ -15,12 +18,6 @@ git switch origin/testing-202-meal-planner-indirect-input-starter
 On startup, the `MealPlanner` should fetch meals from the `MealRepository`.
 
 ### 📝 Steps with a Fake
-
-0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
-
-```sh
-git checkout origin/testing-202-meal-planner-indirect-input-solution apps/whiskmate/src/app/meal-planner/meal-planner.ts
-```
 
 1. Run tests:
 
@@ -36,12 +33,6 @@ pnpm test
 
 ### 📝 Steps with a Spy
 
-0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
-
-```sh
-git checkout origin/testing-202-meal-planner-indirect-input-solution apps/whiskmate/src/app/meal-planner/meal-planner.ts
-```
-
 1. Run tests:
 
 ```sh
@@ -56,4 +47,8 @@ pnpm test
 
 5. Check that the spy was called properly.
 
-6. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+6. Checkout the implementation if you didn't do it already.
+
+```sh
+pnpm cook checkout-impl
+```

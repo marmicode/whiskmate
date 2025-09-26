@@ -7,7 +7,10 @@ sidebar_label: 301 - Recipe Search Isolated
 ## Setup
 
 ```sh
-git switch testing-301-recipe-search-isolated-starter
+pnpm cook start 301-recipe-search-isolated
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal: Test `RecipeSearch`
@@ -25,12 +28,6 @@ export class RecipeSearch {
 ```
 
 ### 📝 Steps
-
-0. [optional] you can either checkout the updated `RecipeSearch` implementation first or go full-on TDD and implement the tests first.
-
-```sh
-git checkout origin/testing-301-recipe-search-isolated-solution apps/whiskmate/src/app/recipe/recipe-search.ng.ts
-```
 
 1. Run tests:
 
@@ -55,4 +52,8 @@ pnpm test
    ]);
    ```
 
-3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+3. Checkout the implementation if you didn't do it already.
+
+```sh
+pnpm cook checkout-impl
+```

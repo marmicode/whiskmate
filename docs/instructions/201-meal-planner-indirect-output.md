@@ -7,7 +7,10 @@ sidebar_label: 201 - Meal Planner Indirect Output
 ## Setup
 
 ```sh
-git switch testing-201-meal-planner-indirect-output-starter
+pnpm cook start 201-meal-planner-indirect-output
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal: Make sure that meals are persisted
@@ -21,12 +24,6 @@ You can use a [Spy](#-steps-with-a-spy), a [Fake](#-steps-with-a-fake), or try b
 
 ### 📝 Steps with a Fake
 
-0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
-
-```sh
-git checkout origin/testing-201-meal-planner-indirect-output-solution apps/whiskmate/src/app/meal-planner/meal-planner.ts
-```
-
 1. Run tests:
 
 ```sh
@@ -39,15 +36,13 @@ pnpm test
 
 4. Check that the fake repo contains the added recipe.
 
-5. Checkout the implementation as mentioned at step 0 if you didn't do it already.
-
-### 📝 Steps with a Spy
-
-0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
+5. Checkout the implementation if you didn't do it already.
 
 ```sh
-git checkout origin/testing-201-meal-planner-indirect-output-solution apps/whiskmate/src/app/meal-planner/meal-planner.ts
+pnpm cook checkout-impl
 ```
+
+### 📝 Steps with a Spy
 
 1. Run tests:
 
@@ -61,7 +56,11 @@ pnpm test
 
 4. Check that the spies were called properly.
 
-5. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+5. Checkout the implementation if you didn't do it already.
+
+```sh
+pnpm cook checkout-impl
+```
 
 ## Appendices
 

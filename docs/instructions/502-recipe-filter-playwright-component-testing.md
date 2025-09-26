@@ -7,7 +7,10 @@ sidebar_label: 502 - Playwright CT - Recipe Filter
 ## Setup
 
 ```sh
-git switch testing-502-recipe-filter-ct-starter
+pnpm cook start 502-recipe-filter-ct
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal: Test `RecipeFilter` using Playwright Component Testing

@@ -7,7 +7,10 @@ sidebar_label: 302 - Recipe Search Integration
 ## Setup
 
 ```sh
-git switch testing-302-recipe-search-integration-starter
+pnpm cook start 302-recipe-search-integration-test-bed
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal #1: Test `RecipeSearch`
@@ -28,12 +31,6 @@ But let's check the DOM this time.
 
 ### 📝 Steps
 
-0. [optional] you can either checkout the updated `RecipeSearch` implementation first or go full-on TDD and implement the tests first.
-
-```sh
-git checkout origin/testing-302-recipe-search-integration-solution-test-bed apps/whiskmate/src/app/recipe/recipe-search.ng.ts
-```
-
 1. Run tests:
 
 ```sh
@@ -44,11 +41,19 @@ pnpm test
 
    1. Query DOM and check names are displayed. (Cf. [query DOM with `fixture.debugElement`](#-tip-query-dom-with-fixturedebugelement)])
 
-3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+3. Checkout the implementation if you didn't do it already.
+
+```sh
+pnpm cook checkout-impl
+```
 
 ## 🎯 Goal #2: Test `RecipeSearch` using `@testing-library/angular`
 
 Refactor the previous test using `@testing-library/angular` instead of `TestBed`.
+
+```sh
+pnpm cook start 302-recipe-search-integration-testing-library
+```
 
 ### 🍴 Cutleries
 

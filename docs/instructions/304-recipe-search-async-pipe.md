@@ -7,7 +7,10 @@ sidebar_label: 304 - Recipe Search Async Pipe
 ## Setup
 
 ```sh
-git switch testing-304-recipe-search-async-pipe-starter
+pnpm cook start 304-recipe-search-async-pipe
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal: Use `async` pipe and fix tests
@@ -25,7 +28,7 @@ pnpm test
 2. Checkout new `RecipeSearch` implementation.
 
 ```sh
-git checkout origin/testing-304-recipe-search-async-pipe-solution apps/whiskmate/src/app/recipe/recipe-search.ng.ts
+pnpm cook checkout-impl
 ```
 
 > This will replace the imperative approach:

@@ -7,7 +7,10 @@ sidebar_label: 503 - Playwright CT - Recipe Search
 ## Setup
 
 ```sh
-git switch testing-503-recipe-search-ct-starter
+pnpm cook start 503-recipe-search-ct
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal #1: Check that `RecipeSearch` shows all recipes

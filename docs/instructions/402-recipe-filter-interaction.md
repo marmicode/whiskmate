@@ -7,7 +7,10 @@ sidebar_label: 402 - Recipe Filter Interaction
 ## Setup
 
 ```sh
-git switch testing-402-recipe-search-filter-interaction-starter
+pnpm cook start 402-recipe-search-filter-interaction
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal: Test `RecipeSearch` interaction with `RecipeFilter`
@@ -17,12 +20,6 @@ git switch testing-402-recipe-search-filter-interaction-starter
 We will test the contract using a shallow test.
 
 ### 📝 Steps
-
-0. [optional] you can either checkout the updated `RecipeSearch` implementation first or go full-on TDD and implement the tests first.
-
-```sh
-git checkout origin/testing-402-recipe-search-filter-interaction-solution apps/whiskmate/src/app/recipe/recipe-search.ng.ts
-```
 
 1. Run tests:
 
@@ -40,7 +37,11 @@ pnpm test
 
    4. Query DOM and check child recipe preview components properties. (Cf. [query DOM with `fixture.debugElement`](./302-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](./303-recipe-search-shallow.md#-tip-access-element-properties))
 
-3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+3. Checkout the implementation if you didn't do it already.
+
+```sh
+pnpm cook checkout-impl
+```
 
 ## Appendices
 

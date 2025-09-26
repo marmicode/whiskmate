@@ -7,7 +7,10 @@ sidebar_label: 102 - Meal Planner Reactive
 ## Setup
 
 ```sh
-git switch testing-102-meal-planner-reactive-starter
+pnpm cook start 102-meal-planner-reactive
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal #1: Test `MealPlanner.recipes$`
@@ -27,12 +30,6 @@ class MealPlanner {
 1. it notifies subscribers when new recipes are added.
 
 ### 📝 Steps
-
-0. [optional] you can either checkout the updated `MealPlanner` implementation first or go full-on TDD and implement the tests first.
-
-```sh
-git checkout origin/testing-102-meal-planner-reactive-solution apps/whiskmate/src/app/meal-planner/meal-planner.ts
-```
 
 1. Run tests:
 
@@ -66,7 +63,11 @@ pnpm test
 
 2. Implement tests.
 
-3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+3. Checkout the implementation if you didn't do it already.
+
+```sh
+pnpm cook checkout-impl
+```
 
 ## Appendices
 

@@ -7,7 +7,10 @@ sidebar_label: 401 - Recipe Filter
 ## Setup
 
 ```sh
-git switch testing-401-recipe-filter-starter
+pnpm cook start 401-recipe-filter
+# ♻️ TDD: You can choose to:
+# - go full-on TDD and implement the tests first then checkout the implementation later,
+# - or checkout the implementation first and then implement the tests.
 ```
 
 ## 🎯 Goal: Test `RecipeFilter`
@@ -17,12 +20,6 @@ New component `RecipeFilter` should trigger `filterChange` output with a value o
 This will be later used by `RecipeSearch` to filter results based on user filtering.
 
 ### 📝 Steps
-
-0. [optional] you can either checkout the updated `RecipeFilter` implementation first or go full-on TDD and implement the tests first.
-
-```sh
-git checkout origin/testing-401-recipe-filter-solution apps/whiskmate/src/app/recipe/recipe-filter.ng.ts
-```
 
 1. Run tests:
 
@@ -38,4 +35,8 @@ pnpm test
 
    3. Check that `filterChange` have been triggered.
 
-3. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+3. Checkout the implementation if you didn't do it already.
+
+```sh
+pnpm cook checkout-impl
+```

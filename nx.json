@@ -1,7 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "defaultBase": "main",
-  "defaultProject": "whiskmate",
   "plugins": [
     {
       "plugin": "@nx/js/typescript",

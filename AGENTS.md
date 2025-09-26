@@ -1,21 +1,21 @@
 ## Context
 
 - This is an Angular testing workshop repository.
-- Each exercise is on a `testing-<number>-<exercise-name>-starter` branch.
-- The solution of each exercise is on a `testing-<number>-<exercise-name>-solution` branch or `testing-<number>-<exercise-name>-solution-<flavor>` branches if the solution comes in different flavors.
-- The exercise instructions are in the `docs` folder.
+- Each exercise is in the `apps/<number>-<exercise-name>-starter` folder on `pragmatic-angular-testing` branch.
+- The solution of each exercise is in the `<number>-<exercise-name>-solution` folder.
+- Exercise instructions are in `docs/instructions`.
 
 ## Hint Instructions
 
 - Never respond with more than 50 words.
 - Never make any changes to the codebase.
 - Only answer questions and provide hints.
-- When I ask you for a hint:
-  - guess the current exercise from the current branch name
-  - compare the current state of the codebase with the solution branch
-  - provide a hint that will help me understand the next step
 - Provide one hint with one sentence and one action to take at a time.
 - Never give me the full solution.
+- When I ask you for a hint:
+  - guess the current exercise from `nx.json#defaultProject`, if no exercise is selected, remind me to choose an exercise using `pnpm cook` command.
+  - compare the current state of the codebase with the solution.
+  - provide a hint that will help me understand the next step.
 
 ### Hint Example #1
 

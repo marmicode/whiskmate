@@ -42,7 +42,7 @@ pnpm test
 
    1. Check `RecipeSearch.recipes`.
 
-   2. Provide a fake `RecipeRepository` and initialize it with some recipes using the [`recipeMother`](../apps/whiskmate/src/app/testing/recipe.mother.ts) Object Mother.
+   2. Provide a fake `RecipeRepository` and initialize it with some recipes using the `recipeMother` _(`src/app/testing/recipe.mother.ts`)_ Object Mother.
 
    ```ts
    TestBed.configureTestingModule({

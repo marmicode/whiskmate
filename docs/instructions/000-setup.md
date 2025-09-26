@@ -1,6 +1,8 @@
 # Setup
 
-## Install git `>= 2.23`
+## 📦 Install stuff
+
+### Install git `>= 2.23`
 
 https://git-scm.com/downloads
 
@@ -8,7 +10,7 @@ https://git-scm.com/downloads
 Make sure to pick a git version `>= 2.23`
 :::
 
-## Install NodeJS `>=22.12.0`
+### Install NodeJS `>=22.12.0`
 
 :::warning
 Make sure to pick a NodeJS version `>=22.12.0`
@@ -16,7 +18,7 @@ Make sure to pick a NodeJS version `>=22.12.0`
 
 https://nodejs.org/en/download
 
-## Install pnpm
+### Install pnpm
 
 https://pnpm.io/installation
 
@@ -30,29 +32,29 @@ or if you are using [Volta](https://volta.sh/)
 volta install pnpm
 ```
 
-## Retrieve source code and install dependencies
+## 📥 Retrieve source code and install dependencies
 
 ```sh
-git clone https://github.com/marmicode/whiskmate.git --branch testing-000-starter
+git clone https://github.com/marmicode/whiskmate.git --branch pragmatic-angular-testing
 
 cd whiskmate
 
 pnpm install
 ```
 
-## Open the instructions
+## ⌨️ Cook CLI
 
-```sh
-pnpm start-docs
-```
+The `cook` CLI allows you to cook exercises:
 
-## Go to an exercise
+- select an exercise from a list
+- checkout the implementation when the test is ready _(♻️ TDD mode)_
+- go to the solution
 
 ```sh
 pnpm cook
 ```
 
-## Appendices
+## 📖 Tips
 
 ### Choose a test runner
 

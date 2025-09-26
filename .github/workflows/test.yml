@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: ./.github/actions/setup
-      - run: pnpm nx run-many --parallel=4 -t build
+      - run: pnpm nx affected -t build
 
   lint:
     name: 🧹 Lint
@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: ./.github/actions/setup
-      - run: pnpm nx run-many --parallel=4 -t lint
+      - run: pnpm nx affected -t lint
 
   test:
     name: ✅ Test
@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: ./.github/actions/setup
-      - run: pnpm nx run-many --parallel=4 -t test,vitest --pass-with-no-tests
+      - run: pnpm nx affected -t test,vitest --pass-with-no-tests
 
   playwright-ct:
     name: 🎭 Playwright CT
@@ -47,7 +47,7 @@ jobs:
         uses: ./.github/actions/setup
       - name: Playwright browsers install
         run: pnpm playwright install --with-deps
-      - run: pnpm nx run-many --parallel=4 -t test-ui --pass-with-no-tests
+      - run: pnpm nx affected -t test-ui --pass-with-no-tests
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -13,7 +13,7 @@ const STARTER_SUFFIX = '-starter';
 const SOLUTION_SUFFIX = '-solution';
 const COOKING_BRANCH = 'cooking';
 
-async function main(args: string[], ctx: Context) {
+export async function main(args: string[], ctx: Context) {
   const command = await prepareCommand(args, ctx);
 
   switch (command.type) {

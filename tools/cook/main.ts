@@ -200,7 +200,7 @@ function maybeGetCurrentExercise({
   const { defaultProject } = JSON.parse(fileSystemAdapter.readFile('nx.json'));
   const { exercises } = config;
 
-  if (defaultProject == null || !defaultProject.endsWith('-starter')) {
+  if (defaultProject == null || !defaultProject.endsWith(STARTER_SUFFIX)) {
     return null;
   }
 

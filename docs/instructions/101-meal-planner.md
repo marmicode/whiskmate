@@ -40,9 +40,9 @@ You can choose to:
 
 ### 📝 Steps
 
-1. Go to `apps/whiskmate/src/app/meal-planner/meal-planner.spec.ts` _(Cf. use [example below](#test-example))_
+1. Go to `src/app/meal-planner/meal-planner.spec.ts` _(Cf. use [example below](#test-example))_
 
-2. You can import `Recipe` from `apps/whiskmate/src/app/recipe/recipe.ts`
+2. You can import `Recipe` from `src/app/recipe/recipe.ts`
 
 ```ts
 import { Recipe } from '../recipe/recipe';

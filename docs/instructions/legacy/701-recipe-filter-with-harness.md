@@ -6,7 +6,7 @@ git checkout origin/testing-700-recipe-filter-material-harness-starter
 
 ## 🎯 Goal: Test `<wm-recipe-filter>` using `MatInputHarness`
 
-Update `apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts` using `MatInputHarness`.
+Update `src/app/recipe/recipe-filter.component.spec.ts` using `MatInputHarness`.
 
 ### 📝 Steps
 
@@ -18,7 +18,7 @@ pnpm test
 
 2. Implement tests:
 
-   1. Open `apps/whiskmate/src/app/recipe/recipe-filter.component.spec.ts`.
+   1. Open `src/app/recipe/recipe-filter.component.spec.ts`.
 
    2. Instantiate a `HarnessLoader`:
 

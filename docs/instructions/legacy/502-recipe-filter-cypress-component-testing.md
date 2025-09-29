@@ -16,7 +16,7 @@ Check that `RecipeFilterComponent` triggers the `filterChange` output with the r
 pnpm nx component-test --watch
 ```
 
-2. Open `apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts`.
+2. Open `src/app/recipe/recipe-filter.component.cy.ts`.
 
 3. Fill the form by finding the inputs with their labels _(Keywords, Max Ingredients, Max Steps)_ then type using the `type()` command.
 
@@ -93,7 +93,7 @@ The only drawback is that it is a bit more verbose and will require more boilerp
 
 #### D. The custom `spyOuput` helper
 
-As a trade-off between the previous approaches, we created a custom helper in `apps/whiskmate/cypress/support/spy-output.ts` that works like this:
+As a trade-off between the previous approaches, we created a custom helper in `cypress/support/spy-output.ts` that works like this:
 
 ```ts
 cy.mount(RecipeFormComponent).then(spyOutput('recipeChange'));

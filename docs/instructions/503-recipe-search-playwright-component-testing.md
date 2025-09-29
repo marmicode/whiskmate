@@ -31,9 +31,9 @@ You can choose to:
 pnpm test-ui --ui
 ```
 
-2. Open `apps/whiskmate/src/app/recipe/recipe-search.pw.ts`
+2. Open `src/app/recipe/recipe-search.pw.ts`
 
-3. Arrange fake recipe repository in the constructor of the Test Container component (`apps/whiskmate/src/app/recipe/recipe-search.test-container.ts`).
+3. Arrange fake recipe repository in the constructor of the Test Container component (`src/app/recipe/recipe-search.test-container.ts`).
 
 ```typescript
 import { recipeMother } from './recipe.mother';
@@ -60,7 +60,7 @@ class RecipeSearchTestContainerComponent {
 
 ### 📝 Steps
 
-1. Set the `keywords` input value as we already did in `apps/whiskmate/src/app/recipe/recipe-filter.pw.ts`.
+1. Set the `keywords` input value as we already did in `src/app/recipe/recipe-filter.pw.ts`.
 
 2. Check that only recipes with matching keywords are shown.
 

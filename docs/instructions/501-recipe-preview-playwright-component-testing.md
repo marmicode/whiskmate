@@ -33,7 +33,7 @@ Let's test that `RecipePreview` is showing the recipe name properly.
 pnpm test-ui --ui
 ```
 
-2. Open `apps/whiskmate/src/app/recipe/recipe-preview.pw.ts`.
+2. Open `src/app/recipe/recipe-preview.pw.ts`.
 
 3. `RecipePreview` needs a `recipe` input. You can create a recipe using the `recipeMother` object mother and passing along to the component using the `inputs` option. e.g.:
 

@@ -31,7 +31,7 @@ Check that `RecipeFilter` triggers the `filterChange` output with the right valu
 pnpm test-ui --ui
 ```
 
-2. Open `apps/whiskmate/src/app/recipe/recipe-filter.pw.ts`.
+2. Open `src/app/recipe/recipe-filter.pw.ts`.
 
 3. Fill the form by finding the inputs with their labels _(Keywords, Max Ingredients, Max Steps)_ then type using the `type()` command.
 

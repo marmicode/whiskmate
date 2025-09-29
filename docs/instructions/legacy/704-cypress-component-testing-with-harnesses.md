@@ -19,7 +19,7 @@ nx g @nx/angular:cypress-component-configuration whiskmate
 
 ## Setup @jscutlery/cypress-harness
 pnpm install -D  @jscutlery/cypress-harness cypress-pipe
-echo "import '@jscutlery/cypress-harness/support-ct';" >> apps/whiskmate/cypress/support/commands.ts
+echo "import '@jscutlery/cypress-harness/support-ct';" >> cypress/support/commands.ts
 ```
 
 1. Run Cypress in component testing mode:
@@ -28,9 +28,9 @@ echo "import '@jscutlery/cypress-harness/support-ct';" >> apps/whiskmate/cypress
 pnpm ct --watch
 ```
 
-2. Refactor `apps/whiskmate/src/app/recipe/recipe-filter.component.cy.ts` and get rid of all calls to `cy.find*()`.
-3. Refactor `apps/whiskmate/src/app/recipe/recipe-preview.component.cy.ts` and get rid of all calls to `cy.find*()`.
-4. Refactor `apps/whiskmate/src/app/recipe/recipe-search.component.cy.ts` and get rid of all calls to `cy.find*()`.
+2. Refactor `src/app/recipe/recipe-filter.component.cy.ts` and get rid of all calls to `cy.find*()`.
+3. Refactor `src/app/recipe/recipe-preview.component.cy.ts` and get rid of all calls to `cy.find*()`.
+4. Refactor `src/app/recipe/recipe-search.component.cy.ts` and get rid of all calls to `cy.find*()`.
 
 ## Appendices
 

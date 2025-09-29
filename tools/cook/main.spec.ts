@@ -24,7 +24,7 @@ describe('cook', () => {
 
     expect(executedCommands).toEqual([
       'git switch angular-vitest-mini-workshop',
-      'git branch -D cooking || true',
+      'git branch -D cooking || exit 0',
       'git switch -c cooking',
       'git add .',
       'git commit -m "feat: ✨ focus on 1-recipe-search-starter"',
@@ -49,7 +49,7 @@ describe('cook', () => {
 
     expect(executedCommands).toEqual([
       'git switch angular-vitest-mini-workshop',
-      'git branch -D cooking || true',
+      'git branch -D cooking || exit 0',
       'git switch -c cooking',
       'git show angular-vitest-mini-workshop:apps/1-recipe-search-solution/src/app/recipe/recipe-search.ng.ts > apps/1-recipe-search-starter/src/app/recipe/recipe-search.ng.ts',
       'git add .',
@@ -67,7 +67,7 @@ describe('cook', () => {
 
     expect(executedCommands).toEqual([
       'git switch angular-vitest-mini-workshop',
-      'git branch -D cooking || true',
+      'git branch -D cooking || exit 0',
       'git switch -c cooking',
       'git add .',
       'git commit -m "feat: ✨ focus on 1-recipe-search-solution"',
@@ -129,7 +129,10 @@ async function runMain({
 class CommandRunnerFake implements CommandRunner {
   private _executedCommands: string[] = [];
 
-  executeCommand(command: string) {
+  executeCommand(
+    command: string,
+    { env }: { env?: Record<string, string> } = {},
+  ) {
     this._executedCommands.push(command);
   }
 

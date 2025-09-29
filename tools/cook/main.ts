@@ -230,9 +230,15 @@ function focusOnProject(ctx: Context, project: string) {
       fileSystemAdapter.removeDir(join(appsFolder, folder));
     }
   }
-
   commandRunner.executeCommand(`git add .`);
-  commandRunner.executeCommand(`git commit -m "feat: ✨ focus on ${project}"`);
+  commandRunner.executeCommand(`git commit -m "feat: ✨ focus on ${project}"`, {
+    env: {
+      GIT_AUTHOR_NAME: 'Cooker',
+      GIT_AUTHOR_EMAIL: 'kitchen@marmicode.io',
+      GIT_COMMITTER_NAME: 'Cooker',
+      GIT_COMMITTER_EMAIL: 'kitchen@marmicode.io',
+    },
+  });
 }
 
 async function prepareCookingBranch(ctx: Context) {
@@ -246,7 +252,7 @@ async function prepareCookingBranch(ctx: Context) {
   console.log(`Switching to "${branch}" branch...`);
 
   commandRunner.executeCommand(`git switch ${base}`);
-  commandRunner.executeCommand(`git branch -D ${branch} || true`);
+  commandRunner.executeCommand(`git branch -D ${branch} || exit 0`);
   commandRunner.executeCommand(`git switch -c ${branch}`);
 }
 

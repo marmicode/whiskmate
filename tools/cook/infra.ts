@@ -4,9 +4,18 @@ import { readdirSync, readFileSync, rmSync, writeFileSync } from 'fs';
 const { prompt } = inquirer;
 
 export class CommandRunner {
-  executeCommand(command: string): void {
+  executeCommand(
+    command: string,
+    { env }: { env?: Record<string, string> } = {},
+  ): void {
     /* Ignore stdout. */
-    execSync(command, { stdio: ['inherit', 'pipe', 'inherit'] });
+    execSync(command, {
+      stdio: ['inherit', 'pipe', 'inherit'],
+      env: {
+        ...process.env,
+        ...env,
+      },
+    });
   }
 }
 

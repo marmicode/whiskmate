@@ -47,7 +47,7 @@ jobs:
         uses: ./.github/actions/setup
       - name: Playwright browsers install
         run: pnpm playwright install --with-deps
-      - run: pnpm nx affected -t test-ui --pass-with-no-tests
+      - run: pnpm nx affected -t test-ui --pass-with-no-tests --parallel=1
       - uses: actions/upload-artifact@v4
         if: always()
         with:

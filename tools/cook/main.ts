@@ -1,4 +1,4 @@
-import { join } from 'node:path';
+import { join } from 'node:path/posix';
 import { fileURLToPath } from 'node:url';
 import { config } from './config.ts';
 import { type Config, type Exercise } from './core.ts';

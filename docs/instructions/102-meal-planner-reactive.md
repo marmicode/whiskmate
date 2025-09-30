@@ -51,7 +51,7 @@ Instead of letting Angular poll recipes using `MealPlanner.canAddRecipe(recipe: 
 
 ```ts
 class MealPlanner {
-  watchCanAddRecipe(recipe: Recipe): Observable<boolaen>;
+  watchCanAddRecipe(recipe: Recipe): Observable<boolean>;
 }
 ```
 

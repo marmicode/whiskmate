@@ -5,9 +5,7 @@ describe(RecipeSearch.name, () => {
   it.todo('🚧 should search recipes without keyword on load');
 
   function createComponent() {
-    TestBed.configureTestingModule({
-      providers: [RecipeSearch],
-    });
+    TestBed.configureTestingModule({ providers: [RecipeSearch] });
 
     const component = TestBed.inject(RecipeSearch);
 

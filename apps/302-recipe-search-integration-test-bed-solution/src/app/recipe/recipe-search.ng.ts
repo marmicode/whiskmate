@@ -2,6 +2,7 @@ import { RecipePreview } from './recipe-preview.ng';
 import { Catalog } from '../shared/catalog.ng';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   inject,
   OnDestroy,
@@ -26,13 +27,22 @@ import { RecipeRepository } from './recipe-repository';
 export class RecipeSearch implements OnDestroy, OnInit {
   recipes?: Recipe[];
 
+  private _cdr = inject(ChangeDetectorRef, { optional: true });
   private _recipeRepository = inject(RecipeRepository);
   private _subscription?: Subscription;
 
   ngOnInit() {
     this._subscription = this._recipeRepository
       .search()
-      .subscribe((recipes) => (this.recipes = recipes));
+      .subscribe((recipes) => {
+        this.recipes = recipes;
+
+        /* DO NOT DO THIS AT HOME.
+         * This is just a hack to show the drawbacks of:
+         * - "Isolated" testing
+         * - Non-reactive code */
+        this._cdr?.markForCheck();
+      });
   }
 
   ngOnDestroy() {

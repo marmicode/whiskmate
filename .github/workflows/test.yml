@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: ./.github/actions/setup
-      - run: nx run tools:sanity-check
+      - run: pnpm nx run tools:sanity-check
 
   test:
     name: ✅ Test

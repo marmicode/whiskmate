@@ -16,6 +16,11 @@ async function main(args: string[]) {
     .flat();
 
   const startIndex = projects.indexOf(startProject);
+  if (startIndex === -1) {
+    console.error(`Project ${startProject} not found`);
+    process.exit(1);
+  }
+
   const filteredProjects = projects.slice(startIndex);
   const pairwisedProjects = pairwise(filteredProjects);
 

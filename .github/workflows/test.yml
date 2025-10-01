@@ -25,6 +25,17 @@ jobs:
         uses: ./.github/actions/setup
       - run: pnpm nx affected -t lint
 
+  sanity-check:
+    name: 🧹 Sanity Check
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - run: nx run tools:sanity-check
+
   test:
     name: ✅ Test
     runs-on: ubuntu-22.04

@@ -16,16 +16,20 @@ function main() {
     (project) => !expectedProjects.includes(project),
   );
 
-  if (missingProjects.length) {
-    console.log('❌ Missing projects:');
-    printProjects(missingProjects);
-  }
-  if (extraProjects.length) {
-    console.log('🚧 Extra projects:');
-    printProjects(extraProjects);
-  }
   if (!missingProjects.length && !extraProjects.length) {
     console.log('✅All projects are as expected.');
+  } else {
+    if (missingProjects.length) {
+      console.log('❌ Missing projects:');
+      printProjects(missingProjects);
+    }
+
+    if (extraProjects.length) {
+      console.log('🚧 Extra projects:');
+      printProjects(extraProjects);
+    }
+
+    process.exit(1);
   }
 }
 

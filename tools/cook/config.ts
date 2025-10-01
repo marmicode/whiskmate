@@ -2,6 +2,7 @@ import { type Config, type Exercise } from './core.ts';
 
 const files = {
   mealPlanner: 'src/app/meal-planner/meal-planner.ts',
+  mealRepository: 'src/app/meal-planner/meal-repository.ts',
   recipeFilter: 'src/app/recipe/recipe-filter.ng.ts',
   recipeSearch: 'src/app/recipe/recipe-search.ng.ts',
 };
@@ -26,6 +27,15 @@ const exercises: Exercise[] = [
     id: '202-meal-planner-indirect-input',
     name: '202 - Meal Planner Indirect Input',
     implementationFiles: [files.mealPlanner],
+  },
+  {
+    id: '203-meal-repository',
+    name: '203 - Meal Repository',
+    implementationFiles: [files.mealRepository],
+  },
+  {
+    id: '204-meal-repository-contract',
+    name: '204 - Meal Repository Contract',
   },
   {
     id: '301-recipe-search-isolated',
@@ -67,6 +77,16 @@ const exercises: Exercise[] = [
   {
     id: '402-recipe-search-filter-interaction',
     name: '402 - Recipe Search & Filter Interaction',
+    implementationFiles: [files.recipeFilter],
+  },
+  {
+    id: '403-recipe-search-add-button',
+    name: '403 - Recipe Search Add Button',
+    implementationFiles: [files.recipeSearch],
+  },
+  {
+    id: '404-recipe-filter-material',
+    name: '404 - Recipe Filter Material',
     implementationFiles: [files.recipeFilter],
   },
   {

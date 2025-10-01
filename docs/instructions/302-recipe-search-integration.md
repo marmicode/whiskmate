@@ -43,13 +43,15 @@ But let's check the DOM this time.
 pnpm test
 ```
 
-#### 2.a. Configure the `TestBed` with real server:
+#### 2. Open `src/app/recipe/recipe-search.ng.integration.spec.ts`.
+
+#### 3.a. Configure the `TestBed` with real server:
 
 ```ts
 TestBed.configureTestingModule({ providers: [provideHttpClient()] });
 ```
 
-#### 2.b. Configure the `TestBed` with a test double:
+#### 3.b. Configure the `TestBed` with a test double:
 
 ```ts
 TestBed.configureTestingModule({ providers: [provideRecipeRepositoryFake()] });
@@ -59,9 +61,9 @@ const fake = TestBed.inject(RecipeRepositoryFake);
 fake...
 ```
 
-#### 3. Query DOM and check names are displayed. (Cf. [query DOM with `fixture.debugElement`](#-tip-query-dom-with-fixturedebugelement)])
+#### 4. Query DOM and check names are displayed. (Cf. [query DOM with `fixture.debugElement`](#-tip-query-dom-with-fixturedebugelement)])
 
-#### 4. Checkout the implementation if you didn't do it already.
+#### 5. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl

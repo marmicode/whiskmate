@@ -48,13 +48,15 @@ You can try the same exercise with both:
 pnpm test
 ```
 
-#### 2.a. Configure the `TestBed` with real server:
+#### 2. Open `src/app/recipe/recipe-search.ng.isolated.spec.ts`.
+
+#### 3.a. Configure the `TestBed` with real server:
 
 ```ts
 TestBed.configureTestingModule({ providers: [provideHttpClient()] });
 ```
 
-#### 2.b. Configure the `TestBed` with a test double:
+#### 3.b. Configure the `TestBed` with a test double:
 
 ```ts
 TestBed.configureTestingModule({ providers: [provideRecipeRepositoryFake()] });
@@ -64,9 +66,9 @@ const fake = TestBed.inject(RecipeRepositoryFake);
 fake...
 ```
 
-#### 3. Check `component.recipes` property.
+#### 4. Check `component.recipes` property.
 
-#### 4. Checkout the implementation if you didn't do it already.
+#### 5. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl

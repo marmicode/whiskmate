@@ -43,7 +43,9 @@ class MealPlanner {
 pnpm test
 ```
 
-#### 2. Implement tests.
+#### 2. Open `src/app/meal-planner/meal-planner.spec.ts`.
+
+#### 3. Implement tests.
 
 ## 🎯 Goal #2: Test `MealPlanner.watchCanAddRecipe()`
 
@@ -67,7 +69,9 @@ class MealPlanner {
 pnpm test
 ```
 
-#### 2. Implement tests.
+#### 2. Open `src/app/meal-planner/meal-planner.spec.ts`.
+
+#### 3. Implement tests.
 
 #### 3. Checkout the implementation if you didn't do it already.
 

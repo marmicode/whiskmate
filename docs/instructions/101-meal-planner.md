@@ -82,7 +82,9 @@ pnpm cook checkout-impl
 pnpm test
 ```
 
-#### 2. Implement tests.
+#### 2. Open `src/app/meal-planner/meal-planner.spec.ts`.
+
+#### 3. Implement tests.
 
 ## 📖 Appendices
 

@@ -39,9 +39,9 @@ But let's check children properties this time.
 pnpm test
 ```
 
-#### 2. Implement tests:
+#### 2. Open `src/app/recipe/recipe-search.ng.shallow.spec.ts`.
 
-1.  Override component's imports & schema:
+#### 3. Override component's imports & schema:
 
 ```ts
 TestBed.overrideComponent(RecipeSearch, {
@@ -52,9 +52,9 @@ TestBed.overrideComponent(RecipeSearch, {
 });
 ```
 
-2.  Query DOM and check child components properties. (Cf. [query DOM with `fixture.debugElement`](302-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](#-tip-access-element-properties))
+#### 4. Query DOM and check child components properties. (Cf. [query DOM with `fixture.debugElement`](302-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](#-tip-access-element-properties))
 
-#### 3. Checkout the implementation if you didn't do it already.
+#### 5. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl

@@ -102,7 +102,7 @@ render(MyThing, {
 You can query one or multiple elements using, respectively, `query` and `queryAll` methods.
 
 ```ts
-const step = fixture.debugElement.query(By.css('.step')).nativeElement.textContent;
+const item = fixture.debugElement.query(By.css('.my-item')).nativeElement.textContent;
 
-const steps = fixture.debugElement.queryAll(By.css('.step')).map((el) => el.nativeElement.textContent);
+const items = fixture.debugElement.queryAll(By.css('.my-item')).map((el) => el.nativeElement.textContent);
 ```

@@ -69,7 +69,10 @@
       }
     },
     "reset": {
-      "command": "rm -rf .swc {projectRoot}/playwright/.cache"
+      "command": "rm -rf .swc playwright/.cache",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
     },
     "test": {
       "configurations": {

@@ -80,6 +80,10 @@
           }
         }
       }
+    },
+    "test-ui": {
+      "command": "playwright test -c playwright-ct.config.ts",
+      "options": { "cwd": "{projectRoot}" }
     }
   }
 }

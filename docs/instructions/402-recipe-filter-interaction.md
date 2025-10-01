@@ -27,29 +27,27 @@ We will test the contract using a shallow test.
 
 ### 📝 Steps
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2. Implement tests:
+#### 2. Open `src/app/recipe/recipe-search.ng.shallow.spec.ts`.
 
-   1. Open `src/app/recipe/recipe-search.ng.shallow.spec.ts`.
+#### 3. Add a new test: `it('should search recipes using given filter', ...)`.
 
-   2. Add a new test: `it('should search recipes using given filter', ...)`.
+#### 4. Trigger `filterChange` on `RecipeFilter`. (Cf. [trigger events using `debugElement.triggerEventHandler`](#-tip-trigger-events-using-debugelementtriggereventhandler))
 
-   3. Trigger `filterChange` on `RecipeFilter`. (Cf. [trigger events using `debugElement.triggerEventHandler`](#-tip-trigger-events-using-debugelementtriggereventhandler))
+#### 5. Query DOM and check child recipe preview components properties. (Cf. [query DOM with `fixture.debugElement`](./302-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](./303-recipe-search-shallow.md#-tip-access-element-properties))
 
-   4. Query DOM and check child recipe preview components properties. (Cf. [query DOM with `fixture.debugElement`](./302-recipe-search-integration.md#-tip-query-dom-with-fixturedebugelement)] & [access element properties](./303-recipe-search-shallow.md#-tip-access-element-properties))
-
-3. Checkout the implementation if you didn't do it already.
+#### 6. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl
 ```
 
-## Appendices
+## 📖 Appendices
 
 ### 🎁 Tip: Trigger events using `DebugElement.triggerEventHandler`
 

@@ -25,35 +25,35 @@ On startup, the `MealPlanner` should fetch meals from the `MealRepository`.
 
 ### 📝 Steps with a Fake
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2. Use the `setUpMealPlanner()` function instead of `createMealPlanner()` in order to configure the spy before creating the `MealPlanner`.
+#### 2. Use the `setUpMealPlanner()` function instead of `createMealPlanner()` in order to configure the spy before creating the `MealPlanner`.
 
-3. Check that the `MealPlanner` contains the meals from the `MealRepository`.
+#### 3. Check that the `MealPlanner` contains the meals from the `MealRepository`.
 
-4. Checkout the implementation as mentioned at step 0 if you didn't do it already.
+#### 4. Checkout the implementation as mentioned at step 0 if you didn't do it already.
 
 ### 📝 Steps with a Spy
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2. Remove the fake and create & provide the spy instead. _(Cf. [Tip: Create & provide a type-safe spy](./201-meal-planner-indirect-output.md#-tip-create--provide-a-type-safe-spy-with-vitest))_
+#### 2. Remove the fake and create & provide the spy instead. _(Cf. [Tip: Create & provide a type-safe spy](./201-meal-planner-indirect-output.md#-tip-create--provide-a-type-safe-spy-with-vitest))_
 
-3. Use the `setUpMealPlanner()` function instead of `createMealPlanner()` in order to configure the spy before creating the `MealPlanner`.
+#### 3. Use the `setUpMealPlanner()` function instead of `createMealPlanner()` in order to configure the spy before creating the `MealPlanner`.
 
-4. Check that the `MealPlanner` contains the meals from the `MealRepository`.
+#### 4. Check that the `MealPlanner` contains the meals from the `MealRepository`.
 
-5. Check that the spy was called properly.
+#### 5. Check that the spy was called properly.
 
-6. Checkout the implementation if you didn't do it already.
+#### 6. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl

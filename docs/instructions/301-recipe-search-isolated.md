@@ -21,7 +21,7 @@ You can choose to:
 
 ## 🎯 Goal: Test `RecipeSearch`
 
-New component `RecipeSearch` should call `RecipeRepository.search()` on startup.
+New component `RecipeSearch` should fetch recipes using `RecipeRepository` on startup.
 
 **Implement tests** for `RecipeSearch` and make sure that:
 
@@ -33,33 +33,49 @@ export class RecipeSearch {
 }
 ```
 
+:::info
+You can try the same exercise with both:
+
+- the real server (Cf. [2.a. Configure the `TestBed` with real server](#2a-configure-the-testbed-with-real-server))
+- then with the fake repository (Cf. [2.b. Configure the `TestBed` with a test double](#2b-configure-the-testbed-with-a-test-double))
+  :::
+
 ### 📝 Steps
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2. Implement tests:
+#### 2.a. Configure the `TestBed` with real server:
 
-   1. Check `RecipeSearch.recipes`.
+```ts
+TestBed.configureTestingModule({ providers: [provideHttpClient()] });
+```
 
-   2. Provide a fake `RecipeRepository` and initialize it with some recipes using the `recipeMother` _(`src/app/testing/recipe.mother.ts`)_ Object Mother.
+#### 2.b. Configure the `TestBed` with a test double:
 
-   ```ts
-   TestBed.configureTestingModule({
-     providers: [provideRecipeRepositoryFake()],
-   });
+```ts
+TestBed.configureTestingModule({ providers: [provideRecipeRepositoryFake()] });
+const fake = TestBed.inject(RecipeRepositoryFake);
 
-   TestBed.inject(RecipeRepositoryFake).setRecipes([
-     recipeMother.withBasicInfo('Burger').build(),
-     ...
-   ]);
-   ```
+/* Configure the fake. */
+fake...
+```
 
-3. Checkout the implementation if you didn't do it already.
+#### 3. Check `component.recipes` property.
+
+#### 4. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl
+```
+
+## 📖 Appendices
+
+### 🎁 Tip: polling until success with `expect.poll`
+
+```ts
+await expect.poll(() => getSomething()).toBe(42);
 ```

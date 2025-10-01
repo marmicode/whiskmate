@@ -40,23 +40,23 @@ You can choose to:
 
 ### 📝 Steps
 
-1. Go to `src/app/meal-planner/meal-planner.spec.ts` _(Cf. use [example below](#test-example))_
+#### 1. Go to `src/app/meal-planner/meal-planner.spec.ts` _(Cf. use [example below](#test-example))_
 
-2. You can import `Recipe` from `src/app/recipe/recipe.ts`
+#### 2. You can import `Recipe` from `src/app/recipe/recipe.ts`
 
 ```ts
 import { Recipe } from '../recipe/recipe';
 ```
 
-3. Run tests:
+#### 3. Run tests:
 
 ```sh
 pnpm test
 ```
 
-4. Implement tests.
+#### 4. Implement tests.
 
-5. Checkout the implementation if you didn't do it already.
+#### 5. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl
@@ -76,15 +76,15 @@ pnpm cook checkout-impl
 
 ### 📝 Steps
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2. Implement tests.
+#### 2. Implement tests.
 
-## Appendices
+## 📖 Appendices
 
 ### Vitest Matchers
 

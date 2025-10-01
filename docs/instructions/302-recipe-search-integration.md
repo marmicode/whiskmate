@@ -21,13 +21,13 @@ You can choose to:
 
 ## 🎯 Goal #1: Test `RecipeSearch`
 
-Same goal as [previous exercise](301-recipe-search-isolated.md) _(i.e. `RecipeSearch` should call `RecipeRepository.search()` on startup.)_
+Same goal as [previous exercise](301-recipe-search-isolated.md) _(i.e. `RecipeSearch` should fetch recipes using `RecipeRepository` on startup.)_
 
 But let's check the DOM this time.
 
 **Implement tests** for `RecipeSearch` and make sure that:
 
-1. recipe names are displayed:
+#### 1. recipe names are displayed:
 
 ```html
 ...
@@ -37,19 +37,19 @@ But let's check the DOM this time.
 
 ### 📝 Steps
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2.a. Configure the `TestBed` with real server:
+#### 2.a. Configure the `TestBed` with real server:
 
 ```ts
 TestBed.configureTestingModule({ providers: [provideHttpClient()] });
 ```
 
-2.b. Configure the `TestBed` with a test double:
+#### 2.b. Configure the `TestBed` with a test double:
 
 ```ts
 TestBed.configureTestingModule({ providers: [provideRecipeRepositoryFake()] });
@@ -59,9 +59,9 @@ const fake = TestBed.inject(RecipeRepositoryFake);
 fake...
 ```
 
-3. Query DOM and check names are displayed. (Cf. [query DOM with `fixture.debugElement`](#-tip-query-dom-with-fixturedebugelement)])
+#### 3. Query DOM and check names are displayed. (Cf. [query DOM with `fixture.debugElement`](#-tip-query-dom-with-fixturedebugelement)])
 
-4. Checkout the implementation if you didn't do it already.
+#### 4. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl
@@ -75,11 +75,17 @@ Refactor the previous test using `@testing-library/angular` instead of `TestBed`
 pnpm cook start 302-recipe-search-integration-testing-library
 ```
 
-### 🍴 Cutleries
+## 📖 Appendices
 
-- [🔗 Render function docs](https://testing-library.com/docs/angular-testing-library/api#render)
-- [🔗 Testing Library Queries docs — or how to choose the right query](https://testing-library.com/docs/queries/about/)
-- How to configure TestBed before mounting the component with Testing Library:
+### 🔗 `@testing-library/angular`'s `render` docs
+
+[https://testing-library.com/docs/angular-testing-library/api#render](https://testing-library.com/docs/angular-testing-library/api#render)
+
+### 🔗 Testing Library Queries docs — or how to choose the right query
+
+[https://testing-library.com/docs/queries/about](https://testing-library.com/docs/queries/about)
+
+### 🎁 Tip: How to configure TestBed before mounting the component with Testing Library
 
 ```ts
 render(MyThing, {
@@ -88,8 +94,6 @@ render(MyThing, {
   },
 });
 ```
-
-## Appendices
 
 ### 🎁 Tip: Query DOM with `fixture.debugElement`
 

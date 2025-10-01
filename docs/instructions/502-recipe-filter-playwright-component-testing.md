@@ -25,23 +25,23 @@ Check that `RecipeFilter` triggers the `filterChange` output with the right valu
 
 ### 📝 Steps
 
-1. Run Playwright component tesets:
+#### 1. Run Playwright component tesets:
 
 ```sh
 pnpm test-ui --ui
 ```
 
-2. Open `src/app/recipe/recipe-filter.pw.ts`.
+#### 2. Open `src/app/recipe/recipe-filter.pw.ts`.
 
-3. Fill the form by finding the inputs with their labels _(Keywords, Max Ingredients, Max Steps)_ then type using the `type()` command.
+#### 3. Fill the form by finding the inputs with their labels _(Keywords, Max Ingredients, Max Steps)_ then type using the `type()` command.
 
 ```ts
 component.getByLabel('Keywords').fill('...');
 ```
 
-4. Spy on the `filterChange` output _(Cf. [🎁 Tip: Spying on component outputs](#-tip-spying-on-component-outputs))_ and check that it was called with the right filter object.
+#### 4. Spy on the `filterChange` output _(Cf. [🎁 Tip: Spying on component outputs](#-tip-spying-on-component-outputs))_ and check that it was called with the right filter object.
 
-## Appendices
+## 📖 Appendices
 
 ### 🎁 Tip: Spying on component outputs
 

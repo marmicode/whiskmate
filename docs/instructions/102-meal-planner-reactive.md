@@ -37,13 +37,13 @@ class MealPlanner {
 
 ### 📝 Steps
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2. Implement tests.
+#### 2. Implement tests.
 
 ## 🎯 Goal #2: Test `MealPlanner.watchCanAddRecipe()`
 
@@ -61,21 +61,21 @@ class MealPlanner {
 
 ### 📝 Steps
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2. Implement tests.
+#### 2. Implement tests.
 
-3. Checkout the implementation if you didn't do it already.
+#### 3. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl
 ```
 
-## Appendices
+## 📖 Appendices
 
 ### 🎁 Tip: Spying on observables
 

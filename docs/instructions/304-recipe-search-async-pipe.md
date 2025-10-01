@@ -25,13 +25,13 @@ Let's go reactive and see what happens.
 
 ### 📝 Steps
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2. Checkout new `RecipeSearch` implementation.
+#### 2. Checkout new `RecipeSearch` implementation.
 
 ```sh
 pnpm cook checkout-impl
@@ -61,6 +61,6 @@ pnpm cook checkout-impl
 > }
 > ```
 
-3. 👀 See which tests broke.
+#### 3. 👀 See which tests broke.
 
-4. Fix tests.
+#### 4. Fix tests.

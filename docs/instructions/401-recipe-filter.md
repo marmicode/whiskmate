@@ -27,21 +27,21 @@ This will be later used by `RecipeSearch` to filter results based on user filter
 
 ### 📝 Steps
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test
 ```
 
-2. Implement tests:
+#### 2. Implement tests:
 
-   1. Spy on `filterChange` output. _(Note that an `EventEmitter` is an `Observable`)_
+1.  Spy on `filterChange` output. _(Note that an `EventEmitter` is an `Observable`)_
 
-   2. Fill the form inputs using the following `aria-label` attributes: `Keywords`, `Max Ingredients` and `Max Steps`.
+2.  Fill the form inputs using the following `aria-label` attributes: `Keywords`, `Max Ingredients` and `Max Steps`.
 
-   3. Check that `filterChange` have been triggered.
+3.  Check that `filterChange` have been triggered.
 
-3. Checkout the implementation if you didn't do it already.
+#### 3. Checkout the implementation if you didn't do it already.
 
 ```sh
 pnpm cook checkout-impl

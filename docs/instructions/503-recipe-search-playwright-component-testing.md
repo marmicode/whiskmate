@@ -25,15 +25,15 @@ You can choose to:
 
 ### 📝 Steps
 
-1. Run tests:
+#### 1. Run tests:
 
 ```sh
 pnpm test-ui --ui
 ```
 
-2. Open `src/app/recipe/recipe-search.pw.ts`
+#### 2. Open `src/app/recipe/recipe-search.pw.ts`
 
-3. Arrange fake recipe repository in the constructor of the Test Container component (`src/app/recipe/recipe-search.test-container.ts`).
+#### 3. Arrange fake recipe repository in the constructor of the Test Container component (`src/app/recipe/recipe-search.test-container.ts`).
 
 ```typescript
 import { recipeMother } from './recipe.mother';
@@ -50,9 +50,9 @@ class RecipeSearchTestContainerComponent {
 }
 ```
 
-4. Find all recipe names using `getByRole()`.
+#### 4. Find all recipe names using `getByRole()`.
 
-5. Check that all recipe names are shown.
+#### 5. Check that all recipe names are shown.
 
 ## 🎯 Goal #2: Check that `RecipeSearch` filters recipes based on user criteria
 
@@ -60,9 +60,9 @@ class RecipeSearchTestContainerComponent {
 
 ### 📝 Steps
 
-1. Set the `keywords` input value as we already did in `src/app/recipe/recipe-filter.pw.ts`.
+#### 1. Set the `keywords` input value as we already did in `src/app/recipe/recipe-filter.pw.ts`.
 
-2. Check that only recipes with matching keywords are shown.
+#### 2. Check that only recipes with matching keywords are shown.
 
 ## 🎯 Goal #3: Check that click "ADD" button adds the recipe to the meal plan
 
@@ -70,11 +70,11 @@ class RecipeSearchTestContainerComponent {
 
 ### 📝 Steps
 
-1. Find the "ADD" button using `getByRole()`.
+#### 1. Find the "ADD" button using `getByRole()`.
 
-2. Click the "ADD" button.
+#### 2. Click the "ADD" button.
 
-3. Check that the recipe has been added to the meal plan. _(Cf. [🎁 Tip: Notifying test of state changes](#-tip-notifying-test-of-state-changes))_
+#### 3. Check that the recipe has been added to the meal plan. _(Cf. [🎁 Tip: Notifying test of state changes](#-tip-notifying-test-of-state-changes))_
 
 ## 🎯 Goal #4: Check that the "ADD" button is disabled when the recipe is already in the meal plan
 
@@ -82,7 +82,7 @@ class RecipeSearchTestContainerComponent {
 
 While we could simply click the "ADD" button and check that the button is disabled, we will instead check that the button is disabled from the start. The main reason to this is that we want to make sure that the button is disabled based on the meal plan and not just because the button was clicked.
 
-1. In order to arrange the state, we can add an input to our Test Container and control it from our test.
+#### 1. In order to arrange the state, we can add an input to our Test Container and control it from our test.
 
 ```typescript
 class MyTestContainer {
@@ -98,9 +98,9 @@ class MyTestContainer {
 }
 ```
 
-2. Check that the "ADD" button is disabled.
+#### 2. Check that the "ADD" button is disabled.
 
-## Appendices
+## 📖 Appendices
 
 ### 🎁 Tip: Notifying test of state changes
 

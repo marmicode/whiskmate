@@ -27,15 +27,15 @@ Let's test that `RecipePreview` is showing the recipe name properly.
 
 ### 📝 Steps
 
-1. Run Playwright component tests:
+#### 1. Run Playwright component tests:
 
 ```sh
 pnpm test-ui --ui
 ```
 
-2. Open `src/app/recipe/recipe-preview.pw.ts`.
+#### 2. Open `src/app/recipe/recipe-preview.pw.ts`.
 
-3. `RecipePreview` needs a `recipe` input. You can create a recipe using the `recipeMother` object mother and passing along to the component using the `inputs` option. e.g.:
+#### 3. `RecipePreview` needs a `recipe` input. You can create a recipe using the `recipeMother` object mother and passing along to the component using the `inputs` option. e.g.:
 
 ```ts
 const component = mount(Greetings, {
@@ -45,11 +45,11 @@ const component = mount(Greetings, {
 });
 ```
 
-4. Check that the recipe name is shown.
+#### 4. Check that the recipe name is shown.
 
 Playwright provides built-in locators similar to Testing Library. Cf. [https://playwright.dev/docs/locators](https://playwright.dev/docs/locators)
 
-## Appendices
+## 📖 Appendices
 
 ### Playwright Assertions
 

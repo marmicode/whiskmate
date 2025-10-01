@@ -25,7 +25,7 @@
     {
       "plugin": "@nx/jest/plugin",
       "options": {
-        "targetName": "vitest"
+        "targetName": "jest"
       }
     },
     {

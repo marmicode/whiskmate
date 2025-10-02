@@ -3,7 +3,7 @@ import { recipeMother } from '../testing/recipe.mother';
 import { Recipe } from './recipe';
 import { RecipeSearchTestContainer } from './recipe-search.test-container.ng';
 
-test.describe('<wm-recipe-search>', () => {
+test.describe('RecipeSearch', () => {
   test('should show recipes', async ({ page, mount }) => {
     await mount(RecipeSearchTestContainer);
 

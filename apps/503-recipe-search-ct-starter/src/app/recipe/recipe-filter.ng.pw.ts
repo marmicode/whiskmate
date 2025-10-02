@@ -2,7 +2,7 @@ import { expect, test } from '@jscutlery/playwright-ct-angular';
 import { RecipeFilterCriteria } from './recipe-filter-criteria';
 import { RecipeFilter } from './recipe-filter.ng';
 
-test.describe('<wm-recipe-filter>', () => {
+test.describe('RecipeFilter', () => {
   test('should trigger filterChange', async ({ page, mount }) => {
     let filter: RecipeFilterCriteria | undefined;
     await mount(RecipeFilter, {

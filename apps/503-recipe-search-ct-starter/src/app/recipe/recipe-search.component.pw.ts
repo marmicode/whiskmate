@@ -1,6 +1,6 @@
 import { expect, test } from '@jscutlery/playwright-ct-angular';
 
-test.describe('<wm-recipe-search>', () => {
+test.describe('RecipeSearch', () => {
   test('should show recipes', async ({ mount }) => {
     test.skip(true, '🚧 work in progress!');
   });

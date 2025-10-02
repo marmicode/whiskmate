@@ -2,7 +2,7 @@ import { expect, test } from '@jscutlery/playwright-ct-angular';
 import { recipeMother } from '../testing/recipe.mother';
 import { RecipePreview } from './recipe-preview.ng';
 
-test.describe('<wm-recipe-preview>', () => {
+test.describe('RecipePreview', () => {
   test('should show recipe name', async ({ page, mount }) => {
     const recipe = recipeMother.withBasicInfo('Burger').build();
 

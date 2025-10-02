@@ -2,7 +2,7 @@ import { expect, test } from '@testronaut/angular';
 import { recipeMother } from '../testing/recipe.mother';
 import { RecipeSearchTestContainer } from './recipe-search.test-container.ng';
 
-test.describe('<wm-recipe-search>', () => {
+test.describe('RecipeSearch', () => {
   test('should show recipes', async ({ page, mount }) => {
     test.skip(true, '🚧 work in progress!');
   });

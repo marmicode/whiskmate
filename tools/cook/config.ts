@@ -105,6 +105,10 @@ const exercises: Exercise[] = [
     id: '504-playwright-visual-regression-testing',
     name: '504 - Playwright Visual Regression Testing',
   },
+  {
+    id: '601-testronaut',
+    name: '601 - Testronaut',
+  },
 ];
 
 export const config: Config = {

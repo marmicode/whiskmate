@@ -66,6 +66,25 @@ jobs:
           path: dist/.playwright
           retention-days: 7
 
+  testronaut:
+    name: 🧑‍🚀 Testronaut
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Playwright browsers install
+        run: pnpm playwright install --with-deps
+      - run: pnpm nx affected -t testronaut --pass-with-no-tests --parallel=1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 🎭 Playwright Report
+          path: dist/.playwright
+          retention-days: 7
+
   deploy-gh-pages:
     name: 🚀 Deploy to GitHub Pages
     if: github.ref == 'refs/heads/pragmatic-angular-testing'

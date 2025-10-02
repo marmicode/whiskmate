@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@jscutlery/playwright-ct-angular';
 import { nxE2EPreset } from '@nx/playwright/preset';
-import analog from '@analogjs/vite-plugin-angular';
+import { swcAngularUnpluginOptions } from '@jscutlery/swc-angular';
+import swc from 'unplugin-swc';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -13,9 +14,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     ctViteConfig: {
-      /* Allow invalid version due to compatible vite versions Plugin type mismatch. */
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      plugins: [analog() as any],
+      plugins: [swc.vite(swcAngularUnpluginOptions())],
       resolve: {
         /* @angular/material is using "style" as a Custom Conditional export to expose prebuilt styles etc... */
         conditions: ['style'],

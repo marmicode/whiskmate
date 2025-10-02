@@ -1,12 +1,13 @@
 import '@angular/compiler';
 import { defineConfig, devices } from '@playwright/test';
 import { withTestronautAngular } from '@testronaut/angular';
-import { delimiter } from 'node:path';
+import { sep } from 'node:path';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const projectName = __dirname.split(delimiter).pop();
+const projectName = __dirname.split(sep).pop();
+
 export default defineConfig(
   withTestronautAngular({
     configPath: __filename,

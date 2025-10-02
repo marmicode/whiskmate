@@ -1,16 +1,17 @@
 import '@angular/compiler';
 import { defineConfig, devices } from '@playwright/test';
 import { withTestronautAngular } from '@testronaut/angular';
+import { delimiter } from 'node:path';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+const projectName = __dirname.split(delimiter).pop();
 export default defineConfig(
   withTestronautAngular({
     configPath: __filename,
     testServer: {
-      command:
-        'nx serve 601-testronaut-solution --configuration testronaut --port {port}',
+      command: `nx serve ${projectName} --configuration testronaut --port {port}`,
     },
   }),
   {

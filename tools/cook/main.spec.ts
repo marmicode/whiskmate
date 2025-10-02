@@ -76,14 +76,31 @@ describe('cook', () => {
       defaultProject: '1-recipe-search-solution',
     });
   });
+
+  it('stops cooking', async () => {
+    const { executedCommands } = await runMain({
+      choices: { command: 'stop' },
+      hasLocalChanges: true,
+      nxJsonContent: {
+        defaultProject: '1-recipe-search-starter',
+      },
+    });
+    expect(executedCommands).toEqual([
+      'git reset --hard',
+      'git clean -df',
+      'git switch angular-vitest-mini-workshop',
+    ]);
+  });
 });
 
 async function runMain({
   choices,
+  hasLocalChanges,
   nxJsonContent,
   files = {},
 }: {
   choices: Record<string, unknown>;
+  hasLocalChanges: boolean;
   nxJsonContent: { defaultProject?: string };
   files?: Record<string, string>;
 }) {
@@ -97,6 +114,9 @@ async function runMain({
       ...files,
       'nx.json': JSON.stringify(nxJsonContent),
     },
+  });
+  gitAdapter.configure({
+    hasLocalChanges,
   });
   promptAdapter.configure({ choices });
 

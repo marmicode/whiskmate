@@ -26,13 +26,16 @@ export async function main(args: string[], ctx: Context) {
     case 'solution':
       await checkoutSolution(ctx, command.exercise);
       break;
+    case 'stop':
+      await stopCooking(ctx);
+      break;
     default:
       console.error('Invalid choice');
       process.exit(1);
   }
 }
 
-type CommandType = 'start' | 'checkout-impl' | 'solution';
+type CommandType = 'start' | 'checkout-impl' | 'solution' | 'stop';
 
 type Command =
   | {
@@ -42,6 +45,9 @@ type Command =
   | {
       type: 'checkout-impl' | 'solution';
       exercise: Exercise;
+    }
+  | {
+      type: 'stop';
     };
 
 interface Context {
@@ -67,6 +73,8 @@ async function prepareCommand(args: string[], ctx: Context): Promise<Command> {
       case 'solution':
         assertExerciseSelected('solution', exercise);
         return { type: 'solution', exercise };
+      case 'stop':
+        return { type: 'stop' };
       default:
         console.error(`Invalid command: ${command}`);
         console.log(`Usage:
@@ -101,6 +109,10 @@ async function prepareCommand(args: string[], ctx: Context): Promise<Command> {
       {
         name: 'solution',
         message: 'Go to solution',
+      },
+      {
+        name: 'stop',
+        message: 'Stop cooking',
       },
     ] satisfies Array<{ name: CommandType; message: string }>,
   });
@@ -239,6 +251,15 @@ function focusOnProject(ctx: Context, project: string) {
       GIT_COMMITTER_EMAIL: 'kitchen@marmicode.io',
     },
   });
+}
+
+async function stopCooking(ctx: Context) {
+  const {
+    config: { base },
+    commandRunner,
+  } = ctx;
+  await maybeWipeout(ctx);
+  commandRunner.executeCommand(`git switch ${base}`);
 }
 
 async function prepareCookingBranch(ctx: Context) {

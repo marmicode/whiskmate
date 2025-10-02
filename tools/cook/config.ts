@@ -77,7 +77,7 @@ const exercises: Exercise[] = [
   {
     id: '402-recipe-search-filter-interaction',
     name: '402 - Recipe Search & Filter Interaction',
-    implementationFiles: [files.recipeFilter],
+    implementationFiles: [files.recipeSearch],
   },
   {
     id: '403-recipe-search-add-button',
